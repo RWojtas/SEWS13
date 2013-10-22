@@ -1,5 +1,4 @@
-
-public abstract class  Mensch {
+public abstract class Mensch {
 	// Attribute
 	private Position pos;
 	private Position target;
@@ -158,7 +157,7 @@ public abstract class  Mensch {
 		if (this.getActivity() == 1) {
 			if (this.pos == this.target) {
 				// TO-DO: Wegfinde-Algorithmus
-				int xORy = main.myRandom(0, 1);
+				int xORy = Funktionen.myRandom(0, 1);
 				switch (xORy) {
 				case 0:
 					if (x < target.getXPosition()) {
