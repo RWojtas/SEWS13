@@ -1,0 +1,14 @@
+/* 
+ * Aktivitätentabelle:
+ * 	0  - offen
+ *  1  - gehen
+ *  2  - tanzen
+ *  3  - trinken
+ *  4  - sitzen
+ *  5  - urinieren
+ *  6  - reden
+ *  7  - flirten
+ *  8  - Musik wünschen
+ *  9  - ausruhen
+ *  10 - im Koma liegen
+ */
