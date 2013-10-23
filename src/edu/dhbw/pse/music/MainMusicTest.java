@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class MainMusicTest {
 	public static void main(String[] args) {
-		new Main().start();
+		new MainMusicTest().start();
 	}
 
 	public void start() {
@@ -24,9 +24,7 @@ public class MainMusicTest {
 		String file = mf.path;
 		String title = mf.title;
 		
-		BufferedImage image =  ImageIO.read("file:/");
 		JFrame frame = new JFrame();
-		frame.setIconImage(image);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(300,100);
