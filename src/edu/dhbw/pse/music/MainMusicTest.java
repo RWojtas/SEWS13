@@ -1,9 +1,7 @@
 package edu.dhbw.pse.music;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JToolTip;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
