@@ -6,7 +6,7 @@ public abstract class Drinks {
 	private char name;
 	private boolean bonus;
 	
-	public void drinkbought(boolean clickedplayer){
+	public void drinkbought(boolean clickedbyplayer){
 		
 	}
 }
