@@ -1,9 +1,9 @@
 
 public class DJ extends DiscoObjects{
-	int accessible = 0;
-	int song;
+	private int accessible = 0;
+	private int song;
 	
-	void changeSong(){
+	public void changeSong(){
 		
 	}
 

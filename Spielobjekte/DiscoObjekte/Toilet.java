@@ -1,12 +1,12 @@
 
 public class Toilet extends DiscoObjects {
 	
-	int accessible = 0;
-	boolean full;
-	int maxAmount;
-	int amount;
+	private int accessible = 0;
+	private boolean full;
+	private int maxAmount;
+	private int amount;
 	
-	void goToilet(){
+	public void goToilet(){
 		
 	}
 

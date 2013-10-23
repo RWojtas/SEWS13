@@ -1,6 +1,6 @@
 
 public class Table extends DiscoObjects {
 	
-	int accessible = 0;
+	private int accessible = 0;
 
 }
