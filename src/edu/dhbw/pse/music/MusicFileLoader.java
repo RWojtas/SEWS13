@@ -1,10 +1,16 @@
 package edu.dhbw.pse.music;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
 
+/**
+ * 
+ * @author Nicolas
+ *
+ */
 public class MusicFileLoader {
 	final static String START_DIR = "C:\\Users\\Nicolas\\Desktop";
 	final static String[] MUSIC_TYPES = { "application/octet-stream" };

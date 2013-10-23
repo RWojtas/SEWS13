@@ -1,4 +1,8 @@
 package edu.dhbw.pse.music;
+
+/**
+ * @author Nicolas
+ */
 public class MusicFile {
 	public String category;
 	public String title;
