@@ -8,8 +8,14 @@ public class Toilet extends DiscoObjects {
 	private int maxAmount;
 	private int amount;
 	
-	public void goToilet(){
-		
+	public void goToilet(Mensch p){
+		if(p=NPC&(amount == maxamount)){
+			p.waiting();
+		}
+		else popup();
+	}
+	public pop(){
+		//Eine Funktion, die dem Hauptspieler sagt, dass die Toilette besetzt ist.
 	}
 
 }
