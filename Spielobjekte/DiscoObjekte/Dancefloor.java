@@ -8,8 +8,8 @@ public class Dancefloor extends DiscoObjects{
 	private int maxamount;
 	private boolean full = 0;
 	
-	public void dance(){
-		
+	public void getClicked(Person p){
+		p.tanzen();
 	}
 	
 	public void checkfull(){
