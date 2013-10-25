@@ -5,4 +5,5 @@ public class main {
 	}
 //Test
 	//Philips Push von seinem Home PC!
+	//Philips Push von seinem Laptop!
 }
