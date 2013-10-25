@@ -18,7 +18,6 @@ public class MusicFileLoader {
 
 	private List<MusicFile> music_list = new ArrayList<MusicFile>();
 	private List<String> categories = new ArrayList<String>();
-
 	static {
 		music_type = new ArrayList<String>();
 		for (String s : MUSIC_TYPES)

@@ -1,3 +1,5 @@
+import java.math.*;
+
 public class Position {
 	private int x;
 	private int y;
@@ -14,5 +16,9 @@ public class Position {
 	public void setPosition(int x, int y) {
 		this.x=x;
 		this.y=y;
+	}
+	
+	public double distance(Position p) {
+		return Math.sqrt((this.x-p.x)^2+(this.y-p.y)^2);
 	}
 }

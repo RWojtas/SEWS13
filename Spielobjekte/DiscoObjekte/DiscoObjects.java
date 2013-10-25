@@ -1,5 +1,8 @@
 
-//created by Anna & Silke
+/**
+ * @author Anna
+ * @author Silke
+ */
 
 public abstract class DiscoObjects {
 
