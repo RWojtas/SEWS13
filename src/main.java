@@ -1,7 +1,7 @@
 public class main {
 
 	public static void main(String[] args) {
-			// MAIN2!!!
+			System.out.println("Hello World!");
 	}
 //Test
 	//Philips Push von seinem Home PC!
