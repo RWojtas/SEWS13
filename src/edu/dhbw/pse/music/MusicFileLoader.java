@@ -1,6 +1,7 @@
 package edu.dhbw.pse.music;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import javax.activation.MimetypesFileTypeMap;
  * 
  */
 public class MusicFileLoader {
-	final static String START_DIR = "C:\\Users\\Nicolas\\Desktop\\test";
+	//final static String START_DIR = "C:\\Users\\Nicolas\\Desktop\\test";
 	final static String[] MUSIC_TYPES = { "application/octet-stream" };
 	static List<String> music_type = new ArrayList<String>();
 
@@ -24,7 +25,13 @@ public class MusicFileLoader {
 	}
 
 	public MusicFileLoader() {
-		File home = new File(START_DIR);
+		//File home = new File(START_DIR);
+		File home = new File("/");
+		try {
+			home = new File(getClass().getResource("/Data/Music/").toURI());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 		for (File dir : home.listFiles()) {
 			if (dir.isDirectory()) {
 				if (!categories.contains(dir.getName()))
