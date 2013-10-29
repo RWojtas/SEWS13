@@ -12,7 +12,7 @@ public class BufferedImageLoader {
   private int imageHeight;
   private int imageWidth;
   private static Dimension deskResolution;
-  private static Dimension standardResolution = new Dimension(1920,1080); //Beispiel Wert: (1920,1080)
+  private static Dimension standardResolution = new Dimension(1366,768); //Beispiel Wert: (1920,1080)
   private static double resolutionFactor = 1;
   
   public BufferedImageLoader(String adress, String name, int picsX, int picsY) {
