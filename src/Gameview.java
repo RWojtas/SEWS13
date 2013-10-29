@@ -41,5 +41,6 @@ public class Gameview extends JPanel{
 //    //In der Folgenden Codezeile wird die Graphic vom Graphicmanager 
 //    //geladen und an die Stelle x=20 und y=30 gezeichnet.
     g.drawImage(graphicmanager.objectGraphic.getImage(),20,30,null);
+    g.drawImage(graphicmanager.bg.getImage(),0,0,null);
   }
 }

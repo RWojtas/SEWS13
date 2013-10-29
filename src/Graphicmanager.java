@@ -5,6 +5,8 @@ public class Graphicmanager {
 
   public BufferedImageLoader objectGraphic;
   public BufferedImageLoader humanGraphic;
+  
+  public BufferedImageLoader bg;
 
   public Graphicmanager() {
      
@@ -17,5 +19,7 @@ public class Graphicmanager {
     
     //Mit diesem Befehl kann eine einzige Grafik geladen werden.
     objectGraphic = new BufferedImageLoader("Data/Graphics/","Bar.png");
+    
+    bg = new BufferedImageLoader("Data/Graphics/dark/","bg.png");
   }
 }
