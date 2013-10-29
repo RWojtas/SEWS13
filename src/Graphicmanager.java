@@ -16,6 +16,6 @@ public class Graphicmanager {
     //humanGraphic = new BufferedImageLoader("Data/Graphics/","area.png",5,2);
     
     //Mit diesem Befehl kann eine einzige Grafik geladen werden.
-    //humanGraphic = new BufferedImageLoader("Data/Graphics/","area.png");
+    objectGraphic = new BufferedImageLoader("Data/Graphics/","Bar.png");
   }
 }
