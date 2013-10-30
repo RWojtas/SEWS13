@@ -3,10 +3,16 @@ import java.awt.image.BufferedImage;
 public class GraphicManager {
   public int levels;
 
-  public BufferedImageLoader objectGraphic;
-  public BufferedImageLoader humanGraphic;
+//  public BufferedImageLoader objectGraphic;
+//  public BufferedImageLoader humanGraphic;
   public BufferedImageLoader background;
-
+  public BufferedImageLoader bar;
+  public BufferedImageLoader dj;
+  public BufferedImageLoader dancefloor;
+  public BufferedImageLoader table;
+  public BufferedImageLoader wc;
+  public BufferedImageLoader human;
+  
   public GraphicManager() {
     
 	//Mit diesem Befehl wird jede im Folgenden geladene Grafik
@@ -17,8 +23,14 @@ public class GraphicManager {
     //humanGraphic = new BufferedImageLoader("Data/Graphics/","area.png",5,2);
     
     //Mit diesem Befehl kann eine einzige Grafik geladen werden.
-    objectGraphic = new BufferedImageLoader("Data/Graphics/","Bar.png");
+    //objectGraphic = new BufferedImageLoader("Data/Graphics/","Bar.png");
     
-    background = new BufferedImageLoader("Data/Graphics/dark/","bg.png");
+    background = new BufferedImageLoader("Data/Graphics/","bg.png");
+    bar = new BufferedImageLoader("Data/Graphics/","bar01.png");
+    dj = new BufferedImageLoader("Data/Graphics/","dj01.png");
+    dancefloor = new BufferedImageLoader("Data/Graphics/","tanzflaeche01.png");
+    table = new BufferedImageLoader("Data/Graphics/","tisch01.png");
+    wc = new BufferedImageLoader("Data/Graphics/","wc01.png");
+    human = new BufferedImageLoader("Data/Graphics/","mensch01.png");
   }
 }
