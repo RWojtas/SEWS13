@@ -3,9 +3,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import music.MusicManager;
 import objects.Bar;
 import objects.DiscoObject;
-import edu.dhbw.pse.music.MusicManager;
 
 public class GameLogic {
   public GameView gameView;

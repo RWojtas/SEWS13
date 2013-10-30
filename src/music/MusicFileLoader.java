@@ -1,4 +1,4 @@
-package edu.dhbw.pse.music;
+package music;
 
 import java.io.File;
 import java.net.URISyntaxException;
