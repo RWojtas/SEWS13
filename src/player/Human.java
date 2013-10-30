@@ -5,16 +5,16 @@ import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
-public abstract class Mensch extends JLabel{
+public abstract class Human extends JLabel{
 	// Attribute
 	protected Position position;
 	protected Position target;
 	protected double flirt;
-	protected double spaﬂ;
-	protected double alkpegel;
-	protected double blase;
-	protected double energie;
-	protected char geschlecht;
+	protected double fun;
+	protected double alcLevel;
+	protected double urine;
+	protected double energy;
+	protected char gender;
 	protected int type;
 	protected int activity;
 	protected int activityTimer;
@@ -36,15 +36,15 @@ public abstract class Mensch extends JLabel{
 	 */
 
 	// Constructor
-	public Mensch(char geschlecht, int type, BufferedImage image, int x, int y) {
+	public Human(char gender, int type, BufferedImage image, int x, int y) {
 		this.position = new Position(x, y);
 		this.target = new Position(0, 0);
 		this.flirt = 0.5;
-		this.spaﬂ = 0.5;
-		this.alkpegel = 0;
-		this.blase = 0.5;
-		this.energie = 1;
-		this.geschlecht = geschlecht;
+		this.fun = 0.5;
+		this.alcLevel = 0;
+		this.urine = 0.5;
+		this.energy = 1;
+		this.gender = gender;
 		this.type = type;
 		this.activity = 0;
 		
@@ -58,8 +58,8 @@ public abstract class Mensch extends JLabel{
 	}
 
 	// START: GETTER + SETTER
-	public char getGeschlecht(){
-		return this.geschlecht;
+	public char getGender(){
+		return this.gender;
 	}
 	
 	public int getType(){
@@ -91,36 +91,36 @@ public abstract class Mensch extends JLabel{
 		this.flirt = flirt;
 	}
 
-	public double getSpaﬂ() {
-		return spaﬂ;
+	public double getFun() {
+		return fun;
 	}
 
-	public void setSpaﬂ(double spaﬂ) {
-		this.spaﬂ = spaﬂ;
+	public void setFun(double fun) {
+		this.fun = fun;
 	}
 
-	public double getAlkpegel() {
-		return alkpegel;
+	public double getAlcLevel() {
+		return alcLevel;
 	}
 
-	public void setAlkpegel(double alkpegel) {
-		this.alkpegel = alkpegel;
+	public void setAlcLevel(double alcLevel) {
+		this.alcLevel = alcLevel;
 	}
 
-	public double getBlase() {
-		return blase;
+	public double getUrine() {
+		return urine;
 	}
 
-	public void setBlase(double blase) {
-		this.blase = blase;
+	public void setUrine(double urine) {
+		this.urine = urine;
 	}
 
-	public double getEnergie() {
-		return energie;
+	public double getEnergy() {
+		return energy;
 	}
 
-	public void setEnergie(double energie) {
-		this.energie = energie;
+	public void setEnergy(double energy) {
+		this.energy = energy;
 	}
 
 	public int getActivity() {
@@ -150,30 +150,30 @@ public abstract class Mensch extends JLabel{
 	// END: GETTER + SETTER
 
 	// START: AKTIVITƒTSMETHODEN
-	public void tanzen() {
+	public void dance() {
 		this.setActivity(2);
 		this.setActivityTimer(20);
 	}
 
-	public void trinken() {
+	public void drink() {
 		this.setActivity(3);
 		this.setActivityTimer(20);
 	}
 
-	public void urinieren() {
+	public void urinate() {
 		this.setActivity(5);
 		this.setActivityTimer(20);
 	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
-	public void getNextPos() {
+	public void getNextPosition() {
 		int x = this.getXPosition();
 		int y = this.getYPosition();
 
 		if (this.getActivity() == 1) {
 			if (this.position == this.target) {
 				// TO-DO: Wegfinde-Algorithmus
-				int xORy = Funktionen.myRandom(0, 1);
+				int xORy = Functions.myRandom(0, 1);
 				switch (xORy) {
 				case 0:
 					if (x < target.getXPosition()) {

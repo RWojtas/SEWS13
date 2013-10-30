@@ -1,14 +1,13 @@
 package objects;
 import java.awt.image.BufferedImage;
-
-import player.Spieler;
+import player.Player;
 
 //created by Anna & Silke
 
 public class Dancefloor extends DiscoObject {
 	
 	private int amount;
-	private int maxamount;
+	private int maxAmount;
 	private boolean full = false;
 	
 	public Dancefloor(BufferedImage image, int x, int y) {
@@ -16,12 +15,12 @@ public class Dancefloor extends DiscoObject {
 		accessible = true;
 	}
 	
-	public void getClicked(Spieler s){
-		s.tanzen();
+	public void getClicked(Player s){
+		s.dance();
 	}
 	
 	public void checkFull(){
-		if((maxamount-amount)==0){
+		if((maxAmount-amount)==0){
 			full=true;
 		}
 	}

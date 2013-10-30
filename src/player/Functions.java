@@ -1,6 +1,6 @@
 package player;
 
-public class Funktionen {
+public class Functions {
 	public static int myRandom(int low, int high) {
 		return (int) (Math.random() * (high - low) + low);
 	}
