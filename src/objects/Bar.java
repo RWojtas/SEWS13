@@ -1,10 +1,15 @@
 package objects;
 
+import java.awt.image.BufferedImage;
+
 public class Bar extends DiscoObject {
 
-	Drinks[] drinklist;
-	int waitingtime,
-	accessible = 0;
+	private Drink[] drinkList;
+	private int waitingTime;
 	
+	public Bar(BufferedImage image, int x, int y) {
+		super(image, x, y);
+		accessible = true;
+	}
 
 }

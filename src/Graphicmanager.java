@@ -9,9 +9,9 @@ public class Graphicmanager {
   public BufferedImageLoader bg;
 
   public Graphicmanager() {
-     
+    
 	//Mit diesem Befehl wird jede im Folgenden geladene Grafik
-	//in Abhängigkeit zur Bildschirmaufloesung geladen.
+	//in Abhaengigkeit zur Bildschirmaufloesung geladen.
     BufferedImageLoader.setRelationToResolution(true);
     
     //Mit diesem Befehl kann eine Grafiktabelle mit 5 x 2 Bildern geladen werden.

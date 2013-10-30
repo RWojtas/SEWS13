@@ -1,18 +1,24 @@
 package player;
 
-public abstract class Mensch {
+import java.awt.image.BufferedImage;
+
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+
+public abstract class Mensch extends JLabel{
 	// Attribute
-	private Position pos;
-	private Position target;
-	private double flirt;
-	private double spaﬂ;
-	private double alkpegel;
-	private double blase;
-	private double energie;
-	private char geschlecht;
-	private int type;
-	private int activity;
-	private int activityTimer;
+	protected Position position;
+	protected Position target;
+	protected double flirt;
+	protected double spaﬂ;
+	protected double alkpegel;
+	protected double blase;
+	protected double energie;
+	protected char geschlecht;
+	protected int type;
+	protected int activity;
+	protected int activityTimer;
+	protected ImageIcon image;
 
 	/*
 	 * Aktivit‰tentabelle: 
@@ -30,8 +36,8 @@ public abstract class Mensch {
 	 */
 
 	// Constructor
-	public Mensch(char geschlecht, int type) {
-		this.pos = new Position(0, 0);
+	public Mensch(char geschlecht, int type, BufferedImage image, int x, int y) {
+		this.position = new Position(x, y);
 		this.target = new Position(0, 0);
 		this.flirt = 0.5;
 		this.spaﬂ = 0.5;
@@ -41,6 +47,14 @@ public abstract class Mensch {
 		this.geschlecht = geschlecht;
 		this.type = type;
 		this.activity = 0;
+		
+		setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
+		setBounds(x,y,image.getWidth(),image.getHeight());
+	}
+	
+	public void moveObject(int x, int y) {
+		position.setPosition(x, y);
+		setLocation(position.getXPosition(),position.getYPosition());
 	}
 
 	// START: GETTER + SETTER
@@ -53,16 +67,16 @@ public abstract class Mensch {
 	}
 	
 	
-	public int getXPos() {
-		return pos.getXPosition();
+	public int getXPosition() {
+		return position.getXPosition();
 	}
 
-	public int getYPos() {
-		return pos.getYPosition();
+	public int getYPosition() {
+		return position.getYPosition();
 	}
 
-	public void setPos(int x, int y) {
-		pos.setPosition(x, y);
+	public void setPosition(int x, int y) {
+		position.setPosition(x, y);
 	}
 
 	public void setTarget(int x, int y) {
@@ -153,11 +167,11 @@ public abstract class Mensch {
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
 	public void getNextPos() {
-		int x = this.getXPos();
-		int y = this.getYPos();
+		int x = this.getXPosition();
+		int y = this.getYPosition();
 
 		if (this.getActivity() == 1) {
-			if (this.pos == this.target) {
+			if (this.position == this.target) {
 				// TO-DO: Wegfinde-Algorithmus
 				int xORy = Funktionen.myRandom(0, 1);
 				switch (xORy) {
@@ -176,7 +190,7 @@ public abstract class Mensch {
 					}
 					break;
 				}
-				pos.setPosition(x, y);
+				position.setPosition(x, y);
 			}
 		}
 	}

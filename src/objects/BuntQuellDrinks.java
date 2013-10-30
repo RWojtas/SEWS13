@@ -2,9 +2,13 @@ package objects;
 
 //created by Anna & Silke
 
-public class BuntQuellDrinks extends Drinks {
+public class BuntQuellDrinks extends Drink {
 	
-	public void drinkbought(boolean clickedbyplayer){
+	public BuntQuellDrinks() {
+		
+	}
+	
+	public void drinkBought(boolean clickedByPlayer){
 		
 	}
 

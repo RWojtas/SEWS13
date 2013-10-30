@@ -1,10 +1,16 @@
 package objects;
 
+import java.awt.image.BufferedImage;
+
 //created by Anna & Silke
 
-public class OtherDrinks extends Drinks{
+public class OtherDrinks extends Drink {
 
-	public void drinkbought(boolean clickedbyplayer){
+	public OtherDrinks() {
+		
+	}
+	
+	public void drinkBought(boolean clickedByPlayer){
 		
 	}
 }

@@ -1,11 +1,14 @@
 package objects;
 
+import java.awt.image.BufferedImage;
+
 //created by Anna & Silke
 
 public class Bench extends DiscoObject {
 	
-	private int accessible = 1;
-	
-
+	public Bench(BufferedImage image, int x, int y) {
+		super(image, x, y);
+		accessible = true;
+	}
 
 }
