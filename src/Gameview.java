@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import objects.*;
 
 public class Gameview extends JPanel{
   public Graphicmanager graphicmanager;
@@ -9,7 +10,7 @@ public class Gameview extends JPanel{
   public DiscoObject[] discoObject;
 //  public Mensch[] mensch;
   
-  //Ein Feld ist 20x20 px groß
+  //Ein Feld ist 20x20 px gross
   
   public Gameview(Graphicmanager graphicmanager) {
     this.graphicmanager = graphicmanager;

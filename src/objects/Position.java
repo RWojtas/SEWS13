@@ -1,4 +1,5 @@
-import java.math.*;
+package objects;
+import java.lang.Math;
 
 public class Position {
 	private int x;

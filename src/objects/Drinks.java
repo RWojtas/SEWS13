@@ -1,3 +1,4 @@
+package objects;
 
 //created by Anna & Silke
 
@@ -7,7 +8,5 @@ public abstract class Drinks {
 	private char name;
 	private boolean bonus;
 	
-	public void drinkbought(boolean clickedbyplayer){
-		
-	}
+	public abstract void drinkbought(boolean clickedbyplayer);
 }

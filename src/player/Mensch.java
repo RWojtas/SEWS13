@@ -1,9 +1,11 @@
+package player;
+
 public abstract class Mensch {
 	// Attribute
 	private Position pos;
 	private Position target;
 	private double flirt;
-	private double spass;
+	private double spaß;
 	private double alkpegel;
 	private double blase;
 	private double energie;
@@ -13,7 +15,7 @@ public abstract class Mensch {
 	private int activityTimer;
 
 	/*
-	 * Aktivitï¿½tentabelle: 
+	 * Aktivitätentabelle: 
 	 * 0  - offen 
 	 * 1  - gehen 
 	 * 2  - tanzen 
@@ -22,7 +24,7 @@ public abstract class Mensch {
 	 * 5  - urinieren 
 	 * 6  - reden 
 	 * 7  - flirten 
-	 * 8  - Musik wï¿½nschen 
+	 * 8  - Musik wünschen 
 	 * 9  - ausruhen 
 	 * 10 - im Koma liegen
 	 */
@@ -32,7 +34,7 @@ public abstract class Mensch {
 		this.pos = new Position(0, 0);
 		this.target = new Position(0, 0);
 		this.flirt = 0.5;
-		this.spass = 0.5;
+		this.spaß = 0.5;
 		this.alkpegel = 0;
 		this.blase = 0.5;
 		this.energie = 1;
@@ -75,12 +77,12 @@ public abstract class Mensch {
 		this.flirt = flirt;
 	}
 
-	public double getSpass() {
-		return spass;
+	public double getSpaß() {
+		return spaß;
 	}
 
-	public void setSpass(double spass) {
-		this.spass = spass;
+	public void setSpaß(double spaß) {
+		this.spaß = spaß;
 	}
 
 	public double getAlkpegel() {
@@ -133,7 +135,7 @@ public abstract class Mensch {
 
 	// END: GETTER + SETTER
 
-	// START: AKTIVITï¿½TSMETHODEN
+	// START: AKTIVITÄTSMETHODEN
 	public void tanzen() {
 		this.setActivity(2);
 		this.setActivityTimer(20);
@@ -180,6 +182,6 @@ public abstract class Mensch {
 	}
 	// END: getNextPos()
 
-	// END: AKTIVITï¿½TSMETHODEN
+	// END: AKTIVITÄTSMETHODEN
 
 }
