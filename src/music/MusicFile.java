@@ -1,4 +1,4 @@
-package edu.dhbw.pse.music;
+package music;
 
 import javafx.scene.media.Media;
 
