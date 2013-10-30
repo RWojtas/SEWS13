@@ -1,14 +1,13 @@
 import java.awt.image.BufferedImage;
 
-public class Graphicmanager {
+public class GraphicManager {
   public int levels;
 
   public BufferedImageLoader objectGraphic;
   public BufferedImageLoader humanGraphic;
-  
-  public BufferedImageLoader bg;
+  public BufferedImageLoader background;
 
-  public Graphicmanager() {
+  public GraphicManager() {
     
 	//Mit diesem Befehl wird jede im Folgenden geladene Grafik
 	//in Abhaengigkeit zur Bildschirmaufloesung geladen.
@@ -20,6 +19,6 @@ public class Graphicmanager {
     //Mit diesem Befehl kann eine einzige Grafik geladen werden.
     objectGraphic = new BufferedImageLoader("Data/Graphics/","Bar.png");
     
-    bg = new BufferedImageLoader("Data/Graphics/dark/","bg.png");
+    background = new BufferedImageLoader("Data/Graphics/dark/","bg.png");
   }
 }
