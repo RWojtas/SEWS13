@@ -26,8 +26,14 @@ public class GameView extends JFrame{
     background.setBackground(Color.black);
     background.setLayout(null);
     
-    doManager.addComponents(background);
     asManager.addComponents(background);
+    doManager.addComponents(background);
+    
+    // Temp
+    JLabel st = new JLabel(new ImageIcon(doManager.graphicManager.status.getImage()));
+    st.setBounds(1366-272, 0, 272, 768);
+    background.add(st);
+    // Temp Ende
     
     c.add(background);
   }

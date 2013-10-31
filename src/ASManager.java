@@ -1,4 +1,7 @@
+import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
+
 import player.*;
 
 
@@ -15,6 +18,6 @@ public class ASManager {
 	}
 	
 	public void addComponents(JPanel panel) {
-		
+		panel.add(new AS('w', 1, graphicManager.human.getImage(), 500, 400));
 	}
 }
