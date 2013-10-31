@@ -14,6 +14,13 @@ public class GraphicManager {
   public BufferedImageLoader human;
   public BufferedImageLoader status;
   
+  // Startmenü
+  public BufferedImageLoader startMenueBG;
+  public BufferedImageLoader[] startMenueButtons;
+  
+  // Mouse
+  public BufferedImageLoader mouse;
+  
   public GraphicManager() {
     
 	//Mit diesem Befehl wird jede im Folgenden geladene Grafik
@@ -34,5 +41,13 @@ public class GraphicManager {
     wc = new BufferedImageLoader("Data/Graphics/","wc01.png");
     human = new BufferedImageLoader("Data/Graphics/","mensch01.png");
     status = new BufferedImageLoader("Data/Graphics/","status01.png");
+    
+    
+    startMenueBG = new BufferedImageLoader("Data/Graphics/","startbildschirm01.png");
+    startMenueButtons = new BufferedImageLoader[2];
+    startMenueButtons[0] = new BufferedImageLoader("Data/Graphics/","startMenueButton101.png");
+    startMenueButtons[1] = new BufferedImageLoader("Data/Graphics/","startMenueButton1Pressed01.png");
+    
+    mouse = new BufferedImageLoader("Data/Graphics/","mouse01.png");
   }
 }

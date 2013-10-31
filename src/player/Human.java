@@ -1,5 +1,6 @@
 package player;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
