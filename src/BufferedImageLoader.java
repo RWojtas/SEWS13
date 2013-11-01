@@ -1,7 +1,11 @@
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.awt.image.BufferedImage;
+
 import javax.imageio.*;
+
 import java.io.*;
 import java.net.*;
 
@@ -19,7 +23,7 @@ public class BufferedImageLoader {
     imageTable = new BufferedImage[picsX][picsY];
     BufferedImage scaledBufferedImage = null;
     BufferedImage source = null;
-   
+    
     URL pic_url = getClass().getResource(adress+""+name);
 
     try {
@@ -28,7 +32,7 @@ public class BufferedImageLoader {
     } catch (IOException e) {
       System.out.println("Fehler beim laden von: "+pic_url);
     }
-
+    
     int x;
     for(int y=0;y<picsY;y++) {
       for(x=0;x<picsX;x++) {
@@ -47,7 +51,7 @@ public class BufferedImageLoader {
   public BufferedImageLoader(String adress, String name) {
     BufferedImage scaledBufferedImage = null;
     BufferedImage source = null;
-    
+
     URL pic_url = getClass().getResource(adress+""+name);
     
     try {
@@ -95,7 +99,7 @@ public class BufferedImageLoader {
   public void loadImage(String adress, String name) {
     BufferedImage scaledBufferedImage = null;
     BufferedImage source = null;
-   
+    
     URL pic_url = getClass().getResource(adress+""+name);
     
     try {
@@ -149,6 +153,14 @@ public class BufferedImageLoader {
     } else {
       resolutionFactor = 1;	
     }
+  }
+  
+  public static int scaleToScreenX(int xPos) {
+	  return (int)(resolutionFactor*(double)(xPos));
+  }
+
+  public static int scaleToScreenY(int yPos) {
+	  return (int)(resolutionFactor*(double)(yPos));  
   }
   
   public static Dimension getStandardResolution() {

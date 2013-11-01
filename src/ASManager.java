@@ -18,7 +18,7 @@ public class ASManager {
 	}
 	
 	public void addComponents(JPanel panel) {
-		panel.add(new AS('w', 1, graphicManager.human.getImage(), 500, 400));
+		panel.add(new AS('w', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400)));
 	}
 	
 	public boolean checkFreePosition(Position ul, Position ur, Position dl, Position dr) {
