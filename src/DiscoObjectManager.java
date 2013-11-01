@@ -26,6 +26,7 @@ public class DiscoObjectManager {
 		//Folgende Codezeilen sind nur ein Beispiel und können gern geloescht werden!
 	    discoObject = new DiscoObject[7];
 	    //discoObject[0] = new Bar(graphicManager.background.getImage(),0,0);
+<<<<<<< HEAD
 	    discoObject[0] = new Bar(graphicManager.bar.getImage(),BufferedImageLoader.scaleToScreenX(0),BufferedImageLoader.scaleToScreenY(-18));
 	    discoObject[1] = new Toilet(graphicManager.wc.getImage(),BufferedImageLoader.scaleToScreenX(12),BufferedImageLoader.scaleToScreenY(270));
 	    discoObject[2] = new DJ(graphicManager.dj.getImage(),BufferedImageLoader.scaleToScreenX(0),BufferedImageLoader.scaleToScreenY(428));
@@ -33,6 +34,15 @@ public class DiscoObjectManager {
 	    discoObject[4] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(692),BufferedImageLoader.scaleToScreenY(23));
 	    discoObject[5] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(902),BufferedImageLoader.scaleToScreenY(23));
 	    discoObject[6] = new Table(graphicManager.dancefloor.getImage(),BufferedImageLoader.scaleToScreenX(274),BufferedImageLoader.scaleToScreenY(768-330));
+=======
+	    discoObject[0] = new Bar(graphicManager.bar.getImage(), scaleToScreenX(0),scaleToScreenY(-18));
+	    discoObject[1] = new Toilet(graphicManager.wc.getImage(),scaleToScreenX(12),scaleToScreenY(270));
+	    discoObject[2] = new DJ(graphicManager.dj.getImage(),scaleToScreenX(0),scaleToScreenY(428));
+	    discoObject[3] = new Table(graphicManager.table.getImage(),scaleToScreenX(480),scaleToScreenY(23));
+	    discoObject[4] = new Table(graphicManager.table.getImage(),scaleToScreenX(692),scaleToScreenY(23));
+	    discoObject[5] = new Table(graphicManager.table.getImage(),scaleToScreenX(902),scaleToScreenY(23));
+	    discoObject[6] = new Table(graphicManager.dancefloor.getImage(),scaleToScreenX(274),scaleToScreenY(768-330));
+>>>>>>> branch 'master' of https://github.com/RWojtas/SEWS13.git
 	    
 	    for(DiscoObject obj : discoObject)
 			panel.add(obj);
@@ -43,5 +53,13 @@ public class DiscoObjectManager {
 			//Hier wird dann geprüft, ob eine Kolision mit einem DiskoObjekt entsteht.
 		}
 		return true;
+	}
+	
+	private int scaleToScreenX(double v) {
+		return (int) (v*deskResolution.getWidth()/1366);
+	}
+	
+	private int scaleToScreenY(double v) {
+		return (int) (v*deskResolution.getHeight()/768);
 	}
 }
