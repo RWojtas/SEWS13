@@ -51,7 +51,8 @@ public class GameView extends JFrame{
     
       // Temp
       JLabel status = new JLabel(new ImageIcon(doManager.graphicManager.status.getImage()));
-      status.setBounds(DiscoObjectManager.scaleToScreenX(1366-272), 0, DiscoObjectManager.scaleToScreenX(272), DiscoObjectManager.scaleToScreenY(768));
+      status.setBounds(BufferedImageLoader.scaleToScreenX(1366-272), 0, 272, 768);
+
       layer1.add(status);
       // Temp Ende    
   }
