@@ -1,51 +1,64 @@
-import java.awt.AWTEvent;
-import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-public class Menu extends JPanel {
+import javax.swing.JLayeredPane;
+public class Menu extends JLayeredPane {
 	public Menu(GraphicManager graphicManager) {
+		JLabel mouse = new JLabel();
+		mouse.setVisible(true);
+		mouse.setText("ads");
+		mouse.setAlignmentX(LEFT_ALIGNMENT);
+		mouse.setAlignmentY(TOP_ALIGNMENT);
+		mouse.setBounds(0, 740, 100, 10);
+		add(mouse, 100);
+		
+		JLabel start = new JLabel();
+		start.setIcon(new ImageIcon(graphicManager.startMenueButtons[0].getImage()));
+		start.setBounds(659-120, 275, 295, 56);
+		start.addMouseListener(new StartAction(start, graphicManager, this));
+		add(start, 100);
+		
 		JLabel menuBack = new JLabel();
 		menuBack.setIcon(new ImageIcon(graphicManager.startMenueBG.getImage()));
 		menuBack.setBounds(0, 0, 1366, 768);
 		menuBack.setVisible(true);
-		menuBack.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(this.getX(),
-			     this.getY()), "mouse01"));
-		
-		add(menuBack);
-		
-		JButton start = new JButton();
-		start.setIcon(new ImageIcon(graphicManager.startMenueButtons[0].getImage()));
-		start.setBounds(559, 275, 295, 56);
-		start.setPressedIcon(new ImageIcon(graphicManager.startMenueButtons[1].getImage()));
-		start.setBorderPainted(false);
-		start.addMouseListener(new StartAction(start, graphicManager,this));
-		add(start);
-		
-		
-		
+		add(menuBack, 10);
+
 		setBounds(0,0,1366,768);
 		setVisible(true);
+		addMouseMotionListener(new MouseMove(mouse));
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(this.getX(), this.getY()), "mouse01"));
+	}
+	
+	class MouseMove implements MouseMotionListener {
+		JLabel l;
+		public MouseMove(JLabel l) {
+			this.l = l;
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			l.setText("X:"+e.getX()+" Y:"+e.getY());
+		}
+		
 	}
 	
 	class StartAction implements MouseListener {
-		private JButton a;
+		private JLabel a;
 		private GraphicManager graphicManager;
-		private JPanel p;
-		public StartAction(JButton a, GraphicManager g, JPanel p) {
+		private JLayeredPane p;
+		public StartAction(JLabel a, GraphicManager g, JLayeredPane p) {
 			this.a = a;
 			this.graphicManager = g;
 			this.p = p;
@@ -59,13 +72,11 @@ public class Menu extends JPanel {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			System.out.println("Enter!");
-			p.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			a.setIcon(new ImageIcon(graphicManager.startMenueButtons[1].getImage()));
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			p.setCursor(Cursor.getDefaultCursor());
 			a.setIcon(new ImageIcon(graphicManager.startMenueButtons[0].getImage()));
 		}
 
