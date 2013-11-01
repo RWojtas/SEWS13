@@ -7,34 +7,60 @@ import objects.*;
 
 public class GameView extends JFrame{
   public GraphicManager graphicManager;
-  public int currentLevel;
-  public static Dimension deskResolution;
   public ASManager asManager;
   public DiscoObjectManager doManager;
   public Container c;
-//  public Human[] mensch;
-  
-  //Ein Feld ist 20x20 px gross
+  public static Dimension deskResolution;
+  public int currentLevel;
+  public JPanel background;
+  public JLayeredPane layeredPane;
+  public JPanel layer1;
+  public JPanel layer2;
+  public JPanel layer3;
   
   public GameView(ASManager asManager, DiscoObjectManager doManager) {
-    c = getContentPane();
-    currentLevel=1;
-    this.asManager = asManager;
-    this.doManager = doManager;
+	  deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
+	  setSize((int)deskResolution.getWidth(),(int)deskResolution.getHeight()); 
+	  c = getContentPane();
+	  currentLevel=1;
+	  this.asManager = asManager;
+      this.doManager = doManager;
+    
+      /*
+      background = new JPanel();
+      background.setBackground(Color.black);
+      background.setSize((int)deskResolution.getWidth(),(int)deskResolution.getHeight()); 
+      background.setLayout(null);
+      c.add(background);
+      */
+      
+      layeredPane = new JLayeredPane();
+
+      layer1 = createLayerPanel();
+      layer2 = createLayerPanel();
+      layer3 = createLayerPanel();
+      
+      layeredPane.add(layer1, 0); 
+      layeredPane.add(layer2, 1); 
+      layeredPane.add(layer3, 2);
+    
+      c.add(layeredPane);
+      
+      asManager.addComponents(layer2);
+      doManager.addComponents(layer3); 
+    
+      // Temp
+      JLabel status = new JLabel(new ImageIcon(doManager.graphicManager.status.getImage()));
+      status.setBounds(1366-272, 0, 272, 768);
+      layer1.add(status);
+      // Temp Ende    
+  }
   
-    JPanel background = new JPanel();
-    background.setBackground(Color.black);
-    background.setLayout(null);
-    
-    asManager.addComponents(background);
-    doManager.addComponents(background);
-    
-    // Temp
-    JLabel st = new JLabel(new ImageIcon(doManager.graphicManager.status.getImage()));
-    st.setBounds(1366-272, 0, 272, 768);
-    background.add(st);
-    // Temp Ende
-    
-    c.add(background);
+  public JPanel createLayerPanel() {
+	  JPanel layer = new JPanel();
+	  layer.setLayout(null);
+	  layer.setBounds(0,0,(int)deskResolution.getWidth(),(int)deskResolution.getHeight());
+	  layer.setOpaque(false);
+	  return layer;
   }
 }

@@ -1,11 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-
 import music.MusicManager;
-import objects.Bar;
-import objects.DiscoObject;
+import player.*;
 
 public class GameLogic {
   public GameView gameView;
@@ -23,7 +20,6 @@ public class GameLogic {
     
     gameView = new GameView(asManager, doManager);
     gameView.setTitle("Felse deine Feier");
-    gameView.setSize((int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()),(int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
     gameView.setUndecorated(true);
     gameView.setAlwaysOnTop(true);
     gameView.setResizable(false);
@@ -33,6 +29,16 @@ public class GameLogic {
     //frame.add(musicManager.getPanel());	//add music panel
     
     //musicManager.play(); //play music
+  }
+  
+  public boolean checkFreePosition(Position ul, Position ur, Position dl, Position dr) {
+	  
+	  if(!asManager.checkFreePosition(ul, ur, dl, dr)) 
+		  return false;
+	  if(!doManager.checkFreePosition(ul, ur, dl, dr)) 
+		  return false;
+	  
+	  return true;
   }
 
   public static void main (String [] args) {

@@ -20,4 +20,11 @@ public class ASManager {
 	public void addComponents(JPanel panel) {
 		panel.add(new AS('w', 1, graphicManager.human.getImage(), 500, 400));
 	}
+	
+	public boolean checkFreePosition(Position ul, Position ur, Position dl, Position dr) {
+		for(int i=0;i<human.length;i++) {
+			//Hier wird dann geprüft, ob eine Kolision mit einem Menschen entsteht.
+		}
+		return true;
+	}
 }

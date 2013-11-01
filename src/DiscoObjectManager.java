@@ -1,5 +1,7 @@
 import javax.swing.JPanel;
+
 import objects.*;
+import player.Position;
 
 
 public class DiscoObjectManager {
@@ -29,5 +31,12 @@ public class DiscoObjectManager {
 	    
 	    for(DiscoObject obj : discoObject)
 			panel.add(obj);
+	}
+	
+	public boolean checkFreePosition(Position ul, Position ur, Position dl, Position dr) {
+		for(int i=0;i<discoObject.length;i++) {
+			//Hier wird dann geprüft, ob eine Kolision mit einem DiskoObjekt entsteht.
+		}
+		return true;
 	}
 }

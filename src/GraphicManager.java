@@ -3,17 +3,18 @@ import java.awt.image.BufferedImage;
 public class GraphicManager {
   public int levels;
 
-//  public BufferedImageLoader objectGraphic;
-//  public BufferedImageLoader humanGraphic;
+  // public BufferedImageLoader objectGraphic;
   public BufferedImageLoader background;
   public BufferedImageLoader bar;
   public BufferedImageLoader dj;
   public BufferedImageLoader dancefloor;
   public BufferedImageLoader table;
   public BufferedImageLoader wc;
-  public BufferedImageLoader human;
   public BufferedImageLoader status;
   
+  // public BufferedImageLoader humanGraphic;
+  public BufferedImageLoader human;
+ 
   // Startmenü
   public BufferedImageLoader startMenueBG;
   public BufferedImageLoader[] startMenueButtons;
