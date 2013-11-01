@@ -155,6 +155,10 @@ public class BufferedImageLoader {
     return standardResolution;
   }
   
+  public static Dimension getDeskResolution() {
+	    return deskResolution;
+  }
+  
   public static void setStandardResolution(Dimension d) {
 	standardResolution = d;  
   }

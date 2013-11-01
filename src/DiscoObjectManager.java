@@ -10,10 +10,8 @@ import player.Position;
 public class DiscoObjectManager {
 	public DiscoObject[] discoObject;
 	public GraphicManager graphicManager;
-	public static Dimension deskResolution;
 	
 	public DiscoObjectManager(GraphicManager graphicManager) {
-		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
 		this.graphicManager = graphicManager;
 	}
 	
@@ -26,7 +24,7 @@ public class DiscoObjectManager {
 		//Folgende Codezeilen sind nur ein Beispiel und können gern geloescht werden!
 	    discoObject = new DiscoObject[7];
 	    //discoObject[0] = new Bar(graphicManager.background.getImage(),0,0);
-	    discoObject[0] = new Bar(graphicManager.bar.getImage(), scaleToScreenX(0),scaleToScreenY(-18));
+	    discoObject[0] = new Bar(graphicManager.bar.getImage(),scaleToScreenX(0),scaleToScreenY(-18));
 	    discoObject[1] = new Toilet(graphicManager.wc.getImage(),scaleToScreenX(12),scaleToScreenY(270));
 	    discoObject[2] = new DJ(graphicManager.dj.getImage(),scaleToScreenX(0),scaleToScreenY(428));
 	    discoObject[3] = new Table(graphicManager.table.getImage(),scaleToScreenX(480),scaleToScreenY(23));
@@ -45,11 +43,11 @@ public class DiscoObjectManager {
 		return true;
 	}
 	
-	private int scaleToScreenX(double v) {
-		return (int) (v*deskResolution.getWidth()/1366);
+	public static int scaleToScreenX(double v) {
+		return (int) (v*BufferedImageLoader.getDeskResolution().getWidth()/1366);
 	}
 	
-	private int scaleToScreenY(double v) {
-		return (int) (v*deskResolution.getHeight()/768);
+	public static int scaleToScreenY(double v) {
+		return (int) (v*BufferedImageLoader.getDeskResolution().getHeight()/768);
 	}
 }

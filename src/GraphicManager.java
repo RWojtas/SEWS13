@@ -49,6 +49,6 @@ public class GraphicManager {
     startMenueButtons[0] = new BufferedImageLoader("Data/Graphics/","startMenueButton101.png");
     startMenueButtons[1] = new BufferedImageLoader("Data/Graphics/","startMenueButton1Pressed01.png");
     
-    mouse = new BufferedImageLoader("Data/Graphics/","mouse01.png");
+    mouse = new BufferedImageLoader("Data/Graphics/","mouse02.png");
   }
 }

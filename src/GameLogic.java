@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import music.MusicManager;
 import player.*;
 
@@ -25,8 +27,9 @@ public class GameLogic {
     gameView.setResizable(false);
     gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameView.setVisible(true);
+    gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(gameView.getX(), gameView.getY()), "mouse02"));
     
-    //frame.add(musicManager.getPanel());	//add music panel
+    //gameView.add(musicManager.getPanel());	//add music panel
     
     //musicManager.play(); //play music
   }
