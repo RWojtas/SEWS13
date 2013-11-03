@@ -12,3 +12,15 @@
  *  9  - ausruhen
  *  10 - im Koma liegen
  */
+ 
+/*
+ * Direction: Richtung der Person
+ * 0  - unten
+ * 1  - unten/links (schräg)
+ * 2  - links
+ * 3  - links/oben (schräg)
+ * 4  - oben
+ * 5  - oben/rechts (schräg)
+ * 6  - rechts
+ * 7  - rechts/unten (schräg)
+ */

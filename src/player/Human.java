@@ -20,6 +20,8 @@ public abstract class Human extends JLabel{
 	protected int activity;
 	protected int activityTimer;
 	protected ImageIcon image;
+	private int size;
+	private int direction;
 
 	/*
 	 * Aktivitätentabelle: 
@@ -35,11 +37,24 @@ public abstract class Human extends JLabel{
 	 * 9  - ausruhen 
 	 * 10 - im Koma liegen
 	 */
+	
+	/*
+	 * Direction: Richtung der Person
+	 * 0  - unten
+	 * 1  - unten/links (schräg)
+	 * 2  - links
+	 * 3  - links/oben (schräg)
+	 * 4  - oben
+	 * 5  - oben/rechts (schräg)
+	 * 6  - rechts
+	 * 7  - rechts/unten (schräg)
+	 */
 
 	// Constructor
-	public Human(char gender, int type, BufferedImage image, int x, int y) {
-		this.position = new Position(x, y);
-		this.target = new Position(0, 0);
+	public Human(char gender, int type, BufferedImage image, int x, int y, int size, int direction) {
+		this.size = size;
+		this.position = new Position(x, y, x+size, y, x, y+size, x+size, y+size);
+		this.target = new Position(0, 0, 0, 0, 0, 0, 0, 0);
 		this.flirt = 0.5;
 		this.fun = 0.5;
 		this.alcLevel = 0;
@@ -48,14 +63,15 @@ public abstract class Human extends JLabel{
 		this.gender = gender;
 		this.type = type;
 		this.activity = 0;
+		this.direction = direction;
 		
 		setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
 		setBounds(x,y,image.getWidth(),image.getHeight());
 	}
 	
 	public void moveObject(int x, int y) {
-		position.setPosition(x, y);
-		setLocation(position.getXPosition(),position.getYPosition());
+		position.setPosition(x, y, x+this.size, y, x, y+this.size, x+this.size, y+this.size);
+		setLocation(position.getX0(),position.getY0());
 	}
 
 	// START: GETTER + SETTER
@@ -67,21 +83,31 @@ public abstract class Human extends JLabel{
 		return this.type;
 	}
 	
+	public int getDirection() {
+		return this.direction;
+	}
 	
 	public int getXPosition() {
-		return position.getXPosition();
+		return position.getX0();
 	}
 
 	public int getYPosition() {
-		return position.getYPosition();
+		return position.getY0();
+	}
+	
+	public Position getPosition() {
+		return position;
 	}
 
-	public void setPosition(int x, int y) {
-		position.setPosition(x, y);
+	public void setPosition(int x, int y, int direction) {
+		if(direction == 0 || direction == 2 || direction == 4 || direction == 6)
+			position.setPosition(x, y, x+this.size, y, x, y+this.size, x+this.size, y+this.size);
+		// else
+			// hier muss ne Formel für die Drehung hin, bei 45°, jemand nen Plan?
 	}
 
 	public void setTarget(int x, int y) {
-		target.setPosition(x, y);
+		target.setPosition(x, y, x+this.size, y, x, y+this.size, x+this.size, y+this.size);
 	}
 
 	public double getFlirt() {
@@ -177,21 +203,21 @@ public abstract class Human extends JLabel{
 				int xORy = Functions.myRandom(0, 1);
 				switch (xORy) {
 				case 0:
-					if (x < target.getXPosition()) {
+					if (x < target.getX0()) {
 						x++;
-					} else if (x > target.getXPosition()) {
+					} else if (x > target.getX0()) {
 						x--;
 					}
 					break;
 				case 1:
-					if (y < target.getYPosition()) {
+					if (y < target.getY0()) {
 						y++;
-					} else if (y > target.getYPosition()) {
+					} else if (y > target.getY0()) {
 						y--;
 					}
 					break;
 				}
-				position.setPosition(x, y);
+				position.setPosition(x, y, x+this.size, y, x, y+this.size, x+this.size, y+this.size);
 			}
 		}
 	}
