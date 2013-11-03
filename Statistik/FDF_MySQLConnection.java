@@ -1,61 +1,93 @@
+import java.net.NetworkInterface;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class FDF_MySQLConnection {
 	private Connection connect = null;
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
+	
+	public static String getMacAddress() throws Exception {
+		String result = "";
+		try {
+			for (NetworkInterface ni : Collections.list(NetworkInterface.getNetworkInterfaces())) {
+				byte[] hardwareAddress = ni.getHardwareAddress();
+				if (hardwareAddress != null) {
+					for (int i = 0; i < hardwareAddress.length; i++) {
+						result += String.format((i == 0 ? "" : "") + "%02X", hardwareAddress[i]);
+					}
+					if (result.length() > 0 && !ni.isLoopback()) { return result; }
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
-	public void readDataBase() throws Exception {
+	public void setStatistik() throws Exception {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("com.mysql.jdbc.Driver");
 			// Setup the connection with the DB
 			connect = DriverManager
-					.getConnection("jdbc:mysql://localhost/feedback?"
-							+ "user=sqluser&password=sqluserpw");
+					.getConnection("jdbc:mysql://localhost/fdf?"
+							+ "user=root&password=");
 
-			// Statements allow to issue SQL queries to the database
-			statement = connect.createStatement();
-			// Result set get the result of the SQL query
-			resultSet = statement
-					.executeQuery("select * from FEEDBACK.COMMENTS");
+			preparedStatement = connect
+					.prepareStatement("select * from FDF.exec where hwaddress = ? ;");
+			preparedStatement.setString(1, getMacAddress());
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				int cnt = resultSet.getInt("count");
+				cnt++;
+				preparedStatement = connect
+						.prepareStatement("UPDATE FDF.exec  SET count = ? , date_last = ? WHERE hwaddress = ?;");
+				preparedStatement.setInt(1, cnt);
+				preparedStatement.setDate(2, new java.sql.Date(new Date().getTime()));
+				preparedStatement.setString(3, getMacAddress());
+				preparedStatement.executeUpdate();
+			} else {
+				// PreparedStatements can use variables and are more efficient
+				preparedStatement = connect
+						.prepareStatement("insert into  FDF.exec values (default, ?, ?, ?, ?)");
+				// Parameters start with 1
+				preparedStatement.setString(1, getMacAddress());
+				preparedStatement.setInt(2, 1);
+				preparedStatement.setDate(3, new java.sql.Date(new Date().getTime()));
+				preparedStatement.setDate(4, new java.sql.Date(new Date().getTime()));
+				preparedStatement.executeUpdate();
+			}
+			
+
+			preparedStatement = connect
+					.prepareStatement("select * from FDF.exec where hwaddress = ? ;");
+			preparedStatement.setString(1, getMacAddress());
+			resultSet = preparedStatement.executeQuery();
 			writeResultSet(resultSet);
 
-			// PreparedStatements can use variables and are more efficient
 			preparedStatement = connect
-					.prepareStatement("insert into  FEEDBACK.COMMENTS values (default, ?, ?, ?, ? , ?, ?)");
-			// "myuser, webpage, datum, summary, COMMENTS from FEEDBACK.COMMENTS");
-			// Parameters start with 1
-			preparedStatement.setString(1, "Test");
-			preparedStatement.setString(2, "TestEmail");
-			preparedStatement.setString(3, "TestWebpage");
-			preparedStatement.setDate(4, new java.sql.Date(
-					new GregorianCalendar(2013, 10, 15).getTimeInMillis()));
-			preparedStatement.setString(5, "TestSummary");
-			preparedStatement.setString(6, "TestComment");
-			preparedStatement.executeUpdate();
-
-			preparedStatement = connect
-					.prepareStatement("SELECT myuser, webpage, datum, summary, COMMENTS from FEEDBACK.COMMENTS");
+					.prepareStatement("SELECT * from FDF.exec");
 			resultSet = preparedStatement.executeQuery();
 			writeResultSet(resultSet);
 
 			// Remove again the insert comment
-			preparedStatement = connect
-					.prepareStatement("delete from FEEDBACK.COMMENTS where myuser= ? ; ");
-			preparedStatement.setString(1, "Test");
-			preparedStatement.executeUpdate();
-
+			// preparedStatement = connect
+			//		.prepareStatement("delete from FDF.exec where hwaddress= ? ; ");
+			// preparedStatement.setString(1, "MAC");
+			// preparedStatement.executeUpdate();
+			
+			statement = connect.createStatement();
 			resultSet = statement
-					.executeQuery("select * from FEEDBACK.COMMENTS");
+					.executeQuery("select * from FDF.exec");
 			writeMetaData(resultSet);
 		} catch (Exception e) {
 			throw e;
@@ -84,16 +116,14 @@ public class FDF_MySQLConnection {
 			// also possible to get the columns via the column number
 			// which starts at 1
 			// e.g. resultSet.getSTring(2);
-			String user = resultSet.getString("myuser");
-			String website = resultSet.getString("webpage");
-			String summary = resultSet.getString("summary");
-			Date date = resultSet.getDate("datum");
-			String comment = resultSet.getString("comments");
-			System.out.println("User: " + user);
-			System.out.println("Website: " + website);
-			System.out.println("Summary: " + summary);
-			System.out.println("Date: " + date);
-			System.out.println("Comment: " + comment);
+			String mac = resultSet.getString("hwaddress");
+			int cnt = resultSet.getInt("count");
+			Date date_first = resultSet.getDate("date_first");
+			Date date_last = resultSet.getDate("date_last");
+			System.out.println("MAC-Adresse: " + mac);
+			System.out.println("Counter: " + cnt);
+			System.out.println("Erster Start: " + date_first);
+			System.out.println("Letzter Start " + date_last);
 		}
 	}
 
