@@ -34,11 +34,11 @@ public class GameLogic {
     //musicManager.play(); //play music
   }
   
-  public boolean checkFreePosition(Position ul, Position ur, Position dl, Position dr) {
+  public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
 	  
-	  if(!asManager.checkFreePosition(ul, ur, dl, dr)) 
+	  if(!asManager.checkFreePosition(lo,ro,lu,ru)) 
 		  return false;
-	  if(!doManager.checkFreePosition(ul, ur, dl, dr)) 
+	  if(!doManager.checkFreePosition(lo,ro,lu,ru)) 
 		  return false;
 	  
 	  return true;

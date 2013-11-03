@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 import javax.swing.JPanel;
 
 import objects.*;
+import player.Coordinate;
 import player.Position;
 
 
@@ -39,10 +40,10 @@ public class DiscoObjectManager {
 			panel.add(obj);
 	}
 	
-	public boolean checkFreePosition(Position ul, Position ur, Position dl, Position dr) {
-		for(int i=0;i<discoObject.length;i++) {
+	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
+		// for(int i=0;i<discoObject.length;i++) { WAT für length?
 			//Hier wird dann geprüft, ob eine Kolision mit einem DiskoObjekt entsteht.
-		}
+		// }
 		return true;
 	}
 }

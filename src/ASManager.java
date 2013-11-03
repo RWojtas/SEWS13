@@ -21,7 +21,7 @@ public class ASManager {
 		panel.add(new AS('w', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0));
 	}
 	
-	public boolean checkFreePosition(Position ul, Position ur, Position dl, Position dr) {
+	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
 		// for(int i=0;i<human.length;i++) { -> WAT für length?
 			
 			//Hier wird dann geprüft, ob eine Kolision mit einem Menschen entsteht.
