@@ -22,13 +22,13 @@ public class GameLogic {
     
     gameView = new GameView(asManager, doManager);
     gameView.setTitle("Felse deine Feier");
-    gameView.setUndecorated(true);
+    gameView.setUndecorated(false);
     gameView.setAlwaysOnTop(true);
     gameView.setResizable(false);
     gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameView.setVisible(true);
     gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(gameView.getX(), gameView.getY()), "mouse02"));
-    
+    //gameView.addMouseListener(new GameViewMouseListener());
     //gameView.add(musicManager.getPanel());	//add music panel
     
     //musicManager.play(); //play music
@@ -47,4 +47,5 @@ public class GameLogic {
   public static void main (String [] args) {
     new GameLogic();
   }
+
 }

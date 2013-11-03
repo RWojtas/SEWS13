@@ -24,7 +24,7 @@ public abstract class Human extends JLabel{
 	private int direction;
 
 	/*
-	 * Aktivitätentabelle: 
+	 * Aktivitï¿½tentabelle: 
 	 * 0  - offen 
 	 * 1  - gehen 
 	 * 2  - tanzen 
@@ -33,7 +33,7 @@ public abstract class Human extends JLabel{
 	 * 5  - urinieren 
 	 * 6  - reden 
 	 * 7  - flirten 
-	 * 8  - Musik wünschen 
+	 * 8  - Musik wï¿½nschen 
 	 * 9  - ausruhen 
 	 * 10 - im Koma liegen
 	 */
@@ -41,13 +41,13 @@ public abstract class Human extends JLabel{
 	/*
 	 * Direction: Richtung der Person
 	 * 0  - unten
-	 * 1  - unten/links (schräg)
+	 * 1  - unten/links (schrï¿½g)
 	 * 2  - links
-	 * 3  - links/oben (schräg)
+	 * 3  - links/oben (schrï¿½g)
 	 * 4  - oben
-	 * 5  - oben/rechts (schräg)
+	 * 5  - oben/rechts (schrï¿½g)
 	 * 6  - rechts
-	 * 7  - rechts/unten (schräg)
+	 * 7  - rechts/unten (schrï¿½g)
 	 */
 
 	// Constructor
@@ -67,6 +67,7 @@ public abstract class Human extends JLabel{
 		
 		setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
 		setBounds(x,y,image.getWidth(),image.getHeight());
+		setOpaque(false);
 	}
 	
 	public void moveObject(int x, int y) {
@@ -103,7 +104,7 @@ public abstract class Human extends JLabel{
 		if(direction == 0 || direction == 2 || direction == 4 || direction == 6)
 			position.setPosition(x, y, x+this.size, y, x, y+this.size, x+this.size, y+this.size);
 		// else
-			// hier muss ne Formel für die Drehung hin, bei 45°, jemand nen Plan?
+			// hier muss ne Formel fï¿½r die Drehung hin, bei 45ï¿½, jemand nen Plan?
 	}
 
 	public void setTarget(int x, int y) {
@@ -176,7 +177,7 @@ public abstract class Human extends JLabel{
 
 	// END: GETTER + SETTER
 
-	// START: AKTIVITÄTSMETHODEN
+	// START: AKTIVITï¿½TSMETHODEN
 	public void dance() {
 		this.setActivity(2);
 		this.setActivityTimer(20);
@@ -223,6 +224,6 @@ public abstract class Human extends JLabel{
 	}
 	// END: getNextPos()
 
-	// END: AKTIVITÄTSMETHODEN
+	// END: AKTIVITï¿½TSMETHODEN
 
 }
