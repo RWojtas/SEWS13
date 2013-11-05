@@ -3,7 +3,10 @@ package main;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+
 import javax.swing.*;
+
+import main.Menu.MouseAction;
 import objects.*;
 import player.*;
 
@@ -57,6 +60,14 @@ public class GameView extends JFrame implements MouseListener {
       statusbar = createLayerPanelStatusbar();
       layeredPane.add(statusbar, 3);
       
+      GraphicManager graphicManager = new GraphicManager();
+      JLabel start = new JLabel();
+		Icon start_icon = new ImageIcon(graphicManager.startMenueButtons.getImage(0,0));
+		// Icon start_icon_hover = new ImageIcon(graphicManager.startMenueButtons.getImage(0,1));
+		start.setIcon(start_icon);
+		start.setBounds(0, 0, 200, 1000);
+		statusbar.add(start);
+      
       
       
       // End: Statusbar
@@ -77,7 +88,7 @@ public class GameView extends JFrame implements MouseListener {
 	  layer.setOpaque(false);
 	  return layer;
   }
-  
+   
   public JPanel createLayerPanelStatusbar() {
 	  JPanel layer = new JPanel();
 	  layer.setLayout(null);
