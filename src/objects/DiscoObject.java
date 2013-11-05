@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import player.*;
 
 /**
  * @author Anna
@@ -24,5 +25,17 @@ public abstract class DiscoObject extends JLabel {
 	public void moveObject(int x, int y) {
 		position.setPosition(x, y);
 		setLocation(position.getXPosition(),position.getYPosition());
+	}
+	
+	
+	public void setStatusES(Person p, int aktivitaet, int number){
+		
+		if (aktivitaet == 3){
+			switch (number){
+				case '0': p.set
+				
+			}			
+		}
+		
 	}
 }
