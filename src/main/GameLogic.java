@@ -9,17 +9,32 @@ import player.*;
 
 public class GameLogic {
   public static GameLogic gameLogic;
-  public GameView gameView;
-  public GraphicManager graphicManager;
-  public ASManager asManager;
-  public DiscoObjectManager doManager;
-  public MusicManager musicManager;
-  
+  public static GameView gameView;
+  public static GraphicManager graphicManager;
+  public static ASManager asManager;
+  public static DiscoObjectManager doManager;
+  public static MusicManager musicManager;
+
   public static GameLogic getInstance() {
 	  if(gameLogic == null) {
 		  gameLogic = new GameLogic();
 	  }
 	  return gameLogic;
+  }
+  
+  public void start() {
+	  long frames = 0;
+	  long lastTimeChecked = System.nanoTime();
+	  
+	  while(true) {
+		  asManager.human[0].stepNextPosition();
+		  frames++;
+	      if(System.nanoTime()-lastTimeChecked >= 1000000000) {
+	    	  gameView.fps.setText(""+frames);
+	    	  frames = 0;
+	    	  lastTimeChecked = System.nanoTime();
+	      }
+	  }
   }
   
   private GameLogic() {
@@ -30,7 +45,7 @@ public class GameLogic {
     
     gameView = new GameView(asManager, doManager);
     gameView.setTitle("Felse deine Feier");
-    gameView.setUndecorated(false);
+    gameView.setUndecorated(true);
     gameView.setAlwaysOnTop(true);
     gameView.setResizable(false);
     gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,9 +56,6 @@ public class GameLogic {
     
     //musicManager.play(); //play music
     
-    while(true) {
-    	
-    }
   }
   
   public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
@@ -57,7 +69,7 @@ public class GameLogic {
   }
 
   public static void main (String [] args) {
-      GameLogic.getInstance();
+      GameLogic.getInstance().start();
   }
 
 }

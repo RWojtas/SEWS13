@@ -19,6 +19,7 @@ public class GameView extends JFrame implements MouseListener {
   public JPanel layer1;
   public JPanel layer2;
   public JPanel layer3;
+  public JLabel fps;
   
   public GameView(ASManager asManager, DiscoObjectManager doManager) {
 	  deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
@@ -38,6 +39,8 @@ public class GameView extends JFrame implements MouseListener {
       
       layeredPane = new JLayeredPane();
       layeredPane.addMouseListener(this);
+      
+      c.add(layeredPane);
 
       layer1 = createLayerPanel();
       layer2 = createLayerPanel();
@@ -46,12 +49,18 @@ public class GameView extends JFrame implements MouseListener {
       layeredPane.add(layer1, 0); 
       layeredPane.add(layer2, 1); 
       layeredPane.add(layer3, 2);
-    
-      c.add(layeredPane);
       
       asManager.addComponents(layer2);
       doManager.addComponents(layer3); 
-    
+      
+      fps = new JLabel("0");
+      fps.setOpaque(false);
+      fps.setHorizontalAlignment(JLabel.RIGHT);
+      fps.setFont(new Font("Dialog",Font.BOLD,30));
+      fps.setBounds((int)deskResolution.getWidth()-300-3,(int)deskResolution.getHeight()-30,300,30);
+     
+      layer3.add(fps);
+      
       // Temp
       JLabel status = new JLabel(new ImageIcon(doManager.graphicManager.status.getImage()));
       status.setBounds(BufferedImageLoader.scaleToScreenX(1366-272), 0, 272, 768);
@@ -75,11 +84,8 @@ public class GameView extends JFrame implements MouseListener {
   	  //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
   	  //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 
-  	  /* TODO Raffel & Sebastian
-  	   * Wenn (Position ist Frei?)
-  	   * Dann (starte Wegfindungsalgorithmus)
-  	   * Ansonsten (tuhe nichts/Gib stör Signal aus).
-  	   */
+  	  asManager.human[0].setActivity(1);
+  	  asManager.human[0].setTarget(e.getX(),e.getY());
   }
 
   @Override
