@@ -106,8 +106,6 @@ public abstract class Human extends JLabel{
 
 	public void setPosition(int x, int y, int direction) {
 		position.setPosition(x, y, x+this.width, y, x, y+this.height, x+this.width, y+this.height);
-		// else
-			// hier muss ne Formel f�r die Drehung hin, bei 45�, jemand nen Plan?
 	}
 
 	public void setTarget(int x, int y) {
@@ -357,7 +355,7 @@ public abstract class Human extends JLabel{
 				if(rcheck) {
 					newPos = ausDirzuCoo(this.direction);
 				}
-				position.setPosition(newPos.getXCoordinate(), newPos.getYCoordinate(), x+this.width, y, x, y+this.height, x+this.width, y+this.height); // Die neue Position wird explizit gesetzt.
+				moveObject(newPos.getXCoordinate(), newPos.getYCoordinate()); // Die neue Position wird explizit gesetzt.
 			}
 		}
 	}
