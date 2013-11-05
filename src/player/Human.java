@@ -10,21 +10,21 @@ import main.GameLogic;
 
 public abstract class Human extends JLabel{
 	// Attribute
-	protected Position position;
-	protected Position target;
-	protected double flirt;
+	protected Position position;		// Aktuelle Position des Human-Objektes
+	protected Position target;			// Ziel-Position des Human-Objektes
+	protected double flirt;				// Spielfaktoren... entsprechend der Variablennamen
 	protected double fun;
 	protected double alcLevel;
 	protected double urine;
 	protected double energy;
-	protected char gender;
-	protected int type;
-	protected int activity;
-	protected int activityTimer;
+	protected char gender;				// Geschlecht -> Für gewisse Logik wichtig (Jungs flirten keine Jungs an)
+	protected int type;					// Typ -> wichtig für die Grafiken
+	protected int activity;				// Aktivität, die gerade ausgeführt wird (siehe unten: Aktivitätstabelle)
+	protected int activityTimer;		// Wie lang eine Aktivität (noch) dauert
 	protected ImageIcon image;
-	private int length;
-	private int width;
-	private int direction;
+	private int height;					// Höhe des Spielers (Sicht von oben)
+	private int width;					// Breite des Spielers (Sicht von oben)
+	private int direction;				// Richtung in die der Spieler gerade schaut -> wichtig für weitere Bewegung
 
 	/*
 	 * Aktivitï¿½tentabelle: 
@@ -54,10 +54,10 @@ public abstract class Human extends JLabel{
 	 */
 
 	// Constructor
-	public Human(char gender, int type, BufferedImage image, int x, int y, int length, int width, int direction) {
-		this.length = length;
+	public Human(char gender, int type, BufferedImage image, int x, int y, int height, int width, int direction) {
+		this.height = height;
 		this.width =  width;
-		this.position = new Position(x, y, x+width, y, x, y+length, x+width, y+length);
+		this.position = new Position(x, y, x+width, y, x, y+height, x+width, y+height);
 		this.target = new Position(0, 0, 0, 0, 0, 0, 0, 0);
 		this.flirt = 0.5;
 		this.fun = 0.5;
@@ -75,7 +75,7 @@ public abstract class Human extends JLabel{
 	}
 	
 	public void moveObject(int x, int y) {
-		position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
+		position.setPosition(x, y, x+this.width, y, x, y+this.height, x+this.width, y+this.height);
 		setLocation(position.getX0(),position.getY0());
 	}
 
@@ -105,13 +105,13 @@ public abstract class Human extends JLabel{
 	}
 
 	public void setPosition(int x, int y, int direction) {
-		position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
+		position.setPosition(x, y, x+this.width, y, x, y+this.height, x+this.width, y+this.height);
 		// else
 			// hier muss ne Formel fï¿½r die Drehung hin, bei 45ï¿½, jemand nen Plan?
 	}
 
 	public void setTarget(int x, int y) {
-		target.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
+		target.setPosition(x, y, x+this.width, y, x, y+this.height, x+this.width, y+this.height);
 	}
 
 	public double getFlirt() {
@@ -218,6 +218,11 @@ public abstract class Human extends JLabel{
 	public void incActivityTimer() {
 		this.activityTimer++;
 	}
+	
+	public void setDirection(int dir) {
+		this.direction = dir;
+	}
+	
 
 	// END: GETTER + SETTER
 
@@ -237,19 +242,19 @@ public abstract class Human extends JLabel{
 		this.setActivityTimer(20);
 	}
 	
-	public boolean checkFreePosition(int x, int y) {
-		GameLogic gl = GameLogic.getInstance();
-		return gl.checkFreePosition(new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+length), new Coordinate(x+width, y+length));
+	public boolean checkFreePosition(int x, int y) {		// Überprüft ob eine gewisse Koordinate besetzt ist oder nicht. 
+		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in From von "false" oder "true".
+		return gl.checkFreePosition(new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
 	}
 	
-	public Coordinate ausDirzuCoo(int dir) {
-		int x = this.getPosition().getX0();
-		int y = this.getPosition().getY0();
+	public Coordinate ausDirzuCoo(int dir) { 			// Diese Methode erstellt aus der Richtung eines Menschen
+		int x = this.getPosition().getX0();				// die nächste Position, in die er hingehen würde. 
+		int y = this.getPosition().getY0();				// Diese Koordinate wird dann zurückgegeben.
 		switch(dir) {
 		case 0: 
-			++y;
+			++y;									
 			break;
-		case 1:
+		case 1:											
 			++y;
 			x--;
 			break;
@@ -279,48 +284,57 @@ public abstract class Human extends JLabel{
 	}
 	
 	
-	public void check(int dir) {
+	public boolean check(int dir, int cnt) {
+		cnt++;
 		dir = dir%8;
-		Coordinate Coo = ausDirzuCoo(dir);
-		if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())){
-			this.direction = dir;
+		Coordinate Coo = ausDirzuCoo(dir);										// Diese Methode überprüft anhand der Richtung, die übergeben wird, die nächste Koordinate und schaut,  
+		if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())){		// ob diese frei ist. Falls ja, wird die Richtung des Menschen entsprechend gesetzt.
+			this.direction = dir;												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und prüft die nächste Richtung
+		}																		// Sind alle 8 Richtungen einmal durchgeprüft, gibt die Methode false zurück.
+		else {																	// Der Integer cnt zählt sich bei jedem Durchlauf um einen hoch und schaut somit, ob alle Richtungen geprüft worden sind.
+			if(cnt <= 8) {														
+				if(!(check(dir+1, cnt))) {
+					return false;
+				}
+			}
+			else 
+				return false;
 		}
-		else {
-			check(dir+1);
-		}
-			
+		return true;	
 	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
-	public void getNextPosition() {
-		int x = this.getXPosition();
-		int y = this.getYPosition();
+	public void stepNextPosition() {													//Diese Methode setzt die nächste Position des Menschen 
+		int x = this.getXPosition();												//mit Hilfe der weiter oben erklärten Methoden.
+		int y = this.getYPosition();												//Der Fall, dass sich der Mensch nicht bewegt, ist abgefangen.
+		boolean rcheck = false;
+		Coordinate newPos = new Coordinate(x, y);
 		
-		if (this.getActivity() == 1) {
-			if (this.position != this.target) {
-				if(x < this.target.getX0() && y < this.target.getY0()) {
-						this.check(7);
-				}
+		if (this.getActivity() == 1) {												
+			if (this.position != this.target) {										
+				if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
+						rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht für die Richtung unten rechts. 
+				}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
 				else if(x > this.target.getX0() && y < this.target.getY0()){
-						this.check(1);
+						rcheck = this.check(1,0);
 				}
 				else if( x < this.target.getX0() && y > this.target.getY0()) {
-						this.check(5);
+						rcheck = this.check(5,0);
 				}
 				else if(x > this.target.getX0() && y > this.target.getY0()) {
-						this.check(3);
+						rcheck = this.check(3,0);
 				}
 				else if(x > this.target.getX0()) {
-						this.check(2);
+						rcheck = this.check(2,0);
 				}
 				else if(x < this.target.getX0()) {
-						this.check(6);
+						rcheck = this.check(6,0);
 				}
 				else if(y < this.target.getY0()) {
-						this.check(0);
+						rcheck = this.check(0,0);
 				}
 				else if(y > this.target.getY0()) {
-						this.check(4);
+						rcheck = this.check(4,0);
 				}
 				// TO-DO: Wegfinde-Algorithmus
 				/*int xORy = Functions.myRandom(0, 1);
@@ -340,8 +354,10 @@ public abstract class Human extends JLabel{
 					}
 					break;
 				}*/
-				Coordinate newPos = ausDirzuCoo(this.direction);
-				position.setPosition(newPos.getXCoordinate(), newPos.getYCoordinate(), x+this.width, y, x, y+this.length, x+this.width, y+this.length);
+				if(rcheck) {
+					newPos = ausDirzuCoo(this.direction);
+				}
+				position.setPosition(newPos.getXCoordinate(), newPos.getYCoordinate(), x+this.width, y, x, y+this.height, x+this.width, y+this.height); // Die neue Position wird explizit gesetzt.
 			}
 		}
 	}
