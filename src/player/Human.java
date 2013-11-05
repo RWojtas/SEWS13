@@ -304,7 +304,7 @@ public abstract class Human extends JLabel{
 	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
-	public void getNextPosition() {													//Diese Methode setzt die nächste Position des Menschen 
+	public void stepNextPosition() {													//Diese Methode setzt die nächste Position des Menschen 
 		int x = this.getXPosition();												//mit Hilfe der weiter oben erklärten Methoden.
 		int y = this.getYPosition();												//Der Fall, dass sich der Mensch nicht bewegt, ist abgefangen.
 		boolean rcheck = false;

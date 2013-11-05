@@ -19,6 +19,7 @@ public class GameView extends JFrame implements MouseListener {
   public JPanel layer1;
   public JPanel layer2;
   public JPanel layer3;
+  public JPanel statusbar;
   
   public GameView(ASManager asManager, DiscoObjectManager doManager) {
 	  deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
@@ -51,6 +52,14 @@ public class GameView extends JFrame implements MouseListener {
       
       asManager.addComponents(layer2);
       doManager.addComponents(layer3); 
+      
+      // Statusbar
+      statusbar = createLayerPanelStatusbar();
+      layeredPane.add(statusbar, 3);
+      
+      
+      
+      // End: Statusbar
     
       // Temp
      // JLabel status = new JLabel(new ImageIcon(doManager.graphicManager.status.getImage()));
@@ -65,6 +74,14 @@ public class GameView extends JFrame implements MouseListener {
 	  JPanel layer = new JPanel();
 	  layer.setLayout(null);
 	  layer.setBounds(0,0,(int)deskResolution.getWidth(),(int)deskResolution.getHeight());
+	  layer.setOpaque(false);
+	  return layer;
+  }
+  
+  public JPanel createLayerPanelStatusbar() {
+	  JPanel layer = new JPanel();
+	  layer.setLayout(null);
+	  layer.setBounds((int)deskResolution.getWidth()-200,0,200,(int)deskResolution.getHeight());
 	  layer.setOpaque(false);
 	  return layer;
   }
