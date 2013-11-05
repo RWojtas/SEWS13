@@ -156,7 +156,7 @@ public abstract class Human extends JLabel{
 	}
 	
 	public void removeAlcLevel(double alclevel){
-		this.alclevel -=alclevel;
+		this.alcLevel -=alclevel;
 	}
 
 	public double getUrine() {
