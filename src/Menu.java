@@ -1,96 +1,71 @@
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
-import java.awt.event.MouseMotionListener;
-
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+
 public class Menu extends JLayeredPane {
 	public Menu(GraphicManager graphicManager) {
-		JLabel mouse = new JLabel();
-		mouse.setVisible(true);
-		mouse.setText("ads");
-		mouse.setAlignmentX(LEFT_ALIGNMENT);
-		mouse.setAlignmentY(TOP_ALIGNMENT);
-		mouse.setBounds(0, 740, 100, 10);
-		add(mouse, 100);
+		int left = 640*1366/1600;
+		int top = 270*768/900;
+		int width = 300;
+		int height = 60;
 		
 		JLabel start = new JLabel();
-		start.setIcon(new ImageIcon(graphicManager.startMenueButtons[0].getImage()));
-		start.setBounds(659-120, 275, 295, 56);
-		start.addMouseListener(new StartAction(start, graphicManager, this));
+		Icon start_icon = new ImageIcon(graphicManager.startMenueButtons.getImage(0,0));
+		Icon start_icon_hover = new ImageIcon(graphicManager.startMenueButtons.getImage(1,0));
+		start.setIcon(start_icon);
+		start.setBounds(left, top, width, height);
+		start.addMouseListener(new MouseAction(start_icon, start_icon_hover));
 		add(start, 100);
 		
-		JLabel menuBack = new JLabel();
-		menuBack.setIcon(new ImageIcon(graphicManager.startMenueBG.getImage()));
-		menuBack.setBounds(0, 0, 1366, 768);
-		menuBack.setVisible(true);
-		add(menuBack, 10);
-
+		JLabel end = new JLabel();
+		Icon end_icon = new ImageIcon(graphicManager.startMenueButtons.getImage(2,0));
+		Icon end_icon_hover = new ImageIcon(graphicManager.startMenueButtons.getImage(3,0));
+		end.setIcon(start_icon);
+		end.setBounds(left, top, width, height);
+		end.addMouseListener(new MouseAction(end_icon, end_icon_hover));
+		add(end, 100);
+		
+		add(new JLabel("test"));
+		
 		setBounds(0,0,1366,768);
 		setVisible(true);
-		addMouseMotionListener(new MouseMove(mouse));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(this.getX(), this.getY()), "mouse01"));
 	}
 	
-	class MouseMove implements MouseMotionListener {
-		JLabel l;
-		public MouseMove(JLabel l) {
-			this.l = l;
-		}
-
-		@Override
-		public void mouseDragged(MouseEvent e) {}
-
-		@Override
-		public void mouseMoved(MouseEvent e) {
-			l.setText("X:"+e.getX()+" Y:"+e.getY());
-		}
+	class MouseAction implements MouseListener {
+		private Icon standard;
+		private Icon hover;
 		
-	}
-	
-	class StartAction implements MouseListener {
-		private JLabel a;
-		private GraphicManager graphicManager;
-		private JLayeredPane p;
-		public StartAction(JLabel a, GraphicManager g, JLayeredPane p) {
-			this.a = a;
-			this.graphicManager = g;
-			this.p = p;
+		public MouseAction(Icon standard, Icon hover) {
+			this.standard = standard;
+			this.hover = hover;
 		}
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			System.out.println("Klick!");
+			// TODO start game
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			System.out.println("Enter!");
-			a.setIcon(new ImageIcon(graphicManager.startMenueButtons[1].getImage()));
+			((JLabel) e.getSource()).setIcon(hover);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			a.setIcon(new ImageIcon(graphicManager.startMenueButtons[0].getImage()));
+			((JLabel) e.getSource()).setIcon(standard);
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mousePressed(MouseEvent e) {}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mouseReleased(MouseEvent e) {}
 	}
 	
 	public static void main(String[] args) {
@@ -105,7 +80,7 @@ public class Menu extends JLayeredPane {
 	    gameView.setResizable(false);
 	    gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    gameView.setVisible(true);
-	    
+	    gameView.add(new JLabel("test"));
 	    gameView.add(new Menu(graphicManager));
 	}
 }
