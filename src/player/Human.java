@@ -20,7 +20,8 @@ public abstract class Human extends JLabel{
 	protected int activity;
 	protected int activityTimer;
 	protected ImageIcon image;
-	private int size;
+	private int length;
+	private int width;
 	private int direction;
 
 	/*
@@ -51,9 +52,10 @@ public abstract class Human extends JLabel{
 	 */
 
 	// Constructor
-	public Human(char gender, int type, BufferedImage image, int x, int y, int size, int direction) {
-		this.size = size;
-		this.position = new Position(x, y, x+size, y, x, y+size, x+size, y+size);
+	public Human(char gender, int type, BufferedImage image, int x, int y, int length, int width, int direction) {
+		this.length = length;
+		this.width =  width;
+		this.position = new Position(x, y, x+width, y, x, y+length, x+width, y+length);
 		this.target = new Position(0, 0, 0, 0, 0, 0, 0, 0);
 		this.flirt = 0.5;
 		this.fun = 0.5;
@@ -70,7 +72,7 @@ public abstract class Human extends JLabel{
 	}
 	
 	public void moveObject(int x, int y) {
-		position.setPosition(x, y, x+this.size, y, x, y+this.size, x+this.size, y+this.size);
+		position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 		setLocation(position.getX0(),position.getY0());
 	}
 
@@ -100,14 +102,13 @@ public abstract class Human extends JLabel{
 	}
 
 	public void setPosition(int x, int y, int direction) {
-		if(direction == 0 || direction == 2 || direction == 4 || direction == 6)
-			position.setPosition(x, y, x+this.size, y, x, y+this.size, x+this.size, y+this.size);
+		position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 		// else
 			// hier muss ne Formel für die Drehung hin, bei 45°, jemand nen Plan?
 	}
 
 	public void setTarget(int x, int y) {
-		target.setPosition(x, y, x+this.size, y, x, y+this.size, x+this.size, y+this.size);
+		target.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 	}
 
 	public double getFlirt() {
@@ -217,7 +218,7 @@ public abstract class Human extends JLabel{
 					}
 					break;
 				}
-				position.setPosition(x, y, x+this.size, y, x, y+this.size, x+this.size, y+this.size);
+				position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 			}
 		}
 	}
