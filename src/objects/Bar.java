@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Bar extends DiscoObject {
 
-	private Drink[] drinkList;
+	private int[] drinkList = new int[8];
 	private int waitingTime;
 	
 	public Bar(BufferedImage image, int x, int y) {
