@@ -19,6 +19,10 @@ public class GraphicManager {
   // Startmenü
   public BufferedImageLoader startMenueBG;
   public BufferedImageLoader startMenueButtons;
+  public BufferedImageLoader startImpressum;
+  
+  public BufferedImageLoader closeButtons;
+  public BufferedImageLoader startPopup;
   
   // Mouse
   public BufferedImageLoader mouse;
@@ -47,7 +51,11 @@ public class GraphicManager {
     
     startMenueBG = new BufferedImageLoader("Data/Graphics/","startbildschirm01.png");
     startMenueButtons = new BufferedImageLoader("Data/Graphics/","menu_buttons01.png", 1, 8);
+    startImpressum = new BufferedImageLoader("Data/Graphics/","impressum01.png");
     
     mouse = new BufferedImageLoader("Data/Graphics/","mouse02.png");
+    
+    closeButtons = new BufferedImageLoader("Data/Graphics/","closebutton01.png", 1, 2);
+    startPopup = new BufferedImageLoader("Data/Graphics/","startpopup01.png");
   }
 }

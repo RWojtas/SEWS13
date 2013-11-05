@@ -1,4 +1,6 @@
 package main;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -6,60 +8,159 @@ import java.awt.event.MouseListener;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class Menu extends JLayeredPane {
+	GraphicManager graphicManager;
+	
+	JComponent score;
+	JComponent impressum;
+	
+	JLabel start;
+	JLabel high;
+	JLabel impr;
+	JLabel end;
+	JLabel bg;
+	MouseAction start_l;
+	MouseAction high_l;
+	MouseAction impr_l;
+	MouseAction end_l;
+	
 	public Menu(GraphicManager graphicManager) {
+		this.graphicManager = graphicManager;
+		
 		int left = 630*1366/1600;
 		int top = 270*768/900;
 		int width = 300;
 		int height = 60;
 		int height_gab = height + 20;
 		
-		setOpaque(true);
-
 		
-		JLabel start = new JLabel();
+		start = new JLabel();
 		Icon start_icon = new ImageIcon(graphicManager.startMenueButtons.getImage(0,0));
 		Icon start_icon_hover = new ImageIcon(graphicManager.startMenueButtons.getImage(0,1));
 		start.setIcon(start_icon);
 		start.setBounds(left, top, width, height);
-		start.addMouseListener(new MouseAction('s', start_icon, start_icon_hover));
-		add(start, 100);
+		start_l = new MouseAction('s', start_icon, start_icon_hover);
+		add(start, JLayeredPane.DEFAULT_LAYER);
 
-		JLabel high = new JLabel();
+		high = new JLabel();
 		Icon high_icon = new ImageIcon(graphicManager.startMenueButtons.getImage(0,4));
 		Icon high_icon_hover = new ImageIcon(graphicManager.startMenueButtons.getImage(0,5));
 		high.setIcon(high_icon);
 		high.setBounds(left, top+height_gab, width, height);
-		high.addMouseListener(new MouseAction('h', high_icon, high_icon_hover));
-		add(high, 110);
+		high_l = new MouseAction('h', high_icon, high_icon_hover);
+		add(high, JLayeredPane.DEFAULT_LAYER);
 		
-		JLabel impr = new JLabel();
+		impr = new JLabel();
 		Icon impr_icon = new ImageIcon(graphicManager.startMenueButtons.getImage(0,2));
 		Icon impr_icon_hover = new ImageIcon(graphicManager.startMenueButtons.getImage(0,3));
 		impr.setIcon(impr_icon);
 		impr.setBounds(left, top+2*height_gab, width, height);
-		impr.addMouseListener(new MouseAction('i', impr_icon, impr_icon_hover));
-		add(impr, 102);
+		impr_l = new MouseAction('i', impr_icon, impr_icon_hover);
+		add(impr, JLayeredPane.DEFAULT_LAYER);
 		
-		JLabel end = new JLabel();
+		end = new JLabel();
 		Icon end_icon = new ImageIcon(graphicManager.startMenueButtons.getImage(0,6));
 		Icon end_icon_hover = new ImageIcon(graphicManager.startMenueButtons.getImage(0,7));
 		end.setIcon(end_icon);
 		end.setBounds(left, top+4*height_gab, width, height);
-		end.addMouseListener(new MouseAction('e', end_icon, end_icon_hover));
-		add(end, 103);
+		end_l = new MouseAction('e', end_icon, end_icon_hover);
+		add(end, JLayeredPane.DEFAULT_LAYER);
 		
-		JLabel bg = new JLabel(new ImageIcon(graphicManager.startMenueBG.getImage()));
+		bg = new JLabel(new ImageIcon(graphicManager.startMenueBG.getImage()));
 		bg.setBounds(0, 0, 1366, 768);
-		add(bg, 10);
+		add(bg, JLayeredPane.DEFAULT_LAYER);
 		
 		
+		JLabel imp_pic = new JLabel(new ImageIcon(graphicManager.startImpressum.getImage()));
+		impressum = makePopup("Impressum", imp_pic);
+		impressum.setVisible(false);
+		add(impressum, JLayeredPane.POPUP_LAYER);
+		
+		score = makePopup("Bestenliste");
+		score.setVisible(false);
+		add(score, JLayeredPane.POPUP_LAYER);
+		
+		enableButtonsEvents();
 		setBounds(0,0,1366,768);
+		setOpaque(false);
 		setVisible(true);
+	}
+	
+	private void disableButtonsEvents() {
+		start.removeMouseListener(start_l);
+		high.removeMouseListener(high_l);
+		end.removeMouseListener(end_l);
+		impr.removeMouseListener(impr_l);
+	}
+	
+	private void enableButtonsEvents() {
+		start.addMouseListener(start_l);
+		high.addMouseListener(high_l);
+		end.addMouseListener(end_l);
+		impr.addMouseListener(impr_l);
+	}
+	
+	private JComponent makePopup(String title, JComponent content) {
+		JLayeredPane pan = (JLayeredPane) makePopup(title);
+		content.setBounds(10, 80, 680, 300);
+		pan.add(content, JLayeredPane.DEFAULT_LAYER);
+		pan.moveToFront(content);
+		return pan;
+	}
+	
+	private JComponent makePopup(String title) {
+		double screen_width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		double screen_height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		int cont_width = 700;
+		int cont_height = 400;
+
+		JLabel lab = new JLabel(new ImageIcon(graphicManager.startPopup.getImage()));
+		lab.setBounds(0,0,cont_width,cont_height);
+		
+		JLabel text = new JLabel();
+		text.setText(title);
+		text.setFont(new Font("Aharoni", 0, 48));
+		text.setForeground(new Color(128,0,0));
+		text.setBounds(35,20,300,48);
+		
+		JLabel close = new JLabel();
+		Icon close_icon = new ImageIcon(graphicManager.closeButtons.getImage(0, 0));
+		close.setIcon(close_icon);
+		close.setBounds(640,10,45,45);
+		close.addMouseListener(new MouseAdapter() {
+			Icon icon_close = new ImageIcon(graphicManager.closeButtons.getImage(0, 1));
+			Icon icon = new ImageIcon(graphicManager.closeButtons.getImage(0, 0));
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				((JLabel) e.getSource()).setIcon(icon_close);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				((JLabel) e.getSource()).setIcon(icon);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				((JComponent) e.getSource()).getParent().setVisible(false);
+				enableButtonsEvents();
+			}
+		});
+		
+		JLayeredPane pan = new JLayeredPane();
+		pan.setBounds((int) ((screen_width-cont_width)/2),(int) ((screen_height-cont_height)/2),cont_width,cont_height);
+		pan.add(text, JLayeredPane.DEFAULT_LAYER);
+		pan.add(close, JLayeredPane.DEFAULT_LAYER);
+		pan.add(lab, JLayeredPane.DEFAULT_LAYER);
+		pan.setVisible(true);
+		
+		return pan;
 	}
 	
 	class MouseAction implements MouseListener {
@@ -72,20 +173,26 @@ public class Menu extends JLayeredPane {
 			this.hover = hover;
 			this.act = act;
 		}
-		
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			switch(act) {
 				case 's':
+					//TODO start game! ;)
 					break;
 				case 'e':
 					System.exit(0);
 					break;
 				case 'i':
+					impressum.setVisible(true);
+					disableButtonsEvents();
 					break;
 				case 'h':
+					score.setVisible(true);
+					disableButtonsEvents();
 					break;
 			}
+			((JLabel) e.getSource()).setIcon(standard);
 		}
 
 		@Override
