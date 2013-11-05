@@ -1,6 +1,8 @@
 /**
  * @author Nicolas
  */
+
+
 public class Highscore {
 	private static Highscore instance;
 	private int score;
