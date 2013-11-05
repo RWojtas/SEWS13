@@ -1,10 +1,11 @@
+package main;
+
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-
 import music.MusicManager;
 import player.*;
+
 
 public class GameLogic {
   public GameView gameView;

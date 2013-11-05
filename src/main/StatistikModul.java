@@ -1,3 +1,5 @@
+package main;
+
 import java.net.NetworkInterface;
 import java.sql.Connection;
 import java.sql.DriverManager;

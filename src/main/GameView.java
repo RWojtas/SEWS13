@@ -1,13 +1,13 @@
+package main;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-
 import javax.swing.*;
-
 import objects.*;
 
+
 public class GameView extends JFrame implements MouseListener {
-  public GraphicManager graphicManager;
   public ASManager asManager;
   public DiscoObjectManager doManager;
   public Container c;

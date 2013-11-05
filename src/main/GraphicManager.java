@@ -1,3 +1,4 @@
+package main;
 import java.awt.image.BufferedImage;
 
 public class GraphicManager {
@@ -17,7 +18,7 @@ public class GraphicManager {
  
   // Startmenü
   public BufferedImageLoader startMenueBG;
-  public BufferedImageLoader[] startMenueButtons;
+  public BufferedImageLoader startMenueButtons;
   
   // Mouse
   public BufferedImageLoader mouse;
@@ -45,9 +46,7 @@ public class GraphicManager {
     
     
     startMenueBG = new BufferedImageLoader("Data/Graphics/","startbildschirm01.png");
-    startMenueButtons = new BufferedImageLoader[2];
-    startMenueButtons[0] = new BufferedImageLoader("Data/Graphics/","startMenueButton101.png");
-    startMenueButtons[1] = new BufferedImageLoader("Data/Graphics/","startMenueButton1Pressed01.png");
+    startMenueButtons = new BufferedImageLoader("Data/Graphics/","menu_buttons01.png", 1, 8);
     
     mouse = new BufferedImageLoader("Data/Graphics/","mouse02.png");
   }

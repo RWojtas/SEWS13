@@ -1,9 +1,9 @@
+package main;
+
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.JPanel;
-
 import objects.DiscoObject;
 import player.*;
 
@@ -22,7 +22,7 @@ public class ASManager {
 	
 	public void addComponents(JPanel panel) {
 		human = new Human[1];
-		human[0] = new AS('w', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0);
+		human[0] = new AS('w', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0,1);
 	    human[0].addMouseListener(new ASMouseListener());
 
 	    for(Human obj : human)

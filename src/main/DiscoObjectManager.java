@@ -1,10 +1,10 @@
+package main;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.JPanel;
-
 import objects.*;
 import player.Coordinate;
 import player.Position;
@@ -27,7 +27,6 @@ public class DiscoObjectManager {
 	public void addComponents(JPanel panel) {
 		
 	    discoObject = new DiscoObject[7];
-	    //discoObject[0] = new Bar(graphicManager.background.getImage(),0,0);
 	    discoObject[0] = new Bar(graphicManager.bar.getImage(),BufferedImageLoader.scaleToScreenX(0),BufferedImageLoader.scaleToScreenY(-18));
 	    discoObject[0].addMouseListener(new BarMouseListener());
 	    discoObject[1] = new Toilet(graphicManager.wc.getImage(),BufferedImageLoader.scaleToScreenX(12),BufferedImageLoader.scaleToScreenY(270));
@@ -217,7 +216,7 @@ public class DiscoObjectManager {
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
-		    Dancefloor clickedObject = (Dancefloor)e.getSource();   
+		    Table clickedObject = (Table)e.getSource();   
 		    
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
