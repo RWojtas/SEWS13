@@ -53,10 +53,10 @@ public class GameView extends JFrame implements MouseListener {
       doManager.addComponents(layer3); 
     
       // Temp
-      JLabel status = new JLabel(new ImageIcon(doManager.graphicManager.status.getImage()));
-      status.setBounds(BufferedImageLoader.scaleToScreenX(1366-272), 0, 272, 768);
+     // JLabel status = new JLabel(new ImageIcon(doManager.graphicManager.status.getImage()));
+      // status.setBounds(BufferedImageLoader.scaleToScreenX(1366-272), 0, 272, 768);
 
-      layer1.add(status);
+      // layer1.add(status);
   	  
       // Temp Ende    
   }
