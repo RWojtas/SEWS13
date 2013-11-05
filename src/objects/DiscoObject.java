@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import player.*;
+import main.Highscore;
 
 /**
  * @author Anna
@@ -28,30 +29,60 @@ public abstract class DiscoObject extends JLabel {
 		setLocation(position.getXPosition(),position.getYPosition());
 	}
 	
-	//Highscore h = Highscore.getInstance();
+	Highscore h = Highscore.getInstance();
 	
 	public void setStatusES(Person p, int aktivitaet, int number){
 		
 		if (aktivitaet == 3){
 			switch (number){
-				case '0': 	p.addEnergy(0.30);
+				case 0: 	p.addEnergy(0.30);
 							p.addUrine(0.40);
 							p.removeAlcLevel(0.20);
 							p.addFun(0.10);
-							instance.setBonus(1000);
+							h.setBonus(1);
 							break;
-				case '1': 	p.addFlirt(0.20);
+				case 1: 	p.addFlirt(0.20);
 							p.addUrine(0.40);
 							p.addFun(0.10);
+							h.setBonus(1);
 							break;
-				case '2':	p.addFun(0.20);
+				case 2:		p.addFun(0.20);
 							p.addUrine(0.40);
 							p.addFlirt(0.20);
+							h.setBonus(1);
 							break;
-				case '3':	p.removeAlcLevel(0.20);
+				case 3:		p.removeAlcLevel(0.20);
 							p.addEnergy(0.20);
 							p.addUrine(0.40);
 							p.addFun(0.1);
+							h.setBonus(1);
+							break;
+				case 4: 	p.removeAlcLevel(0.20);
+							p.addEnergy(0.20);
+							p.addUrine(0.40);
+							p.addFun(0.10);
+							h.setBonus(1);
+							break;
+				case 5: 	p.addUrine(0.40);
+							break;
+				case 6:		p.addUrine(0.40);
+							p.addEnergy(0.30);
+							break;
+				case 7:		p.addUrine(0.40);
+							p.addAlcLevel(0.30);
+							break;
+				case 8:		p.addUrine(0.40);
+							p.addAlcLevel(0.30);
+							break;
+				case 9:		p.addEnergy(0.40);
+							break;
+				case 10 :	p.removeEnergy(0.25);
+							p.addFun(0.3);
+							break;
+				case 11: 	p.addFlirt(30);
+							p.addFun(30);
+							break;
+				case 12:	p.setUrine(0);
 							break;
 				
 			}			

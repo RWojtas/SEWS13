@@ -1,3 +1,4 @@
+package main;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -7,6 +8,7 @@ import music.MusicManager;
 import player.*;
 
 public class GameLogic {
+  private static GameLogic instance = null;
   public GameView gameView;
   public GraphicManager graphicManager;
   public ASManager asManager;
@@ -32,6 +34,13 @@ public class GameLogic {
     //gameView.add(musicManager.getPanel());	//add music panel
     
     //musicManager.play(); //play music
+  }
+  
+  public static GameLogic getinstance(){
+	  if(instance == null) {
+		  instance = new GameLogic();
+	  }
+	  return instance;
   }
   
   public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {

@@ -242,6 +242,7 @@ public abstract class Human extends JLabel{
 		if (this.getActivity() == 1) {
 			if (this.position != this.target) {
 				if(x < this.target.getX0() && y < this.target.getY0()) {
+//					if(GameLogic.)
 					x++;
 					y++;
 					this.direction = 7;

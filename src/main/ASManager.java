@@ -1,3 +1,4 @@
+package main;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
@@ -18,7 +19,7 @@ public class ASManager {
 	}
 	
 	public void addComponents(JPanel panel) {
-		panel.add(new AS('w', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0,0));
+		panel.add(new AS('w', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(100), BufferedImageLoader.scaleToScreenY(150),0,0,0));
 	}
 	
 	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
