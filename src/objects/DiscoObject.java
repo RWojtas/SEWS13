@@ -54,8 +54,6 @@ public abstract class DiscoObject extends JLabel {
 	
 	
 	public void setStatusES(Human p, int aktivitaet, int number){
-		
-		if (aktivitaet == 3){
 			switch (number){
 				case 0: 	p.addEnergy(0.30);
 							p.addUrine(0.40);
@@ -108,11 +106,9 @@ public abstract class DiscoObject extends JLabel {
 							break;
 				
 			}	
-		}
 	}
 			
 		public void setStatusAS (Human p, int aktivitaet, int number){
-			if (aktivitaet == 3){
 				switch (number){
 					case 0: 	p.addEnergy(0.30);
 								p.addUrine(0.40);
@@ -165,7 +161,6 @@ public abstract class DiscoObject extends JLabel {
 								break;
 					
 				}	
-			}
 			
 		}
 	
