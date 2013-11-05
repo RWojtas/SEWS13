@@ -8,14 +8,21 @@ import player.*;
 
 
 public class GameLogic {
+  public static GameLogic gameLogic;
   public GameView gameView;
   public GraphicManager graphicManager;
   public ASManager asManager;
   public DiscoObjectManager doManager;
   public MusicManager musicManager;
   
+  public static GameLogic getInstance() {
+	  if(gameLogic == null) {
+		  gameLogic = new GameLogic();
+	  }
+	  return gameLogic;
+  }
   
-  public GameLogic() {
+  private GameLogic() {
     graphicManager = new GraphicManager();
     asManager = new ASManager(graphicManager);
     doManager = new DiscoObjectManager(graphicManager);
@@ -50,7 +57,7 @@ public class GameLogic {
   }
 
   public static void main (String [] args) {
-    new GameLogic();
+      GameLogic.getInstance();
   }
 
 }

@@ -48,7 +48,6 @@ public class ASManager {
 	  	}
 	  	  
 	  	if(clickedObject == null) {
-	  		System.out.println("check2");
 	  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
 	        try {
 	  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
@@ -58,7 +57,6 @@ public class ASManager {
 	  	}
 	  	  		
 	  	if(clickedObject == null) {
-	  		System.out.println("check3");
 	  	    clickedPanel = (JPanel)clickedLayeredPane.getComponent(2);
 	  	    try {
 	  		    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  

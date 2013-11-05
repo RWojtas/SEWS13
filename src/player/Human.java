@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import main.GameLogic;
-
 
 public abstract class Human extends JLabel{
 	// Attribute
@@ -236,91 +234,50 @@ public abstract class Human extends JLabel{
 		this.setActivity(5);
 		this.setActivityTimer(20);
 	}
-	
-	public boolean checkFreePosition(int x, int y) {
-		GameLogic gl = GameLogic.getinstance();
-		return gl.checkFreePosition(new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+length), new Coordinate(x+width, y+length));
-	}
-	
-	public Coordinate ausDirzuCoo(int dir) {
-		int x = this.getPosition().getX0();
-		int y = this.getPosition().getY0();
-		switch(dir) {
-		case 0: 
-			++y;
-			break;
-		case 1:
-			++y;
-			x--;
-			break;
-		case 2:
-			x--;
-			break;
-		case 3:
-			x--;
-			y--;
-			break;
-		case 4:
-			y++;
-			break;
-		case 5:
-			x++;
-			y--;
-			break;
-		case 6:
-			x++;
-			break;
-		case 7:
-			x++;
-			y++;
-			break;
-		}
-		return new Coordinate(x,y);
-	}
-	
-	
-	public void check(int dir) {
-		dir = dir%8;
-		Coordinate Coo = ausDirzuCoo(dir);
-		if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())){
-			this.direction = dir;
-		}
-		else {
-			check(dir+1);
-		}
-			
-	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
 	public void getNextPosition() {
 		int x = this.getXPosition();
 		int y = this.getYPosition();
-		
+
 		if (this.getActivity() == 1) {
 			if (this.position != this.target) {
 				if(x < this.target.getX0() && y < this.target.getY0()) {
-						this.check(7);
+//					if(GameLogic.)
+					x++;
+					y++;
+					this.direction = 7;
 				}
 				else if(x > this.target.getX0() && y < this.target.getY0()){
-						this.check(1);
+					x--;
+					y++;
+					this.direction = 1;
 				}
 				else if( x < this.target.getX0() && y > this.target.getY0()) {
-						this.check(5);
+					x++;
+					y--;
+					this.direction = 5;
 				}
 				else if(x > this.target.getX0() && y > this.target.getY0()) {
-						this.check(3);
+					x--;
+					y--;
+					this.direction = 3;
 				}
 				else if(x > this.target.getX0()) {
-						this.check(2);
+					x--;
+					this.direction = 2;
 				}
 				else if(x < this.target.getX0()) {
-						this.check(6);
+					x++;
+					this.direction = 6;
 				}
 				else if(y < this.target.getY0()) {
-						this.check(0);
+					y++;
+					this.direction = 0;
 				}
 				else if(y > this.target.getY0()) {
-						this.check(4);
+					y--;
+					this.direction = 4;
 				}
 				// TO-DO: Wegfinde-Algorithmus
 				/*int xORy = Functions.myRandom(0, 1);
@@ -340,8 +297,7 @@ public abstract class Human extends JLabel{
 					}
 					break;
 				}*/
-				Coordinate newPos = ausDirzuCoo(this.direction);
-				position.setPosition(newPos.getXCoordinate(), newPos.getYCoordinate(), x+this.width, y, x, y+this.length, x+this.width, y+this.length);
+				position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 			}
 		}
 	}
