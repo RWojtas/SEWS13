@@ -1,14 +1,11 @@
 package main;
 import java.awt.*;
-
 import javax.swing.*;
-
 import java.awt.image.BufferedImage;
-
 import javax.imageio.*;
-
 import java.io.*;
 import java.net.*;
+
 
 public class BufferedImageLoader {
 
@@ -25,7 +22,7 @@ public class BufferedImageLoader {
     BufferedImage scaledBufferedImage = null;
     BufferedImage source = null;
     
-    URL pic_url = getClass().getResource(adress+""+name);
+    URL pic_url = getClass().getResource("../"+adress+""+name);
 
     try {
       source = ImageIO.read(pic_url);
@@ -53,7 +50,7 @@ public class BufferedImageLoader {
     BufferedImage scaledBufferedImage = null;
     BufferedImage source = null;
 
-    URL pic_url = getClass().getResource(adress+""+name);
+    URL pic_url = getClass().getResource("../"+adress+""+name);
     
     try {
       source = ImageIO.read(pic_url);
@@ -75,7 +72,7 @@ public class BufferedImageLoader {
     BufferedImage scaledBufferedImage = null;
     BufferedImage source = null;
     
-    URL pic_url = getClass().getResource(adress+""+name);
+    URL pic_url = getClass().getResource("../"+adress+""+name);
 
     try {
       source = ImageIO.read(pic_url);
@@ -101,7 +98,7 @@ public class BufferedImageLoader {
     BufferedImage scaledBufferedImage = null;
     BufferedImage source = null;
     
-    URL pic_url = getClass().getResource(adress+""+name);
+    URL pic_url = getClass().getResource("../"+adress+""+name);
     
     try {
       source = ImageIO.read(pic_url);
