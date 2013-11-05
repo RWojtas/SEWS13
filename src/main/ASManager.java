@@ -3,7 +3,10 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
 import objects.DiscoObject;
 import player.*;
 
@@ -29,13 +32,62 @@ public class ASManager {
 			panel.add(obj);
 	}
 	
+    public Human getComponentAt(int x, int y) {
+		JLayeredPane clickedLayeredPane;
+		JPanel clickedPanel;
+	  	Human clickedObject = null;
+	  	  
+	  	clickedLayeredPane = GameView.layeredPane;
+	  	  
+	  	clickedPanel = (JPanel)clickedLayeredPane.getComponent(0);
+	  	  
+	  	try {
+	  		clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
+	  	} catch(Exception e) {
+	  		clickedObject = null;
+	  	}
+	  	  
+	  	if(clickedObject == null) {
+	  		System.out.println("check2");
+	  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
+	        try {
+	  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
+	  	  	} catch(Exception e) {
+	  	  	    clickedObject = null;
+	  	  	}	
+	  	}
+	  	  		
+	  	if(clickedObject == null) {
+	  		System.out.println("check3");
+	  	    clickedPanel = (JPanel)clickedLayeredPane.getComponent(2);
+	  	    try {
+	  		    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
+	  		} catch(Exception e) {
+	  		     clickedObject = null;
+	  		}
+	    }
+	  	return clickedObject;
+	}
+	
 	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
-		// for(int i=0;i<human.length;i++) { -> WAT f�r length?
-			
-			//Hier wird dann gepr�ft, ob eine Kolision mit einem Menschen entsteht.
-		// }
+		Human component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
+		if (component != null) 
+			return false;
+		
+		component = getComponentAt(ro.getXCoordinate(),ro.getYCoordinate());
+		if (component != null)
+			return false;
+		
+		component = getComponentAt(lu.getXCoordinate(),lu.getYCoordinate());
+		if (component != null)
+			return false;
+		
+		component = getComponentAt(ru.getXCoordinate(),ru.getYCoordinate());
+		if (component != null)
+			return false;
+		
 		return true;
-	} 
+	}
 	
 	class ASMouseListener implements MouseListener {
 	    @Override

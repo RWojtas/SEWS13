@@ -4,7 +4,10 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
 import objects.*;
 import player.Coordinate;
 import player.Position;
@@ -46,10 +49,58 @@ public class DiscoObjectManager {
 			panel.add(obj);
 	}
 	
+	 public DiscoObject getComponentAt(int x, int y) {
+		JLayeredPane clickedLayeredPane;
+		JPanel clickedPanel;
+	  	DiscoObject clickedObject = null;
+	  	  
+	  	clickedLayeredPane = GameView.layeredPane;
+	  	  
+	  	clickedPanel = (JPanel)clickedLayeredPane.getComponent(0);
+	  	  
+	  	try {
+	  		clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
+	  	} catch(Exception e) {
+	  		clickedObject = null;
+	  	}
+	  	  
+	  	if(clickedObject == null) {
+	  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
+	        try {
+	  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
+	  	  	} catch(Exception e) {
+	  	  	    clickedObject = null;
+	  	  	}	
+	  	}
+	  	  		
+	  	if(clickedObject == null) {
+	  	    clickedPanel = (JPanel)clickedLayeredPane.getComponent(2);
+	  	    try {
+	  		    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
+	  		} catch(Exception e) {
+	  		     clickedObject = null;
+	  		}
+	    }
+	  	return clickedObject;
+	}
+	
 	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
-		for(int i=0;i<discoObject.length;i++) {
-			
-		}
+		DiscoObject component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
+		if (component != null) 
+			return false;
+		
+		component = getComponentAt(ro.getXCoordinate(),ro.getYCoordinate());
+		if (component != null)
+			return false;
+		
+		component = getComponentAt(lu.getXCoordinate(),lu.getYCoordinate());
+		if (component != null)
+			return false;
+		
+		component = getComponentAt(ru.getXCoordinate(),ru.getYCoordinate());
+		if (component != null)
+			return false;
+		
 		return true;
 	}
 	

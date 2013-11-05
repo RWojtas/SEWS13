@@ -33,6 +33,10 @@ public class GameLogic {
     //gameView.add(musicManager.getPanel());	//add music panel
     
     //musicManager.play(); //play music
+    
+    while(true) {
+    	
+    }
   }
   
   public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {

@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import objects.*;
+import player.*;
 
 
 public class GameView extends JFrame implements MouseListener {
@@ -14,7 +15,7 @@ public class GameView extends JFrame implements MouseListener {
   public static Dimension deskResolution;
   public int currentLevel;
   public JPanel background;
-  public JLayeredPane layeredPane;
+  public static JLayeredPane layeredPane;
   public JPanel layer1;
   public JPanel layer2;
   public JPanel layer3;
@@ -54,11 +55,9 @@ public class GameView extends JFrame implements MouseListener {
       // Temp
       JLabel status = new JLabel(new ImageIcon(doManager.graphicManager.status.getImage()));
       status.setBounds(BufferedImageLoader.scaleToScreenX(1366-272), 0, 272, 768);
-  
-      //Graphics2D g2d = (Graphics2D)status.getGraphics();
-      //g2d.rotate(Math.toRadians(45), 272,768);
 
       layer1.add(status);
+  	  
       // Temp Ende    
   }
   
@@ -69,47 +68,12 @@ public class GameView extends JFrame implements MouseListener {
 	  layer.setOpaque(false);
 	  return layer;
   }
-  
-  //Eine Methode die dazu verwendet werden kann, einen globalen MouseListener zu bauen
-  //Gibt das oberste Objekt zurück, das angeklickt wurde.
-  public DiscoObject getClickedObject(int x, int y) {
-	  JPanel clickedPanel;
-  	  DiscoObject clickedObject = null;
-  	  
-  	  clickedPanel = (JPanel)layeredPane.getComponent(0);
-  	  try {
-  		clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
-  	  } catch(Exception e) {
-  		clickedObject = null;
-  	  }
-  	  
-  	  if(clickedObject == null) {
-  		clickedPanel = (JPanel)layeredPane.getComponent(1);
-  		try {
-  	  	  clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
-  	  	} catch(Exception e) {
-  	  	  clickedObject = null;
-  	  	}
-  		
-  	  }
-  	  		
-  	  if(clickedObject == null) {
-  	    clickedPanel = (JPanel)layeredPane.getComponent(2);
-  	    try {
-  		  clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
-  		} catch(Exception e) {
-  		 clickedObject = null;
-  		}
-  	  }
-  	  return clickedObject;
-  }
 
   @Override
   public void mouseClicked(MouseEvent e) {
   	  System.out.println("mouseClicked!");
   	  //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
   	  //ohne mit gedrückter Maustaste die Position der Maus zu verändern
-
 
   	  /* TODO Raffel & Sebastian
   	   * Wenn (Position ist Frei?)
