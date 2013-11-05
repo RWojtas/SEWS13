@@ -199,9 +199,45 @@ public abstract class Human extends JLabel{
 		int y = this.getYPosition();
 
 		if (this.getActivity() == 1) {
-			if (this.position == this.target) {
+			if (this.position != this.target) {
+				if(x < this.target.getX0() && y < this.target.getY0()) {
+					x++;
+					y++;
+					this.direction = 7;
+				}
+				else if(x > this.target.getX0() && y < this.target.getY0()){
+					x--;
+					y++;
+					this.direction = 1;
+				}
+				else if( x < this.target.getX0() && y > this.target.getY0()) {
+					x++;
+					y--;
+					this.direction = 5;
+				}
+				else if(x > this.target.getX0() && y > this.target.getY0()) {
+					x--;
+					y--;
+					this.direction = 3;
+				}
+				else if(x > this.target.getX0()) {
+					x--;
+					this.direction = 2;
+				}
+				else if(x < this.target.getX0()) {
+					x++;
+					this.direction = 6;
+				}
+				else if(y < this.target.getY0()) {
+					y++;
+					this.direction = 0;
+				}
+				else if(y > this.target.getY0()) {
+					y--;
+					this.direction = 4;
+				}
 				// TO-DO: Wegfinde-Algorithmus
-				int xORy = Functions.myRandom(0, 1);
+				/*int xORy = Functions.myRandom(0, 1);
 				switch (xORy) {
 				case 0:
 					if (x < target.getX0()) {
@@ -217,7 +253,7 @@ public abstract class Human extends JLabel{
 						y--;
 					}
 					break;
-				}
+				}*/
 				position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 			}
 		}
