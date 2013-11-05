@@ -2,7 +2,7 @@
  * @author Nicolas
  */
 
-
+package main;
 public class Highscore {
 	private static Highscore instance;
 	private int score;
