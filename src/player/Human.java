@@ -118,6 +118,14 @@ public abstract class Human extends JLabel{
 	public void setFlirt(double flirt) {
 		this.flirt = flirt;
 	}
+	
+	public void addFlirt(double flirt){
+		this.flirt +=flirt;
+	}
+	
+	public void removeFlirt(double flirt){
+		this.flirt -=flirt;
+	}
 
 	public double getFun() {
 		return fun;
@@ -125,6 +133,14 @@ public abstract class Human extends JLabel{
 
 	public void setFun(double fun) {
 		this.fun = fun;
+	}
+	
+	public void addFun(double fun){
+		this.fun +=fun;
+	}
+	
+	public void removeFun(double fun){
+		this.fun -=fun;
 	}
 
 	public double getAlcLevel() {
@@ -134,6 +150,14 @@ public abstract class Human extends JLabel{
 	public void setAlcLevel(double alcLevel) {
 		this.alcLevel = alcLevel;
 	}
+	
+	public void addAlcLevel(double alcLevel){
+		this.alcLevel +=alcLevel;
+	}
+	
+	public void removeAlcLevel(double alclevel){
+		this.alclevel -=alclevel;
+	}
 
 	public double getUrine() {
 		return urine;
@@ -141,6 +165,14 @@ public abstract class Human extends JLabel{
 
 	public void setUrine(double urine) {
 		this.urine = urine;
+	}
+	
+	public void addUrine(double urine){
+		this.urine +=urine;
+	}
+	
+	public void removeUrine(double urine){
+		this.urine -=urine;
 	}
 
 	public double getEnergy() {
@@ -150,6 +182,14 @@ public abstract class Human extends JLabel{
 	public void setEnergy(double energy) {
 		this.energy = energy;
 	}
+	
+	public void addEnergy(double energy){
+		this.energy +=energy;
+	}
+	
+	public void removeEnergy(double energy){
+		this.energy -=energy;
+	}
 
 	public int getActivity() {
 		return activity;
@@ -158,7 +198,8 @@ public abstract class Human extends JLabel{
 	public void setActivity(int activity) {
 		this.activity = activity;
 	}
-
+	
+	
 	public void setActivityTimer(int timer) {
 		this.activityTimer = timer;
 	}
