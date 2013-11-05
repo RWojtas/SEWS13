@@ -70,12 +70,11 @@ public class GameView extends JFrame implements MouseListener {
       layeredPane.add(statusbar, 3);
       
       GraphicManager graphicManager = new GraphicManager();
-      JLabel start = new JLabel();
-	  Icon startIcon = new ImageIcon(graphicManager.startMenueButtons.getImage(0,0));
-		// Icon start_icon_hover = new ImageIcon(graphicManager.startMenueButtons.getImage(0,1));
-	  start.setIcon(startIcon);
-	  start.setBounds(0, 0, 200, 1000);
-	  statusbar.add(start);  
+      JLabel Titel = new JLabel("Statusbar", JLabel.CENTER);
+      Titel.setFont(new Font("Dialog",Font.BOLD,24));
+      Titel.setBounds(0,0,200,100);
+      
+	  statusbar.add(Titel);  
       // End: Statusbar
     
       // Temp
