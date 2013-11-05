@@ -247,7 +247,7 @@ public abstract class Human extends JLabel{
 		int y = this.getPosition().getY0();
 		switch(dir) {
 		case 0: 
-			++y;
+			++y;									
 			break;
 		case 1:
 			++y;
@@ -279,48 +279,57 @@ public abstract class Human extends JLabel{
 	}
 	
 	
-	public void check(int dir) {
+	public boolean check(int dir, int cnt) {
+		cnt++;
 		dir = dir%8;
 		Coordinate Coo = ausDirzuCoo(dir);
 		if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())){
-			this.direction = dir;
+			this.direction = dir;	
 		}
 		else {
-			check(dir+1);
+			if(cnt <= 8) {
+				if(!(check(dir+1, cnt))) {
+					return false;
+				}
+			}
+			else 
+				return false;
 		}
-			
+		return true;	
 	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
 	public void getNextPosition() {
 		int x = this.getXPosition();
 		int y = this.getYPosition();
+		boolean rcheck = false;
+		Coordinate newPos = new Coordinate(x, y);
 		
 		if (this.getActivity() == 1) {
 			if (this.position != this.target) {
 				if(x < this.target.getX0() && y < this.target.getY0()) {
-						this.check(7);
+						rcheck = this.check(7,0);
 				}
 				else if(x > this.target.getX0() && y < this.target.getY0()){
-						this.check(1);
+						rcheck = this.check(1,0);
 				}
 				else if( x < this.target.getX0() && y > this.target.getY0()) {
-						this.check(5);
+						rcheck = this.check(5,0);
 				}
 				else if(x > this.target.getX0() && y > this.target.getY0()) {
-						this.check(3);
+						rcheck = this.check(3,0);
 				}
 				else if(x > this.target.getX0()) {
-						this.check(2);
+						rcheck = this.check(2,0);
 				}
 				else if(x < this.target.getX0()) {
-						this.check(6);
+						rcheck = this.check(6,0);
 				}
 				else if(y < this.target.getY0()) {
-						this.check(0);
+						rcheck = this.check(0,0);
 				}
 				else if(y > this.target.getY0()) {
-						this.check(4);
+						rcheck = this.check(4,0);
 				}
 				// TO-DO: Wegfinde-Algorithmus
 				/*int xORy = Functions.myRandom(0, 1);
@@ -340,7 +349,9 @@ public abstract class Human extends JLabel{
 					}
 					break;
 				}*/
-				Coordinate newPos = ausDirzuCoo(this.direction);
+				if(rcheck) {
+					newPos = ausDirzuCoo(this.direction);
+				}
 				position.setPosition(newPos.getXCoordinate(), newPos.getYCoordinate(), x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 			}
 		}
