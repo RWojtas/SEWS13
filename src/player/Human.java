@@ -118,6 +118,14 @@ public abstract class Human extends JLabel{
 	public void setFlirt(double flirt) {
 		this.flirt = flirt;
 	}
+	
+	public void addFlirt(double flirt){
+		this.flirt +=flirt;
+	}
+	
+	public void removeFlirt(double flirt){
+		this.flirt -=flirt;
+	}
 
 	public double getFun() {
 		return fun;
@@ -125,6 +133,14 @@ public abstract class Human extends JLabel{
 
 	public void setFun(double fun) {
 		this.fun = fun;
+	}
+	
+	public void addFun(double fun){
+		this.fun +=fun;
+	}
+	
+	public void removeFun(double fun){
+		this.fun -=fun;
 	}
 
 	public double getAlcLevel() {
@@ -134,6 +150,14 @@ public abstract class Human extends JLabel{
 	public void setAlcLevel(double alcLevel) {
 		this.alcLevel = alcLevel;
 	}
+	
+	public void addAlcLevel(double alcLevel){
+		this.alcLevel +=alcLevel;
+	}
+	
+	public void removeAlcLevel(double alclevel){
+		this.alcLevel -=alclevel;
+	}
 
 	public double getUrine() {
 		return urine;
@@ -141,6 +165,14 @@ public abstract class Human extends JLabel{
 
 	public void setUrine(double urine) {
 		this.urine = urine;
+	}
+	
+	public void addUrine(double urine){
+		this.urine +=urine;
+	}
+	
+	public void removeUrine(double urine){
+		this.urine -=urine;
 	}
 
 	public double getEnergy() {
@@ -150,6 +182,14 @@ public abstract class Human extends JLabel{
 	public void setEnergy(double energy) {
 		this.energy = energy;
 	}
+	
+	public void addEnergy(double energy){
+		this.energy +=energy;
+	}
+	
+	public void removeEnergy(double energy){
+		this.energy -=energy;
+	}
 
 	public int getActivity() {
 		return activity;
@@ -158,7 +198,8 @@ public abstract class Human extends JLabel{
 	public void setActivity(int activity) {
 		this.activity = activity;
 	}
-
+	
+	
 	public void setActivityTimer(int timer) {
 		this.activityTimer = timer;
 	}
@@ -199,9 +240,45 @@ public abstract class Human extends JLabel{
 		int y = this.getYPosition();
 
 		if (this.getActivity() == 1) {
-			if (this.position == this.target) {
+			if (this.position != this.target) {
+				if(x < this.target.getX0() && y < this.target.getY0()) {
+					x++;
+					y++;
+					this.direction = 7;
+				}
+				else if(x > this.target.getX0() && y < this.target.getY0()){
+					x--;
+					y++;
+					this.direction = 1;
+				}
+				else if( x < this.target.getX0() && y > this.target.getY0()) {
+					x++;
+					y--;
+					this.direction = 5;
+				}
+				else if(x > this.target.getX0() && y > this.target.getY0()) {
+					x--;
+					y--;
+					this.direction = 3;
+				}
+				else if(x > this.target.getX0()) {
+					x--;
+					this.direction = 2;
+				}
+				else if(x < this.target.getX0()) {
+					x++;
+					this.direction = 6;
+				}
+				else if(y < this.target.getY0()) {
+					y++;
+					this.direction = 0;
+				}
+				else if(y > this.target.getY0()) {
+					y--;
+					this.direction = 4;
+				}
 				// TO-DO: Wegfinde-Algorithmus
-				int xORy = Functions.myRandom(0, 1);
+				/*int xORy = Functions.myRandom(0, 1);
 				switch (xORy) {
 				case 0:
 					if (x < target.getX0()) {
@@ -217,7 +294,7 @@ public abstract class Human extends JLabel{
 						y--;
 					}
 					break;
-				}
+				}*/
 				position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 			}
 		}
