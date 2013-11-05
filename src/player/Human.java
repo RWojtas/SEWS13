@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import main.GameLogic;
+
 
 public abstract class Human extends JLabel{
 	// Attribute
@@ -25,7 +27,7 @@ public abstract class Human extends JLabel{
 	private int direction;
 
 	/*
-	 * Aktivitätentabelle: 
+	 * Aktivitï¿½tentabelle: 
 	 * 0  - offen 
 	 * 1  - gehen 
 	 * 2  - tanzen 
@@ -34,7 +36,7 @@ public abstract class Human extends JLabel{
 	 * 5  - urinieren 
 	 * 6  - reden 
 	 * 7  - flirten 
-	 * 8  - Musik wünschen 
+	 * 8  - Musik wï¿½nschen 
 	 * 9  - ausruhen 
 	 * 10 - im Koma liegen
 	 */
@@ -42,13 +44,13 @@ public abstract class Human extends JLabel{
 	/*
 	 * Direction: Richtung der Person
 	 * 0  - unten
-	 * 1  - unten/links (schräg)
+	 * 1  - unten/links (schrï¿½g)
 	 * 2  - links
-	 * 3  - links/oben (schräg)
+	 * 3  - links/oben (schrï¿½g)
 	 * 4  - oben
-	 * 5  - oben/rechts (schräg)
+	 * 5  - oben/rechts (schrï¿½g)
 	 * 6  - rechts
-	 * 7  - rechts/unten (schräg)
+	 * 7  - rechts/unten (schrï¿½g)
 	 */
 
 	// Constructor
@@ -69,6 +71,7 @@ public abstract class Human extends JLabel{
 		
 		setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
 		setBounds(x,y,image.getWidth(),image.getHeight());
+		setOpaque(false);
 	}
 	
 	public void moveObject(int x, int y) {
@@ -104,7 +107,7 @@ public abstract class Human extends JLabel{
 	public void setPosition(int x, int y, int direction) {
 		position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 		// else
-			// hier muss ne Formel für die Drehung hin, bei 45°, jemand nen Plan?
+			// hier muss ne Formel fï¿½r die Drehung hin, bei 45ï¿½, jemand nen Plan?
 	}
 
 	public void setTarget(int x, int y) {
@@ -218,7 +221,7 @@ public abstract class Human extends JLabel{
 
 	// END: GETTER + SETTER
 
-	// START: AKTIVITÄTSMETHODEN
+	// START: AKTIVITï¿½TSMETHODEN
 	public void dance() {
 		this.setActivity(2);
 		this.setActivityTimer(20);
@@ -233,50 +236,100 @@ public abstract class Human extends JLabel{
 		this.setActivity(5);
 		this.setActivityTimer(20);
 	}
+	
+	public boolean checkFreePosition(int x, int y) {
+		GameLogic gl = GameLogic.getInstance();
+		return gl.checkFreePosition(new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+length), new Coordinate(x+width, y+length));
+	}
+	
+	public Coordinate ausDirzuCoo(int dir) {
+		int x = this.getPosition().getX0();
+		int y = this.getPosition().getY0();
+		switch(dir) {
+		case 0: 
+			++y;									
+			break;
+		case 1:
+			++y;
+			x--;
+			break;
+		case 2:
+			x--;
+			break;
+		case 3:
+			x--;
+			y--;
+			break;
+		case 4:
+			y++;
+			break;
+		case 5:
+			x++;
+			y--;
+			break;
+		case 6:
+			x++;
+			break;
+		case 7:
+			x++;
+			y++;
+			break;
+		}
+		return new Coordinate(x,y);
+	}
+	
+	
+	public boolean check(int dir, int cnt) {
+		cnt++;
+		dir = dir%8;
+		Coordinate Coo = ausDirzuCoo(dir);
+		if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())){
+			this.direction = dir;	
+		}
+		else {
+			if(cnt <= 8) {
+				if(!(check(dir+1, cnt))) {
+					return false;
+				}
+			}
+			else 
+				return false;
+		}
+		return true;	
+	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
 	public void getNextPosition() {
 		int x = this.getXPosition();
 		int y = this.getYPosition();
-
+		boolean rcheck = false;
+		Coordinate newPos = new Coordinate(x, y);
+		
 		if (this.getActivity() == 1) {
 			if (this.position != this.target) {
 				if(x < this.target.getX0() && y < this.target.getY0()) {
-//					if(GameLogic.)
-					x++;
-					y++;
-					this.direction = 7;
+						rcheck = this.check(7,0);
 				}
 				else if(x > this.target.getX0() && y < this.target.getY0()){
-					x--;
-					y++;
-					this.direction = 1;
+						rcheck = this.check(1,0);
 				}
 				else if( x < this.target.getX0() && y > this.target.getY0()) {
-					x++;
-					y--;
-					this.direction = 5;
+						rcheck = this.check(5,0);
 				}
 				else if(x > this.target.getX0() && y > this.target.getY0()) {
-					x--;
-					y--;
-					this.direction = 3;
+						rcheck = this.check(3,0);
 				}
 				else if(x > this.target.getX0()) {
-					x--;
-					this.direction = 2;
+						rcheck = this.check(2,0);
 				}
 				else if(x < this.target.getX0()) {
-					x++;
-					this.direction = 6;
+						rcheck = this.check(6,0);
 				}
 				else if(y < this.target.getY0()) {
-					y++;
-					this.direction = 0;
+						rcheck = this.check(0,0);
 				}
 				else if(y > this.target.getY0()) {
-					y--;
-					this.direction = 4;
+						rcheck = this.check(4,0);
 				}
 				// TO-DO: Wegfinde-Algorithmus
 				/*int xORy = Functions.myRandom(0, 1);
@@ -296,12 +349,15 @@ public abstract class Human extends JLabel{
 					}
 					break;
 				}*/
-				position.setPosition(x, y, x+this.width, y, x, y+this.length, x+this.width, y+this.length);
+				if(rcheck) {
+					newPos = ausDirzuCoo(this.direction);
+				}
+				position.setPosition(newPos.getXCoordinate(), newPos.getYCoordinate(), x+this.width, y, x, y+this.length, x+this.width, y+this.length);
 			}
 		}
 	}
 	// END: getNextPos()
 
-	// END: AKTIVITÄTSMETHODEN
+	// END: AKTIVITï¿½TSMETHODEN
 
 }

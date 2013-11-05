@@ -1,14 +1,11 @@
 package main;
 import java.awt.*;
-
 import javax.swing.*;
-
 import java.awt.image.BufferedImage;
-
 import javax.imageio.*;
-
 import java.io.*;
 import java.net.*;
+
 
 public class BufferedImageLoader {
 
