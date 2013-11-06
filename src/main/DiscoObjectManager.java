@@ -96,6 +96,7 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[0].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		  	
@@ -135,6 +136,7 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[7].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		  	
@@ -174,6 +176,7 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked Dancefloor");
+		    discoObject[6].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
@@ -213,6 +216,7 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[2].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
@@ -252,14 +256,15 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[0].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
 		    Table clickedObject = (Table)e.getSource();   
 		    
 		    /* TODO
-		  	 * Entsprechender Overlayaufruf bzw. Aktion
-		     */
+		  	 * Entsprechender Overlayaufruf bzw. Aktion*/
+		     
 		}
 
 		@Override
@@ -285,12 +290,13 @@ public class DiscoObjectManager {
 		     //Wird ausgelöst, nachdem man einen Klick mit der Maus wieder loslässt
 			  
 	    }
-	}
+	} 
 	
 	class ToiletMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[1].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
