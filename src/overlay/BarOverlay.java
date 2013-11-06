@@ -11,9 +11,6 @@ import main.BufferedImageLoader;
 import main.GraphicManager;
 
 public class BarOverlay extends Overlay {	
-	private enum drinks {
-		
-	}
 	public BarOverlay(final GraphicManager graphicManager, String t) {
 		super(graphicManager, t);
 		

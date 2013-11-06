@@ -68,6 +68,8 @@ public class GraphicManager {
     speaker = new BufferedImageLoader("Data/Graphics/","speaker01.png",1,2);
     
     popup1000x600 = new BufferedImageLoader("Data/Graphics/","popup1000x600_01.png");
+    statusBG = new BufferedImageLoader("Data/Graphics/","drinkbuttons02.png", 2, 8);
+    
     statusBG = new BufferedImageLoader("Data/Graphics/","statusbg01.png");
     statusUhr = new BufferedImageLoader("Data/Graphics/","uhr01.png");
   }
