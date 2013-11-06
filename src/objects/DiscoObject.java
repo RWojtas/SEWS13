@@ -15,10 +15,12 @@ public abstract class DiscoObject extends JLabel {
 
 	protected Position position;
 	protected boolean accessible;
+	protected String type;
 	protected Highscore h = Highscore.getInstance();
 	
-	public DiscoObject(BufferedImage image, int x, int y) {
+	public DiscoObject(String type, BufferedImage image, int x, int y) {
 		position = new Position(x,y);
+		this.type = type;
 		setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
 		setBounds(position.getXPosition(),position.getYPosition(),image.getWidth(),image.getHeight());
 		setOpaque(false);
@@ -40,7 +42,7 @@ public abstract class DiscoObject extends JLabel {
 	/*
 	0. BlauHohn
 	1. RotOchsen
-	2. GelbVögln
+	2. GelbVï¿½gln
 	3. SchwarzKatzerl
 	4. ZitronenLimonade
 	5. Eistee

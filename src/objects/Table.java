@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 public class Table extends DiscoObject {
 
 	public Table(BufferedImage image, int x, int y) {
-		super(image, x, y);
+		super("Table", image, x, y);
 		accessible = false;
 	}
 }

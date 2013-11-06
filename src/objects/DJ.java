@@ -8,7 +8,7 @@ public class DJ extends DiscoObject {
 	private int song;
 	
 	public DJ(BufferedImage image, int x, int y) {
-		super(image, x, y);
+		super("DJ", image, x, y);
 		accessible = false;
 	}
 	
