@@ -77,60 +77,50 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(fps);
 
 		// Statusbar
-
-		JLabel statusb_bg = new JLabel();
-		Icon statusb_bg_icon = new ImageIcon(graphicManager.statusBG.getImage());
-		statusb_bg.setIcon(statusb_bg_icon);
-		statusb_bg.setBounds((int) deskResolution.getWidth()
+		Statusbar sbar = new Statusbar(graphicManager);
+		
+		JLabel statusb_bg = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(270), 0,
 				BufferedImageLoader.scaleToScreenX(270),
-				BufferedImageLoader.scaleToScreenY(768));
+				BufferedImageLoader.scaleToScreenY(768), 
+				graphicManager.statusBG.getImage());
 		layer1.add(statusb_bg,1);
 
-		JLabel statusb_uhr = new JLabel();
-		Icon statusb_uhr_icon = new ImageIcon(graphicManager.statusUhr.getImage());
-		statusb_uhr.setIcon(statusb_uhr_icon);
-		statusb_uhr.setBounds((int) deskResolution.getWidth()
+		JLabel statusb_uhr = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(233), BufferedImageLoader.scaleToScreenY(10),
 				BufferedImageLoader.scaleToScreenX(223),
-				BufferedImageLoader.scaleToScreenY(263));
+				BufferedImageLoader.scaleToScreenY(263),
+				graphicManager.statusUhr.getImage());
 		layer1.add(statusb_uhr,0);
 
-		/*
-		 * JPanel StatusbarBG = new JPanel(); StatusbarBG.setLayout(null);
-		 * StatusbarBG
-		 * .setBounds((int)deskResolution.getWidth()-200,0,200,(int)deskResolution
-		 * .getHeight()); float[] hsbvals = Color.RGBtoHSB(50, 50, 50, null);
-		 * StatusbarBG
-		 * .setBackground(Color.getHSBColor(hsbvals[0],hsbvals[1],hsbvals[2]));
-		 * layer1.add(StatusbarBG);
-		 */
-
-		JLabel Titel = new JLabel("My Heart will go on", JLabel.LEFT);
-		Titel.setFont(new Font("Aharoni", Font.BOLD, 16));
-		Titel.setForeground(Color.white);
-		Titel.setBounds((int) deskResolution.getWidth()
+		JLabel Titel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(65),
 				BufferedImageLoader.scaleToScreenX(175),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(30),
+				"My Heart will go on", 
+				16, 
+				JLabel.LEFT,
+				Font.BOLD);
 		layer1.add(Titel, 0);
 		
-		JLabel Genre = new JLabel("Rock", JLabel.RIGHT);
-		Genre.setFont(new Font("Aharoni", Font.BOLD, 24));
-		Genre.setForeground(Color.white);
-		Genre.setBounds((int) deskResolution.getWidth()
+		JLabel Genre = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(95),
 				BufferedImageLoader.scaleToScreenX(175),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(30), 
+				"Rock", 
+				24, 
+				JLabel.RIGHT,
+				Font.BOLD);
 		layer1.add(Genre, 0);
 		
-		JLabel Uhrzeit = new JLabel("23:05", JLabel.CENTER);
-		Uhrzeit.setFont(new Font("Aharoni", Font.BOLD, 80));
-		Uhrzeit.setForeground(Color.white);
-		Uhrzeit.setBounds((int) deskResolution.getWidth()
+		JLabel Uhrzeit = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(140),
 				BufferedImageLoader.scaleToScreenX(175),
-				BufferedImageLoader.scaleToScreenY(60));
+				BufferedImageLoader.scaleToScreenY(60),
+				"23:05", 
+				80,
+				JLabel.CENTER,
+				Font.BOLD);
 		layer1.add(Uhrzeit, 0);
 		
 		JProgressBar energyBar = new JProgressBar();
@@ -146,13 +136,14 @@ public class GameView extends JFrame implements MouseListener {
 		energyBar.setForeground(Color.white);
 		energyBar.setBorderPainted(false);
 		layer1.add(energyBar, 0);
-		JLabel energyLabel = new JLabel("Energie", JLabel.LEFT);
-		energyLabel.setFont(new Font("Aharoni", Font.ITALIC, 24));
-		energyLabel.setForeground(Color.white);
-		energyLabel.setBounds((int) deskResolution.getWidth()
+		JLabel energyLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(310),
 				BufferedImageLoader.scaleToScreenX(175),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(30),
+				"Energie", 
+				24,
+				JLabel.LEFT,
+				Font.ITALIC);
 		layer1.add(energyLabel, 0);
 		
 		JProgressBar funBar = new JProgressBar();
@@ -168,13 +159,14 @@ public class GameView extends JFrame implements MouseListener {
 		funBar.setForeground(Color.white);
 		funBar.setBorderPainted(false);
 		layer1.add(funBar, 0);
-		JLabel funLabel = new JLabel("Spass", JLabel.LEFT);
-		funLabel.setFont(new Font("Aharoni", Font.ITALIC, 24));
-		funLabel.setForeground(Color.white);
-		funLabel.setBounds((int) deskResolution.getWidth()
+		JLabel funLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(380),
 				BufferedImageLoader.scaleToScreenX(175),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(30),
+				"Spass", 
+				24,
+				JLabel.LEFT,
+				Font.ITALIC);
 		layer1.add(funLabel, 0);
 		
 		JProgressBar urineBar = new JProgressBar();
@@ -190,13 +182,14 @@ public class GameView extends JFrame implements MouseListener {
 		urineBar.setForeground(Color.white);
 		urineBar.setBorderPainted(false);
 		layer1.add(urineBar, 0);
-		JLabel urineLabel = new JLabel("Blase", JLabel.LEFT);
-		urineLabel.setFont(new Font("Aharoni", Font.ITALIC, 24));
-		urineLabel.setForeground(Color.white);
-		urineLabel.setBounds((int) deskResolution.getWidth()
+		JLabel urineLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(450),
 				BufferedImageLoader.scaleToScreenX(175),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(30),
+				"Blase",
+				24,
+				JLabel.LEFT,
+				Font.ITALIC);
 		layer1.add(urineLabel, 0);
 		
 		JProgressBar alcLevelBar = new JProgressBar();
@@ -212,13 +205,14 @@ public class GameView extends JFrame implements MouseListener {
 		alcLevelBar.setForeground(Color.white);
 		alcLevelBar.setBorderPainted(false);
 		layer1.add(alcLevelBar, 0);
-		JLabel alcLevelLabel = new JLabel("Alkoholpegel", JLabel.LEFT);
-		alcLevelLabel.setFont(new Font("Aharoni", Font.ITALIC, 24));
-		alcLevelLabel.setForeground(Color.white);
-		alcLevelLabel.setBounds((int) deskResolution.getWidth()
+		JLabel alcLevelLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(520),
 				BufferedImageLoader.scaleToScreenX(175),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(30),
+				"Alkoholpegel", 
+				24,
+				JLabel.LEFT,
+				Font.ITALIC);
 		layer1.add(alcLevelLabel, 0);
 		
 		JProgressBar flirtBar = new JProgressBar();
@@ -234,13 +228,14 @@ public class GameView extends JFrame implements MouseListener {
 		flirtBar.setForeground(Color.white);
 		flirtBar.setBorderPainted(false);
 		layer1.add(flirtBar, 0);
-		JLabel flirtLabel = new JLabel("Liebaeugelei", JLabel.LEFT);
-		flirtLabel.setFont(new Font("Aharoni", Font.ITALIC, 24));
-		flirtLabel.setForeground(Color.white);
-		flirtLabel.setBounds((int) deskResolution.getWidth()
+		JLabel flirtLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(590),
 				BufferedImageLoader.scaleToScreenX(175),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(30),
+				"Liebaeugelei", 
+				24,
+				JLabel.LEFT,
+				Font.ITALIC);
 		layer1.add(flirtLabel, 0);
 		
 		JLabel gameExit = new JLabel();
@@ -257,19 +252,6 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(gameExit, 0);
 		
 		gameExit.addMouseListener(gameExit_l);
-		
-		// gameExit_l.mousePressed(null);
-		// End: Statusbar
-
-		// Temp
-		// JLabel status = new JLabel(new
-		// ImageIcon(doManager.graphicManager.status.getImage()));
-		// status.setBounds(BufferedImageLoader.scaleToScreenX(1366-272), 0,
-		// 272, 768);
-
-		// layer1.add(status);
-
-		// Temp Ende
 	}
 	
 	class MouseAction implements MouseListener {
