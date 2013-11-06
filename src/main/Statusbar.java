@@ -4,6 +4,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -40,6 +41,18 @@ public class Statusbar {
 				width,
 				height);
 		return label;
+	}
+	
+	public JProgressBar addProgressBar(int posX, int posY, int width, int height) {
+		JProgressBar progressbar = new JProgressBar();
+		progressbar.setMinimum(0);
+		progressbar.setMaximum(100);
+		progressbar.setStringPainted(false);
+		progressbar.setBounds(posX,posY,width,height);
+		progressbar.setBackground(Color.black);
+		progressbar.setForeground(Color.white);
+		progressbar.setBorderPainted(false);
+		return progressbar;
 	}
 	
 }

@@ -123,18 +123,11 @@ public class GameView extends JFrame implements MouseListener {
 				Font.BOLD);
 		layer1.add(Uhrzeit, 0);
 		
-		JProgressBar energyBar = new JProgressBar();
-		energyBar.setMinimum(0);
-		energyBar.setMaximum(100);
-		energyBar.setValue(15);
-		energyBar.setStringPainted(false);
-		energyBar.setBounds((int) deskResolution.getWidth()
+		JProgressBar energyBar = sbar.addProgressBar((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(335),
 				BufferedImageLoader.scaleToScreenX(235),
 				BufferedImageLoader.scaleToScreenY(30));
-		energyBar.setBackground(Color.black);
-		energyBar.setForeground(Color.white);
-		energyBar.setBorderPainted(false);
+		energyBar.setValue(15);
 		layer1.add(energyBar, 0);
 		JLabel energyLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(310),
@@ -146,18 +139,11 @@ public class GameView extends JFrame implements MouseListener {
 				Font.ITALIC);
 		layer1.add(energyLabel, 0);
 		
-		JProgressBar funBar = new JProgressBar();
-		funBar.setMinimum(0);
-		funBar.setMaximum(100);
-		funBar.setValue(30);
-		funBar.setStringPainted(false);
-		funBar.setBounds((int) deskResolution.getWidth()
+		JProgressBar funBar = sbar.addProgressBar((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(405),
 				BufferedImageLoader.scaleToScreenX(235),
 				BufferedImageLoader.scaleToScreenY(30));
-		funBar.setBackground(Color.black);
-		funBar.setForeground(Color.white);
-		funBar.setBorderPainted(false);
+		funBar.setValue(15);
 		layer1.add(funBar, 0);
 		JLabel funLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(380),
@@ -169,18 +155,11 @@ public class GameView extends JFrame implements MouseListener {
 				Font.ITALIC);
 		layer1.add(funLabel, 0);
 		
-		JProgressBar urineBar = new JProgressBar();
-		urineBar.setMinimum(0);
-		urineBar.setMaximum(100);
-		urineBar.setValue(45);
-		urineBar.setStringPainted(false);
-		urineBar.setBounds((int) deskResolution.getWidth()
+		JProgressBar urineBar = sbar.addProgressBar((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(475),
 				BufferedImageLoader.scaleToScreenX(235),
 				BufferedImageLoader.scaleToScreenY(30));
-		urineBar.setBackground(Color.black);
-		urineBar.setForeground(Color.white);
-		urineBar.setBorderPainted(false);
+		urineBar.setValue(0);
 		layer1.add(urineBar, 0);
 		JLabel urineLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(450),
@@ -192,18 +171,11 @@ public class GameView extends JFrame implements MouseListener {
 				Font.ITALIC);
 		layer1.add(urineLabel, 0);
 		
-		JProgressBar alcLevelBar = new JProgressBar();
-		alcLevelBar.setMinimum(0);
-		alcLevelBar.setMaximum(100);
-		alcLevelBar.setValue(60);
-		alcLevelBar.setStringPainted(false);
-		alcLevelBar.setBounds((int) deskResolution.getWidth()
+		JProgressBar alcLevelBar = sbar.addProgressBar((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(545),
 				BufferedImageLoader.scaleToScreenX(235),
 				BufferedImageLoader.scaleToScreenY(30));
-		alcLevelBar.setBackground(Color.black);
-		alcLevelBar.setForeground(Color.white);
-		alcLevelBar.setBorderPainted(false);
+		alcLevelBar.setValue(0);
 		layer1.add(alcLevelBar, 0);
 		JLabel alcLevelLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(520),
@@ -215,18 +187,11 @@ public class GameView extends JFrame implements MouseListener {
 				Font.ITALIC);
 		layer1.add(alcLevelLabel, 0);
 		
-		JProgressBar flirtBar = new JProgressBar();
-		flirtBar.setMinimum(0);
-		flirtBar.setMaximum(100);
-		flirtBar.setValue(75);
-		flirtBar.setStringPainted(false);
-		flirtBar.setBounds((int) deskResolution.getWidth()
+		JProgressBar flirtBar = sbar.addProgressBar((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(615),
 				BufferedImageLoader.scaleToScreenX(235),
 				BufferedImageLoader.scaleToScreenY(30));
-		flirtBar.setBackground(Color.black);
-		flirtBar.setForeground(Color.white);
-		flirtBar.setBorderPainted(false);
+		flirtBar.setValue(0);
 		layer1.add(flirtBar, 0);
 		JLabel flirtLabel = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(590),
