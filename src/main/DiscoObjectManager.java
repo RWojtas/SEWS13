@@ -252,7 +252,7 @@ public class DiscoObjectManager {
 	    }
 	}
 	
-	/*class TableMouseListener implements MouseListener {
+	class TableMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
@@ -263,7 +263,7 @@ public class DiscoObjectManager {
 		    Table clickedObject = (Table)e.getSource();   
 		    
 		    /* TODO
-		  	 * Entsprechender Overlayaufruf bzw. Aktion
+		  	 * Entsprechender Overlayaufruf bzw. Aktion*/
 		     
 		}
 
@@ -290,7 +290,7 @@ public class DiscoObjectManager {
 		     //Wird ausgelöst, nachdem man einen Klick mit der Maus wieder loslässt
 			  
 	    }
-	} */
+	} 
 	
 	class ToiletMouseListener implements MouseListener {
 	    @Override
