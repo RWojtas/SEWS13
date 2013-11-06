@@ -6,12 +6,14 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
+import overlay.BarOverlay;
 import main.Menu.MouseAction;
 import objects.*;
 import player.*;
 
 
 public class GameView extends JFrame implements MouseListener {
+  public GraphicManager graphicManager;
   public ASManager asManager;
   public DiscoObjectManager doManager;
   public Player player;
@@ -28,7 +30,7 @@ public class GameView extends JFrame implements MouseListener {
   public JPanel statusbar;
   
   
-  public GameView(ASManager asManager, DiscoObjectManager doManager, Player player) {
+  public GameView(ASManager asManager, DiscoObjectManager doManager, Player player, GraphicManager graphicManager) {
 	  deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
 	  setSize((int)deskResolution.getWidth(),(int)deskResolution.getHeight()); 
 	  c = getContentPane();
@@ -36,6 +38,7 @@ public class GameView extends JFrame implements MouseListener {
 	  this.asManager = asManager;
       this.doManager = doManager;
       this.player = player;
+      this.graphicManager = graphicManager;
     
       /*
       background = new JPanel();
@@ -59,6 +62,10 @@ public class GameView extends JFrame implements MouseListener {
       layeredPane.add(layer2, 1); //Layer für Overlay
       layeredPane.add(layer3, 2); //Layer für Human
       layeredPane.add(layer4, 3); //Layer für DiscoObject
+      
+      JComponent bar = new BarOverlay(graphicManager, player, "Die Bar");
+      bar.setVisible(true);
+      layeredPane.add(bar, JLayeredPane.POPUP_LAYER);
       
       layer3.add(player);
       asManager.addComponents(layer3);
