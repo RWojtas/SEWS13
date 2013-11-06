@@ -62,14 +62,14 @@ public abstract class DiscoObject extends JLabel {
  *  8  - Musik wÃ¼nschen
  *  9  - ausruhen
  *  10 - im Koma liegen
- *  11 - BlauHohn
- *  12 - RotOchsen
- *  13 - GelbVögln
- *  14 - SchwarzKatzerl
- *  15 - ZitronenLimonade
- *  16 - Eistee
- *  17 - Cocktail
- *  18 - Shot
+ *  11 - BlauHohn 1,5 Euro
+ *  12 - RotOchsen 2 Euro
+ *  13 - GelbVögln 2,5 Euro
+ *  14 - SchwarzKatzerl 2 Euro
+ *  15 - ZitronenLimonade 2,5 Euro
+ *  16 - Eistee 2,5 Euro
+ *  17 - Cocktail 3,5 Euro
+ *  18 - Shot 2,5 Euro
 	*/
 	
 	
@@ -80,41 +80,33 @@ public abstract class DiscoObject extends JLabel {
 							p.removeAlcLevel(0.20);
 							p.addFun(0.10);
 							h.setBonus(1);
-							p.removeMoney(1.5);
 							break;
 				case 12: 	p.addFlirt(0.20);
 							p.addUrine(0.40);
 							p.addFun(0.10);
 							h.setBonus(1);
-							p.removeMoney(2.0);
 							break;
 				case 13:	p.addFun(0.20);
 							p.addUrine(0.40);
 							p.addFlirt(0.20);
 							h.setBonus(1);
-							p.removeMoney(2.5);
 							break;
 				case 14:	p.removeAlcLevel(0.20);
 							p.addEnergy(0.20);
 							p.addUrine(0.40);
 							p.addFun(0.1);
 							h.setBonus(1);
-							p.removeMoney(2.0);
 							break;
 				case 15: 	p.addUrine(0.40);
-							p.removeMoney(2.5);
 							break;
 				case 16:	p.addUrine(0.40);
 							p.addEnergy(0.30);
-							p.removeMoney(2.5);
 							break;
 				case 17:	p.addUrine(0.40);
 							p.addAlcLevel(0.30);
-							p.removeMoney(3.5);
 							break;
 				case 18:	p.addUrine(0.40);
 							p.addAlcLevel(0.30);
-							p.removeMoney(2.5);
 							break;
 				case 4:		p.addEnergy(0.40);
 							break;
