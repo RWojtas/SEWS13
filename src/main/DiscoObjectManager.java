@@ -58,7 +58,7 @@ public class DiscoObjectManager {
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
+		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
 		        try {
 		  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {
@@ -72,18 +72,16 @@ public class DiscoObjectManager {
 	
 	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
 		DiscoObject component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
-		if (component != null && !component.getAccessible())
+		if (component != null && !component.getAccessible()) 
 			return false;
-	
+		
 		component = getComponentAt(ro.getXCoordinate(),ro.getYCoordinate());
 		if (component != null && !component.getAccessible())
 			return false;
 		
-		
 		component = getComponentAt(lu.getXCoordinate(),lu.getYCoordinate());
 		if (component != null && !component.getAccessible())
 			return false;
-		
 		
 		component = getComponentAt(ru.getXCoordinate(),ru.getYCoordinate());
 		if (component != null && !component.getAccessible())

@@ -26,11 +26,10 @@ public class GameView extends JFrame implements MouseListener {
   public JPanel layer4;
   public JLabel fps;
   public JPanel statusbar;
-  public JLabel test;
   
   
   public GameView(ASManager asManager, DiscoObjectManager doManager, Player player) {
-	  deskResolution = new Dimension(500,10000);
+	  deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
 	  setSize((int)deskResolution.getWidth(),(int)deskResolution.getHeight()); 
 	  c = getContentPane();
 	  currentLevel=1;
@@ -88,12 +87,6 @@ public class GameView extends JFrame implements MouseListener {
       // layer1.add(status);
   	  
       // Temp Ende    
-	  
-	  test = new JLabel();
-	  test.setOpaque(true);
-	  test.setBackground(Color.black);
-	  test.setVisible(false);
-	  layer1.add(test);
   }
   
   public JPanel createLayerPanel() {
@@ -112,8 +105,6 @@ public class GameView extends JFrame implements MouseListener {
   	  
   	  player.setActivity(1);
   	  player.setTarget(e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
-  	  
-  	  
   }
 
   @Override
@@ -131,20 +122,12 @@ public class GameView extends JFrame implements MouseListener {
   @Override
   public void mousePressed(MouseEvent e) {
 	  //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt (egal wie lange der Klick andauert)
-      int qubeSize = 50; 
-  	  
-  	  Coordinate lo = new Coordinate(e.getX(),e.getY());
-  	  Coordinate ro = new Coordinate(e.getX(),e.getY()+qubeSize);;
-  	  Coordinate lu = new Coordinate(e.getX()+qubeSize,e.getY());;
-  	  Coordinate ru = new Coordinate(e.getX()+qubeSize,e.getY()+qubeSize);;
-  	  test.setBounds(e.getX(),e.getY(),qubeSize,qubeSize);
-  	  test.setVisible(true);
-  	  System.out.println(GameLogic.getInstance().checkFreePosition(lo, ro, lu, ru));
+	  
   }
 
   @Override
   public void mouseReleased(MouseEvent e) {
 	  //Wird ausgelöst, nachdem man einen Klick mit der Maus wieder loslässt
-	  test.setVisible(false);
+	  
   }
 }

@@ -43,7 +43,7 @@ public class ASManager {
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
+		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
 		        try {
 		  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {
