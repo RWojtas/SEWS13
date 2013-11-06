@@ -23,12 +23,14 @@ public class GameView extends JFrame implements MouseListener {
   public JPanel layer1;
   public JPanel layer2;
   public JPanel layer3;
+  public JPanel layer4;
   public JLabel fps;
   public JPanel statusbar;
+  public JLabel test;
   
   
   public GameView(ASManager asManager, DiscoObjectManager doManager, Player player) {
-	  deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
+	  deskResolution = new Dimension(500,10000);
 	  setSize((int)deskResolution.getWidth(),(int)deskResolution.getHeight()); 
 	  c = getContentPane();
 	  currentLevel=1;
@@ -49,17 +51,19 @@ public class GameView extends JFrame implements MouseListener {
       
       c.add(layeredPane);
 
-      layer1 = createLayerPanel();
-      layer2 = createLayerPanel();
-      layer3 = createLayerPanel();
+      layer1 = createLayerPanel(); //Höchste Schicht
+      layer2 = createLayerPanel(); //Mittlere Schicht
+      layer3 = createLayerPanel(); //Mittlere Schicht
+      layer4 = createLayerPanel(); //Tiefste Schicht
       
-      layeredPane.add(layer1, 0); 
-      layeredPane.add(layer2, 1); 
-      layeredPane.add(layer3, 2);
+      layeredPane.add(layer1, 0); //Layer für Statusbar
+      layeredPane.add(layer2, 1); //Layer für Overlay
+      layeredPane.add(layer3, 2); //Layer für Human
+      layeredPane.add(layer4, 3); //Layer für DiscoObject
       
-      layer2.add(player);
-      asManager.addComponents(layer2);
-      doManager.addComponents(layer3); 
+      layer3.add(player);
+      asManager.addComponents(layer3);
+      doManager.addComponents(layer4); 
       
       fps = new JLabel("0");
       fps.setOpaque(false);
@@ -67,18 +71,14 @@ public class GameView extends JFrame implements MouseListener {
       fps.setFont(new Font("Dialog",Font.BOLD,30));
       fps.setBounds((int)deskResolution.getWidth()-300-3,(int)deskResolution.getHeight()-30,300,30);
      
-      layer3.add(fps);
+      layer1.add(fps);
       
       // Statusbar
-      statusbar = createLayerPanelStatusbar();
-      layeredPane.add(statusbar, 3);
-      
-      GraphicManager graphicManager = new GraphicManager();
       JLabel Titel = new JLabel("Statusbar", JLabel.CENTER);
       Titel.setFont(new Font("Dialog",Font.BOLD,24));
-      Titel.setBounds(0,0,200,100);
+      Titel.setBounds((int)deskResolution.getWidth()-200,0,200,(int)deskResolution.getHeight());
       
-	  statusbar.add(Titel);  
+	  layer1.add(Titel);  
       // End: Statusbar
     
       // Temp
@@ -88,20 +88,18 @@ public class GameView extends JFrame implements MouseListener {
       // layer1.add(status);
   	  
       // Temp Ende    
+	  
+	  test = new JLabel();
+	  test.setOpaque(true);
+	  test.setBackground(Color.black);
+	  test.setVisible(false);
+	  layer1.add(test);
   }
   
   public JPanel createLayerPanel() {
 	  JPanel layer = new JPanel();
 	  layer.setLayout(null);
 	  layer.setBounds(0,0,(int)deskResolution.getWidth(),(int)deskResolution.getHeight());
-	  layer.setOpaque(false);
-	  return layer;
-  }
-   
-  public JPanel createLayerPanelStatusbar() {
-	  JPanel layer = new JPanel();
-	  layer.setLayout(null);
-	  layer.setBounds((int)deskResolution.getWidth()-200,0,200,(int)deskResolution.getHeight());
 	  layer.setOpaque(false);
 	  return layer;
   }
@@ -114,6 +112,8 @@ public class GameView extends JFrame implements MouseListener {
   	  
   	  player.setActivity(1);
   	  player.setTarget(e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
+  	  
+  	  
   }
 
   @Override
@@ -131,12 +131,20 @@ public class GameView extends JFrame implements MouseListener {
   @Override
   public void mousePressed(MouseEvent e) {
 	  //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt (egal wie lange der Klick andauert)
-	  
+      int qubeSize = 50; 
+  	  
+  	  Coordinate lo = new Coordinate(e.getX(),e.getY());
+  	  Coordinate ro = new Coordinate(e.getX(),e.getY()+qubeSize);;
+  	  Coordinate lu = new Coordinate(e.getX()+qubeSize,e.getY());;
+  	  Coordinate ru = new Coordinate(e.getX()+qubeSize,e.getY()+qubeSize);;
+  	  test.setBounds(e.getX(),e.getY(),qubeSize,qubeSize);
+  	  test.setVisible(true);
+  	  System.out.println(GameLogic.getInstance().checkFreePosition(lo, ro, lu, ru));
   }
 
   @Override
   public void mouseReleased(MouseEvent e) {
 	  //Wird ausgelöst, nachdem man einen Klick mit der Maus wieder loslässt
-	  
+	  test.setVisible(false);
   }
 }
