@@ -2,6 +2,8 @@ package objects;
 
 import java.awt.image.BufferedImage;
 
+import player.Position;
+
 public class Bar extends DiscoObject {
 
 	private int[] drinkList = new int[8];

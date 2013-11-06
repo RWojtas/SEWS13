@@ -1,6 +1,8 @@
 package objects;
 import java.awt.image.BufferedImage;
+
 import player.Player;
+import player.Position;
 
 //created by Anna & Silke
 
