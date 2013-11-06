@@ -29,7 +29,7 @@ public class Overlay extends JLayeredPane {
 		double screen_height = Toolkit.getDefaultToolkit().getScreenSize()
 				.getHeight();
 		int cont_width = 1000;
-		int cont_height = 600;
+		int cont_height = 650;
 
 		bg = new JLabel(new ImageIcon(
 				graphicManager.popup1000x600.getImage()));
@@ -117,7 +117,7 @@ public class Overlay extends JLayeredPane {
 				graphicManager.mouse.getImage(),
 				new Point(gameView.getX(), gameView.getY()), "mouse02"));
 
-		JComponent c = new Overlay(graphicManager, "Die Bar");
+		JComponent c = new BarOverlay(graphicManager, "Die Bar");
 
 		GroupLayout layout = new GroupLayout(gameView.getContentPane());
 		gameView.getContentPane().setLayout(layout);
