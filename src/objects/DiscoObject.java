@@ -15,10 +15,12 @@ public abstract class DiscoObject extends JLabel {
 
 	protected Position position;
 	protected boolean accessible;
+	protected String type;
 	protected Highscore h = Highscore.getInstance();
 	
-	public DiscoObject(BufferedImage image, int x, int y) {
+	public DiscoObject(String type, BufferedImage image, int x, int y) {
 		position = new Position(x,y);
+		this.type = type;
 		setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
 		setBounds(position.getXPosition(),position.getYPosition(),image.getWidth(),image.getHeight());
 		setOpaque(false);
@@ -35,6 +37,14 @@ public abstract class DiscoObject extends JLabel {
 
 	public int getPositionY() {
 		return position.getYPosition();
+	}
+	
+	public boolean getAccessible() {
+		return this.accessible;
+	}
+	
+	public String getType() {
+		return this.type;
 	}
 	
 	/*

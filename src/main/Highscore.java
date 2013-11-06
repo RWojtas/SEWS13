@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Highscore {
+	private static final String HIGHSCORE_FILE = "data\\highscore.txt";
 	private static Highscore instance;
-	private static int score;
-	private static ArrayList<Integer> list;
+	private int score;
+	private ArrayList<Integer> list;
 
 	/**
 	 * Konstruktor
@@ -24,6 +25,7 @@ public class Highscore {
 	private Highscore() {
 		score = 0;
 		list = readHighscoreFile();
+		saveHighscoreFile();
 	}
 
 	/**
@@ -81,9 +83,7 @@ public class Highscore {
 		FileWriter file_writer;
 		StringBuffer buff = new StringBuffer();
 		try {
-			file_writer = new FileWriter(new File(this.getClass()
-					.getResource("../Data/score/highscore").getFile()
-					.toString()));
+			file_writer = new FileWriter(new File(HIGHSCORE_FILE),false);
 			
 			Collections.sort(list);
 			
@@ -92,7 +92,7 @@ public class Highscore {
 			}
 			
 			file_writer.write(buff.toString());
-			
+			file_writer.close();
 		} catch (IOException e) {}
 		
 	}
@@ -108,15 +108,14 @@ public class Highscore {
 		ArrayList<Integer> l = new ArrayList<Integer>();
 
 		try {
-			file_reader = new FileReader(new File(this.getClass()
-					.getResource("../Data/score/highscore").getFile()
-					.toString()));
+			file_reader = new FileReader(new File(HIGHSCORE_FILE));
 
 			do {
 				c = file_reader.read();
 				if (c == ';' || c == -1 && buff.length() > 0) {
 					l.add(Integer.parseInt(buff.toString()));
 					buff = new StringBuffer();
+					
 				} else
 					buff.append((char) c);
 			} while (c != -1);
