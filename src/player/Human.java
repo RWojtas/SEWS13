@@ -305,12 +305,25 @@ public abstract class Human extends JLabel{
 						 return false;
 					 }
 				}
-				else if(this.target.getY0() < this.position.getY0()) {
+				else if((this.target.getY0() < this.position.getY0()) && (this.target.getX0() < this.position.getX0())) {
 					if(!check(dir+1,cnt)) {
 						return false;
 					}
 				}
-				
+				else if((this.target.getY0() > this.position.getY0()) && (this.target.getX0() > this.position.getX0())) {
+					if(!check(dir+1,cnt)) {
+						return false;
+					}
+				}
+				else if((this.target.getY0() < this.position.getY0()) && (this.target.getX0() > this.position.getX0())) {
+					if(!check(dir+1,cnt)) {
+						return false;
+					}
+				}
+				else if(this.target.getY0() == this.position.getY0())
+					if(!check(dir-1,cnt)) {
+						return false;
+					}
 			}
 		}
 		return true;	
