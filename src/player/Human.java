@@ -309,7 +309,8 @@ public abstract class Human extends JLabel{
 	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
-	public void stepNextPosition() {													//Diese Methode setzt die n�chste Position des Menschen 
+	public void stepNextPosition() { //Diese Methode setzt die n�chste Position des Menschen
+		// System.out.println("stepNextPosition()");
 		int x = this.getXPosition();												//mit Hilfe der weiter oben erkl�rten Methoden.
 		int y = this.getYPosition();												//Der Fall, dass sich der Mensch nicht bewegt, ist abgefangen.
 		boolean rcheck = false;
@@ -363,6 +364,7 @@ public abstract class Human extends JLabel{
 					newPos = ausDirzuCoo(this.direction);
 				}
 				moveObject(newPos.getXCoordinate(), newPos.getYCoordinate()); // Die neue Position wird explizit gesetzt.
+				// System.out.println("Aktuell: x:"+x+" y:"+y+" Neu: x:"+newPos.getXCoordinate()+" y:"+newPos.getYCoordinate());
 			}
 		}
 	}
