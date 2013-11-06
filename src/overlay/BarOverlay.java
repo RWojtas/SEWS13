@@ -51,12 +51,9 @@ public class BarOverlay extends Overlay {
 		}
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			System.out.println("Energie:"+player.getEnergy());
-			System.out.println("Highscore:"+Highscore.getInstance().getScore());
 			DiscoObject.setStatusES(player, action);
-			System.out.println("Energie:"+player.getEnergy());
-			System.out.println("Highscore:"+Highscore.getInstance().getScore());
 			((JLabel) e.getSource()).getParent().setVisible(false);
+			((JLabel) e.getSource()).getParent().setEnabled(false);
 		}
 		@Override
 		public void mouseEntered(MouseEvent e) {

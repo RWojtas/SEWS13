@@ -62,14 +62,14 @@ public abstract class DiscoObject extends JLabel {
  *  8  - Musik wÃ¼nschen
  *  9  - ausruhen
  *  10 - im Koma liegen
- *  11 - BlauHohn
- *  12 - RotOchsen
- *  13 - GelbVögln
- *  14 - SchwarzKatzerl
- *  15 - ZitronenLimonade
- *  16 - Eistee
- *  17 - Cocktail
- *  18 - Shot
+ *  11 - BlauHohn 1,5 Euro
+ *  12 - RotOchsen 2 Euro
+ *  13 - GelbVögln 2,5 Euro
+ *  14 - SchwarzKatzerl 2 Euro
+ *  15 - ZitronenLimonade 2,5 Euro
+ *  16 - Eistee 2,5 Euro
+ *  17 - Cocktail 3,5 Euro
+ *  18 - Shot 2,5 Euro
 	*/
 	
 	

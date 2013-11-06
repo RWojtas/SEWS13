@@ -63,9 +63,8 @@ public class GameView extends JFrame implements MouseListener {
       layeredPane.add(layer3, 2); //Layer für Human
       layeredPane.add(layer4, 3); //Layer für DiscoObject
       
-      JComponent bar = new BarOverlay(graphicManager, player, "Die Bar");
-      bar.setVisible(true);
-      layeredPane.add(bar, JLayeredPane.POPUP_LAYER);
+//      BarOverlay bar = new BarOverlay(graphicManager, player, "Die Bar");
+//      layeredPane.add(bar, JLayeredPane.POPUP_LAYER);
       
       layer3.add(player);
       asManager.addComponents(layer3);

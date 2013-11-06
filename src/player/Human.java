@@ -300,9 +300,8 @@ public abstract class Human extends JLabel{
 		}																		// Sind alle 8 Richtungen einmal durchgepr�ft, gibt die Methode false zur�ck.
 		else {																	// Der Integer cnt z�hlt sich bei jedem Durchlauf um einen hoch und schaut somit, ob alle Richtungen gepr�ft worden sind.
 			if(cnt <= 8) {	
-				if(this.target.getY0() > this.position.getY0()) {
+				if((this.target.getY0() > this.position.getY0()) && (this.target.getX0() < this.position.getX0())) {
 					 if(!check(dir-1,cnt)) {
-						 System.out.println("gaay");
 						 return false;
 					 }
 				}
@@ -310,10 +309,6 @@ public abstract class Human extends JLabel{
 					if(!check(dir+1,cnt)) {
 						return false;
 					}
-				}
-				else {
-					if(!check(dir+1,cnt))
-						return false;
 				}
 				
 			}
