@@ -271,7 +271,7 @@ public abstract class Human extends JLabel{
 			y--;
 			break;
 		case 4:
-			y++;
+			y--;
 			break;
 		case 5:
 			x++;
