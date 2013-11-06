@@ -253,8 +253,10 @@ public class GameView extends JFrame implements MouseListener {
 				- BufferedImageLoader.scaleToScreenX(250), BufferedImageLoader.scaleToScreenY(660),
 				BufferedImageLoader.scaleToScreenX(240),
 				BufferedImageLoader.scaleToScreenY(49));
-		// MouseAction gameExit_l = new MouseAction('e', gameExit_icon, gameExit_icon_hover);
+		MouseAction gameExit_l = new MouseAction('e', gameExit_icon, gameExit_icon_hover);
 		layer1.add(gameExit, 0);
+		
+		gameExit.addMouseListener(gameExit_l);
 		
 		// gameExit_l.mousePressed(null);
 		// End: Statusbar
@@ -268,6 +270,46 @@ public class GameView extends JFrame implements MouseListener {
 		// layer1.add(status);
 
 		// Temp Ende
+	}
+	
+	class MouseAction implements MouseListener {
+		private Icon standard;
+		private Icon hover;
+		private char act;
+
+		public MouseAction(char act, Icon standard, Icon hover) {
+			this.standard = standard;
+			this.hover = hover;
+			this.act = act;
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			switch (act) {
+			case 'e':
+				System.exit(0);
+				break;
+			}
+			((JLabel) e.getSource()).setIcon(standard);
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			((JLabel) e.getSource()).setIcon(hover);
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			((JLabel) e.getSource()).setIcon(standard);
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
 	}
 
 	public JPanel createLayerPanel() {
