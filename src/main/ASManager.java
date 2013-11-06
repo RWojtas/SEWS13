@@ -55,21 +55,21 @@ public class ASManager {
 	  	return clickedObject;
 	}
 	
-	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
+	public boolean checkFreePosition(long id, Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
 		Human component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
-		if (component != null) 
+		if (component != null && component.getId() != id)
 			return false;
-		
+				
 		component = getComponentAt(ro.getXCoordinate(),ro.getYCoordinate());
-		if (component != null)
+		if (component != null && component.getId() != id)
 			return false;
 		
 		component = getComponentAt(lu.getXCoordinate(),lu.getYCoordinate());
-		if (component != null)
+		if (component != null && component.getId() != id)
 			return false;
 		
 		component = getComponentAt(ru.getXCoordinate(),ru.getYCoordinate());
-		if (component != null)
+		if (component != null && component.getId() != id)
 			return false;
 		
 		return true;

@@ -72,20 +72,28 @@ public class DiscoObjectManager {
 	
 	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
 		DiscoObject component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
-		if (component != null && !component.getAccessible()) 
+		if (component != null && !component.getAccessible()) {
+			System.out.println("lo false");
 			return false;
-		
+		}
+				
 		component = getComponentAt(ro.getXCoordinate(),ro.getYCoordinate());
-		if (component != null && !component.getAccessible())
+		if (component != null && !component.getAccessible()) {
+			System.out.println("ro false");
 			return false;
+		}
 		
 		component = getComponentAt(lu.getXCoordinate(),lu.getYCoordinate());
-		if (component != null && !component.getAccessible())
+		if (component != null && !component.getAccessible()) {
+			System.out.println("lu false");
 			return false;
+		}
 		
 		component = getComponentAt(ru.getXCoordinate(),ru.getYCoordinate());
-		if (component != null && !component.getAccessible())
+		if (component != null && !component.getAccessible()) {
+			System.out.println("ru false");
 			return false;
+		}
 		
 		return true;
 	}

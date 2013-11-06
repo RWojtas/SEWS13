@@ -11,6 +11,7 @@ import main.GameLogic;
 public abstract class Human extends JLabel{
 	// Attribute
 	public int graphicState;
+	protected static long id=0;
 	protected Position position;		// Aktuelle Position des Human-Objektes
 	protected Position target;			// Ziel-Position des Human-Objektes
 	protected double flirt;				// Spielfaktoren... entsprechend der Variablennamen
@@ -23,9 +24,9 @@ public abstract class Human extends JLabel{
 	protected int activity;				// Aktivit�t, die gerade ausgef�hrt wird (siehe unten: Aktivit�tstabelle)
 	protected int activityTimer;		// Wie lang eine Aktivit�t (noch) dauert
 	protected ImageIcon image;
-	private int height;					// H�he des Spielers (Sicht von oben)
-	private int width;					// Breite des Spielers (Sicht von oben)
-	private int direction;				// Richtung in die der Spieler gerade schaut -> wichtig f�r weitere Bewegung
+	protected int height;					// H�he des Spielers (Sicht von oben)
+	protected int width;					// Breite des Spielers (Sicht von oben)
+	protected int direction;				// Richtung in die der Spieler gerade schaut -> wichtig f�r weitere Bewegung
 
 	/*
 	 * Aktivit�tentabelle: 
@@ -56,6 +57,7 @@ public abstract class Human extends JLabel{
 
 	// Constructor
 	public Human(String type, char gender, BufferedImage image, int x, int y, int direction) {
+		this.id+=1;
 		this.position = new Position(x, y, x+width, y, x, y+height, x+width, y+height);
 		this.target = new Position(0, 0, 0, 0, 0, 0, 0, 0);
 		this.flirt = 0.5;
@@ -87,6 +89,10 @@ public abstract class Human extends JLabel{
 	}
 
 	// START: GETTER + SETTER
+	public long getId() {
+		return this.id;
+	}
+	
 	public char getGender(){
 		return this.gender;
 	}
@@ -249,7 +255,7 @@ public abstract class Human extends JLabel{
 	
 	public boolean checkFreePosition(int x, int y) {		// �berpr�ft ob eine gewisse Koordinate besetzt ist oder nicht. 
 		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in From von "false" oder "true".
-		return gl.checkFreePosition(new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
+		return gl.checkFreePosition(this.id, new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
 	}
 	
 	public Coordinate ausDirzuCoo(int dir) { 			// Diese Methode erstellt aus der Richtung eines Menschen
