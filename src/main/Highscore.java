@@ -3,49 +3,129 @@
  */
 
 package main;
+
+import java.awt.List;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Highscore {
 	private static Highscore instance;
-	private int score;
+	private static int score;
+	private static ArrayList<Integer> list;
+
 	/**
 	 * Konstruktor
 	 */
 	private Highscore() {
-		this.score = 0;
+		score = 0;
+		list = readHighscoreFile();
 	}
+
 	/**
 	 * Singeltone
+	 * 
 	 * @return Instanz des Highscores
 	 */
 	public static Highscore getInstance() {
-		instance = (instance == null) ?  new Highscore() : instance;
+		instance = (instance == null) ? new Highscore() : instance;
 		return instance;
 	}
+
 	/**
 	 * gibt Punktestand zurück
+	 * 
 	 * @return Score
 	 */
 	public int getScore() {
 		return this.score;
 	}
+
 	/**
 	 * Punktestand setzen
+	 * 
 	 * @param score
 	 */
 	public void setScore(int score) {
 		this.score = score;
 	}
+
 	/**
 	 * Bonuspunkte hinzufügen
-	 * @param bonus Pluspunkte
+	 * 
+	 * @param bonus
+	 *            Pluspunkte
 	 */
 	public void setBonus(int bonus) {
 		this.score += bonus;
 	}
+
 	/**
 	 * Manuspunkte abziehen
-	 * @param manus Minuspunkte
+	 * 
+	 * @param manus
+	 *            Minuspunkte
 	 */
 	public void setManus(int manus) {
-		this.score += manus;
+		this.score -= manus;
+	}
+	
+	/**
+	 * Save highscores
+	 */
+	public void saveHighscoreFile() {
+		FileWriter file_writer;
+		StringBuffer buff = new StringBuffer();
+		try {
+			file_writer = new FileWriter(new File(this.getClass()
+					.getResource("../Data/score/highscore").getFile()
+					.toString()));
+			
+			Collections.sort(list);
+			
+			for (Integer a : list) {
+				buff.append(a.toString()+";");
+			}
+			
+			file_writer.write(buff.toString());
+			
+		} catch (IOException e) {}
+		
+	}
+	
+	/**
+	 * 
+	 * @return Highscorelist
+	 */
+	public ArrayList<Integer> readHighscoreFile() {
+		FileReader file_reader;
+		int c;
+		StringBuffer buff = new StringBuffer();
+		ArrayList<Integer> l = new ArrayList<Integer>();
+
+		try {
+			file_reader = new FileReader(new File(this.getClass()
+					.getResource("../Data/score/highscore").getFile()
+					.toString()));
+
+			do {
+				c = file_reader.read();
+				if (c == ';' || c == -1 && buff.length() > 0) {
+					l.add(Integer.parseInt(buff.toString()));
+					buff = new StringBuffer();
+				} else
+					buff.append((char) c);
+			} while (c != -1);
+
+			file_reader.close();
+		} catch (IOException e) {}
+		
+		Collections.sort(l);
+		
+		return l;
 	}
 }

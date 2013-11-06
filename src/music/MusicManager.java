@@ -10,7 +10,6 @@ import javax.swing.JComponent;
 
 /**
  * @author Nicolas
- *
  */
 public class MusicManager {
 	private MusicFileLoader mfl;
@@ -39,13 +38,19 @@ public class MusicManager {
 		// next MusicFile
 		mediaPlayer.setOnEndOfMedia(new Runnable() {
 			public void run() {
-				mediaPlayer.stop();
-				mediaIndex = (mediaIndex + 1) % mfList.size();	// next MusicFile
-				mediaPlayer = new MediaPlayer(mfList.get(mediaIndex).getMedia());
-				mediaPlayer.play();
-				defineActions();
+				openNextSong();
 			}
 		});
+	}
+	
+	private void openNextSong() {
+		boolean before = isMute();
+		mediaPlayer.stop();
+		mediaIndex = (mediaIndex + 1) % mfList.size();	// next MusicFile
+		mediaPlayer = new MediaPlayer(mfList.get(mediaIndex).getMedia());
+		mute(before);
+		mediaPlayer.play();
+		defineActions();
 	}
 	
 	private void shuffle() {
@@ -65,7 +70,23 @@ public class MusicManager {
 	}
 	
 	public void mute(boolean onOff) {
-		mediaPlayer.setMute(onOff);;
+		mediaPlayer.setMute(onOff);
+		
+	}
+	public boolean isMute() {
+		return mediaPlayer.isMute();
+	}
+	
+	public String getSongTitle() {
+		return mfList.get(mediaIndex).title;
+	}
+	
+	public String getSongCategory() {
+		return mfList.get(mediaIndex).category;
+	}
+	
+	public void next() {
+		openNextSong();
 	}
 	
 	public void requestedCategory(String category) {
