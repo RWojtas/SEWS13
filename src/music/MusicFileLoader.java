@@ -13,7 +13,7 @@ import javax.activation.MimetypesFileTypeMap;
  * 
  */
 public class MusicFileLoader {
-	//final static String START_DIR = "C:\\Users\\Nicolas\\Desktop\\test";
+	final static String START_DIR = "media\\";
 	final static String[] MUSIC_TYPES = { "application/octet-stream" };
 	static List<String> music_type = new ArrayList<String>();
 
@@ -25,13 +25,7 @@ public class MusicFileLoader {
 	}
 
 	public MusicFileLoader() {
-		//File home = new File(START_DIR);
-		File home = new File("/");
-		try {
-			home = new File(getClass().getResource("/Data/Music/").toURI());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
+		File home = new File(START_DIR);
 		for (File dir : home.listFiles()) {
 			if (dir.isDirectory()) {
 				if (!categories.contains(dir.getName()))
@@ -40,7 +34,7 @@ public class MusicFileLoader {
 					if (music.isFile()
 							&& music_type.contains(new MimetypesFileTypeMap()
 									.getContentType(music))
-							&& getRightPartFilename(music.getName()).equals("mp3"))
+							&& getRightPartFilename(music.getName()).toLowerCase().equals("mp3"))
 						music_list.add(new MusicFile(this
 								.getLeftPartFilename(music.getName()), dir
 								.getName(), music.toURI().toString()));

@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -37,7 +38,7 @@ public class Menu extends JLayeredPane {
 	JLabel end;
 	JLabel bg;
 	JLabel speaker;
-	
+
 	MouseAction start_l;
 	MouseAction high_l;
 	MouseAction impr_l;
@@ -56,6 +57,15 @@ public class Menu extends JLayeredPane {
 		final MusicManager musicManager = new MusicManager();
 		add(musicManager.getPanel());
 		musicManager.play();
+		
+		final JLabel song = new JLabel(musicManager.getSongTitle() + " (" + musicManager.getSongCategory() + ")");
+		song.setBounds(200,20,200,45);
+		song.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+					musicManager.next();
+					song.setText(musicManager.getSongTitle() + " (" + musicManager.getSongCategory() + ")");
+			}
+		});
 		
 		JLabel speaker = new JLabel();
 		Icon speaker_icon = new ImageIcon(graphicManager.speaker.getImage(0,
@@ -76,6 +86,7 @@ public class Menu extends JLayeredPane {
 		});
 		speaker.setVisible(true);
 		
+		add(song, JLayeredPane.DEFAULT_LAYER);
 		add(speaker, JLayeredPane.DEFAULT_LAYER);
 		
 		start = new JLabel();
@@ -291,7 +302,9 @@ public class Menu extends JLayeredPane {
 		gameView.setResizable(false);
 		gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameView.setVisible(true);
-		gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(gameView.getX(), gameView.getY()), "mouse02"));
+		gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				graphicManager.mouse.getImage(),
+				new Point(gameView.getX(), gameView.getY()), "mouse02"));
 
 		JComponent c = new Menu(graphicManager);
 

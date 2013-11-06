@@ -50,8 +50,8 @@ public class GraphicManager {
     status = new BufferedImageLoader("Data/Graphics/","status01.png");
     
     
-    startMenueBG = new BufferedImageLoader("Data/Graphics/","startbildschirm01.png");
-    startMenueButtons = new BufferedImageLoader("Data/Graphics/","menu_buttons01.png", 1, 8);
+    startMenueBG = new BufferedImageLoader("Data/Graphics/","startbildschirm02.png");
+    startMenueButtons = new BufferedImageLoader("Data/Graphics/","menu_buttons02.png", 1, 8);
     startImpressum = new BufferedImageLoader("Data/Graphics/","impressum01.png");
     
     mouse = new BufferedImageLoader("Data/Graphics/","mouse04.png");
