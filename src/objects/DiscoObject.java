@@ -49,65 +49,74 @@ public abstract class DiscoObject extends JLabel {
 	}
 	
 	/*
-	0. BlauHohn
-	1. RotOchsen
-	2. GelbVögln
-	3. SchwarzKatzerl
-	4. ZitronenLimonade
-	5. Eistee
-	6. Cocktail
-	7. Shot
-	8. sitzen
-	9. tanzen
-	10. flirten
-	11. auf Toilette gehen
+	/* 
+ * AktivitÃ¤tentabelle:
+ * 	0  - offen
+ *  1  - gehen
+ *  2  - tanzen
+ *  3  - trinken
+ *  4  - sitzen
+ *  5  - urinieren
+ *  6  - reden
+ *  7  - flirten
+ *  8  - Musik wÃ¼nschen
+ *  9  - ausruhen
+ *  10 - im Koma liegen
+ *  11 - BlauHohn
+ *  12 - RotOchsen
+ *  13 - GelbVögln
+ *  14 - SchwarzKatzerl
+ *  15 - ZitronenLimonade
+ *  16 - Eistee
+ *  17 - Cocktail
+ *  18 - Shot
 	*/
 	
 	
 	public void setStatusES(Human p, int number){ 
 			switch (number){
-				case 0: 	p.addEnergy(0.30);
+				case 11: 	p.addEnergy(0.30);
 							p.addUrine(0.40);
 							p.removeAlcLevel(0.20);
 							p.addFun(0.10);
 							h.setBonus(1);
 							break;
-				case 1: 	p.addFlirt(0.20);
+				case 12: 	p.addFlirt(0.20);
 							p.addUrine(0.40);
 							p.addFun(0.10);
 							h.setBonus(1);
 							break;
-				case 2:		p.addFun(0.20);
+				case 13:	p.addFun(0.20);
 							p.addUrine(0.40);
 							p.addFlirt(0.20);
 							h.setBonus(1);
 							break;
-				case 3:		p.removeAlcLevel(0.20);
+				case 14:	p.removeAlcLevel(0.20);
 							p.addEnergy(0.20);
 							p.addUrine(0.40);
 							p.addFun(0.1);
 							h.setBonus(1);
 							break;
-				case 4: 	p.addUrine(0.40);
+				case 15: 	p.addUrine(0.40);
 							break;
-				case 5:		p.addUrine(0.40);
+				case 16:	p.addUrine(0.40);
 							p.addEnergy(0.30);
 							break;
-				case 6:		p.addUrine(0.40);
+				case 17:	p.addUrine(0.40);
 							p.addAlcLevel(0.30);
 							break;
-				case 7:		p.addUrine(0.40);
+				case 18:	p.addUrine(0.40);
 							p.addAlcLevel(0.30);
 							break;
-				case 8:		p.addEnergy(0.40);
+				case 4:		p.addEnergy(0.40);
 							break;
-				case 9:	p.removeEnergy(0.25);
+				case 2:		p.removeEnergy(0.25);
 							p.addFun(0.3);
 							break;
-				case 10: 	p.addFlirt(30);
+				case 7: 	p.addFlirt(30);
 							p.addFun(30);
 							break;
-				case 11:	p.setUrine(0);
+				case 5	:	p.setUrine(0);
 							break;
 				
 			}	
