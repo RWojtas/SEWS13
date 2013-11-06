@@ -58,7 +58,7 @@ public class GameLogic implements KeyListener {
     player = new Player(100,'m', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(1200), BufferedImageLoader.scaleToScreenY(100),1);
     //musicManager = new MusicManager();	// music manger
     
-    gameView = new GameView(asManager, doManager, player);
+    gameView = new GameView(asManager, doManager, player, graphicManager);
     gameView.setTitle("Felse deine Feier");
     gameView.setUndecorated(true);
     gameView.setAlwaysOnTop(true);

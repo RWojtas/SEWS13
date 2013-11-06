@@ -29,6 +29,9 @@ public class GraphicManager {
   
   public BufferedImageLoader drinkButtons;
   
+  public BufferedImageLoader statusBG;
+  public BufferedImageLoader statusUhr;
+  
   // Mouse
   public BufferedImageLoader mouse;
   
@@ -66,5 +69,8 @@ public class GraphicManager {
     
     popup1000x600 = new BufferedImageLoader("Data/Graphics/","popup1000x600_01.png");
     drinkButtons = new BufferedImageLoader("Data/Graphics/","drinkbuttons02.png", 2, 8);
+    
+    statusBG = new BufferedImageLoader("Data/Graphics/","statusbg01.png");
+    statusUhr = new BufferedImageLoader("Data/Graphics/","uhr01.png");
   }
 }
