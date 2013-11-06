@@ -74,11 +74,19 @@ public class GameLogic implements KeyListener {
     
   }
   
-  public boolean checkFreePosition(long id, Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
-	  
+  public boolean checkFreePosition(int id, Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
 	  if(!asManager.checkFreePosition(id,lo,ro,lu,ru)) 
 		  return false;
 	  if(!doManager.checkFreePosition(lo,ro,lu,ru)) 
+		  return false;
+	  
+	  return true;
+  }
+  
+  public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
+	  if(!asManager.checkFreeCoordinate(id,coordinate)) 
+		  return false;
+	  if(!doManager.checkFreeCoordinate(coordinate)) 
 		  return false;
 	  
 	  return true;

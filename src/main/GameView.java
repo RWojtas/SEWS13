@@ -96,6 +96,39 @@ public class GameView extends JFrame implements MouseListener {
 	  layer.setOpaque(false);
 	  return layer;
   }
+  
+  public void setTarget(Human human, int x, int y) {
+	  Coordinate lo = new Coordinate(x,y);
+	  Coordinate ro = new Coordinate(x+human.getWidth(),y);
+	  Coordinate lu = new Coordinate(x,y+human.getHeight());;
+	  Coordinate ru = new Coordinate(x+human.getWidth(),y+human.getHeight());;
+	  
+	  //while(true) {
+		  if(!GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), lo)) {
+			  
+		  } 
+		  
+		  if(!GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), ro)) {
+			  
+		  } 
+		  
+		  if(!GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), lu)) {
+			  
+		  } 
+		  
+		  if(!GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), ru)) {
+			  
+		  } 
+	  //}
+	  
+	  player.setActivity(1);
+	  player.setTarget(x, y);  
+  }
+  
+  public Coordinate determineFreePosition(int x, int y) {
+	  Coordinate freePosition = null;
+	  return freePosition;
+  }
 
   @Override
   public void mouseClicked(MouseEvent e) {
@@ -103,8 +136,9 @@ public class GameView extends JFrame implements MouseListener {
   	  //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
   	  //ohne mit gedrückter Maustaste die Position der Maus zu verändern
   	  
-  	  player.setActivity(1);
-  	  player.setTarget(e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
+  	  //setTarget(human,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
+  	player.setActivity(1);
+	  player.setTarget(e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);  
   }
 
   @Override

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import objects.*;
 import player.Coordinate;
+import player.Human;
 import player.Position;
 
 
@@ -69,31 +70,24 @@ public class DiscoObjectManager {
 
 	  	return clickedObject;
 	}
+	 
+    public boolean checkFreeCoordinate(Coordinate coordinate) {
+    	DiscoObject component = getComponentAt(coordinate.getXCoordinate(),coordinate.getYCoordinate());
+		if (component != null && !component.getAccessible())
+			return false;
+		else
+    		return true;
+    }
 	
-	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
-		DiscoObject component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
-		if (component != null && !component.getAccessible()) {
-			System.out.println("lo false");
+	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {		
+		if(!checkFreeCoordinate(lo))
 			return false;
-		}
-				
-		component = getComponentAt(ro.getXCoordinate(),ro.getYCoordinate());
-		if (component != null && !component.getAccessible()) {
-			System.out.println("ro false");
+		if(!checkFreeCoordinate(ro))
 			return false;
-		}
-		
-		component = getComponentAt(lu.getXCoordinate(),lu.getYCoordinate());
-		if (component != null && !component.getAccessible()) {
-			System.out.println("lu false");
+		if(!checkFreeCoordinate(lu))
 			return false;
-		}
-		
-		component = getComponentAt(ru.getXCoordinate(),ru.getYCoordinate());
-		if (component != null && !component.getAccessible()) {
-			System.out.println("ru false");
+		if(!checkFreeCoordinate(ru))
 			return false;
-		}
 		
 		return true;
 	}
