@@ -73,6 +73,14 @@ public class GameView extends JFrame implements MouseListener {
       layer1.add(fps);
       
       // Statusbar
+     
+      JPanel StatusbarBG = new JPanel();
+      StatusbarBG.setLayout(null);
+      StatusbarBG.setBounds((int)deskResolution.getWidth()-200,0,200,(int)deskResolution.getHeight());
+      float[] hsbvals = Color.RGBtoHSB(50, 50, 50, null);
+      StatusbarBG.setBackground(Color.getHSBColor(hsbvals[0],hsbvals[1],hsbvals[2]));
+	  layer1.add(StatusbarBG);
+      
       JLabel Titel = new JLabel("Statusbar", JLabel.CENTER);
       Titel.setFont(new Font("Dialog",Font.BOLD,24));
       Titel.setBounds((int)deskResolution.getWidth()-200,0,200,(int)deskResolution.getHeight());

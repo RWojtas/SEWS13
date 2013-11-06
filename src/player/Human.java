@@ -348,24 +348,7 @@ public abstract class Human extends JLabel{
 				else if(y > this.target.getY0()) {
 						rcheck = this.check(4,0);
 				}
-				// TO-DO: Wegfinde-Algorithmus
-				/*int xORy = Functions.myRandom(0, 1);
-				switch (xORy) {
-				case 0:
-					if (x < target.getX0()) {
-						x++;
-					} else if (x > target.getX0()) {
-						x--;
-					}
-					break;
-				case 1:
-					if (y < target.getY0()) {
-						y++;
-					} else if (y > target.getY0()) {
-						y--;
-					}
-					break;
-				}*/
+				
 				if(rcheck) {
 					newPos = ausDirzuCoo(this.direction);
 				}
