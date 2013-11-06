@@ -49,18 +49,18 @@ public class Menu extends JLayeredPane {
 	public Menu(final GraphicManager graphicManager) {
 		this.graphicManager = graphicManager;
 
-		int left = 630 * 1366 / 1600;
-		int top = 270 * 768 / 900;
-		int width = 300;
-		int height = 60;
-		int height_gab = height + 20;
+		int left = BufferedImageLoader.scaleToScreenX(630 * 1366 / 1600);
+		int top = BufferedImageLoader.scaleToScreenY(270 * 768 / 900);
+		int width = BufferedImageLoader.scaleToScreenX(300);
+		int height = BufferedImageLoader.scaleToScreenY(60);
+		int height_gab = BufferedImageLoader.scaleToScreenY(height + 20);
 		
 		final MusicManager musicManager = new MusicManager();
 		add(musicManager.getPanel());
 		musicManager.play();
 		
 		final JLabel song = new JLabel(musicManager.getSongTitle() + " (" + musicManager.getSongCategory() + ")");
-		song.setBounds(200,20,200,45);
+		song.setBounds(BufferedImageLoader.scaleToScreenX(200),BufferedImageLoader.scaleToScreenX(20),BufferedImageLoader.scaleToScreenX(200),BufferedImageLoader.scaleToScreenX(45));
 		song.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 					musicManager.next();
@@ -72,7 +72,7 @@ public class Menu extends JLayeredPane {
 		Icon speaker_icon = new ImageIcon(graphicManager.speaker.getImage(0,
 				0));
 		speaker.setIcon(speaker_icon);
-		speaker.setBounds(140, 20, 45, 45);
+		speaker.setBounds(BufferedImageLoader.scaleToScreenX(140), BufferedImageLoader.scaleToScreenY(20), BufferedImageLoader.scaleToScreenX(45), BufferedImageLoader.scaleToScreenY(45));
 		speaker.addMouseListener(new MouseAdapter() {
 			Icon off = new ImageIcon(graphicManager.speaker
 					.getImage(0, 1));
@@ -131,7 +131,7 @@ public class Menu extends JLayeredPane {
 		add(end, JLayeredPane.DEFAULT_LAYER);
 
 		bg = new JLabel(new ImageIcon(graphicManager.startMenueBG.getImage()));
-		bg.setBounds(0, 0, 1366, 768);
+		bg.setBounds(0, 0, BufferedImageLoader.scaleToScreenX(1366), BufferedImageLoader.scaleToScreenX(768));
 		add(bg, JLayeredPane.DEFAULT_LAYER);
 
 		JLabel imp_pic = new JLabel(new ImageIcon(
@@ -149,7 +149,7 @@ public class Menu extends JLayeredPane {
 		best.setBackground(new Color(0,0,0,0));
 		best.setFocusable(false);
 		best.setText("Bester Punktestand: " + bester_stand);
-		best.setFont(new Font("Ahorani", 0, 30));
+		best.setFont(new Font("Ahorani", 0, BufferedImageLoader.scaleToScreenY(30)));
 		best.setForeground(new Color(128, 0, 0));
 		score = makePopup("Bestenliste",best);
 		score.setVisible(false);
@@ -157,7 +157,7 @@ public class Menu extends JLayeredPane {
 
 		
 		enableButtonsEvents();
-		setBounds(0, 0, 1366, 768);
+		setBounds(0, 0, BufferedImageLoader.scaleToScreenX(1366), BufferedImageLoader.scaleToScreenY(768));
 		setOpaque(false);
 		setVisible(true);
 	}
@@ -189,8 +189,8 @@ public class Menu extends JLayeredPane {
 				.getWidth();
 		double screen_height = Toolkit.getDefaultToolkit().getScreenSize()
 				.getHeight();
-		int cont_width = 700;
-		int cont_height = 400;
+		int cont_width = BufferedImageLoader.scaleToScreenX(700);
+		int cont_height = BufferedImageLoader.scaleToScreenY(400);
 
 		JLabel lab = new JLabel(new ImageIcon(
 				graphicManager.startPopup.getImage()));
@@ -198,15 +198,15 @@ public class Menu extends JLayeredPane {
 
 		JLabel text = new JLabel();
 		text.setText(title);
-		text.setFont(new Font("Aharoni", 0, 48));
+		text.setFont(new Font("Aharoni", 0, BufferedImageLoader.scaleToScreenY(48)));
 		text.setForeground(new Color(128, 0, 0));
-		text.setBounds(35, 20, 300, 48);
+		text.setBounds(BufferedImageLoader.scaleToScreenX(35), BufferedImageLoader.scaleToScreenY(20), BufferedImageLoader.scaleToScreenX(300), BufferedImageLoader.scaleToScreenY(48));
 
 		JLabel close = new JLabel();
 		Icon close_icon = new ImageIcon(graphicManager.closeButtons.getImage(0,
 				0));
 		close.setIcon(close_icon);
-		close.setBounds(640, 10, 45, 45);
+		close.setBounds(BufferedImageLoader.scaleToScreenX(640), BufferedImageLoader.scaleToScreenY(10), BufferedImageLoader.scaleToScreenX(45), BufferedImageLoader.scaleToScreenY(45));
 		close.addMouseListener(new MouseAdapter() {
 			Icon icon_close = new ImageIcon(graphicManager.closeButtons
 					.getImage(0, 1));
