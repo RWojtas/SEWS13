@@ -14,6 +14,7 @@ import player.*;
 public class GameView extends JFrame implements MouseListener {
   public ASManager asManager;
   public DiscoObjectManager doManager;
+  public Player player;
   public Container c;
   public static Dimension deskResolution;
   public int currentLevel;
@@ -25,13 +26,15 @@ public class GameView extends JFrame implements MouseListener {
   public JLabel fps;
   public JPanel statusbar;
   
-  public GameView(ASManager asManager, DiscoObjectManager doManager) {
+  
+  public GameView(ASManager asManager, DiscoObjectManager doManager, Player player) {
 	  deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
 	  setSize((int)deskResolution.getWidth(),(int)deskResolution.getHeight()); 
 	  c = getContentPane();
 	  currentLevel=1;
 	  this.asManager = asManager;
       this.doManager = doManager;
+      this.player = player;
     
       /*
       background = new JPanel();
@@ -54,6 +57,7 @@ public class GameView extends JFrame implements MouseListener {
       layeredPane.add(layer2, 1); 
       layeredPane.add(layer3, 2);
       
+      layer2.add(player);
       asManager.addComponents(layer2);
       doManager.addComponents(layer3); 
       
@@ -108,9 +112,9 @@ public class GameView extends JFrame implements MouseListener {
   	  System.out.println("mouseClicked!");
   	  //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
   	  //ohne mit gedrückter Maustaste die Position der Maus zu verändern
-
-  	  asManager.human[0].setActivity(1);
-  	  asManager.human[0].setTarget(e.getX(),e.getY());
+  	  
+  	  player.setActivity(1);
+  	  player.setTarget(e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
   }
 
   @Override

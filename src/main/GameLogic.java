@@ -2,7 +2,9 @@ package main;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import music.MusicManager;
 import player.*;
 
@@ -14,6 +16,9 @@ public class GameLogic {
   public static ASManager asManager;
   public static DiscoObjectManager doManager;
   public static MusicManager musicManager;
+  public static final long UPDATE_TIME_INTERVALL = 5000000;
+  public static final long ONE_SECOND = 1000000000; 
+  public Player player;
 
   public static GameLogic getInstance() {
 	  if(gameLogic == null) {
@@ -24,15 +29,24 @@ public class GameLogic {
   
   public void start() {
 	  long frames = 0;
-	  long lastTimeChecked = System.nanoTime();
+	  long framesPerSecondTimer = System.nanoTime();
+	  long updateTimer = System.nanoTime(); 
 	  
 	  while(true) {
-		  asManager.human[0].stepNextPosition();
-		  frames++;
-	      if(System.nanoTime()-lastTimeChecked >= 1000000000) {
+		  
+		  //Updates
+		  if((System.nanoTime()-updateTimer) >= UPDATE_TIME_INTERVALL) {
+			  asManager.updateComponents();
+			  player.stepNextPosition();  
+			  frames++;
+			  updateTimer += UPDATE_TIME_INTERVALL;
+		  }
+		  
+		  //FPS Berechnung 
+	      if(System.nanoTime()-framesPerSecondTimer >= ONE_SECOND) {
 	    	  gameView.fps.setText(""+frames);
 	    	  frames = 0;
-	    	  lastTimeChecked = System.nanoTime();
+	    	  framesPerSecondTimer = System.nanoTime();
 	      }
 	  }
   }
@@ -41,9 +55,10 @@ public class GameLogic {
     graphicManager = new GraphicManager();
     asManager = new ASManager(graphicManager);
     doManager = new DiscoObjectManager(graphicManager);
+    player = new Player(100,'m', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0,1);
     //musicManager = new MusicManager();	// music manger
     
-    gameView = new GameView(asManager, doManager);
+    gameView = new GameView(asManager, doManager, player);
     gameView.setTitle("Felse deine Feier");
     gameView.setUndecorated(true);
     gameView.setAlwaysOnTop(true);

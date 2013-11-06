@@ -10,6 +10,7 @@ import main.GameLogic;
 
 public abstract class Human extends JLabel{
 	// Attribute
+	public int graphicState;
 	protected Position position;		// Aktuelle Position des Human-Objektes
 	protected Position target;			// Ziel-Position des Human-Objektes
 	protected double flirt;				// Spielfaktoren... entsprechend der Variablennamen
@@ -17,14 +18,14 @@ public abstract class Human extends JLabel{
 	protected double alcLevel;
 	protected double urine;
 	protected double energy;
-	protected char gender;				// Geschlecht -> Für gewisse Logik wichtig (Jungs flirten keine Jungs an)
-	protected int type;					// Typ -> wichtig für die Grafiken
-	protected int activity;				// Aktivität, die gerade ausgeführt wird (siehe unten: Aktivitätstabelle)
-	protected int activityTimer;		// Wie lang eine Aktivität (noch) dauert
+	protected char gender;				// Geschlecht -> Fï¿½r gewisse Logik wichtig (Jungs flirten keine Jungs an)
+	protected int type;					// Typ -> wichtig fï¿½r die Grafiken
+	protected int activity;				// Aktivitï¿½t, die gerade ausgefï¿½hrt wird (siehe unten: Aktivitï¿½tstabelle)
+	protected int activityTimer;		// Wie lang eine Aktivitï¿½t (noch) dauert
 	protected ImageIcon image;
-	private int height;					// Höhe des Spielers (Sicht von oben)
+	private int height;					// Hï¿½he des Spielers (Sicht von oben)
 	private int width;					// Breite des Spielers (Sicht von oben)
-	private int direction;				// Richtung in die der Spieler gerade schaut -> wichtig für weitere Bewegung
+	private int direction;				// Richtung in die der Spieler gerade schaut -> wichtig fï¿½r weitere Bewegung
 
 	/*
 	 * Aktivitï¿½tentabelle: 
@@ -69,6 +70,7 @@ public abstract class Human extends JLabel{
 		this.activity = 0;
 		this.direction = direction;
 		
+		graphicState = 0;
 		setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
 		setBounds(x,y,image.getWidth(),image.getHeight());
 		setOpaque(false);
@@ -77,6 +79,11 @@ public abstract class Human extends JLabel{
 	public void moveObject(int x, int y) {
 		position.setPosition(x, y, x+this.width, y, x, y+this.height, x+this.width, y+this.height);
 		setLocation(position.getX0(),position.getY0());
+	}
+	
+	public void setImage(BufferedImage image) {
+		setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
+		setBounds(position.getX0(),position.getY0(),image.getWidth(),image.getHeight());
 	}
 
 	// START: GETTER + SETTER
@@ -240,14 +247,14 @@ public abstract class Human extends JLabel{
 		this.setActivityTimer(20);
 	}
 	
-	public boolean checkFreePosition(int x, int y) {		// Überprüft ob eine gewisse Koordinate besetzt ist oder nicht. 
+	public boolean checkFreePosition(int x, int y) {		// ï¿½berprï¿½ft ob eine gewisse Koordinate besetzt ist oder nicht. 
 		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in From von "false" oder "true".
 		return gl.checkFreePosition(new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
 	}
 	
 	public Coordinate ausDirzuCoo(int dir) { 			// Diese Methode erstellt aus der Richtung eines Menschen
-		int x = this.getPosition().getX0();				// die nächste Position, in die er hingehen würde. 
-		int y = this.getPosition().getY0();				// Diese Koordinate wird dann zurückgegeben.
+		int x = this.getPosition().getX0();				// die nï¿½chste Position, in die er hingehen wï¿½rde. 
+		int y = this.getPosition().getY0();				// Diese Koordinate wird dann zurï¿½ckgegeben.
 		switch(dir) {
 		case 0: 
 			++y;									
@@ -285,11 +292,11 @@ public abstract class Human extends JLabel{
 	public boolean check(int dir, int cnt) {
 		cnt++;
 		dir = dir%8;
-		Coordinate Coo = ausDirzuCoo(dir);										// Diese Methode überprüft anhand der Richtung, die übergeben wird, die nächste Koordinate und schaut,  
+		Coordinate Coo = ausDirzuCoo(dir);										// Diese Methode ï¿½berprï¿½ft anhand der Richtung, die ï¿½bergeben wird, die nï¿½chste Koordinate und schaut,  
 		if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())){		// ob diese frei ist. Falls ja, wird die Richtung des Menschen entsprechend gesetzt.
-			this.direction = dir;												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und prüft die nächste Richtung
-		}																		// Sind alle 8 Richtungen einmal durchgeprüft, gibt die Methode false zurück.
-		else {																	// Der Integer cnt zählt sich bei jedem Durchlauf um einen hoch und schaut somit, ob alle Richtungen geprüft worden sind.
+			this.direction = dir;												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und prï¿½ft die nï¿½chste Richtung
+		}																		// Sind alle 8 Richtungen einmal durchgeprï¿½ft, gibt die Methode false zurï¿½ck.
+		else {																	// Der Integer cnt zï¿½hlt sich bei jedem Durchlauf um einen hoch und schaut somit, ob alle Richtungen geprï¿½ft worden sind.
 			if(cnt <= 8) {														
 				if(!(check(dir+1, cnt))) {
 					return false;
@@ -302,8 +309,8 @@ public abstract class Human extends JLabel{
 	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
-	public void stepNextPosition() {													//Diese Methode setzt die nächste Position des Menschen 
-		int x = this.getXPosition();												//mit Hilfe der weiter oben erklärten Methoden.
+	public void stepNextPosition() {													//Diese Methode setzt die nï¿½chste Position des Menschen 
+		int x = this.getXPosition();												//mit Hilfe der weiter oben erklï¿½rten Methoden.
 		int y = this.getYPosition();												//Der Fall, dass sich der Mensch nicht bewegt, ist abgefangen.
 		boolean rcheck = false;
 		Coordinate newPos = new Coordinate(x, y);
@@ -311,7 +318,7 @@ public abstract class Human extends JLabel{
 		if (this.getActivity() == 1) {												
 			if (this.position != this.target) {										
 				if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
-						rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht für die Richtung unten rechts. 
+						rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht fï¿½r die Richtung unten rechts. 
 				}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
 				else if(x > this.target.getX0() && y < this.target.getY0()){
 						rcheck = this.check(1,0);

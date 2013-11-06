@@ -20,16 +20,15 @@ public class ASManager {
 	}
 	
 	public void updateComponents() {
-		
+		for(int i=0;i<human.length;i++) {
+			human[i].stepNextPosition();
+		}	
 	}
 	
 	public void addComponents(JPanel panel) {
-		human = new Human[2];
-		human[0] = new Player(100,'m', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0,1);
-		human[1] = new AS('w', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0,1);
-	    human[1].addMouseListener(new ASMouseListener());
-	    
-	   
+		human = new Human[1];
+		human[0] = new AS('w', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(700), BufferedImageLoader.scaleToScreenY(400),0,0,1);
+	    human[0].addMouseListener(new ASMouseListener());	   
 
 	    for(Human obj : human)
 			panel.add(obj);
