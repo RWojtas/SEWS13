@@ -39,6 +39,14 @@ public abstract class DiscoObject extends JLabel {
 		return position.getYPosition();
 	}
 	
+	public boolean getAccessible() {
+		return this.accessible;
+	}
+	
+	public String getType() {
+		return this.type;
+	}
+	
 	/*
 	0. BlauHohn
 	1. RotOchsen
