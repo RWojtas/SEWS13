@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import main.GameLogic;
+import objects.DiscoObject;
 
 
 public abstract class Human extends JLabel{
@@ -75,6 +76,7 @@ public abstract class Human extends JLabel{
 		setBounds(x,y,width,height);
 		setOpaque(false);
 	}
+	
 	
 	public void moveObject(int x, int y) {
 		position.setPosition(x, y, x+this.width, y, x, y+this.height, x+this.width, y+this.height);
