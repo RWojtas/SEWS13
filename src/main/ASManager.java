@@ -40,32 +40,18 @@ public class ASManager {
 	  	Human clickedObject = null;
 	  	  
 	  	clickedLayeredPane = GameView.layeredPane;
-	  	  
-	  	clickedPanel = (JPanel)clickedLayeredPane.getComponent(0);
-	  	  
-	  	try {
-	  		clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
-	  	} catch(Exception e) {
-	  		clickedObject = null;
+	  	
+	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
+	  		if(clickedObject == null) {
+		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
+		        try {
+		  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
+		  	  	} catch(Exception e) {
+		  	  	    clickedObject = null;
+		  	  	}	
+		  	}
 	  	}
-	  	  
-	  	if(clickedObject == null) {
-	  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
-	        try {
-	  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
-	  	  	} catch(Exception e) {
-	  	  	    clickedObject = null;
-	  	  	}	
-	  	}
-	  	  		
-	  	if(clickedObject == null) {
-	  	    clickedPanel = (JPanel)clickedLayeredPane.getComponent(2);
-	  	    try {
-	  		    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
-	  		} catch(Exception e) {
-	  		     clickedObject = null;
-	  		}
-	    }
+	  	
 	  	return clickedObject;
 	}
 	

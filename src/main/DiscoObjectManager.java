@@ -55,51 +55,36 @@ public class DiscoObjectManager {
 	  	DiscoObject clickedObject = null;
 	  	  
 	  	clickedLayeredPane = GameView.layeredPane;
-	  	  
-	  	clickedPanel = (JPanel)clickedLayeredPane.getComponent(0);
-	  	  
-	  	try {
-	  		clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
-	  	} catch(Exception e) {
-	  		clickedObject = null;
+	  	
+	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
+	  		if(clickedObject == null) {
+		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
+		        try {
+		  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
+		  	  	} catch(Exception e) {
+		  	  	    clickedObject = null;
+		  	  	}	
+		  	}
 	  	}
-	  	  
-	  	if(clickedObject == null) {
-	  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
-	        try {
-	  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
-	  	  	} catch(Exception e) {
-	  	  	    clickedObject = null;
-	  	  	}	
-	  	}
-	  	  		
-	  	if(clickedObject == null) {
-	  	    clickedPanel = (JPanel)clickedLayeredPane.getComponent(2);
-	  	    try {
-	  		    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
-	  		} catch(Exception e) {
-	  		     clickedObject = null;
-	  		}
-	    }
+
 	  	return clickedObject;
 	}
 	
 	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
 		DiscoObject component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
-		//if(component.)
-		if (component != null) 
+		if (component != null && !component.getAccessible()) 
 			return false;
 		
 		component = getComponentAt(ro.getXCoordinate(),ro.getYCoordinate());
-		if (component != null)
+		if (component != null && !component.getAccessible())
 			return false;
 		
 		component = getComponentAt(lu.getXCoordinate(),lu.getYCoordinate());
-		if (component != null)
+		if (component != null && !component.getAccessible())
 			return false;
 		
 		component = getComponentAt(ru.getXCoordinate(),ru.getYCoordinate());
-		if (component != null)
+		if (component != null && !component.getAccessible())
 			return false;
 		
 		return true;

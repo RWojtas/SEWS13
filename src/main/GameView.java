@@ -23,6 +23,7 @@ public class GameView extends JFrame implements MouseListener {
   public JPanel layer1;
   public JPanel layer2;
   public JPanel layer3;
+  public JPanel layer4;
   public JLabel fps;
   public JPanel statusbar;
   
@@ -49,17 +50,19 @@ public class GameView extends JFrame implements MouseListener {
       
       c.add(layeredPane);
 
-      layer1 = createLayerPanel();
-      layer2 = createLayerPanel();
-      layer3 = createLayerPanel();
+      layer1 = createLayerPanel(); //Höchste Schicht
+      layer2 = createLayerPanel(); //Mittlere Schicht
+      layer3 = createLayerPanel(); //Mittlere Schicht
+      layer4 = createLayerPanel(); //Tiefste Schicht
       
-      layeredPane.add(layer1, 0); 
-      layeredPane.add(layer2, 1); 
-      layeredPane.add(layer3, 2);
+      layeredPane.add(layer1, 0); //Layer für Statusbar
+      layeredPane.add(layer2, 1); //Layer für Overlay
+      layeredPane.add(layer3, 2); //Layer für Human
+      layeredPane.add(layer4, 3); //Layer für DiscoObject
       
-      layer2.add(player);
-      asManager.addComponents(layer2);
-      doManager.addComponents(layer3); 
+      layer3.add(player);
+      asManager.addComponents(layer3);
+      doManager.addComponents(layer4); 
       
       fps = new JLabel("0");
       fps.setOpaque(false);
@@ -67,18 +70,14 @@ public class GameView extends JFrame implements MouseListener {
       fps.setFont(new Font("Dialog",Font.BOLD,30));
       fps.setBounds((int)deskResolution.getWidth()-300-3,(int)deskResolution.getHeight()-30,300,30);
      
-      layer3.add(fps);
+      layer1.add(fps);
       
       // Statusbar
-      statusbar = createLayerPanelStatusbar();
-      layeredPane.add(statusbar, 3);
-      
-      GraphicManager graphicManager = new GraphicManager();
       JLabel Titel = new JLabel("Statusbar", JLabel.CENTER);
       Titel.setFont(new Font("Dialog",Font.BOLD,24));
-      Titel.setBounds(0,0,200,100);
+      Titel.setBounds((int)deskResolution.getWidth()-200,0,200,(int)deskResolution.getHeight());
       
-	  statusbar.add(Titel);  
+	  layer1.add(Titel);  
       // End: Statusbar
     
       // Temp
@@ -94,14 +93,6 @@ public class GameView extends JFrame implements MouseListener {
 	  JPanel layer = new JPanel();
 	  layer.setLayout(null);
 	  layer.setBounds(0,0,(int)deskResolution.getWidth(),(int)deskResolution.getHeight());
-	  layer.setOpaque(false);
-	  return layer;
-  }
-   
-  public JPanel createLayerPanelStatusbar() {
-	  JPanel layer = new JPanel();
-	  layer.setLayout(null);
-	  layer.setBounds((int)deskResolution.getWidth()-200,0,200,(int)deskResolution.getHeight());
 	  layer.setOpaque(false);
 	  return layer;
   }
