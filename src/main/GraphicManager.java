@@ -25,6 +25,8 @@ public class GraphicManager {
   public BufferedImageLoader startPopup;
   public BufferedImageLoader speaker;
   
+  public BufferedImageLoader popup1000x600;
+  
   // Mouse
   public BufferedImageLoader mouse;
   
@@ -59,5 +61,7 @@ public class GraphicManager {
     closeButtons = new BufferedImageLoader("Data/Graphics/","closebutton01.png", 1, 2);
     startPopup = new BufferedImageLoader("Data/Graphics/","startpopup01.png");
     speaker = new BufferedImageLoader("Data/Graphics/","speaker01.png",1,2);
+    
+    popup1000x600 = new BufferedImageLoader("Data/Graphics/","popup1000x600_01.png");
   }
 }
