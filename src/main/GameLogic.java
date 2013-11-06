@@ -9,7 +9,7 @@ import music.MusicManager;
 import player.*;
 
 
-public class GameLogic {
+public class GameLogic implements KeyListener {
   public static GameLogic gameLogic;
   public static GameView gameView;
   public static GraphicManager graphicManager;
@@ -66,6 +66,7 @@ public class GameLogic {
     gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameView.setVisible(true);
     gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(gameView.getX(), gameView.getY()), "mouse02"));
+    gameView.addKeyListener(this);
     //gameView.addMouseListener(new GameViewMouseListener());
     //gameView.add(musicManager.getPanel());	//add music panel
     
@@ -83,8 +84,26 @@ public class GameLogic {
 	  return true;
   }
 
+  @Override
+  public void keyPressed(KeyEvent arg0) {
+	  if(arg0.getKeyCode() == 27) {
+		  gameView.setVisible(false);
+		  gameView.dispose();
+	      System.exit(0);
+	  };
+  }
+
+  @Override
+  public void keyReleased(KeyEvent arg0) {
+	
+  }
+
+  @Override
+  public void keyTyped(KeyEvent arg0) {
+	  
+  }
+  
   public static void main (String [] args) {
       GameLogic.getInstance().start();
   }
-
 }
