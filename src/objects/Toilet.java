@@ -13,7 +13,7 @@ public class Toilet extends DiscoObject {
 	
 	public Toilet(BufferedImage image, int x, int y) {
 		super("Toilet", image, x, y);
-		accessible = false;
+		accessible = true;
 	}
 	
 	private int number = 11;
