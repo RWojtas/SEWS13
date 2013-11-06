@@ -50,7 +50,7 @@ public abstract class DiscoObject extends JLabel {
 	/*
 	0. BlauHohn
 	1. RotOchsen
-	2. GelbVï¿½gln
+	2. GelbVögln
 	3. SchwarzKatzerl
 	4. ZitronenLimonade
 	5. Eistee
