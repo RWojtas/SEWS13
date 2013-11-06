@@ -71,7 +71,6 @@ public class MusicManager {
 	
 	public void mute(boolean onOff) {
 		mediaPlayer.setMute(onOff);
-		
 	}
 	public boolean isMute() {
 		return mediaPlayer.isMute();

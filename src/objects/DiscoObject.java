@@ -17,6 +17,7 @@ public abstract class DiscoObject extends JLabel {
 	protected boolean accessible;
 	protected String type;
 	protected Highscore h = Highscore.getInstance();
+	public boolean openOverlay = false;
 	
 	public DiscoObject(String type, BufferedImage image, int x, int y) {
 		position = new Position(x,y);
@@ -63,7 +64,7 @@ public abstract class DiscoObject extends JLabel {
 	*/
 	
 	
-	public void setStatusES(Human p, int aktivitaet, int number){ //int aktivitaet muss wahrscheinlich rausgenommen werden
+	public void setStatusES(Human p, int number){ 
 			switch (number){
 				case 0: 	p.addEnergy(0.30);
 							p.addUrine(0.40);

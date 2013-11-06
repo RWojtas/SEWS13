@@ -1,4 +1,4 @@
-package main;
+package overlay;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,13 +15,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
+import main.GraphicManager;
+
 public class Overlay extends JLayeredPane {
-	GraphicManager graphicManager;
+	protected GraphicManager graphicManager;
 	private JLabel title;
 	private JLabel close;
 	private JLabel bg;
-	
-	private JLabel buttons[];
 	
 	public Overlay(final GraphicManager graphicManager, String t) {
 		double screen_width = Toolkit.getDefaultToolkit().getScreenSize()
@@ -67,7 +67,7 @@ public class Overlay extends JLayeredPane {
 				((JComponent) e.getSource()).getParent().setVisible(false);
 			}
 		});
-
+		
 		add(title, JLayeredPane.DEFAULT_LAYER);
 		add(close, JLayeredPane.DEFAULT_LAYER);
 		add(bg, JLayeredPane.DEFAULT_LAYER);
@@ -77,6 +77,27 @@ public class Overlay extends JLayeredPane {
 				cont_height);
 		setVisible(true);
 	}
+	
+	class A extends MouseAdapter {
+		ImageIcon i;
+		ImageIcon h;
+		public A(ImageIcon i, ImageIcon h) {
+			this.i = i;
+			this.h = h;
+		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			((JLabel) e.getSource()).setIcon(h);
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			((JLabel) e.getSource()).setIcon(i);
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		GraphicManager graphicManager = new GraphicManager();
@@ -96,7 +117,7 @@ public class Overlay extends JLayeredPane {
 				graphicManager.mouse.getImage(),
 				new Point(gameView.getX(), gameView.getY()), "mouse02"));
 
-		JComponent c = new Overlay(graphicManager, "Mein Overlay");
+		JComponent c = new Overlay(graphicManager, "Die Bar");
 
 		GroupLayout layout = new GroupLayout(gameView.getContentPane());
 		gameView.getContentPane().setLayout(layout);

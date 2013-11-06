@@ -17,7 +17,7 @@ public class MainMusicTest {
 		MusicManager a = new MusicManager();
 
 		frame.add(a.getPanel());
-		
+
 		a.play();
 		//a.requestedCategory("Indie");
 		
