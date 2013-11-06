@@ -2,6 +2,8 @@ package player;
 
 import java.awt.image.BufferedImage;
 
+import main.Highscore;
+
 public class Player extends Human{
 	private int money;
 	
@@ -18,5 +20,6 @@ public class Player extends Human{
 	public void setMoney(int money) {
 		this.money = money;
 	}
+	
 	
 }
