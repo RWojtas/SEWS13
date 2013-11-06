@@ -299,7 +299,9 @@ public abstract class Human extends JLabel{
 			this.direction = dir;												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und pr�ft die n�chste Richtung
 		}																		// Sind alle 8 Richtungen einmal durchgepr�ft, gibt die Methode false zur�ck.
 		else {																	// Der Integer cnt z�hlt sich bei jedem Durchlauf um einen hoch und schaut somit, ob alle Richtungen gepr�ft worden sind.
-			if(cnt <= 8) {														
+			if(cnt <= 8) {	
+//				if(target y - aktuelle y > 0 && target x - aktuelle x < 0 )
+//					dann check(dir-1,cnt)
 				if(!(check(dir+1, cnt))) {
 					return false;
 				}
