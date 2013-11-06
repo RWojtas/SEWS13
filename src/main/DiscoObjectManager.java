@@ -86,6 +86,7 @@ public class DiscoObjectManager {
 	
 	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
 		DiscoObject component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
+		//if(component.)
 		if (component != null) 
 			return false;
 		

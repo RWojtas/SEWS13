@@ -10,7 +10,7 @@ public class Bench extends DiscoObject {
 	
 	
 	public Bench(BufferedImage image, int x, int y) {
-		super(image, x, y);
+		super("Bench", image, x, y);
 		accessible = true;
 	}
 

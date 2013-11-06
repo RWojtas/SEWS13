@@ -55,7 +55,7 @@ public class GameLogic implements KeyListener {
     graphicManager = new GraphicManager();
     asManager = new ASManager(graphicManager);
     doManager = new DiscoObjectManager(graphicManager);
-    player = new Player(100,'m', 1, graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0,1);
+    player = new Player(100,'m', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0,1);
     //musicManager = new MusicManager();	// music manger
     
     gameView = new GameView(asManager, doManager, player);

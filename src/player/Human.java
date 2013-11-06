@@ -19,7 +19,7 @@ public abstract class Human extends JLabel{
 	protected double urine;
 	protected double energy;
 	protected char gender;				// Geschlecht -> F�r gewisse Logik wichtig (Jungs flirten keine Jungs an)
-	protected int type;					// Typ -> wichtig f�r die Grafiken
+	protected String type;					// Typ -> wichtig f�r die Grafiken
 	protected int activity;				// Aktivit�t, die gerade ausgef�hrt wird (siehe unten: Aktivit�tstabelle)
 	protected int activityTimer;		// Wie lang eine Aktivit�t (noch) dauert
 	protected ImageIcon image;
@@ -55,7 +55,7 @@ public abstract class Human extends JLabel{
 	 */
 
 	// Constructor
-	public Human(char gender, int type, BufferedImage image, int x, int y, int height, int width, int direction) {
+	public Human(String type, char gender, BufferedImage image, int x, int y, int height, int width, int direction) {
 		this.height = height;
 		this.width =  width;
 		this.position = new Position(x, y, x+width, y, x, y+height, x+width, y+height);
@@ -91,7 +91,7 @@ public abstract class Human extends JLabel{
 		return this.gender;
 	}
 	
-	public int getType(){
+	public String getType(){
 		return this.type;
 	}
 	
