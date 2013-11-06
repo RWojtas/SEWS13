@@ -58,7 +58,7 @@ public class DiscoObjectManager {
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
+		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
 		        try {
 		  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {
