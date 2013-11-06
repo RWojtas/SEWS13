@@ -1,4 +1,4 @@
-package main;
+package overlay;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,6 +14,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+
+import main.GraphicManager;
 
 public class Overlay extends JLayeredPane {
 	protected GraphicManager graphicManager;
@@ -65,14 +67,6 @@ public class Overlay extends JLayeredPane {
 				((JComponent) e.getSource()).getParent().setVisible(false);
 			}
 		});
-		
-		for(int i=0;i<8;i++) {
-			JLabel b = new JLabel();
-			b.setIcon(new ImageIcon(graphicManager.drinkButtons.getImage(0,i)));
-			b.setBounds(40+i*100, 100, 90, 176);
-			b.addMouseListener(new A(new ImageIcon(graphicManager.drinkButtons.getImage(0,i)), new ImageIcon(graphicManager.drinkButtons.getImage(1,i))));
-			add(b);
-		}
 		
 		add(title, JLayeredPane.DEFAULT_LAYER);
 		add(close, JLayeredPane.DEFAULT_LAYER);
