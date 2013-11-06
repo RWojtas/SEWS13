@@ -1,6 +1,8 @@
 package objects;
 import java.awt.image.BufferedImage;
+
 import player.Player;
+import player.Position;
 
 //created by Anna & Silke
 
@@ -11,7 +13,7 @@ public class Dancefloor extends DiscoObject {
 	private boolean full = false;
 	
 	public Dancefloor(BufferedImage image, int x, int y) {
-		super(image, x, y);
+		super("Dancefloor", image, x, y);
 		accessible = true;
 	}
 	
