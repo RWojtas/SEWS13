@@ -63,7 +63,7 @@ public abstract class DiscoObject extends JLabel {
 	*/
 	
 	
-	public void setStatusES(Human p, int aktivitaet, int number){
+	public void setStatusES(Human p, int aktivitaet, int number){ //int aktivitaet muss wahrscheinlich rausgenommen werden
 			switch (number){
 				case 0: 	p.addEnergy(0.30);
 							p.addUrine(0.40);
