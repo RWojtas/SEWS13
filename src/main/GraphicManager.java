@@ -31,6 +31,7 @@ public class GraphicManager {
   
   public BufferedImageLoader statusBG;
   public BufferedImageLoader statusUhr;
+  public BufferedImageLoader statusBeenden;
   
   // Mouse
   public BufferedImageLoader mouse;
@@ -72,5 +73,6 @@ public class GraphicManager {
     
     statusBG = new BufferedImageLoader("Data/Graphics/","statusbg01.png");
     statusUhr = new BufferedImageLoader("Data/Graphics/","uhr01.png");
+    statusBeenden = new BufferedImageLoader("Data/Graphics/", "spielBeenden.png", 1, 2);
   }
 }
