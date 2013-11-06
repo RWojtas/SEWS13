@@ -30,7 +30,7 @@ public class GameView extends JFrame implements MouseListener {
 	public JPanel statusbar;
 
 	public GameView(ASManager asManager, DiscoObjectManager doManager,
-			Player player) {
+			Player player, GraphicManager graphicManager) {
 		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize((int) deskResolution.getWidth(),
 				(int) deskResolution.getHeight());
@@ -39,7 +39,7 @@ public class GameView extends JFrame implements MouseListener {
 		this.asManager = asManager;
 		this.doManager = doManager;
 		this.player = player;
-		graphicManager = new GraphicManager();
+		this.graphicManager = graphicManager;
 
 		/*
 		 * background = new JPanel(); background.setBackground(Color.black);

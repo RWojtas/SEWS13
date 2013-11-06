@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import music.MusicManager;
 import player.*;
+import main.GameView;
 
 
 public class GameLogic implements KeyListener {
