@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import objects.*;
 import player.Coordinate;
+import player.Human;
 import player.Position;
 
 
@@ -58,7 +59,7 @@ public class DiscoObjectManager {
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
+		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
 		        try {
 		  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {
@@ -69,22 +70,23 @@ public class DiscoObjectManager {
 
 	  	return clickedObject;
 	}
+	 
+    public boolean checkFreeCoordinate(Coordinate coordinate) {
+    	DiscoObject component = getComponentAt(coordinate.getXCoordinate(),coordinate.getYCoordinate());
+		if (component != null && !component.getAccessible())
+			return false;
+		else
+    		return true;
+    }
 	
-	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
-		DiscoObject component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
-		if (component != null && !component.getAccessible()) 
+	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {		
+		if(!checkFreeCoordinate(lo))
 			return false;
-		
-		component = getComponentAt(ro.getXCoordinate(),ro.getYCoordinate());
-		if (component != null && !component.getAccessible())
+		if(!checkFreeCoordinate(ro))
 			return false;
-		
-		component = getComponentAt(lu.getXCoordinate(),lu.getYCoordinate());
-		if (component != null && !component.getAccessible())
+		if(!checkFreeCoordinate(lu))
 			return false;
-		
-		component = getComponentAt(ru.getXCoordinate(),ru.getYCoordinate());
-		if (component != null && !component.getAccessible())
+		if(!checkFreeCoordinate(ru))
 			return false;
 		
 		return true;

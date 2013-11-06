@@ -27,7 +27,7 @@ public class ASManager {
 	
 	public void addComponents(JPanel panel) {
 		human = new Human[1];
-		human[0] = new AS('w', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(700), BufferedImageLoader.scaleToScreenY(400),0,0,1);
+		human[0] = new AS('w', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(700), BufferedImageLoader.scaleToScreenY(400),1);
 	    human[0].addMouseListener(new ASMouseListener());	   
 
 	    for(Human obj : human)
@@ -43,7 +43,7 @@ public class ASManager {
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(1);
+		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
 		        try {
 		  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {
@@ -54,22 +54,23 @@ public class ASManager {
 	  	
 	  	return clickedObject;
 	}
+    
+    public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
+    	Human component = getComponentAt(coordinate.getXCoordinate(),coordinate.getYCoordinate());
+    	if (component != null && component.hashCode() != id) 
+			return false;
+    	else
+    		return true;
+    }
 	
-	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
-		Human component = getComponentAt(lo.getXCoordinate(),lo.getYCoordinate());
-		if (component != null) 
+	public boolean checkFreePosition(int id, Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {		
+		if(!checkFreeCoordinate(id, lo))
 			return false;
-		
-		component = getComponentAt(ro.getXCoordinate(),ro.getYCoordinate());
-		if (component != null)
+		if(!checkFreeCoordinate(id, ro))
 			return false;
-		
-		component = getComponentAt(lu.getXCoordinate(),lu.getYCoordinate());
-		if (component != null)
+		if(!checkFreeCoordinate(id, lu))
 			return false;
-		
-		component = getComponentAt(ru.getXCoordinate(),ru.getYCoordinate());
-		if (component != null)
+		if(!checkFreeCoordinate(id, ru))
 			return false;
 		
 		return true;

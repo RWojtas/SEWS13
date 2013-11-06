@@ -55,7 +55,7 @@ public class GameLogic implements KeyListener {
     graphicManager = new GraphicManager();
     asManager = new ASManager(graphicManager);
     doManager = new DiscoObjectManager(graphicManager);
-    player = new Player(100,'m', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(400),0,0,1);
+    player = new Player(100,'m', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(1200), BufferedImageLoader.scaleToScreenY(100),1);
     //musicManager = new MusicManager();	// music manger
     
     gameView = new GameView(asManager, doManager, player);
@@ -74,11 +74,19 @@ public class GameLogic implements KeyListener {
     
   }
   
-  public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
-	  
-	  if(!asManager.checkFreePosition(lo,ro,lu,ru)) 
+  public boolean checkFreePosition(int id, Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
+	  if(!asManager.checkFreePosition(id,lo,ro,lu,ru)) 
 		  return false;
 	  if(!doManager.checkFreePosition(lo,ro,lu,ru)) 
+		  return false;
+	  
+	  return true;
+  }
+  
+  public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
+	  if(!asManager.checkFreeCoordinate(id,coordinate)) 
+		  return false;
+	  if(!doManager.checkFreeCoordinate(coordinate)) 
 		  return false;
 	  
 	  return true;

@@ -23,9 +23,9 @@ public abstract class Human extends JLabel{
 	protected int activity;				// Aktivit�t, die gerade ausgef�hrt wird (siehe unten: Aktivit�tstabelle)
 	protected int activityTimer;		// Wie lang eine Aktivit�t (noch) dauert
 	protected ImageIcon image;
-	private int height;					// H�he des Spielers (Sicht von oben)
-	private int width;					// Breite des Spielers (Sicht von oben)
-	private int direction;				// Richtung in die der Spieler gerade schaut -> wichtig f�r weitere Bewegung
+	protected int height;					// H�he des Spielers (Sicht von oben)
+	protected int width;					// Breite des Spielers (Sicht von oben)
+	protected int direction;				// Richtung in die der Spieler gerade schaut -> wichtig f�r weitere Bewegung
 
 	/*
 	 * Aktivit�tentabelle: 
@@ -55,9 +55,7 @@ public abstract class Human extends JLabel{
 	 */
 
 	// Constructor
-	public Human(String type, char gender, BufferedImage image, int x, int y, int height, int width, int direction) {
-		this.height = height;
-		this.width =  width;
+	public Human(String type, char gender, BufferedImage image, int x, int y, int direction) {
 		this.position = new Position(x, y, x+width, y, x, y+height, x+width, y+height);
 		this.target = new Position(0, 0, 0, 0, 0, 0, 0, 0);
 		this.flirt = 0.5;
@@ -71,8 +69,10 @@ public abstract class Human extends JLabel{
 		this.direction = direction;
 		
 		graphicState = 0;
-		setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
-		setBounds(x,y,image.getWidth(),image.getHeight());
+		this.height = image.getHeight();
+		this.width =  image.getWidth();
+		setIcon(new ImageIcon(image.getSubimage(0,0,width,height)));
+		setBounds(x,y,width,height);
 		setOpaque(false);
 	}
 	
@@ -249,7 +249,7 @@ public abstract class Human extends JLabel{
 	
 	public boolean checkFreePosition(int x, int y) {		// �berpr�ft ob eine gewisse Koordinate besetzt ist oder nicht. 
 		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in From von "false" oder "true".
-		return gl.checkFreePosition(new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
+		return gl.checkFreePosition(this.hashCode(), new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
 	}
 	
 	public Coordinate ausDirzuCoo(int dir) { 			// Diese Methode erstellt aus der Richtung eines Menschen
@@ -271,7 +271,7 @@ public abstract class Human extends JLabel{
 			y--;
 			break;
 		case 4:
-			y++;
+			y--;
 			break;
 		case 5:
 			x++;
@@ -309,7 +309,8 @@ public abstract class Human extends JLabel{
 	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
-	public void stepNextPosition() {													//Diese Methode setzt die n�chste Position des Menschen 
+	public void stepNextPosition() { //Diese Methode setzt die n�chste Position des Menschen
+		// System.out.println("stepNextPosition()");
 		int x = this.getXPosition();												//mit Hilfe der weiter oben erkl�rten Methoden.
 		int y = this.getYPosition();												//Der Fall, dass sich der Mensch nicht bewegt, ist abgefangen.
 		boolean rcheck = false;
@@ -363,6 +364,7 @@ public abstract class Human extends JLabel{
 					newPos = ausDirzuCoo(this.direction);
 				}
 				moveObject(newPos.getXCoordinate(), newPos.getYCoordinate()); // Die neue Position wird explizit gesetzt.
+				// System.out.println("Aktuell: x:"+x+" y:"+y+" Neu: x:"+newPos.getXCoordinate()+" y:"+newPos.getYCoordinate());
 			}
 		}
 	}
