@@ -65,7 +65,11 @@ public class MusicManager {
 	}
 	
 	public void mute(boolean onOff) {
-		mediaPlayer.setMute(onOff);;
+		mediaPlayer.setMute(onOff);
+		
+	}
+	public boolean isMute() {
+		return mediaPlayer.isMute();
 	}
 	
 	public void requestedCategory(String category) {
