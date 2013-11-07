@@ -23,28 +23,51 @@ public class BarOverlay extends Overlay {
 	 *  17 - Cocktail
 	 *  18 - Shot
 	 */
-	
+	static final int NUM_BUT = 8;
 	public Player player;
+	JLabel buttons[];
+	Act actions[];
 	
 	public BarOverlay(final GraphicManager graphicManager, Player player, String t) {
 		super(graphicManager, t);
 		this.player = player;
 		
 		// Buttons
-		for(int i=0;i<8;i++) {
-            JLabel b = new JLabel();
-            b.setIcon(new ImageIcon(graphicManager.drinkButtons.getImage(0,i)));
-            b.setBounds(BufferedImageLoader.scaleToScreenX(700+i%3*95), BufferedImageLoader.scaleToScreenY(100+i/3*180), BufferedImageLoader.scaleToScreenX(90), BufferedImageLoader.scaleToScreenY(176));
-            b.addMouseListener(new A(11+i, new ImageIcon(graphicManager.drinkButtons.getImage(0,i)), new ImageIcon(graphicManager.drinkButtons.getImage(1,i))));
-            add(b,JLayeredPane.POPUP_LAYER);
+		buttons = new JLabel[NUM_BUT];
+		actions = new Act[NUM_BUT];
+		for(int i=0;i<NUM_BUT;i++) {
+            buttons[i] = new JLabel();
+            buttons[i].setIcon(new ImageIcon(graphicManager.drinkButtons.getImage(0,i)));
+            buttons[i].setBounds(BufferedImageLoader.scaleToScreenX(700+i%3*95), BufferedImageLoader.scaleToScreenY(100+i/3*180), BufferedImageLoader.scaleToScreenX(90), BufferedImageLoader.scaleToScreenY(176));
+            actions[i] = new Act(11+i, new ImageIcon(graphicManager.drinkButtons.getImage(0,i)), new ImageIcon(graphicManager.drinkButtons.getImage(1,i)));
+            add(buttons[i],JLayeredPane.POPUP_LAYER);
+		}
+		enableActions();
+		System.out.println(this.toString());
+	}
+	
+	public void setVisible(boolean on) {
+		super.setVisible(on);
+//		if (actions[0] != null) enableActions();
+	}
+	
+	private void enableActions() {
+		for(int i=0;i<NUM_BUT;i++) {
+			buttons[i].addMouseListener(actions[i]);
 		}
 	}
 	
-	class A extends MouseAdapter {
+	private void disableActions() {
+		for(int i=0;i<NUM_BUT;i++) {
+			buttons[i].removeMouseListener(actions[i]);
+		}
+	}
+	
+	class Act extends MouseAdapter {
 		ImageIcon i;
 		ImageIcon h;
 		int action;
-		public A(int action, ImageIcon i, ImageIcon h) {
+		public Act(int action, ImageIcon i, ImageIcon h) {
 			this.i = i;
 			this.h = h;
 			this.action = action;
@@ -54,6 +77,7 @@ public class BarOverlay extends Overlay {
 			DiscoObject.setStatusES(player, action);
 			((JLabel) e.getSource()).getParent().setVisible(false);
 			((JLabel) e.getSource()).getParent().setEnabled(false);
+			disableActions();
 		}
 		@Override
 		public void mouseEntered(MouseEvent e) {
