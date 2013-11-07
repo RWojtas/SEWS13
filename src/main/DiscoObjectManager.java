@@ -1,11 +1,11 @@
 package main;
 
 import java.awt.Dimension;
-
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -69,14 +69,14 @@ public class DiscoObjectManager {
 	
 	 public DiscoObject getComponentAt(int x, int y) {
 		JLayeredPane clickedLayeredPane;
-		JPanel clickedPanel;
+		JComponent clickedPanel;
 	  	DiscoObject clickedObject = null;
 	  	  
 	  	clickedLayeredPane = GameView.layeredPane;
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
+		  		clickedPanel = (JComponent)clickedLayeredPane.getComponent(i);
 		        try {
 		  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {

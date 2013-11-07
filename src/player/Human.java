@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
+import main.BufferedImageLoader;
 import main.GameLogic;
 import objects.DiscoObject;
 
@@ -74,8 +76,8 @@ public abstract class Human extends JLabel{
 		graphicState = 0;
 //		this.height = image.getHeight();
 //		this.width =  image.getWidth();
-		this.height = 60;
-		this.width =  60;
+		this.height = BufferedImageLoader.scaleToScreenX(60);
+		this.width =  BufferedImageLoader.scaleToScreenY(60);
 		
 		for(int i=0;i<8;i++) {
 			images[i] = new ImageIcon(image.getSubimage(0,i*width,width,height));

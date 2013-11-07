@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -89,14 +90,14 @@ public class ASManager {
 	
     public Human getComponentAt(int x, int y) {
 		JLayeredPane clickedLayeredPane;
-		JPanel clickedPanel;
+		JComponent clickedPanel;
 	  	Human clickedObject = null;
 	  	  
 	  	clickedLayeredPane = GameView.layeredPane;
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
+		  		clickedPanel = (JComponent)clickedLayeredPane.getComponent(i);
 		        try {
 		  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {
