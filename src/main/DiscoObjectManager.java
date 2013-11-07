@@ -1,11 +1,11 @@
 package main;
 
 import java.awt.Dimension;
-
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -19,9 +19,9 @@ public class DiscoObjectManager {
 	public DiscoObject[] discoObject;
 	public GraphicManager graphicManager;
 	public static Dimension deskResolution;
-	//public Player player;
-	//public Bar bar;
-	//public GameView gameView;
+	public Player player;
+	public Bar bar;
+	public GameView gameView;
 	
 	public DiscoObjectManager(GraphicManager graphicManager) {
 		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
@@ -69,14 +69,14 @@ public class DiscoObjectManager {
 	
 	 public DiscoObject getComponentAt(int x, int y) {
 		JLayeredPane clickedLayeredPane;
-		JPanel clickedPanel;
+		JComponent clickedPanel;
 	  	DiscoObject clickedObject = null;
 	  	  
 	  	clickedLayeredPane = GameView.layeredPane;
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
+		  		clickedPanel = (JComponent)clickedLayeredPane.getComponent(i);
 		        try {
 		  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {
@@ -126,7 +126,7 @@ public class DiscoObjectManager {
 
 	    @Override
 		public void mouseEntered(MouseEvent e) {
-	    	System.out.println("mouseClicked!!!");
+	    	System.out.println("Bar mouseClicked!!!");
 		    //Wird ausgelöst, wenn die Maus den aktiven Bereich des MouseListeners betritt
 			  
 		}
@@ -197,7 +197,7 @@ public class DiscoObjectManager {
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
 		    Dancefloor clickedObject = (Dancefloor)e.getSource();
-		    //gameView.setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2); 
+		    gameView.setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2); 
 		    
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion

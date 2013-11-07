@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
+import player.Player;
 import main.BufferedImageLoader;
 import main.GraphicManager;
 
@@ -118,7 +119,7 @@ public class Overlay extends JLayeredPane {
 				graphicManager.mouse.getImage(),
 				new Point(gameView.getX(), gameView.getY()), "mouse02"));
 
-		JComponent c = new Overlay(graphicManager, "Die Bar");
+		JComponent c = new BarOverlay(graphicManager, new Player(100,'w',graphicManager.man01.getImage(),0,0,5), "Die Bar");
 
 		GroupLayout layout = new GroupLayout(gameView.getContentPane());
 		gameView.getContentPane().setLayout(layout);

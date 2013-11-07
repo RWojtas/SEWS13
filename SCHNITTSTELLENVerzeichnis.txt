@@ -1,5 +1,7 @@
 /* 
  * Aktivitätentabelle:
+	/* 
+ * Aktivitätentabelle:
  * 	0  - offen
  *  1  - gehen
  *  2  - tanzen
@@ -11,6 +13,15 @@
  *  8  - Musik wünschen
  *  9  - ausruhen
  *  10 - im Koma liegen
+ *  11 - BlauHohn 1,5 Euro
+ *  12 - RotOchsen 2 Euro
+ *  13 - GelbV�gln 2,5 Euro
+ *  14 - SchwarzKatzerl 2 Euro
+ *  15 - ZitronenLimonade 2,5 Euro
+ *  16 - Eistee 2,5 Euro
+ *  17 - Cocktail 3,5 Euro
+ *  18 - Shot 2,5 Euro
+	*/
  */
  
 /*

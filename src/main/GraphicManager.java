@@ -15,7 +15,10 @@ public class GraphicManager {
   public BufferedImageLoader bench;
   
   // public BufferedImageLoader humanGraphic;
-  public BufferedImageLoader human;
+  public BufferedImageLoader man01;
+  public BufferedImageLoader woman01;
+  public BufferedImageLoader man02;
+  public BufferedImageLoader woman02;
  
   // Startmen�
   public BufferedImageLoader startMenueBG;
@@ -55,10 +58,14 @@ public class GraphicManager {
     dancefloor = new BufferedImageLoader("Data/Graphics/","tanzflaeche01.png");
     table = new BufferedImageLoader("Data/Graphics/","tisch02.png");
     wc = new BufferedImageLoader("Data/Graphics/","wc01.png");
-    human = new BufferedImageLoader("Data/Graphics/","mensch01.png");
+    
     status = new BufferedImageLoader("Data/Graphics/","status01.png");
     bench = new BufferedImageLoader("Data/Graphics/", "bank01.png");
     
+    man01 = new BufferedImageLoader("Data/Graphics/","human03.png");
+    man02 = new BufferedImageLoader("Data/Graphics/","man01.png");
+    woman01 = new BufferedImageLoader("Data/Graphics/","woman01.png");
+    woman02 = new BufferedImageLoader("Data/Graphics/","woman02.png");
     
     startMenueBG = new BufferedImageLoader("Data/Graphics/","startbildschirm02.png");
     startMenueButtons = new BufferedImageLoader("Data/Graphics/","menu_buttons02.png", 1, 8);
