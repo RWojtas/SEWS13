@@ -31,6 +31,8 @@ public class GameView extends JFrame implements MouseListener {
 	public JPanel layer4;
 	public JLabel fps;
 	
+	public BarOverlay bar;
+	
 	Statusbar sbar;
 	JLabel statusb_bg;
 	JLabel statusb_uhr;
@@ -95,7 +97,7 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(fps);
 		
 		//Overlays
-		BarOverlay bar = new BarOverlay(graphicManager, player, "Die Bar");
+		bar = new BarOverlay(graphicManager, player, "Die Bar");
 		bar.setVisible(false);
 		layeredPane.add(bar, JLayeredPane.POPUP_LAYER);
 		

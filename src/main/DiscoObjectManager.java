@@ -21,7 +21,6 @@ public class DiscoObjectManager {
 	public static Dimension deskResolution;
 	public Player player;
 	public Bar bar;
-	public GameView gameView;
 	GameLogic gameLogic;
 	
 	public DiscoObjectManager(GraphicManager graphicManager, GameLogic gameLogic, Player player) {
@@ -125,6 +124,8 @@ public class DiscoObjectManager {
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
+		    gameLogic.gameView.bar.setVisible(true);
+		    gameLogic.gameView.setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
 		}
 
 	    @Override
