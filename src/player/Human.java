@@ -256,7 +256,7 @@ public abstract class Human extends JLabel{
 	}
 	
 	public boolean checkFreePosition(int x, int y) {		// �berpr�ft ob eine gewisse Koordinate besetzt ist oder nicht. 
-		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in From von "false" oder "true".
+		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in Form von "false" oder "true".
 		return gl.checkFreePosition(this.hashCode(), new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
 	}
 	
