@@ -122,7 +122,7 @@ public abstract class DiscoObject extends JLabel {
 			}	
 	}
 			
-		public void setStatusAS (Human p, int aktivitaet, int number){
+		public void setStatusAS (Human p, int number){
 				switch (number){
 					case 0: 	p.addEnergy(0.30);
 								p.addUrine(0.40);
