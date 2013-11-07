@@ -64,9 +64,9 @@ public class ASManager {
 					//  TO-DO  Aktion muss ausgeführt werden
 				}
 			}
-			System.out.println(doManager.discoObject[0].getPositionX()+"..."+doManager.discoObject[0].getPositionY());
+			//System.out.println(doManager.discoObject[0].getPositionX()+"..."+doManager.discoObject[0].getPositionY());
 			human[i].stepNextPosition();
-			System.out.println("human["+i+"].getActivity()="+human[i].getActivity());
+			//System.out.println("human["+i+"].getActivity()="+human[i].getActivity());
 		}	
 		
 	}
