@@ -9,6 +9,8 @@ import javafx.scene.media.MediaPlayer;
 
 import javax.swing.JComponent;
 
+import main.GameLogic;
+
 /**
  * @author Nicolas
  */
@@ -52,6 +54,7 @@ public class MusicManager {
 		mute(before);
 		mediaPlayer.play();
 		defineActions();
+		GameLogic.getInstance().updateMusic();
 	}
 	
 	private void shuffle() {

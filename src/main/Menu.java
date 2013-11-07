@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.GroupLayout;
 import javax.swing.Icon;
@@ -260,9 +261,11 @@ public class Menu extends JLayeredPane {
 		public void mouseClicked(MouseEvent e) {
 			switch (act) {
 			case 's':
-				GameLogic.getInstance().menu = false;
 				setVisible(false);
 				disableButtonsEvents();
+				GameLogic.getInstance().menu = false;
+				GameLogic.setMusicManager(musicManager);
+				GameLogic.getInstance().updateMusic();
 				break;
 			case 'e':
 				System.exit(0);

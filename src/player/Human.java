@@ -34,6 +34,7 @@ public abstract class Human extends JLabel{
 
 	/*
 	 * Aktivit�tentabelle: 
+	 * -1 - stehen (beim Start nötig)
 	 * 0  - offen 
 	 * 1  - gehen 
 	 * 2  - tanzen 
@@ -73,6 +74,7 @@ public abstract class Human extends JLabel{
 		this.activity = 0;
 		this.direction = direction;
 		
+		
 		graphicState = 0;
 //		this.height = image.getHeight();
 //		this.width =  image.getWidth();
@@ -81,7 +83,7 @@ public abstract class Human extends JLabel{
 		
 		for(int i=0;i<8;i++) {
 			images[i] = new ImageIcon(image.getSubimage(0,i*width,width,height));
-			System.out.println(i*width+"");
+			//System.out.println(i*width+"");
 		};
 		
 		setIcon(images[0]);
@@ -359,7 +361,7 @@ public abstract class Human extends JLabel{
 		boolean rcheck = false;
 		Coordinate newPos = new Coordinate(x, y);
 		
-		if (this.getActivity() != 0) {												
+		if (this.getActivity() != 0 && this.getActivity() != -1 ) {												
 			if (this.position != this.target) {
 				if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
 						rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht f�r die Richtung unten rechts. 
@@ -420,4 +422,12 @@ public abstract class Human extends JLabel{
 
 	// END: AKTIVIT�TSMETHODEN
 
+	public boolean doActivity() {
+		if((this.position.getX0() == target.getX0())  && (position.getY0() == target.getY0())) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 }

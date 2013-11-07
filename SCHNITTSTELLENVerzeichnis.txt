@@ -2,6 +2,7 @@
  * Aktivitätentabelle:
 	/* 
  * Aktivitätentabelle:
+ * -1  - nichts tun beim Start
  * 	0  - offen
  *  1  - gehen
  *  2  - tanzen
