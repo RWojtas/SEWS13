@@ -37,6 +37,9 @@ public class GraphicManager {
   public BufferedImageLoader statusUhr;
   public BufferedImageLoader statusBeenden;
   
+  //Flirten
+  public BufferedImageLoader ButtonFlirten;
+  
   // Mouse
   public BufferedImageLoader mouse;
   
