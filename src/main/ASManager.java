@@ -14,7 +14,7 @@ import player.*;
 public class ASManager {
 	public Human[] human;
 	public GraphicManager graphicManager;
-	
+	final static int as_cntr = 10;
 	public ASManager(GraphicManager graphicManager) {
 		this.graphicManager = graphicManager;
 	}
@@ -26,12 +26,19 @@ public class ASManager {
 	}
 	
 	public void addComponents(JPanel panel) {
-		human = new Human[1];
-		human[0] = new AS('w', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(700), BufferedImageLoader.scaleToScreenY(400),1);
-	    human[0].addMouseListener(new ASMouseListener());	   
-
+		human = new Human[as_cntr];
+		for(int i = 0; i < as_cntr; i++) {
+			human[i] = new AS('w', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(200+(i*37)), BufferedImageLoader.scaleToScreenY(300+(i*28)),1);
+		    human[i].addMouseListener(new ASMouseListener());
+		}
 	    for(Human obj : human)
 			panel.add(obj);
+	    human[9].setTarget(BufferedImageLoader.scaleToScreenX(1000), BufferedImageLoader.scaleToScreenY(500));
+	    human[9].setActivity(1);
+	    for(int i = 8; i >= 0; i--) {
+	    human[i].setTarget(BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(350));
+	    human[i].setActivity(1);
+	    }
 	}
 	
     public Human getComponentAt(int x, int y) {
@@ -57,7 +64,7 @@ public class ASManager {
     
     public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
     	Human component = getComponentAt(coordinate.getXCoordinate(),coordinate.getYCoordinate());
-    	if (component != null && component.hashCode() != id) 
+    	if (component != null && 	component.hashCode() != id) 
 			return false;
     	else
     		return true;
