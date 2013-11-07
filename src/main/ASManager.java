@@ -74,7 +74,7 @@ public class ASManager {
 	public void addComponents(JPanel panel) {
 		human = new Human[as_cntr];
 		for(int i = 0; i < as_cntr; i++) {
-			human[i] = new AS('w', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(200+(i*37)), BufferedImageLoader.scaleToScreenY(300+(i*28)),1);
+			human[i] = new AS(((i%2==0)?'m':'w'), ((i%2==0)?(((i%4==0))?graphicManager.man01.getImage():graphicManager.man02.getImage()):(((i%4)==1)?graphicManager.woman01.getImage():graphicManager.woman02.getImage())), BufferedImageLoader.scaleToScreenX(200+(i*37)), BufferedImageLoader.scaleToScreenY(300+(i*28)),1);
 		    human[i].addMouseListener(new ASMouseListener());
 		}
 	    for(Human obj : human)
