@@ -119,7 +119,7 @@ public class Overlay extends JLayeredPane {
 				graphicManager.mouse.getImage(),
 				new Point(gameView.getX(), gameView.getY()), "mouse02"));
 
-		JComponent c = new BarOverlay(graphicManager, new Player(100,'w',graphicManager.man01.getImage(),0,0,5), "Die Bar");
+		JComponent c = new FlirtOverlay(graphicManager, new Player(100,'w',graphicManager.ButtonFlirten.getImage(),0,0,5), "Flirten");
 
 		GroupLayout layout = new GroupLayout(gameView.getContentPane());
 		gameView.getContentPane().setLayout(layout);
