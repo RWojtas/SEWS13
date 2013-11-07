@@ -14,6 +14,17 @@ public class Bench extends DiscoObject {
 		accessible = true;
 	}
 	
-	private int number = 8;
+	//private int number = 8;
+	private int anzahl;
+	
+	public void setAnzahl(int anzahl){
+		this.anzahl = anzahl;
+	}
+	public int getAnzahl(){
+		return anzahl;
+	}
+	public void incAnzahl(){
+		this.anzahl += 1;
+	}
 
 }

@@ -108,7 +108,7 @@ public class DiscoObjectManager {
 	class BarMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
-		    System.out.println("mouseClicked");
+		    System.out.println("mouseClicked!!!");
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		  	
