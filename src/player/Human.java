@@ -360,7 +360,7 @@ public abstract class Human extends JLabel{
 						rcheck = this.check(5,0);
 				}
 				else if(x > this.target.getX0() && y > this.target.getY0()) {
-						rcheck = this.check(3,0);
+						rcheck = this.check(3,0);	
 				}
 				else if(x > this.target.getX0()) {
 						rcheck = this.check(2,0);
