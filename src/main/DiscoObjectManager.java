@@ -126,6 +126,7 @@ public class DiscoObjectManager {
 
 	    @Override
 		public void mouseEntered(MouseEvent e) {
+	    	System.out.println("mouseClicked!!!");
 		    //Wird ausgelöst, wenn die Maus den aktiven Bereich des MouseListeners betritt
 			  
 		}
