@@ -354,8 +354,7 @@ public abstract class Human extends JLabel{
 						rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht f�r die Richtung unten rechts. 
 				}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
 				else if(x > this.target.getX0() && y < this.target.getY0()){
-						System.out.println("gaay");
-						rcheck = this.check(1,0);
+					rcheck = this.check(1,0);
 				}
 				else if( x < this.target.getX0() && y > this.target.getY0()) {
 						rcheck = this.check(5,0);
