@@ -72,18 +72,19 @@ public class ASManager {
 	}
 	
 	public void addComponents(JPanel panel) {
+		Functions f = new Functions();
 		human = new Human[as_cntr];
 		for(int i = 0; i < as_cntr; i++) {
-			human[i] = new AS('w', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(200+(i*37)), BufferedImageLoader.scaleToScreenY(300+(i*28)),1);
+			human[i] = new AS('w', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(1400), BufferedImageLoader.scaleToScreenY(4),1);
 		    human[i].addMouseListener(new ASMouseListener());
 		}
 	    for(Human obj : human)
 			panel.add(obj);
-	    human[9].setTarget(BufferedImageLoader.scaleToScreenX(1000), BufferedImageLoader.scaleToScreenY(500));
-	    human[9].setActivity(1);
-	    for(int i = 8; i >= 0; i--) {
+
+	    for(int i = as_cntr-1; i >= 0; i--) {
 	    human[i].setTarget(BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(350));
-	    human[i].setActivity(0);
+	    human[i].setActivity(1);
+	    human[i].setTarget(BufferedImageLoader.scaleToScreenX(f.myRandom(200, 800)), BufferedImageLoader.scaleToScreenY(f.myRandom(200, 600)));
 	    }
 	}
 	
