@@ -56,9 +56,10 @@ public class GameLogic implements KeyListener {
   
   private GameLogic() {
     graphicManager = new GraphicManager();
-    doManager = new DiscoObjectManager(graphicManager);
-    asManager = new ASManager(graphicManager,doManager);
+    
     player = new Player(100,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800), BufferedImageLoader.scaleToScreenY(500),1);
+    asManager = new ASManager(graphicManager,doManager);
+    doManager = new DiscoObjectManager(graphicManager, this, player);
     
     gameView = new GameView(asManager, doManager, player, graphicManager);
     gameView.setTitle("Felse deine Feier");
