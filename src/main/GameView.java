@@ -1,6 +1,8 @@
 package main;
 
 
+// TEST TEST TEST 
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -9,7 +11,9 @@ import java.util.Scanner;
 import javax.swing.*;
 
 import overlay.BarOverlay;
+import overlay.DJOverlay;
 import main.Menu.MouseAction;
+import music.MusicManager;
 import objects.*;
 import player.*;
 
@@ -30,6 +34,11 @@ public class GameView extends JFrame implements MouseListener {
 	public JPanel layer4;
 	public JLabel fps;
 	
+	public MusicManager musicManager;
+	
+	public BarOverlay bar;
+	public DJOverlay dj;
+	
 	Statusbar sbar;
 	JLabel statusb_bg;
 	JLabel statusb_uhr;
@@ -48,8 +57,12 @@ public class GameView extends JFrame implements MouseListener {
 	JLabel funLabel;
 	JLabel gameExit;
 	JLabel moneyLabel;
+	private JLabel musicSwitch;
 	  
 	public GameView(ASManager asManager, DiscoObjectManager doManager, Player player, GraphicManager graphicManager) {
+		// Musik
+		musicManager = new MusicManager();
+		
 		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize((int) deskResolution.getWidth(),
 				(int) deskResolution.getHeight());
@@ -59,7 +72,7 @@ public class GameView extends JFrame implements MouseListener {
 		this.doManager = doManager;
 		this.player = player;
 		this.graphicManager = graphicManager;
-		this.sbar = new Statusbar(graphicManager);
+		this.sbar = new Statusbar(graphicManager, musicManager);
 		
 		layeredPane = new JLayeredPane();
 		layeredPane.addMouseListener(this);
@@ -75,9 +88,15 @@ public class GameView extends JFrame implements MouseListener {
 		layeredPane.add(layer2, 1); // Layer für Overlay
 		layeredPane.add(layer3, 2); // Layer für Human
 		layeredPane.add(layer4, 3); // Layer für DiscoObject
-
+		
+		layeredPane.add(musicManager.getPanel());
+		
+		//Men�
+		Menu menu = new Menu(graphicManager, musicManager);
+		layeredPane.add(menu, JLayeredPane.POPUP_LAYER);
+		
 		layer3.add(player);
-		//asManager.addComponents(layer3);
+		asManager.addComponents(layer3);
 		doManager.addComponents(layer4);
 
 		fps = new JLabel("FPS 0");
@@ -88,7 +107,16 @@ public class GameView extends JFrame implements MouseListener {
 				(int) deskResolution.getHeight() - 30, 300, 30);
 
 		layer1.add(fps);
-
+		
+		//Overlays
+		bar = new BarOverlay(graphicManager, player, "Die Bar");
+		bar.setVisible(false);
+		layeredPane.add(bar, JLayeredPane.POPUP_LAYER);
+		
+		dj = new DJOverlay(graphicManager, "Der DJ", musicManager);
+		dj.setVisible(false);
+		layeredPane.add(dj, JLayeredPane.POPUP_LAYER);
+		
 		// Start: Statusbar
 		statusb_bg = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(270), 0,
@@ -141,7 +169,7 @@ public class GameView extends JFrame implements MouseListener {
 				"Geld: 0 Euro", 
 				32,
 				JLabel.RIGHT,
-				Font.BOLD);
+				BufferedImageLoader.scaleToScreenY(Font.BOLD));
 		moneyLabel.setForeground(Color.yellow);
 		layer1.add(moneyLabel, 0);
 		
@@ -226,10 +254,16 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(flirtLabel, 0);
 		
 		gameExit = sbar.addExitButton((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(250), BufferedImageLoader.scaleToScreenY(660),
-				BufferedImageLoader.scaleToScreenX(240),
-				BufferedImageLoader.scaleToScreenY(49));
+				- BufferedImageLoader.scaleToScreenX(60), BufferedImageLoader.scaleToScreenY(710),
+				BufferedImageLoader.scaleToScreenX(45),
+				BufferedImageLoader.scaleToScreenY(45));
 		layer1.add(gameExit, 0);
+		
+		musicSwitch = sbar.addMusicButton((int) deskResolution.getWidth()
+				- BufferedImageLoader.scaleToScreenX(60), BufferedImageLoader.scaleToScreenY(660),
+				BufferedImageLoader.scaleToScreenX(45),
+				BufferedImageLoader.scaleToScreenY(45));
+		layer1.add(musicSwitch, 0);
 		
 		sbar.setBars(energyBar, urineBar, flirtBar, alcLevelBar, funBar);
 		sbar.setLabels(status_mtitle, status_genre, status_uhrzeit, moneyLabel);
@@ -237,6 +271,9 @@ public class GameView extends JFrame implements MouseListener {
 		// End: Statusbar
 	}
  
+	public Statusbar getStatusbar() {
+		return sbar;
+	}
   
   public JPanel createLayerPanel() {
 	  JPanel layer = new JPanel();

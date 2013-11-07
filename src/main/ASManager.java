@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -11,92 +12,100 @@ import objects.DiscoObject;
 import player.*;
 
 
+
 public class ASManager {
-	public Human[] human;
+	public AS[] human;
 	public GraphicManager graphicManager;
 	public DiscoObjectManager doManager;
 	final static int as_cntr = 10;
+	
 	public ASManager(GraphicManager graphicManager, DiscoObjectManager doManager) {
 		this.graphicManager = graphicManager;
 		this.doManager = doManager;
 	}
 	
-	public boolean doActivity(Position current, Position target) {
-		if((current.getX0() == target.getX0())  && (current.getY0() == target.getY0())) {
-			return true;
-		}
-		return false;
-	}
 	
 	public void updateComponents() {
 		Functions f = new Functions();
 		for(int i=0;i<human.length;i++) {
 			if(human[i].getActivityTimer() == 0) {
+				if(human[i].getActivity() == -1) {
+					human[i].setActivity(1);
+				}
+				else if(human[i].getActivity() == 1 && human[i].doActivity()) {
+					human[i].setActivity(0);
+				}
 				if(human[i].getActivity() == 0 || human[i].getActivity() == 2 || human[i].getActivity() == 4) {
 					if(human[i].getUrine() > 0.9) {
-						human[i].setActivity(5);
-						human[i].setActivityTimer(60);
+						human[i].setActivityWithPos(5, doManager);
 					}
 					else if(human[i].getEnergy() < 0.3) {
 						int c = f.myRandom(0, 1);
 						if(c==0) {
-							human[i].setActivity(3);
-							human[i].setActivityTimer(60);
+							human[i].setActivityWithPos(12, doManager);
 						} else { 
-							human[i].setActivity(9);
-							human[i].setActivityTimer(60);
+							human[i].setActivityWithPos(9, doManager);
 						}
 					}
 					else if(human[i].getEnergy() > 0.5 && human[i].getFun() < 0.4) {
-						human[i].setActivity(2);
-						human[i].setTarget(doManager.discoObject[0].getPositionX(),doManager.discoObject[0].getPositionY());
-						human[i].setActivityTimer(60);
+						human[i].setActivityWithPos(2, doManager);
 					}
 					else {
-						int c = f.myRandom(0,6);
-						human[i].setActivity(c);
-						human[i].setActivityTimer(60);
+						int[] Liste = new int[5];
+						for(int g = 0; g < Liste.length; g++) {
+							Liste[g] = g;
+						}		
+						int d = f.myRandom(0, 5);
+						if(Liste[d] == 3){
+							human[i].setActivityWithPos(f.myRandom(11, 19), doManager);
+						}
+						else if(Liste[d] == 5) {
+							human[i].setActivityWithPos(9, doManager);
+						}
+						else {
+							human[i].setActivityWithPos(Liste[d], doManager);
+						}
 					}
 				}
 			} else {
-				if(doActivity(human[i].getPosition(), human[i].getTarget())) {
+				if(human[i].doActivity() || human[i].getActivity() == -1 ) {
 					human[i].decActivityTimer();
 					//  TO-DO  Aktion muss ausgef�hrt werden
 				}
 			}
-			//System.out.println(doManager.discoObject[0].getPositionX()+"..."+doManager.discoObject[0].getPositionY());
 			human[i].stepNextPosition();
-			//System.out.println("human["+i+"].getActivity()="+human[i].getActivity());
+		//	System.out.println("human["+i+"].getActivity()="+human[i].getActivity() + " Timer: " + human[i].getActivityTimer());
 		}	
 		
 	}
 	
 	public void addComponents(JPanel panel) {
-		human = new Human[as_cntr];
+		Functions f = new Functions();
+		human = new AS[as_cntr];
 		for(int i = 0; i < as_cntr; i++) {
-			human[i] = new AS('w', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(200+(i*37)), BufferedImageLoader.scaleToScreenY(300+(i*28)),1);
+			int y = 450;//f.myRandom(60, 700);
+			int x = 1098;//f.myRandom(1100, 1200);
+			human[i] = new AS(((i%2==0)?'m':'w'), ((i%2==0)?(((i%4==0))?graphicManager.man01.getImage():graphicManager.man02.getImage()):(((i%4)==1)?graphicManager.woman01.getImage():graphicManager.woman02.getImage())), BufferedImageLoader.scaleToScreenX(x), BufferedImageLoader.scaleToScreenY(y),1);
 		    human[i].addMouseListener(new ASMouseListener());
+		    human[i].setActivityTimer(f.myRandom(400,3000));
+		    human[i].setActivity(-1);
+		    human[i].setTarget(BufferedImageLoader.scaleToScreenX(f.myRandom(150, 1000)), BufferedImageLoader.scaleToScreenY(f.myRandom(200, 768)));
 		}
 	    for(Human obj : human)
 			panel.add(obj);
-	    human[9].setTarget(BufferedImageLoader.scaleToScreenX(1000), BufferedImageLoader.scaleToScreenY(500));
-	    human[9].setActivity(1);
-	    for(int i = 8; i >= 0; i--) {
-	    human[i].setTarget(BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(350));
-	    human[i].setActivity(0);
-	    }
+
 	}
 	
     public Human getComponentAt(int x, int y) {
 		JLayeredPane clickedLayeredPane;
-		JPanel clickedPanel;
+		JComponent clickedPanel;
 	  	Human clickedObject = null;
 	  	  
 	  	clickedLayeredPane = GameView.layeredPane;
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
+		  		clickedPanel = (JComponent)clickedLayeredPane.getComponent(i);
 		        try {
 		  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {
@@ -132,7 +141,7 @@ public class ASManager {
 	class ASMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
-		    //System.out.println("mouseClicked");
+
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    

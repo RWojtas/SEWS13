@@ -5,6 +5,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
+import music.MusicManager;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -15,7 +17,9 @@ import player.Player;
 
 public class Statusbar {
 	GraphicManager graphicManager;
+	MusicManager musicManager;
 	JLabel gameExit;
+	JLabel mswitch;
 	JProgressBar energyBar;
 	JProgressBar urineBar;
 	JProgressBar flirtBar;
@@ -26,8 +30,9 @@ public class Statusbar {
 	JLabel status_uhrzeit;
 	JLabel moneyLabel;
 	
-	public Statusbar(GraphicManager graphicManager) {
+	public Statusbar(GraphicManager graphicManager, MusicManager musicManager) {
 		this.graphicManager = graphicManager;
+		this.musicManager = musicManager;
 	}
 	
 	public void setBars(JProgressBar energyBar,
@@ -49,12 +54,22 @@ public class Statusbar {
 		this.moneyLabel = moneyLabel;
 	}
 	
+	public void updateMusic(MusicManager musicmanager) {
+		this.status_mtitle.setText(musicmanager.getSongTitle());
+		this.status_genre.setText(musicmanager.getSongCategory());
+	}
+	
 	public void updateBars(Player player) {
-		energyBar.setValue((int)(player.getEnergy()*100));
-		urineBar.setValue((int)(player.getUrine()*100));
-		flirtBar.setValue((int)(player.getFlirt()*100));
-		alcLevelBar.setValue((int)(player.getAlcLevel()*100));
-		funBar.setValue((int)(player.getFun()*100));
+		JProgressBar bars[] = {energyBar, urineBar, flirtBar, alcLevelBar, funBar};
+		int werte[] = {(int)(player.getEnergy()*100),(int)(player.getUrine()*100),(int)(player.getFlirt()*100),(int)(player.getAlcLevel()*100),(int)(player.getFun()*100)};
+		
+		for(int i=0;i<bars.length;i++) {
+			if(bars[i].getValue() < werte[i]) {
+				bars[i].setValue(bars[i].getValue()+1);
+			} else if(bars[i].getValue() > werte[i]) {
+				bars[i].setValue(bars[i].getValue()-1);
+			}
+		}
 		moneyLabel.setText("Geld: "+player.getMoney()+" Euro");
 	}
 	
@@ -90,16 +105,21 @@ public class Statusbar {
 		return progressbar;
 	}
 	
-	public void setMTitle(String text) {
-		this.status_mtitle.setText(text);
-	}
-	
-	public void setGenre(String text) {
-		this.status_genre.setText(text);
-	}
-	
 	public void setUhrzeit(String text) {
 		this.status_uhrzeit.setText(text);
+	}
+	
+	public JLabel addMusicButton(int posX, int posY, int width, int height) {
+		mswitch = new JLabel();
+		Icon icon = new ImageIcon(
+				graphicManager.speaker.getImage(0,0));
+		Icon icon_hover = new ImageIcon(
+				graphicManager.speaker.getImage(0,1));
+		mswitch.setIcon(icon);
+		mswitch.setBounds(posX,posY,width,height);
+		MouseAction gameExit_l = new MouseAction('m', icon, icon_hover);
+		mswitch.addMouseListener(gameExit_l);
+		return mswitch;
 	}
 	
 	public JLabel addExitButton(int posX, int posY, int width, int height) {
@@ -131,19 +151,23 @@ public class Statusbar {
 			switch (act) {
 			case 'e':
 				System.exit(0);
+				((JLabel) e.getSource()).setIcon(standard);
+				break;
+			case 'm':
+				musicManager.mute(!musicManager.isMute());
+				((JLabel) e.getSource()).setIcon((((JLabel) e.getSource()).getIcon().equals(standard)) ? hover : standard);
 				break;
 			}
-			((JLabel) e.getSource()).setIcon(standard);
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			((JLabel) e.getSource()).setIcon(hover);
+			if(act != 'm') ((JLabel) e.getSource()).setIcon(hover);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			((JLabel) e.getSource()).setIcon(standard);
+			if(act != 'm') ((JLabel) e.getSource()).setIcon(standard);
 		}
 
 		@Override

@@ -15,8 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
+import player.Player;
 import main.BufferedImageLoader;
 import main.GraphicManager;
+import music.MusicManager;
 
 public class Overlay extends JLayeredPane {
 	protected GraphicManager graphicManager;
@@ -102,7 +104,7 @@ public class Overlay extends JLayeredPane {
 	
 	public static void main(String[] args) {
 		GraphicManager graphicManager = new GraphicManager();
-
+		MusicManager m = new MusicManager();
 		JFrame gameView = new JFrame();
 
 		gameView.setTitle("Felse deine Feier");
@@ -118,7 +120,7 @@ public class Overlay extends JLayeredPane {
 				graphicManager.mouse.getImage(),
 				new Point(gameView.getX(), gameView.getY()), "mouse02"));
 
-		JComponent c = new Overlay(graphicManager, "Die Bar");
+		JComponent c = new DJOverlay(graphicManager, "DJ", m);
 
 		GroupLayout layout = new GroupLayout(gameView.getContentPane());
 		gameView.getContentPane().setLayout(layout);

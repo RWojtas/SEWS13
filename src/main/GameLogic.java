@@ -2,6 +2,7 @@ package main;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
@@ -16,11 +17,14 @@ public class GameLogic implements KeyListener {
   public static GraphicManager graphicManager;
   public static ASManager asManager;
   public static DiscoObjectManager doManager;
-  public static MusicManager musicManager;
+  private static MusicManager musicManager;
   public static final long UPDATE_TIME_INTERVALL = 5000000;
   public static final long ONE_SECOND = 1000000000; 
   public Player player;
   public boolean gameStart = true;
+  public boolean menu = true;
+  public Statusbar sbar;
+  public boolean initialized = false;
 
   public static GameLogic getInstance() {
 	  if(gameLogic == null) {
@@ -30,19 +34,31 @@ public class GameLogic implements KeyListener {
   }
   
   public void start() {
+	  
 	  long frames = 0;
-	  long framesPerSecondTimer = System.nanoTime();
-	  long updateTimer = System.nanoTime(); 
+	  long framesPerSecondTimer = 0;
+	  long updateTimer = 0; 
 	  
 	  while(gameStart==true) {
+		  if(menu) continue;
+		  if(!initialized) {
+			  frames = 0;
+			  framesPerSecondTimer = System.nanoTime();
+			  updateTimer = System.nanoTime();
+			  initialized = true;
+		  }
+		  
 		  
 		  //Updates
 		  if((System.nanoTime()-updateTimer) >= UPDATE_TIME_INTERVALL) {
-			  //asManager.updateComponents();
+			  asManager.updateComponents();
 			  player.stepNextPosition();
+			  sbar.updateBars(player);
 			  frames++;
 			  updateTimer += UPDATE_TIME_INTERVALL;
 		  }
+		  
+		  
 		  
 		  //FPS Berechnung 
 	      if(System.nanoTime()-framesPerSecondTimer >= ONE_SECOND) {
@@ -55,10 +71,10 @@ public class GameLogic implements KeyListener {
   
   private GameLogic() {
     graphicManager = new GraphicManager();
-    doManager = new DiscoObjectManager(graphicManager);
+    
+    player = new Player(100,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800), BufferedImageLoader.scaleToScreenY(500),1);
+    doManager = new DiscoObjectManager(graphicManager, this, player);
     asManager = new ASManager(graphicManager,doManager);
-    player = new Player(100,'m', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(800), BufferedImageLoader.scaleToScreenY(500),1);
-    //musicManager = new MusicManager();	// music manger
     
     gameView = new GameView(asManager, doManager, player, graphicManager);
     gameView.setTitle("Felse deine Feier");
@@ -69,11 +85,8 @@ public class GameLogic implements KeyListener {
     gameView.setVisible(true);
     gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(gameView.getX(), gameView.getY()), "mouse02"));
     gameView.addKeyListener(this);
-    //gameView.addMouseListener(new GameViewMouseListener());
-    //gameView.add(musicManager.getPanel());	//add music panel
-    
-    //musicManager.play(); //play music
-    
+    gameView.setVisible(true);
+    sbar = gameView.getStatusbar();
   }
   
   public boolean checkFreePosition(int id, Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
@@ -85,7 +98,19 @@ public class GameLogic implements KeyListener {
 	  return true;
   }
   
-  public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
+  public static MusicManager getMusicManager() {
+	return musicManager;
+  }
+
+  public static void setMusicManager(MusicManager musicManager) {
+	GameLogic.musicManager = musicManager;
+  }
+  
+  public void updateMusic() {
+	  sbar.updateMusic(getMusicManager());
+  }
+
+public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
 	  if(!asManager.checkFreeCoordinate(id,coordinate)) 
 		  return false;
 	  if(!doManager.checkFreeCoordinate(coordinate)) 

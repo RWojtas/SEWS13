@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -18,13 +19,15 @@ public class DiscoObjectManager {
 	public DiscoObject[] discoObject;
 	public GraphicManager graphicManager;
 	public static Dimension deskResolution;
-	//public Player player;
-	//public Bar bar;
-	//public GameView gameView;
+	public Player player;
+	public Bar bar;
+	GameLogic gameLogic;
 	
-	public DiscoObjectManager(GraphicManager graphicManager) {
+	public DiscoObjectManager(GraphicManager graphicManager, GameLogic gameLogic, Player player) {
 		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
 		this.graphicManager = graphicManager;
+		this.player = player;
+		this.gameLogic = gameLogic;
 	}
 	
 	public void updateComponents() {
@@ -68,14 +71,14 @@ public class DiscoObjectManager {
 	
 	public DiscoObject getComponentAt(int x, int y) {
 		JLayeredPane clickedLayeredPane;
-		JPanel clickedPanel;
+		JComponent clickedPanel;
 	  	DiscoObject clickedObject = null;
 	  	  
 	  	clickedLayeredPane = GameView.layeredPane;
 	  	
 	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
 	  		if(clickedObject == null) {
-		  		clickedPanel = (JPanel)clickedLayeredPane.getComponent(i);
+		  		clickedPanel = (JComponent)clickedLayeredPane.getComponent(i);
 		        try {
 		  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
 		  	  	} catch(Exception e) {
@@ -129,11 +132,13 @@ public class DiscoObjectManager {
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
+		    gameLogic.gameView.bar.setVisible(true);
+		    gameLogic.gameView.setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
 		}
 
 	    @Override
 		public void mouseEntered(MouseEvent e) {
-	    	System.out.println("mouseClicked!!!");
+	    	System.out.println("Bar mouseClicked!!!");
 		    //Wird ausgelöst, wenn die Maus den aktiven Bereich des MouseListeners betritt
 			  
 		}
@@ -204,7 +209,7 @@ public class DiscoObjectManager {
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
 		    Dancefloor clickedObject = (Dancefloor)e.getSource();
-		    //gameView.setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2); 
+		    gameLogic.gameView.setTarget(player,clickedObject.getX()+e.getX()-player.getWidth()/2,clickedObject.getY()+e.getY()-player.getHeight()/2); 
 		    
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
@@ -248,6 +253,9 @@ public class DiscoObjectManager {
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
+		    
+		    gameLogic.gameView.dj.setVisible(true);
+		    gameLogic.gameView.setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
 		}
 
 	    @Override

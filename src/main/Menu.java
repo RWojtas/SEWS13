@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.GroupLayout;
 import javax.swing.Icon;
@@ -45,9 +46,12 @@ public class Menu extends JLayeredPane {
 	MouseAction impr_l;
 	MouseAction end_l;
 	MouseAction speaker_l;
+	
+	MusicManager musicManager;
 
-	public Menu(final GraphicManager graphicManager) {
+	public Menu(final GraphicManager graphicManager, final MusicManager musicManager) {
 		this.graphicManager = graphicManager;
+		this.musicManager = musicManager;
 
 		int left = BufferedImageLoader.scaleToScreenX(630 * 1366 / 1600);
 		int top = BufferedImageLoader.scaleToScreenY(270 * 768 / 900);
@@ -55,7 +59,7 @@ public class Menu extends JLayeredPane {
 		int height = BufferedImageLoader.scaleToScreenY(60);
 		int height_gab = BufferedImageLoader.scaleToScreenY(height + 20);
 		
-		final MusicManager musicManager = new MusicManager();
+		
 		add(musicManager.getPanel());
 		musicManager.play();
 		
@@ -238,7 +242,7 @@ public class Menu extends JLayeredPane {
 		pan.add(close, JLayeredPane.DEFAULT_LAYER);
 		pan.add(lab, JLayeredPane.DEFAULT_LAYER);
 		pan.setVisible(true);
-
+		
 		return pan;
 	}
 
@@ -257,7 +261,11 @@ public class Menu extends JLayeredPane {
 		public void mouseClicked(MouseEvent e) {
 			switch (act) {
 			case 's':
-				// TODO start game! ;)
+				setVisible(false);
+				disableButtonsEvents();
+				GameLogic.getInstance().menu = false;
+				GameLogic.setMusicManager(musicManager);
+				GameLogic.getInstance().updateMusic();
 				break;
 			case 'e':
 				System.exit(0);
@@ -293,41 +301,41 @@ public class Menu extends JLayeredPane {
 		}
 	}
 
-	public static void main(String[] args) {
-		GraphicManager graphicManager = new GraphicManager();
-
-		JFrame gameView = new JFrame();
-
-		gameView.setTitle("Felse deine Feier");
-		gameView.setSize(
-				(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()),
-				(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
-		gameView.setUndecorated(true);
-		gameView.setAlwaysOnTop(true);
-		gameView.setResizable(false);
-		gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameView.setVisible(true);
-		gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				graphicManager.mouse.getImage(),
-				new Point(gameView.getX(), gameView.getY()), "mouse02"));
-
-		JComponent c = new Menu(graphicManager);
-
-		GroupLayout layout = new GroupLayout(gameView.getContentPane());
-		gameView.getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addComponent(c,
-				javax.swing.GroupLayout.DEFAULT_SIZE,
-				(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()),
-				Short.MAX_VALUE));
-		layout.setVerticalGroup(layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(
-						c,
-						javax.swing.GroupLayout.DEFAULT_SIZE,
-						(int) (Toolkit.getDefaultToolkit().getScreenSize()
-								.getHeight()), Short.MAX_VALUE));
-		gameView.pack();
-		gameView.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		GraphicManager graphicManager = new GraphicManager();
+//
+//		JFrame gameView = new JFrame();
+//
+//		gameView.setTitle("Felse deine Feier");
+//		gameView.setSize(
+//				(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()),
+//				(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
+//		gameView.setUndecorated(true);
+//		gameView.setAlwaysOnTop(true);
+//		gameView.setResizable(false);
+//		gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		gameView.setVisible(true);
+//		gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+//				graphicManager.mouse.getImage(),
+//				new Point(gameView.getX(), gameView.getY()), "mouse02"));
+//
+//		JComponent c = new Menu(graphicManager);
+//
+//		GroupLayout layout = new GroupLayout(gameView.getContentPane());
+//		gameView.getContentPane().setLayout(layout);
+//		layout.setHorizontalGroup(layout.createParallelGroup(
+//				javax.swing.GroupLayout.Alignment.LEADING).addComponent(c,
+//				javax.swing.GroupLayout.DEFAULT_SIZE,
+//				(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()),
+//				Short.MAX_VALUE));
+//		layout.setVerticalGroup(layout.createParallelGroup(
+//				javax.swing.GroupLayout.Alignment.LEADING)
+//				.addComponent(
+//						c,
+//						javax.swing.GroupLayout.DEFAULT_SIZE,
+//						(int) (Toolkit.getDefaultToolkit().getScreenSize()
+//								.getHeight()), Short.MAX_VALUE));
+//		gameView.pack();
+//		gameView.setVisible(true);
+//	}
 }
