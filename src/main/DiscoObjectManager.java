@@ -21,11 +21,13 @@ public class DiscoObjectManager {
 	public static Dimension deskResolution;
 	public Player player;
 	public Bar bar;
-	public GameView gameView;
+	GameLogic gameLogic;
 	
-	public DiscoObjectManager(GraphicManager graphicManager) {
+	public DiscoObjectManager(GraphicManager graphicManager, GameLogic gameLogic, Player player) {
 		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
 		this.graphicManager = graphicManager;
+		this.player = player;
+		this.gameLogic = gameLogic;
 	}
 	
 	public void updateComponents() {
@@ -122,6 +124,8 @@ public class DiscoObjectManager {
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
+		    gameLogic.gameView.bar.setVisible(true);
+		    gameLogic.gameView.setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
 		}
 
 	    @Override
@@ -197,7 +201,7 @@ public class DiscoObjectManager {
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
 		    Dancefloor clickedObject = (Dancefloor)e.getSource();
-		    gameView.setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2); 
+		    gameLogic.gameView.setTarget(player,clickedObject.getX()+e.getX()-player.getWidth()/2,clickedObject.getY()+e.getY()-player.getHeight()/2); 
 		    
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion

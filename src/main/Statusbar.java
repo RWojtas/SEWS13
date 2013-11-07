@@ -5,6 +5,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
+import music.MusicManager;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -49,12 +51,22 @@ public class Statusbar {
 		this.moneyLabel = moneyLabel;
 	}
 	
+	public void updateMusic(MusicManager musicmanager) {
+		this.status_mtitle.setText(musicmanager.getSongTitle());
+		this.status_genre.setText(musicmanager.getSongCategory());
+	}
+	
 	public void updateBars(Player player) {
-		energyBar.setValue((int)(player.getEnergy()*100));
-		urineBar.setValue((int)(player.getUrine()*100));
-		flirtBar.setValue((int)(player.getFlirt()*100));
-		alcLevelBar.setValue((int)(player.getAlcLevel()*100));
-		funBar.setValue((int)(player.getFun()*100));
+		JProgressBar bars[] = {energyBar, urineBar, flirtBar, alcLevelBar, funBar};
+		int werte[] = {(int)(player.getEnergy()*100),(int)(player.getUrine()*100),(int)(player.getFlirt()*100),(int)(player.getAlcLevel()*100),(int)(player.getFun()*100)};
+		
+		for(int i=0;i<bars.length;i++) {
+			if(bars[i].getValue() < werte[i]) {
+				bars[i].setValue(bars[i].getValue()+1);
+			} else if(bars[i].getValue() > werte[i]) {
+				bars[i].setValue(bars[i].getValue()-1);
+			}
+		}
 		moneyLabel.setText("Geld: "+player.getMoney()+" Euro");
 	}
 	
@@ -88,14 +100,6 @@ public class Statusbar {
 		progressbar.setForeground(Color.white);
 		progressbar.setBorderPainted(false);
 		return progressbar;
-	}
-	
-	public void setMTitle(String text) {
-		this.status_mtitle.setText(text);
-	}
-	
-	public void setGenre(String text) {
-		this.status_genre.setText(text);
 	}
 	
 	public void setUhrzeit(String text) {

@@ -25,16 +25,14 @@ public class BarOverlay extends Overlay {
 	 */
 	static final int NUM_BUT = 8;
 	public Player player;
-	JLabel buttons[];
-	Act actions[];
+	JLabel buttons[] = new JLabel[NUM_BUT];
+	Act actions[] = new Act[NUM_BUT];
 	
 	public BarOverlay(final GraphicManager graphicManager, Player player, String t) {
 		super(graphicManager, t);
 		this.player = player;
 		
 		// Buttons
-		buttons = new JLabel[NUM_BUT];
-		actions = new Act[NUM_BUT];
 		for(int i=0;i<NUM_BUT;i++) {
             buttons[i] = new JLabel();
             buttons[i].setIcon(new ImageIcon(graphicManager.drinkButtons.getImage(0,i)));
@@ -43,12 +41,11 @@ public class BarOverlay extends Overlay {
             add(buttons[i],JLayeredPane.POPUP_LAYER);
 		}
 		enableActions();
-		System.out.println(this.toString());
 	}
 	
 	public void setVisible(boolean on) {
 		super.setVisible(on);
-//		if (actions[0] != null) enableActions();
+		if (actions != null) enableActions();
 	}
 	
 	private void enableActions() {

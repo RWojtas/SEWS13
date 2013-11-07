@@ -45,6 +45,8 @@ public class Menu extends JLayeredPane {
 	MouseAction impr_l;
 	MouseAction end_l;
 	MouseAction speaker_l;
+	
+	MusicManager musicManager;
 
 	public Menu(final GraphicManager graphicManager) {
 		this.graphicManager = graphicManager;
@@ -55,7 +57,7 @@ public class Menu extends JLayeredPane {
 		int height = BufferedImageLoader.scaleToScreenY(60);
 		int height_gab = BufferedImageLoader.scaleToScreenY(height + 20);
 		
-		final MusicManager musicManager = new MusicManager();
+		musicManager = new MusicManager();
 		add(musicManager.getPanel());
 		musicManager.play();
 		
@@ -238,7 +240,7 @@ public class Menu extends JLayeredPane {
 		pan.add(close, JLayeredPane.DEFAULT_LAYER);
 		pan.add(lab, JLayeredPane.DEFAULT_LAYER);
 		pan.setVisible(true);
-
+		
 		return pan;
 	}
 
@@ -257,7 +259,11 @@ public class Menu extends JLayeredPane {
 		public void mouseClicked(MouseEvent e) {
 			switch (act) {
 			case 's':
-				// TODO start game! ;)
+				GameLogic.getInstance().menu = false;
+				GameLogic.setMusicManager(musicManager);
+				GameLogic.getInstance().updateMusic();
+				setVisible(false);
+				disableButtonsEvents();
 				break;
 			case 'e':
 				System.exit(0);
