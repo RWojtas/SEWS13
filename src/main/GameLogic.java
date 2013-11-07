@@ -38,7 +38,7 @@ public class GameLogic implements KeyListener {
 		  
 		  //Updates
 		  if((System.nanoTime()-updateTimer) >= UPDATE_TIME_INTERVALL) {
-			  asManager.updateComponents();
+			  //asManager.updateComponents();
 			  player.stepNextPosition();
 			  frames++;
 			  updateTimer += UPDATE_TIME_INTERVALL;
@@ -62,8 +62,8 @@ public class GameLogic implements KeyListener {
     
     gameView = new GameView(asManager, doManager, player, graphicManager);
     gameView.setTitle("Felse deine Feier");
-    gameView.setUndecorated(true);
-    gameView.setAlwaysOnTop(true);
+    gameView.setUndecorated(false);
+    gameView.setAlwaysOnTop(false);
     gameView.setResizable(false);
     gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameView.setVisible(true);
@@ -92,6 +92,14 @@ public class GameLogic implements KeyListener {
 		  return false;
 	  
 	  return true;
+  }
+  
+  public JComponent getComponentAt(int x, int y) {
+	  JComponent component = (JComponent)(asManager.getComponentAt(x, y));
+	  if(component == null) {
+		  component = (JComponent)doManager.getComponentAt(x, y); 
+	  }
+	  return component;
   }
 
   @Override

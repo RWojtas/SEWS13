@@ -4,6 +4,7 @@ package main;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.util.Scanner;
 
 import javax.swing.*;
 
@@ -76,7 +77,7 @@ public class GameView extends JFrame implements MouseListener {
 		layeredPane.add(layer4, 3); // Layer für DiscoObject
 
 		layer3.add(player);
-		asManager.addComponents(layer3);
+		//asManager.addComponents(layer3);
 		doManager.addComponents(layer4);
 
 		fps = new JLabel("FPS 0");
@@ -251,16 +252,134 @@ public class GameView extends JFrame implements MouseListener {
 	  Coordinate ro = new Coordinate(x+human.getWidth(),y);
 	  Coordinate lu = new Coordinate(x,y+human.getHeight());;
 	  Coordinate ru = new Coordinate(x+human.getWidth(),y+human.getHeight());;
+	  int xPos = x;
+	  int yPos = y;
 	  
-	  if(!GameLogic.getInstance().checkFreePosition(human.hashCode(),lo,ro,lu,ru))
-		  target = determineFreeCoordinate(human, new Coordinate(x,y));
+	  if(!GameLogic.getInstance().checkFreePosition(human.hashCode(),lo,ro,lu,ru)) {
+		  if(GameLogic.getInstance().getComponentAt(x,y) == null) {
+			  xPos -= human.getWidth()/2;
+			  yPos -= human.getHeight()/2;
+			  target = determineFreeCoordinate01(human, new Coordinate(xPos,yPos));
+		  } else {
+			  xPos -= human.getWidth()/2;
+			  yPos -= human.getHeight()/2;
+			  target = determineFreeCoordinate02(human, new Coordinate(xPos,yPos));
+		  }
+	  }
 	  
 	  player.setActivity(1);
 	  player.setTarget(target.getXCoordinate(), target.getYCoordinate());  
   }
   
+  public Coordinate determineFreeCoordinate02(Human human, Coordinate c) {
+	  int MAX_LOOPS = 1000;
+	  int loopCounter = 0; //counts loops and Position shifts
+	  int xPos;
+	  int yPos;
+	  int differenceX;
+	  int differenceY;
+	  double slope;
+	  Coordinate lo = null;
+	  Coordinate ro = null;
+	  Coordinate lu = null;
+	  Coordinate ru = null;
+	  boolean loFree;
+	  boolean roFree;
+	  boolean luFree;
+	  boolean ruFree;
+	  
+	  xPos = c.getXCoordinate();
+	  yPos = c.getYCoordinate();
+	  
+	  differenceX = Math.abs(human.getPosition().getX0()-xPos);
+	  differenceY = Math.abs(human.getPosition().getY0()-yPos);
+	  
+	  do {
+		  loopCounter++;
+		  
+		  if(differenceX > differenceY) {
+			  slope = (double)differenceY/(double)differenceX;
+			  if(human.getPosition().getX0() < c.getXCoordinate()) {
+				  xPos--; 
+			  } else {
+				  xPos++;  
+			  }
+			  if(human.getPosition().getY0() < c.getYCoordinate()) {
+				  yPos = c.getYCoordinate()-(int)((double)loopCounter*slope); 
+				  
+			  } else {
+				  yPos = c.getYCoordinate()+(int)((double)loopCounter*slope); 		  
+			  }
+		  } else {
+			  if(differenceX < differenceY) {
+				  slope = (double)differenceX/(double)differenceY;   
+				  if(human.getPosition().getX0() < c.getXCoordinate()) {
+					  xPos = c.getXCoordinate()-(int)((double)loopCounter*slope);
+				  } else {
+					  xPos = c.getXCoordinate()+(int)((double)loopCounter*slope);
+				  }
+				  if(human.getPosition().getY0() < c.getYCoordinate()) {
+					  yPos--;
+				  } else {
+					  yPos++;
+				  }
+			  } else {
+				  if(differenceY == 0 && differenceX == 0) {
+					  break;
+				  } else {
+					  slope = 1;
+					  if(human.getPosition().getX0() < c.getXCoordinate()) {
+						  xPos--;
+					  } else {
+						  xPos++;
+						  System.out.println("Drin2");
+					  }
+					  if(human.getPosition().getY0() < c.getYCoordinate()) {
+						  yPos--;
+					  } else {
+						  yPos++;
+					  }
+				  }
+			  }
+		  }
+		  
+		  //Debugging Comments:
+		  //printStep(c,xPos,yPos);
+		  //Scanner s = new Scanner(System.in);
+		  //s.nextLine();
+		  //System.out.println();
+		  
+		  lo = new Coordinate(xPos,yPos);
+		  ro = new Coordinate(xPos+human.getWidth(),yPos);
+		  lu = new Coordinate(xPos,yPos+human.getHeight());
+		  ru = new Coordinate(xPos+human.getWidth(),yPos+human.getHeight());
+	  } while(!GameLogic.getInstance().checkFreePosition(human.hashCode(), lo, ro, lu, ru) && loopCounter <= MAX_LOOPS);  
+	  return lo;
+  }
+  
+  //Debugging Method
+  public void printStep(Coordinate c, int xPos, int yPos) {
+	  String as = "#", bs = "C", cs = "O";
+	  String p;
+	  int fieldsize = 50;
+	  System.out.println("Coordinate: ("+c.getXCoordinate()+"|"+c.getYCoordinate()+") xPos: "+xPos+" yPos: "+yPos);
+	  for(int a=-fieldsize;a<fieldsize;a++) {
+		  for(int b=-fieldsize;b<fieldsize;b++) {
+			  p = as;
+			  if(a==0 && b==0) {
+				  p = cs;  
+			  }
+			  if(a==yPos-c.getYCoordinate() && b==xPos-c.getXCoordinate()) {
+				  p = bs;
+			  }
+			  System.out.print(p);
+		  }  
+		  System.out.println();
+	  }
+  }
+  
   //Noch in Arbeit
-  public Coordinate determineFreeCoordinate(Human human, Coordinate c) {
+  public Coordinate determineFreeCoordinate01(Human human, Coordinate c) {
 	  final int MAX_LOOPS = 100;
 	  int loopCounter = 0;
 	  Coordinate lo;
@@ -273,6 +392,8 @@ public class GameView extends JFrame implements MouseListener {
 	  boolean ruFree;
 	  
 	  do {
+		  loopCounter++;
+		  
 		  lo = new Coordinate(c.getXCoordinate(),c.getYCoordinate());
 		  ro = new Coordinate(c.getXCoordinate()+human.getWidth(),c.getYCoordinate());
 		  lu = new Coordinate(c.getXCoordinate(),c.getYCoordinate()+human.getHeight());
@@ -383,7 +504,6 @@ public class GameView extends JFrame implements MouseListener {
 				   }
 			   }
 		  }
-		  loopCounter++;
 	  } while((c.getXCoordinate() != lo.getXCoordinate() || c.getYCoordinate() != lo.getYCoordinate()) && loopCounter <= MAX_LOOPS);  
 	  return c;
   }
@@ -421,7 +541,7 @@ public class GameView extends JFrame implements MouseListener {
   	  //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
   	  //ohne mit gedrückter Maustaste die Position der Maus zu verändern
   	  
-  	  setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2); 
+  	  setTarget(player,e.getX(),e.getY()); 
   }
 
 	@Override

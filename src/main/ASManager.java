@@ -61,7 +61,7 @@ public class ASManager {
 			} else {
 				if(doActivity(human[i].getPosition(), human[i].getTarget())) {
 					human[i].decActivityTimer();
-					//  TO-DO  Aktion muss ausgeführt werden
+					//  TO-DO  Aktion muss ausgefï¿½hrt werden
 				}
 			}
 			//System.out.println(doManager.discoObject[0].getPositionX()+"..."+doManager.discoObject[0].getPositionY());
@@ -104,7 +104,7 @@ public class ASManager {
 		  	  	}	
 		  	}
 	  	}
-	  	
+
 	  	return clickedObject;
 	}
     

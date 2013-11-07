@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.Dimension;
-
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -67,7 +66,7 @@ public class DiscoObjectManager {
 			panel.add(obj);
 	}
 	
-	 public DiscoObject getComponentAt(int x, int y) {
+	public DiscoObject getComponentAt(int x, int y) {
 		JLayeredPane clickedLayeredPane;
 		JPanel clickedPanel;
 	  	DiscoObject clickedObject = null;
@@ -115,8 +114,16 @@ public class DiscoObjectManager {
 		    System.out.println("mouseClicked!!!");
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
-		  	
+		  	int xPos;
+		  	int yPos;
+		    
 		    Bar clickedObject = (Bar)e.getSource();
+		   
+		    xPos = clickedObject.getPositionX() + e.getX();
+		    yPos = clickedObject.getPositionY() + e.getY();
+		    
+		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos, yPos);
+		    
 		    //bar.openOverlay=true;
 		    
 		    /* TODO
@@ -274,8 +281,15 @@ public class DiscoObjectManager {
 		    System.out.println("mouseClicked");
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
+		    int xPos;
+		    int yPos;
 		    
 		    Table clickedObject = (Table)e.getSource();   
+		    
+		    xPos = clickedObject.getPositionX() + e.getX();
+		    yPos = clickedObject.getPositionY() + e.getY();
+		    
+		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos, yPos);
 		    
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
