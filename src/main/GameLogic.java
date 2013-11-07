@@ -2,6 +2,7 @@ package main;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
@@ -32,6 +33,9 @@ public class GameLogic implements KeyListener {
   }
   
   public void start() {
+	  try  { TimeUnit.SECONDS.sleep(2); } catch(InterruptedException ex) { Thread.currentThread().interrupt(); }
+	  // Behebt einen Bug bei Raffas Rechner :D
+	  
 	  long frames = 0;
 	  long framesPerSecondTimer = System.nanoTime();
 	  long updateTimer = System.nanoTime(); 
@@ -62,8 +66,8 @@ public class GameLogic implements KeyListener {
     graphicManager = new GraphicManager();
     
     player = new Player(100,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800), BufferedImageLoader.scaleToScreenY(500),1);
-    asManager = new ASManager(graphicManager,doManager);
     doManager = new DiscoObjectManager(graphicManager, this, player);
+    asManager = new ASManager(graphicManager,doManager);
     
     gameView = new GameView(asManager, doManager, player, graphicManager);
     gameView.setTitle("Felse deine Feier");
