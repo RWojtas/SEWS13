@@ -24,6 +24,7 @@ public class Statusbar {
 	JLabel status_mtitle;
 	JLabel status_genre;
 	JLabel status_uhrzeit;
+	JLabel moneyLabel;
 	
 	public Statusbar(GraphicManager graphicManager) {
 		this.graphicManager = graphicManager;
@@ -41,10 +42,11 @@ public class Statusbar {
 		this.funBar = funBar;
 	}
 	
-	public void setLabels(JLabel status_mtitle, JLabel status_genre, JLabel status_uhrzeit) {
+	public void setLabels(JLabel status_mtitle, JLabel status_genre, JLabel status_uhrzeit, JLabel moneyLabel) {
 		this.status_genre = status_genre;
 		this.status_mtitle = status_mtitle;
 		this.status_uhrzeit = status_uhrzeit;
+		this.moneyLabel = moneyLabel;
 	}
 	
 	public void updateBars(Player player) {
@@ -53,6 +55,7 @@ public class Statusbar {
 		flirtBar.setValue((int)(player.getFlirt()*100));
 		alcLevelBar.setValue((int)(player.getAlcLevel()*100));
 		funBar.setValue((int)(player.getFun()*100));
+		moneyLabel.setText("Geld: "+player.getMoney()+" Euro");
 	}
 	
 	public JLabel addLabel(int posX, int posY, int width, int height, BufferedImage image) {

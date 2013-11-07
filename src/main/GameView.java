@@ -46,6 +46,7 @@ public class GameView extends JFrame implements MouseListener {
 	JLabel urineLabel;
 	JLabel funLabel;
 	JLabel gameExit;
+	JLabel moneyLabel;
 	  
 	public GameView(ASManager asManager, DiscoObjectManager doManager, Player player, GraphicManager graphicManager) {
 		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
@@ -132,14 +133,25 @@ public class GameView extends JFrame implements MouseListener {
 				Font.BOLD);
 		layer1.add(status_uhrzeit, 0);
 		
+		moneyLabel = sbar.addLabel((int) deskResolution.getWidth()
+				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(303),
+				BufferedImageLoader.scaleToScreenX(205),
+				BufferedImageLoader.scaleToScreenY(30),
+				"Geld: 0 Euro", 
+				32,
+				JLabel.RIGHT,
+				Font.BOLD);
+		moneyLabel.setForeground(Color.yellow);
+		layer1.add(moneyLabel, 0);
+		
 		energyBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(335),
+				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(360),
 				BufferedImageLoader.scaleToScreenX(235),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(25));
 		energyBar.setValue(0);
 		layer1.add(energyBar, 0);
 		energyLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(310),
+				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(335),
 				BufferedImageLoader.scaleToScreenX(175),
 				BufferedImageLoader.scaleToScreenY(30),
 				"Energie", 
@@ -149,13 +161,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(energyLabel, 0);
 		
 		funBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(405),
+				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(425),
 				BufferedImageLoader.scaleToScreenX(235),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(25));
 		funBar.setValue(0);
 		layer1.add(funBar, 0);
 		funLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(380),
+				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(400),
 				BufferedImageLoader.scaleToScreenX(175),
 				BufferedImageLoader.scaleToScreenY(30),
 				"Spass", 
@@ -165,13 +177,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(funLabel, 0);
 		
 		urineBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(475),
+				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(490),
 				BufferedImageLoader.scaleToScreenX(235),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(25));
 		urineBar.setValue(0);
 		layer1.add(urineBar, 0);
 		urineLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(450),
+				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(465),
 				BufferedImageLoader.scaleToScreenX(175),
 				BufferedImageLoader.scaleToScreenY(30),
 				"Blase",
@@ -181,13 +193,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(urineLabel, 0);
 		
 		alcLevelBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(545),
+				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(555),
 				BufferedImageLoader.scaleToScreenX(235),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(25));
 		alcLevelBar.setValue(0);
 		layer1.add(alcLevelBar, 0);
 		alcLevelLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(520),
+				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(530),
 				BufferedImageLoader.scaleToScreenX(175),
 				BufferedImageLoader.scaleToScreenY(30),
 				"Alkoholpegel", 
@@ -197,13 +209,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(alcLevelLabel, 0);
 		
 		flirtBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(615),
+				- BufferedImageLoader.scaleToScreenX(245), BufferedImageLoader.scaleToScreenY(620),
 				BufferedImageLoader.scaleToScreenX(235),
-				BufferedImageLoader.scaleToScreenY(30));
+				BufferedImageLoader.scaleToScreenY(25));
 		flirtBar.setValue(0);
 		layer1.add(flirtBar, 0);
 		flirtLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(590),
+				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(595),
 				BufferedImageLoader.scaleToScreenX(175),
 				BufferedImageLoader.scaleToScreenY(30),
 				"Liebaeugelei", 
@@ -219,7 +231,7 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(gameExit, 0);
 		
 		sbar.setBars(energyBar, urineBar, flirtBar, alcLevelBar, funBar);
-		sbar.setLabels(status_mtitle, status_genre, status_uhrzeit);
+		sbar.setLabels(status_mtitle, status_genre, status_uhrzeit, moneyLabel);
 		sbar.updateBars(player);
 		// End: Statusbar
 	}
