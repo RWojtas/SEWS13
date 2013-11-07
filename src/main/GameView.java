@@ -76,9 +76,10 @@ public class GameView extends JFrame implements MouseListener {
 		layeredPane.add(layer2, 1); // Layer für Overlay
 		layeredPane.add(layer3, 2); // Layer für Human
 		layeredPane.add(layer4, 3); // Layer für DiscoObject
-
-//		BarOverlay bar = new BarOverlay(graphicManager, player, "Die Bar");
-//	    layeredPane.add(bar, JLayeredPane.POPUP_LAYER);
+		
+		//Men�
+		Menu menu = new Menu(graphicManager);
+		layeredPane.add(menu, JLayeredPane.POPUP_LAYER);
 		
 		layer3.add(player);
 		asManager.addComponents(layer3);
@@ -92,7 +93,12 @@ public class GameView extends JFrame implements MouseListener {
 				(int) deskResolution.getHeight() - 30, 300, 30);
 
 		layer1.add(fps);
-
+		
+		//Overlays
+		BarOverlay bar = new BarOverlay(graphicManager, player, "Die Bar");
+		bar.setVisible(false);
+		layeredPane.add(bar, JLayeredPane.POPUP_LAYER);
+		
 		// Start: Statusbar
 		statusb_bg = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(270), 0,
