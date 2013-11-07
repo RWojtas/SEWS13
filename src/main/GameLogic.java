@@ -22,6 +22,7 @@ public class GameLogic implements KeyListener {
   public Player player;
   public boolean gameStart = true;
   public boolean menu = true;
+  public Statusbar sbar;
 
   public static GameLogic getInstance() {
 	  if(gameLogic == null) {
@@ -41,9 +42,12 @@ public class GameLogic implements KeyListener {
 		  if((System.nanoTime()-updateTimer) >= UPDATE_TIME_INTERVALL) {
 			  asManager.updateComponents();
 			  player.stepNextPosition();
+			  sbar.updateBars(player);
 			  frames++;
 			  updateTimer += UPDATE_TIME_INTERVALL;
 		  }
+		  
+		  
 		  
 		  //FPS Berechnung 
 	      if(System.nanoTime()-framesPerSecondTimer >= ONE_SECOND) {
@@ -71,6 +75,7 @@ public class GameLogic implements KeyListener {
     gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(gameView.getX(), gameView.getY()), "mouse02"));
     gameView.addKeyListener(this);
     gameView.setVisible(true);
+    sbar = gameView.getStatusbar();
   }
   
   public boolean checkFreePosition(int id, Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {

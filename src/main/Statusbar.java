@@ -50,11 +50,16 @@ public class Statusbar {
 	}
 	
 	public void updateBars(Player player) {
-		energyBar.setValue((int)(player.getEnergy()*100));
-		urineBar.setValue((int)(player.getUrine()*100));
-		flirtBar.setValue((int)(player.getFlirt()*100));
-		alcLevelBar.setValue((int)(player.getAlcLevel()*100));
-		funBar.setValue((int)(player.getFun()*100));
+		JProgressBar bars[] = {energyBar, urineBar, flirtBar, alcLevelBar, funBar};
+		int werte[] = {(int)(player.getEnergy()*100),(int)(player.getUrine()*100),(int)(player.getFlirt()*100),(int)(player.getAlcLevel()*100),(int)(player.getFun()*100)};
+		
+		for(int i=0;i<bars.length;i++) {
+			if(bars[i].getValue() < werte[i]) {
+				bars[i].setValue(bars[i].getValue()+1);
+			} else if(bars[i].getValue() > werte[i]) {
+				bars[i].setValue(bars[i].getValue()-1);
+			}
+		}
 		moneyLabel.setText("Geld: "+player.getMoney()+" Euro");
 	}
 	

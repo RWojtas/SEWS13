@@ -247,6 +247,9 @@ public class GameView extends JFrame implements MouseListener {
 		// End: Statusbar
 	}
  
+	public Statusbar getStatusbar() {
+		return sbar;
+	}
   
   public JPanel createLayerPanel() {
 	  JPanel layer = new JPanel();
