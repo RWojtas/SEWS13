@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
+import main.BufferedImageLoader;
 import main.GameLogic;
 import objects.DiscoObject;
 
@@ -23,7 +25,7 @@ public abstract class Human extends JLabel{
 	protected String type;					// Typ -> wichtig f�r die Grafiken
 	protected int activity;				// Aktivit�t, die gerade ausgef�hrt wird (siehe unten: Aktivit�tstabelle)
 	protected int activityTimer;		// Wie lang eine Aktivit�t (noch) dauert
-	protected ImageIcon image;
+	protected ImageIcon images[] = new ImageIcon[8];
 	protected int height;					// H�he des Spielers (Sicht von oben)
 	protected int width;					// Breite des Spielers (Sicht von oben)
 	protected int direction;				// Richtung in die der Spieler gerade schaut -> wichtig f�r weitere Bewegung
@@ -32,6 +34,7 @@ public abstract class Human extends JLabel{
 
 	/*
 	 * Aktivit�tentabelle: 
+	 * -1 - stehen (beim Start nötig)
 	 * 0  - offen 
 	 * 1  - gehen 
 	 * 2  - tanzen 
@@ -71,10 +74,19 @@ public abstract class Human extends JLabel{
 		this.activity = 0;
 		this.direction = direction;
 		
+		
 		graphicState = 0;
-		this.height = image.getHeight();
-		this.width =  image.getWidth();
-		setIcon(new ImageIcon(image.getSubimage(0,0,width,height)));
+//		this.height = image.getHeight();
+//		this.width =  image.getWidth();
+		this.height = BufferedImageLoader.scaleToScreenX(60);
+		this.width =  BufferedImageLoader.scaleToScreenY(60);
+		
+		for(int i=0;i<8;i++) {
+			images[i] = new ImageIcon(image.getSubimage(0,i*width,width,height));
+			//System.out.println(i*width+"");
+		};
+		
+		setIcon(images[0]);
 		setBounds(x,y,width,height);
 		setOpaque(false);
 	}
@@ -234,6 +246,7 @@ public abstract class Human extends JLabel{
 	
 	public void setDirection(int dir) {
 		this.direction = dir;
+		setIcon(images[dir]);
 	}
 	
 
@@ -303,7 +316,7 @@ public abstract class Human extends JLabel{
 		if((dir>7)) dir=0;
 		Coordinate Coo = ausDirzuCoo(dir);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
 		if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())){		// ob diese frei ist. Falls ja, wird die Richtung des Menschen entsprechend gesetzt.
-			this.direction = dir;												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und pr�ft die n�chste Richtung
+			setDirection(dir);												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und pr�ft die n�chste Richtung
 		}																		// Sind alle 8 Richtungen einmal durchgepr�ft, gibt die Methode false zur�ck.
 		else {																	// Der Integer cnt z�hlt sich bei jedem Durchlauf um einen hoch und schaut somit, ob alle Richtungen gepr�ft worden sind.
 			if (cnt <= 8) {
@@ -348,20 +361,19 @@ public abstract class Human extends JLabel{
 		boolean rcheck = false;
 		Coordinate newPos = new Coordinate(x, y);
 		
-		if (this.getActivity() != 0) {												
+		if (this.getActivity() != 0 && this.getActivity() != -1 ) {												
 			if (this.position != this.target) {
 				if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
 						rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht f�r die Richtung unten rechts. 
 				}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
 				else if(x > this.target.getX0() && y < this.target.getY0()){
-						System.out.println("gaay");
-						rcheck = this.check(1,0);
+					rcheck = this.check(1,0);
 				}
 				else if( x < this.target.getX0() && y > this.target.getY0()) {
 						rcheck = this.check(5,0);
 				}
 				else if(x > this.target.getX0() && y > this.target.getY0()) {
-						rcheck = this.check(3,0);
+						rcheck = this.check(3,0);	
 				}
 				else if(x > this.target.getX0()) {
 						rcheck = this.check(2,0);
@@ -384,11 +396,11 @@ public abstract class Human extends JLabel{
 					if(!(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate()))) {		// ob diese frei ist. Falls ja, wird die Richtung des Menschen entsprechend gesetzt.
 						Coo = ausDirzuCoo(4);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
 						if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())) {
-							this.direction = 4;												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und pr�ft die n�chste Richtung
+							setDirection(4);											// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und pr�ft die n�chste Richtung
 							newPos = ausDirzuCoo(this.direction);
 						}
 					} else {
-						this.direction = 2;
+						setDirection(2);
 						newPos = ausDirzuCoo(this.direction);
 						Coo = ausDirzuCoo(1);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
 						if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())) {
@@ -410,4 +422,12 @@ public abstract class Human extends JLabel{
 
 	// END: AKTIVIT�TSMETHODEN
 
+	public boolean doActivity() {
+		if((this.position.getX0() == target.getX0())  && (position.getY0() == target.getY0())) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 }

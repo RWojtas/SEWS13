@@ -1,5 +1,6 @@
 package music;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.MediaPlayer;
 
 import javax.swing.JComponent;
+
+import main.GameLogic;
 
 /**
  * @author Nicolas
@@ -51,6 +54,7 @@ public class MusicManager {
 		mute(before);
 		mediaPlayer.play();
 		defineActions();
+		GameLogic.getInstance().updateMusic();
 	}
 	
 	private void shuffle() {
@@ -84,12 +88,17 @@ public class MusicManager {
 		return mfList.get(mediaIndex).category;
 	}
 	
+	public List<String> getSongCategories() {
+		return mfl.getCategoryList();
+	}
+	
 	public void next() {
 		openNextSong();
 	}
 	
 	public void requestedCategory(String category) {
-		mediaPlayer.stop();	// avoid async-effects...
+		boolean before = mediaPlayer.isAutoPlay();
+		if(before) mediaPlayer.stop();	// avoid async-effects...
 		int size = mfList.size();
 		int index;
 		for(int i = 1;i < size;i++) {
@@ -103,7 +112,9 @@ public class MusicManager {
 				break;
 			}
 		}
-		mediaPlayer.play();	// avoid async-effects...
+		if(before) mediaPlayer.play();	// avoid async-effects...
+		
+		System.out.println("nächser Song:"+mfList.get((mediaIndex + 1)%size).category+": "+mfList.get((mediaIndex + 1)%size).title);
 		
 		/*
 		mediaPlayer.stop();

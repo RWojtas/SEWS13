@@ -15,7 +15,10 @@ public class GraphicManager {
   public BufferedImageLoader bench;
   
   // public BufferedImageLoader humanGraphic;
-  public BufferedImageLoader human;
+  public BufferedImageLoader man01;
+  public BufferedImageLoader woman01;
+  public BufferedImageLoader man02;
+  public BufferedImageLoader woman02;
  
   // Startmen�
   public BufferedImageLoader startMenueBG;
@@ -33,6 +36,12 @@ public class GraphicManager {
   public BufferedImageLoader statusBG;
   public BufferedImageLoader statusUhr;
   public BufferedImageLoader statusBeenden;
+  public BufferedImageLoader statusMusicMute;
+  
+  public BufferedImageLoader musicButtons;
+  
+  //Flirten
+  public BufferedImageLoader ButtonFlirten;
   
   // Mouse
   public BufferedImageLoader mouse;
@@ -55,10 +64,14 @@ public class GraphicManager {
     dancefloor = new BufferedImageLoader("Data/Graphics/","tanzflaeche01.png");
     table = new BufferedImageLoader("Data/Graphics/","tisch02.png");
     wc = new BufferedImageLoader("Data/Graphics/","wc01.png");
-    human = new BufferedImageLoader("Data/Graphics/","mensch01.png");
+    
     status = new BufferedImageLoader("Data/Graphics/","status01.png");
     bench = new BufferedImageLoader("Data/Graphics/", "bank01.png");
     
+    man01 = new BufferedImageLoader("Data/Graphics/","human03.png");
+    man02 = new BufferedImageLoader("Data/Graphics/","man01.png");
+    woman01 = new BufferedImageLoader("Data/Graphics/","woman01.png");
+    woman02 = new BufferedImageLoader("Data/Graphics/","woman02.png");
     
     startMenueBG = new BufferedImageLoader("Data/Graphics/","startbildschirm02.png");
     startMenueButtons = new BufferedImageLoader("Data/Graphics/","menu_buttons02.png", 1, 8);
@@ -73,8 +86,10 @@ public class GraphicManager {
     popup1000x600 = new BufferedImageLoader("Data/Graphics/","popup1000x600_01.png");
     drinkButtons = new BufferedImageLoader("Data/Graphics/","drinkbuttons02.png", 2, 8);
     
-    statusBG = new BufferedImageLoader("Data/Graphics/","statusbg01.png");
+    statusBG = new BufferedImageLoader("Data/Graphics/","statusbg02.png");
     statusUhr = new BufferedImageLoader("Data/Graphics/","uhr01.png");
-    statusBeenden = new BufferedImageLoader("Data/Graphics/", "spielBeenden.png", 1, 2);
+    statusBeenden = new BufferedImageLoader("Data/Graphics/", "exitButton01.png", 1, 2);
+    
+    musicButtons = new BufferedImageLoader("Data/Graphics/", "musicButton01.png", 1, 2);
   }
 }
