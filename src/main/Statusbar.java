@@ -17,7 +17,9 @@ import player.Player;
 
 public class Statusbar {
 	GraphicManager graphicManager;
+	MusicManager musicManager;
 	JLabel gameExit;
+	JLabel mswitch;
 	JProgressBar energyBar;
 	JProgressBar urineBar;
 	JProgressBar flirtBar;
@@ -28,8 +30,9 @@ public class Statusbar {
 	JLabel status_uhrzeit;
 	JLabel moneyLabel;
 	
-	public Statusbar(GraphicManager graphicManager) {
+	public Statusbar(GraphicManager graphicManager, MusicManager musicManager) {
 		this.graphicManager = graphicManager;
+		this.musicManager = musicManager;
 	}
 	
 	public void setBars(JProgressBar energyBar,
@@ -106,6 +109,19 @@ public class Statusbar {
 		this.status_uhrzeit.setText(text);
 	}
 	
+	public JLabel addMusicButton(int posX, int posY, int width, int height) {
+		mswitch = new JLabel();
+		Icon icon = new ImageIcon(
+				graphicManager.speaker.getImage(0,0));
+		Icon icon_hover = new ImageIcon(
+				graphicManager.speaker.getImage(0,1));
+		mswitch.setIcon(icon);
+		mswitch.setBounds(posX,posY,width,height);
+		MouseAction gameExit_l = new MouseAction('m', icon, icon_hover);
+		mswitch.addMouseListener(gameExit_l);
+		return mswitch;
+	}
+	
 	public JLabel addExitButton(int posX, int posY, int width, int height) {
 		gameExit = new JLabel();
 		Icon gameExit_icon = new ImageIcon(
@@ -135,19 +151,23 @@ public class Statusbar {
 			switch (act) {
 			case 'e':
 				System.exit(0);
+				((JLabel) e.getSource()).setIcon(standard);
+				break;
+			case 'm':
+				musicManager.mute(!musicManager.isMute());
+				((JLabel) e.getSource()).setIcon((((JLabel) e.getSource()).getIcon().equals(standard)) ? hover : standard);
 				break;
 			}
-			((JLabel) e.getSource()).setIcon(standard);
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			((JLabel) e.getSource()).setIcon(hover);
+			if(act != 'm') ((JLabel) e.getSource()).setIcon(hover);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			((JLabel) e.getSource()).setIcon(standard);
+			if(act != 'm') ((JLabel) e.getSource()).setIcon(standard);
 		}
 
 		@Override

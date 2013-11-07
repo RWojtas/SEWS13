@@ -56,8 +56,12 @@ public class GameView extends JFrame implements MouseListener {
 	JLabel funLabel;
 	JLabel gameExit;
 	JLabel moneyLabel;
+	private JLabel musicSwitch;
 	  
 	public GameView(ASManager asManager, DiscoObjectManager doManager, Player player, GraphicManager graphicManager) {
+		// Musik
+		musicManager = new MusicManager();
+		
 		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize((int) deskResolution.getWidth(),
 				(int) deskResolution.getHeight());
@@ -67,7 +71,7 @@ public class GameView extends JFrame implements MouseListener {
 		this.doManager = doManager;
 		this.player = player;
 		this.graphicManager = graphicManager;
-		this.sbar = new Statusbar(graphicManager);
+		this.sbar = new Statusbar(graphicManager, musicManager);
 		
 		layeredPane = new JLayeredPane();
 		layeredPane.addMouseListener(this);
@@ -84,8 +88,6 @@ public class GameView extends JFrame implements MouseListener {
 		layeredPane.add(layer3, 2); // Layer für Human
 		layeredPane.add(layer4, 3); // Layer für DiscoObject
 		
-		// Musik
-		musicManager = new MusicManager();
 		layeredPane.add(musicManager.getPanel());
 		
 		//Men�
@@ -166,7 +168,7 @@ public class GameView extends JFrame implements MouseListener {
 				"Geld: 0 Euro", 
 				32,
 				JLabel.RIGHT,
-				Font.BOLD);
+				BufferedImageLoader.scaleToScreenY(Font.BOLD));
 		moneyLabel.setForeground(Color.yellow);
 		layer1.add(moneyLabel, 0);
 		
@@ -251,10 +253,16 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(flirtLabel, 0);
 		
 		gameExit = sbar.addExitButton((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(250), BufferedImageLoader.scaleToScreenY(660),
-				BufferedImageLoader.scaleToScreenX(240),
-				BufferedImageLoader.scaleToScreenY(49));
+				- BufferedImageLoader.scaleToScreenX(60), BufferedImageLoader.scaleToScreenY(710),
+				BufferedImageLoader.scaleToScreenX(45),
+				BufferedImageLoader.scaleToScreenY(45));
 		layer1.add(gameExit, 0);
+		
+		musicSwitch = sbar.addMusicButton((int) deskResolution.getWidth()
+				- BufferedImageLoader.scaleToScreenX(60), BufferedImageLoader.scaleToScreenY(660),
+				BufferedImageLoader.scaleToScreenX(45),
+				BufferedImageLoader.scaleToScreenY(45));
+		layer1.add(musicSwitch, 0);
 		
 		sbar.setBars(energyBar, urineBar, flirtBar, alcLevelBar, funBar);
 		sbar.setLabels(status_mtitle, status_genre, status_uhrzeit, moneyLabel);

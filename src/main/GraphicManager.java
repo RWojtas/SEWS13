@@ -36,6 +36,7 @@ public class GraphicManager {
   public BufferedImageLoader statusBG;
   public BufferedImageLoader statusUhr;
   public BufferedImageLoader statusBeenden;
+  public BufferedImageLoader statusMusicMute;
   
   public BufferedImageLoader musicButtons;
   
@@ -85,9 +86,9 @@ public class GraphicManager {
     popup1000x600 = new BufferedImageLoader("Data/Graphics/","popup1000x600_01.png");
     drinkButtons = new BufferedImageLoader("Data/Graphics/","drinkbuttons02.png", 2, 8);
     
-    statusBG = new BufferedImageLoader("Data/Graphics/","statusbg01.png");
+    statusBG = new BufferedImageLoader("Data/Graphics/","statusbg02.png");
     statusUhr = new BufferedImageLoader("Data/Graphics/","uhr01.png");
-    statusBeenden = new BufferedImageLoader("Data/Graphics/", "spielBeenden.png", 1, 2);
+    statusBeenden = new BufferedImageLoader("Data/Graphics/", "exitButton01.png", 1, 2);
     
     musicButtons = new BufferedImageLoader("Data/Graphics/", "musicButton01.png", 1, 2);
   }
