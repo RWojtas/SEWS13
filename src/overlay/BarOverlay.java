@@ -45,7 +45,9 @@ public class BarOverlay extends Overlay {
 	
 	public void setVisible(boolean on) {
 		super.setVisible(on);
-		if (actions != null) enableActions();
+		if (actions != null)
+			if(on) enableActions();
+			else disableActions();
 	}
 	
 	private void enableActions() {
