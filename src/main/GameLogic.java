@@ -24,6 +24,7 @@ public class GameLogic implements KeyListener {
   public boolean gameStart = true;
   public boolean menu = true;
   public Statusbar sbar;
+  public boolean initialized = false;
 
   public static GameLogic getInstance() {
 	  if(gameLogic == null) {
@@ -33,15 +34,21 @@ public class GameLogic implements KeyListener {
   }
   
   public void start() {
-	  try  { TimeUnit.SECONDS.sleep(2); } catch(InterruptedException ex) { Thread.currentThread().interrupt(); }
-	  // Behebt einen Bug bei Raffas Rechner :D
 	  
 	  long frames = 0;
-	  long framesPerSecondTimer = System.nanoTime();
-	  long updateTimer = System.nanoTime(); 
+	  long framesPerSecondTimer = 0;
+	  long updateTimer = 0; 
 	  
 	  while(gameStart==true) {
 		  if(menu) continue;
+		  if(!initialized) {
+			  frames = 0;
+			  framesPerSecondTimer = System.nanoTime();
+			  updateTimer = System.nanoTime();
+			  initialized = true;
+		  }
+		  
+		  
 		  //Updates
 		  if((System.nanoTime()-updateTimer) >= UPDATE_TIME_INTERVALL) {
 			  asManager.updateComponents();

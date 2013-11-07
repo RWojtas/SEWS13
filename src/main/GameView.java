@@ -10,7 +10,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 import overlay.BarOverlay;
+import overlay.DJOverlay;
 import main.Menu.MouseAction;
+import music.MusicManager;
 import objects.*;
 import player.*;
 
@@ -31,7 +33,10 @@ public class GameView extends JFrame implements MouseListener {
 	public JPanel layer4;
 	public JLabel fps;
 	
+	public MusicManager musicManager;
+	
 	public BarOverlay bar;
+	public DJOverlay dj;
 	
 	Statusbar sbar;
 	JLabel statusb_bg;
@@ -79,8 +84,12 @@ public class GameView extends JFrame implements MouseListener {
 		layeredPane.add(layer3, 2); // Layer für Human
 		layeredPane.add(layer4, 3); // Layer für DiscoObject
 		
+		// Musik
+		musicManager = new MusicManager();
+		layeredPane.add(musicManager.getPanel());
+		
 		//Men�
-		Menu menu = new Menu(graphicManager);
+		Menu menu = new Menu(graphicManager, musicManager);
 		layeredPane.add(menu, JLayeredPane.POPUP_LAYER);
 		
 		layer3.add(player);
@@ -100,6 +109,10 @@ public class GameView extends JFrame implements MouseListener {
 		bar = new BarOverlay(graphicManager, player, "Die Bar");
 		bar.setVisible(false);
 		layeredPane.add(bar, JLayeredPane.POPUP_LAYER);
+		
+		dj = new DJOverlay(graphicManager, "Der DJ", musicManager);
+		dj.setVisible(false);
+		layeredPane.add(dj, JLayeredPane.POPUP_LAYER);
 		
 		// Start: Statusbar
 		statusb_bg = sbar.addLabel((int) deskResolution.getWidth()
