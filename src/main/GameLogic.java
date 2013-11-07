@@ -44,7 +44,7 @@ public class GameLogic implements KeyListener {
 		  
 		  //FPS Berechnung 
 	      if(System.nanoTime()-framesPerSecondTimer >= ONE_SECOND) {
-	    	  gameView.fps.setText(""+frames);
+	    	  gameView.fps.setText("FPS "+frames);
 	    	  frames = 0;
 	    	  framesPerSecondTimer = System.nanoTime();
 	      }

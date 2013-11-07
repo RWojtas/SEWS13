@@ -27,6 +27,17 @@ public class GameView extends JFrame implements MouseListener {
   public JLabel fps;
   public JPanel statusbar;
   
+	/*
+	 * Direction: Richtung
+	 * 0  - unten
+	 * 1  - unten/links (diagonal)
+	 * 2  - links
+	 * 3  - links/oben (diagonal)
+	 * 4  - oben
+	 * 5  - oben/rechts (diagonal)
+	 * 6  - rechts
+	 * 7  - rechts/unten (diagonal)
+	 */
   
   public GameView(ASManager asManager, DiscoObjectManager doManager, Player player) {
 	  deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
@@ -64,7 +75,7 @@ public class GameView extends JFrame implements MouseListener {
       asManager.addComponents(layer3);
       doManager.addComponents(layer4); 
       
-      fps = new JLabel("0");
+      fps = new JLabel("FPS: 0");
       fps.setOpaque(false);
       fps.setHorizontalAlignment(JLabel.RIGHT);
       fps.setFont(new Font("Dialog",Font.BOLD,30));
@@ -98,36 +109,173 @@ public class GameView extends JFrame implements MouseListener {
   }
   
   public void setTarget(Human human, int x, int y) {
+	  Coordinate target = new Coordinate(x,y);
 	  Coordinate lo = new Coordinate(x,y);
 	  Coordinate ro = new Coordinate(x+human.getWidth(),y);
 	  Coordinate lu = new Coordinate(x,y+human.getHeight());;
 	  Coordinate ru = new Coordinate(x+human.getWidth(),y+human.getHeight());;
 	  
-	  //while(true) {
-		  if(!GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), lo)) {
-			  
-		  } 
-		  
-		  if(!GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), ro)) {
-			  
-		  } 
-		  
-		  if(!GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), lu)) {
-			  
-		  } 
-		  
-		  if(!GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), ru)) {
-			  
-		  } 
-	  //}
+	  if(!GameLogic.getInstance().checkFreePosition(human.hashCode(),lo,ro,lu,ru))
+		  target = determineFreeCoordinate(human, new Coordinate(x,y));
 	  
 	  player.setActivity(1);
-	  player.setTarget(x, y);  
+	  player.setTarget(target.getXCoordinate(), target.getYCoordinate());  
   }
   
-  public Coordinate determineFreePosition(int x, int y) {
-	  Coordinate freePosition = null;
-	  return freePosition;
+  //Noch in Arbeit
+  public Coordinate determineFreeCoordinate(Human human, Coordinate c) {
+	  final int MAX_LOOPS = 100;
+	  int loopCounter = 0;
+	  Coordinate lo;
+	  Coordinate ro;
+	  Coordinate lu;
+	  Coordinate ru;
+	  boolean loFree;
+	  boolean roFree;
+	  boolean luFree;
+	  boolean ruFree;
+	  
+	  do {
+		  lo = new Coordinate(c.getXCoordinate(),c.getYCoordinate());
+		  ro = new Coordinate(c.getXCoordinate()+human.getWidth(),c.getYCoordinate());
+		  lu = new Coordinate(c.getXCoordinate(),c.getYCoordinate()+human.getHeight());
+		  ru = new Coordinate(c.getXCoordinate()+human.getWidth(),c.getYCoordinate()+human.getHeight());
+		  
+		  loFree = GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), lo);
+		  roFree = GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), ro);
+		  luFree = GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), lu);
+		  ruFree = GameLogic.getInstance().checkFreeCoordinate(human.hashCode(), ru);
+				 
+		  if(!loFree) {
+			  System.out.println("!loFree");
+			  if(luFree && roFree){
+				if(human.getPosition().getX3() < lo.getXCoordinate()) {
+					//dir u
+					c = shiftTarget(0, c);
+				} else {
+					if(human.getPosition().getY3() < lo.getYCoordinate()) {
+						//dir r
+						c = shiftTarget(6, c);
+					} else {
+						//dir ur
+						c = shiftTarget(7, c);
+					}
+				}	
+			  } else {
+				  if(luFree) {
+					  //dir r
+					  c = shiftTarget(6, c);
+				  } else {
+					  //dir u
+					  c = shiftTarget(0, c);
+				  }
+			  }
+		  } 
+		  
+		  if(!roFree) {
+			  System.out.println("!roFree");
+			  if(loFree && ruFree){
+			      if(human.getPosition().getX2() > ro.getXCoordinate()) {
+					  //dir u
+			    	  c = shiftTarget(0, c);
+				  } else {
+					  if(human.getPosition().getY2() < ro.getYCoordinate()) {
+						  //dir l
+						  c = shiftTarget(2, c);
+					  } else {
+						  //dir ul
+						  c = shiftTarget(1, c);
+					  }
+				  }
+			   } else {
+				   if(loFree) {
+					   //dir l
+					   c = shiftTarget(2, c);
+				   } else {
+					   //dir u
+					   c = shiftTarget(0, c);
+				   }
+			   }
+		  } 
+		  
+		  if(!luFree) {
+			  System.out.println("!luFree");
+			  if(loFree && ruFree){
+			      if(human.getPosition().getX1() < lu.getXCoordinate()) {
+					  //dir o
+			    	  c = shiftTarget(4, c);
+				  } else {
+					  if(human.getPosition().getY1() > lu.getYCoordinate()) {
+						  //dir r
+						  c = shiftTarget(6, c);
+					  } else{
+						  //dir ro
+						  c = shiftTarget(5, c);
+					  }
+				  }
+				  
+			   } else {
+				   if(loFree) {
+					   //dir o
+					   c = shiftTarget(4, c);
+				   } else {
+					   //dir r
+					   c = shiftTarget(6, c);
+				   }
+			   }
+		  } 
+		  
+		  if(!ruFree) {
+			  System.out.println("!ruFree");
+			  if(luFree && roFree){
+				  System.out.println("luFree && roFree");
+			      if(human.getPosition().getX0() > ru.getXCoordinate()) {
+			    	  System.out.println("human.getPosition().getX0() > ru.getXCoordinate()");
+			    	  //dir o
+			    	  c = shiftTarget(4, c);
+			    	  System.out.println("Coordinate: "+c.getXCoordinate()+"|"+c.getYCoordinate());
+				  } else {
+					  if(human.getPosition().getY0() > ru.getYCoordinate()) {
+						  System.out.println("human.getPosition().getY0() > ru.getYCoordinate()");
+						  //dir l
+						  c = shiftTarget(2, c);
+					  } else {
+						  System.out.println("diagonal");
+						  //dir ol
+						  c = shiftTarget(3, c);
+					  }  
+				  }
+			   } else {
+				   if(luFree) {
+					   System.out.println("luFree");
+					   //dir l
+					   c = shiftTarget(2, c);
+				   } else {
+					   System.out.println("roFree");
+					   //dir o
+					   c = shiftTarget(4, c);
+				   }
+			   }
+		  }
+		  loopCounter++;
+	  } while((c.getXCoordinate() != lo.getXCoordinate() || c.getYCoordinate() != lo.getYCoordinate()) && loopCounter <= MAX_LOOPS);  
+	  return c;
+  }
+  
+  public Coordinate shiftTarget(int direction, Coordinate c) {
+	  int shiftWide = 1;
+	  
+	  switch(direction) {
+	  case 0: return new Coordinate(c.getXCoordinate()			,c.getYCoordinate()+shiftWide);
+	  case 1: return new Coordinate(c.getXCoordinate()-shiftWide,c.getYCoordinate()+shiftWide);
+	  case 2: return new Coordinate(c.getXCoordinate()-shiftWide,c.getYCoordinate());
+	  case 3: return new Coordinate(c.getXCoordinate()-shiftWide,c.getYCoordinate()-shiftWide);
+	  case 4: return new Coordinate(c.getXCoordinate()			,c.getYCoordinate()-shiftWide);
+	  case 5: return new Coordinate(c.getXCoordinate()+shiftWide,c.getYCoordinate()-shiftWide);
+	  case 6: return new Coordinate(c.getXCoordinate()+shiftWide,c.getYCoordinate());
+	  case 7: return new Coordinate(c.getXCoordinate()+shiftWide,c.getYCoordinate()+shiftWide);
+	  default: return c;
+	  }
   }
 
   @Override
@@ -136,9 +284,7 @@ public class GameView extends JFrame implements MouseListener {
   	  //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
   	  //ohne mit gedrückter Maustaste die Position der Maus zu verändern
   	  
-  	  //setTarget(human,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);
-  	player.setActivity(1);
-	  player.setTarget(e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2);  
+  	  setTarget(player,e.getX()-player.getWidth()/2,e.getY()-player.getHeight()/2); 
   }
 
   @Override
