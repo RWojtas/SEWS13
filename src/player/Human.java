@@ -114,6 +114,10 @@ public abstract class Human extends JLabel{
 	public Position getPosition() {
 		return position;
 	}
+	
+	public Position getTarget() {
+		return target;
+	}
 
 	public void setPosition(int x, int y, int direction) {
 		position.setPosition(x, y, x+this.width, y, x, y+this.height, x+this.width, y+this.height);
@@ -344,7 +348,7 @@ public abstract class Human extends JLabel{
 		boolean rcheck = false;
 		Coordinate newPos = new Coordinate(x, y);
 		
-		if (this.getActivity() == 1) {												
+		if (this.getActivity() != 0) {												
 			if (this.position != this.target) {
 				if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
 						rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht f�r die Richtung unten rechts. 

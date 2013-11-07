@@ -14,15 +14,61 @@ import player.*;
 public class ASManager {
 	public Human[] human;
 	public GraphicManager graphicManager;
+	public DiscoObjectManager doManager;
 	final static int as_cntr = 10;
-	public ASManager(GraphicManager graphicManager) {
+	public ASManager(GraphicManager graphicManager, DiscoObjectManager doManager) {
 		this.graphicManager = graphicManager;
+		this.doManager = doManager;
+	}
+	
+	public boolean doActivity(Position current, Position target) {
+		if((current.getX0() == target.getX0())  && (current.getY0() == target.getY0())) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void updateComponents() {
+		Functions f = new Functions();
 		for(int i=0;i<human.length;i++) {
+			if(human[i].getActivityTimer() == 0) {
+				if(human[i].getActivity() == 0 || human[i].getActivity() == 2 || human[i].getActivity() == 4) {
+					if(human[i].getUrine() > 0.9) {
+						human[i].setActivity(5);
+						human[i].setActivityTimer(60);
+					}
+					else if(human[i].getEnergy() < 0.3) {
+						int c = f.myRandom(0, 1);
+						if(c==0) {
+							human[i].setActivity(3);
+							human[i].setActivityTimer(60);
+						} else { 
+							human[i].setActivity(9);
+							human[i].setActivityTimer(60);
+						}
+					}
+					else if(human[i].getEnergy() > 0.5 && human[i].getFun() < 0.4) {
+						human[i].setActivity(2);
+						human[i].setTarget(doManager.discoObject[0].getPositionX(),doManager.discoObject[0].getPositionY());
+						human[i].setActivityTimer(60);
+					}
+					else {
+						int c = f.myRandom(0,6);
+						human[i].setActivity(c);
+						human[i].setActivityTimer(60);
+					}
+				}
+			} else {
+				if(doActivity(human[i].getPosition(), human[i].getTarget())) {
+					human[i].decActivityTimer();
+					//  TO-DO  Aktion muss ausgeführt werden
+				}
+			}
+			System.out.println(doManager.discoObject[0].getPositionX()+"..."+doManager.discoObject[0].getPositionY());
 			human[i].stepNextPosition();
+			System.out.println("human["+i+"].getActivity()="+human[i].getActivity());
 		}	
+		
 	}
 	
 	public void addComponents(JPanel panel) {
@@ -37,7 +83,7 @@ public class ASManager {
 	    human[9].setActivity(1);
 	    for(int i = 8; i >= 0; i--) {
 	    human[i].setTarget(BufferedImageLoader.scaleToScreenX(500), BufferedImageLoader.scaleToScreenY(350));
-	    human[i].setActivity(1);
+	    human[i].setActivity(0);
 	    }
 	}
 	
