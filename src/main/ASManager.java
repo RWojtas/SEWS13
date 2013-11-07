@@ -64,9 +64,9 @@ public class ASManager {
 					//  TO-DO  Aktion muss ausgef�hrt werden
 				}
 			}
-			System.out.println(doManager.discoObject[0].getPositionX()+"..."+doManager.discoObject[0].getPositionY());
+			//System.out.println(doManager.discoObject[0].getPositionX()+"..."+doManager.discoObject[0].getPositionY());
 			human[i].stepNextPosition();
-			System.out.println("human["+i+"].getActivity()="+human[i].getActivity());
+			//System.out.println("human["+i+"].getActivity()="+human[i].getActivity());
 		}	
 		
 	}
@@ -132,7 +132,7 @@ public class ASManager {
 	class ASMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
-		    System.out.println("mouseClicked");
+		    //System.out.println("mouseClicked");
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
