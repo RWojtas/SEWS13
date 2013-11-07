@@ -37,14 +37,28 @@ public class DiscoObjectManager {
 	    discoObject[1].addMouseListener(new ToiletMouseListener());
 	    discoObject[2] = new DJ(graphicManager.dj.getImage(),BufferedImageLoader.scaleToScreenX(0),BufferedImageLoader.scaleToScreenY(428));
 	    discoObject[2].addMouseListener(new DJMouseListener());
-	    discoObject[3] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(480),BufferedImageLoader.scaleToScreenY(23));
+	    discoObject[3] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(518),BufferedImageLoader.scaleToScreenY(23));
 	    discoObject[3].addMouseListener(new TableMouseListener());
-	    discoObject[4] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(692),BufferedImageLoader.scaleToScreenY(23));
+	    discoObject[4] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(730),BufferedImageLoader.scaleToScreenY(23));
 	    discoObject[4].addMouseListener(new TableMouseListener());
-	    discoObject[5] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(902),BufferedImageLoader.scaleToScreenY(23));
+	    discoObject[5] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(940),BufferedImageLoader.scaleToScreenY(23));
 	    discoObject[5].addMouseListener(new TableMouseListener());
 	    discoObject[6] = new Dancefloor(graphicManager.dancefloor.getImage(),BufferedImageLoader.scaleToScreenX(274),BufferedImageLoader.scaleToScreenY(768-330));
 	    discoObject[6].addMouseListener(new DancefloorMouseListener());
+	    /*
+	    discoObject[7] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(480),BufferedImageLoader.scaleToScreenY(23));
+	    discoObject[7].addMouseListener(new BenchMouseListener());
+	    discoObject[8] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(616),BufferedImageLoader.scaleToScreenY(23));
+	    discoObject[8].addMouseListener(new BenchMouseListener());
+	    discoObject[9] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(692),BufferedImageLoader.scaleToScreenY(23));
+	    discoObject[9].addMouseListener(new BenchMouseListener());
+	    discoObject[10] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(828),BufferedImageLoader.scaleToScreenY(23));
+	    discoObject[10].addMouseListener(new BenchMouseListener());
+	    discoObject[11] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(902),BufferedImageLoader.scaleToScreenY(23));
+	    discoObject[11].addMouseListener(new BenchMouseListener());
+	    discoObject[12] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(1038),BufferedImageLoader.scaleToScreenY(23));
+	    discoObject[12].addMouseListener(new BenchMouseListener());
+	    */
 	    
 	    for(DiscoObject obj : discoObject)
 			panel.add(obj);
@@ -96,6 +110,7 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[0].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		  	
@@ -135,6 +150,7 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[7].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		  	
@@ -174,6 +190,7 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked Dancefloor");
+		    discoObject[6].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
@@ -213,6 +230,7 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[2].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
@@ -252,14 +270,15 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[0].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
 		    Table clickedObject = (Table)e.getSource();   
 		    
 		    /* TODO
-		  	 * Entsprechender Overlayaufruf bzw. Aktion
-		     */
+		  	 * Entsprechender Overlayaufruf bzw. Aktion*/
+		     
 		}
 
 		@Override
@@ -285,12 +304,13 @@ public class DiscoObjectManager {
 		     //Wird ausgelöst, nachdem man einen Klick mit der Maus wieder loslässt
 			  
 	    }
-	}
+	} 
 	
 	class ToiletMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 		    System.out.println("mouseClicked");
+		    discoObject[1].openOverlay = true;
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    

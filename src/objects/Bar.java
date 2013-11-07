@@ -11,7 +11,7 @@ public class Bar extends DiscoObject {
 	
 	public Bar(BufferedImage image, int x, int y) {
 		super("Bar", image, x, y);
-		accessible = true;
+		accessible = false;
 	}
 	
 	/*

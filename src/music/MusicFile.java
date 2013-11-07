@@ -6,9 +6,9 @@ import javafx.scene.media.Media;
  * @author Nicolas
  */
 public class MusicFile {
-	public String category;
-	public String title;
-	public String path;
+	String category;
+	String title;
+	String path;
 	private Media media;
 
 	public MusicFile(String title, String category, String path) {

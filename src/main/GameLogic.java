@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import music.MusicManager;
 import player.*;
+import main.GameView;
 
 
 public class GameLogic implements KeyListener {
@@ -55,10 +56,10 @@ public class GameLogic implements KeyListener {
     graphicManager = new GraphicManager();
     asManager = new ASManager(graphicManager);
     doManager = new DiscoObjectManager(graphicManager);
-    player = new Player(100,'m', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(1200), BufferedImageLoader.scaleToScreenY(100),1);
+    player = new Player(100,'m', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(800), BufferedImageLoader.scaleToScreenY(500),1);
     //musicManager = new MusicManager();	// music manger
     
-    gameView = new GameView(asManager, doManager, player);
+    gameView = new GameView(asManager, doManager, player, graphicManager);
     gameView.setTitle("Felse deine Feier");
     gameView.setUndecorated(true);
     gameView.setAlwaysOnTop(true);

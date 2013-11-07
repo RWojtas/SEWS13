@@ -1,4 +1,4 @@
-package main;
+package overlay;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,21 +15,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
+import main.BufferedImageLoader;
+import main.GraphicManager;
+
 public class Overlay extends JLayeredPane {
-	GraphicManager graphicManager;
+	protected GraphicManager graphicManager;
 	private JLabel title;
 	private JLabel close;
 	private JLabel bg;
-	
-	private JLabel buttons[];
 	
 	public Overlay(final GraphicManager graphicManager, String t) {
 		double screen_width = Toolkit.getDefaultToolkit().getScreenSize()
 				.getWidth();
 		double screen_height = Toolkit.getDefaultToolkit().getScreenSize()
 				.getHeight();
-		int cont_width = 1000;
-		int cont_height = 600;
+		int cont_width = BufferedImageLoader.scaleToScreenX(1000);
+		int cont_height = BufferedImageLoader.scaleToScreenY(650);
 
 		bg = new JLabel(new ImageIcon(
 				graphicManager.popup1000x600.getImage()));
@@ -39,13 +40,13 @@ public class Overlay extends JLayeredPane {
 		title.setText(t);
 		title.setFont(new Font("Aharoni", 0, 48));
 		title.setForeground(new Color(128, 0, 0));
-		title.setBounds(35, 20, 700, 48);
+		title.setBounds(BufferedImageLoader.scaleToScreenX(35), BufferedImageLoader.scaleToScreenY(20), BufferedImageLoader.scaleToScreenX(700), BufferedImageLoader.scaleToScreenY(48));
 
 		close = new JLabel();
 		Icon close_icon = new ImageIcon(graphicManager.closeButtons.getImage(0,
 				0));
 		close.setIcon(close_icon);
-		close.setBounds(cont_width - 60, 10, 45, 45);
+		close.setBounds(cont_width - BufferedImageLoader.scaleToScreenX(60), BufferedImageLoader.scaleToScreenY(10), BufferedImageLoader.scaleToScreenX(45), BufferedImageLoader.scaleToScreenY(45));
 		close.addMouseListener(new MouseAdapter() {
 			Icon icon_close = new ImageIcon(graphicManager.closeButtons
 					.getImage(0, 1));
@@ -67,7 +68,7 @@ public class Overlay extends JLayeredPane {
 				((JComponent) e.getSource()).getParent().setVisible(false);
 			}
 		});
-
+		
 		add(title, JLayeredPane.DEFAULT_LAYER);
 		add(close, JLayeredPane.DEFAULT_LAYER);
 		add(bg, JLayeredPane.DEFAULT_LAYER);
@@ -77,6 +78,27 @@ public class Overlay extends JLayeredPane {
 				cont_height);
 		setVisible(true);
 	}
+	
+	class A extends MouseAdapter {
+		ImageIcon i;
+		ImageIcon h;
+		public A(ImageIcon i, ImageIcon h) {
+			this.i = i;
+			this.h = h;
+		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			((JLabel) e.getSource()).setIcon(h);
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			((JLabel) e.getSource()).setIcon(i);
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		GraphicManager graphicManager = new GraphicManager();
@@ -96,7 +118,7 @@ public class Overlay extends JLayeredPane {
 				graphicManager.mouse.getImage(),
 				new Point(gameView.getX(), gameView.getY()), "mouse02"));
 
-		JComponent c = new Overlay(graphicManager, "Mein Overlay");
+		JComponent c = new Overlay(graphicManager, "Die Bar");
 
 		GroupLayout layout = new GroupLayout(gameView.getContentPane());
 		gameView.getContentPane().setLayout(layout);

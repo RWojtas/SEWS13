@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import main.GameLogic;
+import objects.DiscoObject;
 
 
 public abstract class Human extends JLabel{
@@ -75,6 +76,7 @@ public abstract class Human extends JLabel{
 		setBounds(x,y,width,height);
 		setOpaque(false);
 	}
+	
 	
 	public void moveObject(int x, int y) {
 		position.setPosition(x, y, x+this.width, y, x, y+this.height, x+this.width, y+this.height);
@@ -297,13 +299,32 @@ public abstract class Human extends JLabel{
 			this.direction = dir;												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und pr�ft die n�chste Richtung
 		}																		// Sind alle 8 Richtungen einmal durchgepr�ft, gibt die Methode false zur�ck.
 		else {																	// Der Integer cnt z�hlt sich bei jedem Durchlauf um einen hoch und schaut somit, ob alle Richtungen gepr�ft worden sind.
-			if(cnt <= 8) {														
-				if(!(check(dir+1, cnt))) {
-					return false;
+			if(cnt <= 8) {	
+				if((this.target.getY0() > this.position.getY0()) && (this.target.getX0() < this.position.getX0())) {
+					 if(!check(dir-1,cnt)) {
+						 return false;
+					 }
 				}
+				else if((this.target.getY0() < this.position.getY0()) && (this.target.getX0() < this.position.getX0())) {
+					if(!check(dir+1,cnt)) {
+						return false;
+					}
+				}
+				else if((this.target.getY0() > this.position.getY0()) && (this.target.getX0() > this.position.getX0())) {
+					if(!check(dir+1,cnt)) {
+						return false;
+					}
+				}
+				else if((this.target.getY0() < this.position.getY0()) && (this.target.getX0() > this.position.getX0())) {
+					if(!check(dir+1,cnt)) {
+						return false;
+					}
+				}
+				else if(this.target.getY0() == this.position.getY0())
+					if(!check(dir-1,cnt)) {
+						return false;
+					}
 			}
-			else 
-				return false;
 		}
 		return true;	
 	}
@@ -342,24 +363,7 @@ public abstract class Human extends JLabel{
 				else if(y > this.target.getY0()) {
 						rcheck = this.check(4,0);
 				}
-				// TO-DO: Wegfinde-Algorithmus
-				/*int xORy = Functions.myRandom(0, 1);
-				switch (xORy) {
-				case 0:
-					if (x < target.getX0()) {
-						x++;
-					} else if (x > target.getX0()) {
-						x--;
-					}
-					break;
-				case 1:
-					if (y < target.getY0()) {
-						y++;
-					} else if (y > target.getY0()) {
-						y--;
-					}
-					break;
-				}*/
+				
 				if(rcheck) {
 					newPos = ausDirzuCoo(this.direction);
 				}
