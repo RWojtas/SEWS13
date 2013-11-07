@@ -115,7 +115,7 @@ public class BufferedImageLoader {
     imageHeight = scaledBufferedImage.getHeight();
   }
   
-  //Gibt die das Image zurück
+  //Gibt das Image zurück
   public BufferedImage getImage() {
     return this.image;
   }

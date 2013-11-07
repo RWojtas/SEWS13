@@ -27,6 +27,8 @@ public abstract class Human extends JLabel{
 	protected int height;					// H�he des Spielers (Sicht von oben)
 	protected int width;					// Breite des Spielers (Sicht von oben)
 	protected int direction;				// Richtung in die der Spieler gerade schaut -> wichtig f�r weitere Bewegung
+	protected int old_direction;
+	boolean wegfindetrouble = false;
 
 	/*
 	 * Aktivit�tentabelle: 
@@ -111,6 +113,10 @@ public abstract class Human extends JLabel{
 	
 	public Position getPosition() {
 		return position;
+	}
+	
+	public Position getTarget() {
+		return target;
 	}
 
 	public void setPosition(int x, int y, int direction) {
@@ -250,7 +256,7 @@ public abstract class Human extends JLabel{
 	}
 	
 	public boolean checkFreePosition(int x, int y) {		// �berpr�ft ob eine gewisse Koordinate besetzt ist oder nicht. 
-		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in From von "false" oder "true".
+		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in Form von "false" oder "true".
 		return gl.checkFreePosition(this.hashCode(), new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
 	}
 	
@@ -293,23 +299,45 @@ public abstract class Human extends JLabel{
 	
 	public boolean check(int dir, int cnt) {
 		cnt++;
-		dir = dir%8;
+		if((dir<0)) dir=7;
+		if((dir>7)) dir=0;
 		Coordinate Coo = ausDirzuCoo(dir);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
 		if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())){		// ob diese frei ist. Falls ja, wird die Richtung des Menschen entsprechend gesetzt.
 			this.direction = dir;												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und pr�ft die n�chste Richtung
 		}																		// Sind alle 8 Richtungen einmal durchgepr�ft, gibt die Methode false zur�ck.
 		else {																	// Der Integer cnt z�hlt sich bei jedem Durchlauf um einen hoch und schaut somit, ob alle Richtungen gepr�ft worden sind.
-			if(cnt <= 8) {	
-//				if(target y - aktuelle y > 0 && target x - aktuelle x < 0 )
-//					dann check(dir-1,cnt)
-				if(!(check(dir+1, cnt))) {
-					return false;
+			if (cnt <= 8) {
+				if ((this.target.getY0() > this.position.getY0())
+						&& (this.target.getX0() < this.position.getX0())) {
+					if (!check(--dir, cnt)) {
+						return false;
+					}
+				} else {
+					if (!check(++dir, cnt)) {
+						return false;
+					}
 				}
+				/*
+				 * if((dir == 4) && !check(3,7) && !check(2,7) && (this.position.getY0()-1 == this.target.getY0())) {
+				 * }
+				 * 
+				 * else if((this.target.getY0() < this.position.getY0()) &&
+				 * (this.target.getX0() < this.position.getX0())) {
+				 * if(!check(++dir,cnt)) { return false; } } else
+				 * if((this.target.getY0() > this.position.getY0()) &&
+				 * (this.target.getX0() > this.position.getX0())) {
+				 * if(!check(++dir,cnt)) { return false; } } else
+				 * if((this.target.getY0() < this.position.getY0()) &&
+				 * (this.target.getX0() > this.position.getX0())) {
+				 * if(!check(++dir,cnt)) { return false; } } else
+				 * if(this.target.getY0() == this.position.getY0())
+				 * if(!check(++dir,cnt)) { return false; } } else
+				 * if(this.target.getX0() == this.position.getX0()) {
+				 * if(!check(--dir,cnt)) { return false; } }
+				 */
 			}
-			else 
-				return false;
 		}
-		return true;	
+		return true;
 	}
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
@@ -320,12 +348,13 @@ public abstract class Human extends JLabel{
 		boolean rcheck = false;
 		Coordinate newPos = new Coordinate(x, y);
 		
-		if (this.getActivity() == 1) {												
-			if (this.position != this.target) {										
+		if (this.getActivity() != 0) {												
+			if (this.position != this.target) {
 				if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
 						rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht f�r die Richtung unten rechts. 
 				}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
 				else if(x > this.target.getX0() && y < this.target.getY0()){
+						System.out.println("gaay");
 						rcheck = this.check(1,0);
 				}
 				else if( x < this.target.getX0() && y > this.target.getY0()) {
@@ -346,29 +375,34 @@ public abstract class Human extends JLabel{
 				else if(y > this.target.getY0()) {
 						rcheck = this.check(4,0);
 				}
-				// TO-DO: Wegfinde-Algorithmus
-				/*int xORy = Functions.myRandom(0, 1);
-				switch (xORy) {
-				case 0:
-					if (x < target.getX0()) {
-						x++;
-					} else if (x > target.getX0()) {
-						x--;
+				if((this.old_direction==4) && (this.direction==0)) {
+					wegfindetrouble = true;
+				}
+				if(wegfindetrouble == true) {
+					rcheck=false;
+					Coordinate Coo = ausDirzuCoo(2);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
+					if(!(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate()))) {		// ob diese frei ist. Falls ja, wird die Richtung des Menschen entsprechend gesetzt.
+						Coo = ausDirzuCoo(4);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
+						if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())) {
+							this.direction = 4;												// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und pr�ft die n�chste Richtung
+							newPos = ausDirzuCoo(this.direction);
+						}
+					} else {
+						this.direction = 2;
+						newPos = ausDirzuCoo(this.direction);
+						Coo = ausDirzuCoo(1);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
+						if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())) {
+							wegfindetrouble=false;
+						}
 					}
-					break;
-				case 1:
-					if (y < target.getY0()) {
-						y++;
-					} else if (y > target.getY0()) {
-						y--;
-					}
-					break;
-				}*/
+				}
+				
 				if(rcheck) {
 					newPos = ausDirzuCoo(this.direction);
 				}
+				this.old_direction = this.direction;
 				moveObject(newPos.getXCoordinate(), newPos.getYCoordinate()); // Die neue Position wird explizit gesetzt.
-				// System.out.println("Aktuell: x:"+x+" y:"+y+" Neu: x:"+newPos.getXCoordinate()+" y:"+newPos.getYCoordinate());
+				System.out.println("Aktuell: x:"+x+" y:"+y+" Neu: x:"+newPos.getXCoordinate()+" y:"+newPos.getYCoordinate()+" Target: x:"+this.target.getX0()+" y:"+this.target.getY0()+ " " +this.direction);
 			}
 		}
 	}

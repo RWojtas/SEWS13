@@ -12,11 +12,12 @@ public class GraphicManager {
   public BufferedImageLoader table;
   public BufferedImageLoader wc;
   public BufferedImageLoader status;
+  public BufferedImageLoader bench;
   
   // public BufferedImageLoader humanGraphic;
   public BufferedImageLoader human;
  
-  // Startmenü
+  // Startmenï¿½
   public BufferedImageLoader startMenueBG;
   public BufferedImageLoader startMenueButtons;
   public BufferedImageLoader startImpressum;
@@ -31,6 +32,7 @@ public class GraphicManager {
   
   public BufferedImageLoader statusBG;
   public BufferedImageLoader statusUhr;
+  public BufferedImageLoader statusBeenden;
   
   // Mouse
   public BufferedImageLoader mouse;
@@ -51,10 +53,11 @@ public class GraphicManager {
     bar = new BufferedImageLoader("Data/Graphics/","bar01.png");
     dj = new BufferedImageLoader("Data/Graphics/","dj01.png");
     dancefloor = new BufferedImageLoader("Data/Graphics/","tanzflaeche01.png");
-    table = new BufferedImageLoader("Data/Graphics/","tisch01.png");
+    table = new BufferedImageLoader("Data/Graphics/","tisch02.png");
     wc = new BufferedImageLoader("Data/Graphics/","wc01.png");
     human = new BufferedImageLoader("Data/Graphics/","mensch01.png");
     status = new BufferedImageLoader("Data/Graphics/","status01.png");
+    bench = new BufferedImageLoader("Data/Graphics/", "bank01.png");
     
     
     startMenueBG = new BufferedImageLoader("Data/Graphics/","startbildschirm02.png");
@@ -72,5 +75,6 @@ public class GraphicManager {
     
     statusBG = new BufferedImageLoader("Data/Graphics/","statusbg01.png");
     statusUhr = new BufferedImageLoader("Data/Graphics/","uhr01.png");
+    statusBeenden = new BufferedImageLoader("Data/Graphics/", "spielBeenden.png", 1, 2);
   }
 }

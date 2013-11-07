@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import music.MusicManager;
 import player.*;
+import main.GameView;
 
 
 public class GameLogic implements KeyListener {
@@ -19,6 +20,7 @@ public class GameLogic implements KeyListener {
   public static final long UPDATE_TIME_INTERVALL = 5000000;
   public static final long ONE_SECOND = 1000000000; 
   public Player player;
+  public boolean gameStart = true;
 
   public static GameLogic getInstance() {
 	  if(gameLogic == null) {
@@ -32,19 +34,19 @@ public class GameLogic implements KeyListener {
 	  long framesPerSecondTimer = System.nanoTime();
 	  long updateTimer = System.nanoTime(); 
 	  
-	  while(true) {
+	  while(gameStart==true) {
 		  
 		  //Updates
 		  if((System.nanoTime()-updateTimer) >= UPDATE_TIME_INTERVALL) {
 			  asManager.updateComponents();
-			  player.stepNextPosition();  
+			  player.stepNextPosition();
 			  frames++;
 			  updateTimer += UPDATE_TIME_INTERVALL;
 		  }
 		  
 		  //FPS Berechnung 
 	      if(System.nanoTime()-framesPerSecondTimer >= ONE_SECOND) {
-	    	  gameView.fps.setText(""+frames);
+	    	  gameView.fps.setText("FPS "+frames);
 	    	  frames = 0;
 	    	  framesPerSecondTimer = System.nanoTime();
 	      }
@@ -53,9 +55,9 @@ public class GameLogic implements KeyListener {
   
   private GameLogic() {
     graphicManager = new GraphicManager();
-    asManager = new ASManager(graphicManager);
     doManager = new DiscoObjectManager(graphicManager);
-    player = new Player(100,'m', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(1200), BufferedImageLoader.scaleToScreenY(100),1);
+    asManager = new ASManager(graphicManager,doManager);
+    player = new Player(100,'m', graphicManager.human.getImage(), BufferedImageLoader.scaleToScreenX(800), BufferedImageLoader.scaleToScreenY(500),1);
     //musicManager = new MusicManager();	// music manger
     
     gameView = new GameView(asManager, doManager, player, graphicManager);
@@ -111,7 +113,7 @@ public class GameLogic implements KeyListener {
 	  
   }
   
-  public static void main (String [] args) {
-      GameLogic.getInstance().start();
+  public static void main(String args[]) {
+	  GameLogic.getInstance().start();
   }
 }
