@@ -37,6 +37,8 @@ public class GraphicManager {
   public BufferedImageLoader statusUhr;
   public BufferedImageLoader statusBeenden;
   
+  public BufferedImageLoader musicButtons;
+  
   //Flirten
   public BufferedImageLoader ButtonFlirten;
   
@@ -86,5 +88,7 @@ public class GraphicManager {
     statusBG = new BufferedImageLoader("Data/Graphics/","statusbg01.png");
     statusUhr = new BufferedImageLoader("Data/Graphics/","uhr01.png");
     statusBeenden = new BufferedImageLoader("Data/Graphics/", "spielBeenden.png", 1, 2);
+    
+    musicButtons = new BufferedImageLoader("Data/Graphics/", "musicButton01.png", 1, 2);
   }
 }
