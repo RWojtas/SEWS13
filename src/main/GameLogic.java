@@ -20,6 +20,7 @@ public class GameLogic implements KeyListener {
   public static final long UPDATE_TIME_INTERVALL = 5000000;
   public static final long ONE_SECOND = 1000000000; 
   public Player player;
+  public boolean gameStart = true;
 
   public static GameLogic getInstance() {
 	  if(gameLogic == null) {
@@ -33,12 +34,12 @@ public class GameLogic implements KeyListener {
 	  long framesPerSecondTimer = System.nanoTime();
 	  long updateTimer = System.nanoTime(); 
 	  
-	  while(true) {
+	  while(gameStart==true) {
 		  
 		  //Updates
 		  if((System.nanoTime()-updateTimer) >= UPDATE_TIME_INTERVALL) {
 			  asManager.updateComponents();
-			  player.stepNextPosition();  
+			  player.stepNextPosition();
 			  frames++;
 			  updateTimer += UPDATE_TIME_INTERVALL;
 		  }
@@ -112,7 +113,7 @@ public class GameLogic implements KeyListener {
 	  
   }
   
-  public static void main (String [] args) {
-      GameLogic.getInstance().start();
+  public static void main(String args[]) {
+	  GameLogic.getInstance().start();
   }
 }
