@@ -5,6 +5,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
+import music.MusicManager;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -47,6 +49,11 @@ public class Statusbar {
 		this.status_mtitle = status_mtitle;
 		this.status_uhrzeit = status_uhrzeit;
 		this.moneyLabel = moneyLabel;
+	}
+	
+	public void updateMusic(MusicManager musicmanager) {
+		this.status_mtitle.setText(musicmanager.getSongTitle());
+		this.status_genre.setText(musicmanager.getSongCategory());
 	}
 	
 	public void updateBars(Player player) {
@@ -93,14 +100,6 @@ public class Statusbar {
 		progressbar.setForeground(Color.white);
 		progressbar.setBorderPainted(false);
 		return progressbar;
-	}
-	
-	public void setMTitle(String text) {
-		this.status_mtitle.setText(text);
-	}
-	
-	public void setGenre(String text) {
-		this.status_genre.setText(text);
 	}
 	
 	public void setUhrzeit(String text) {

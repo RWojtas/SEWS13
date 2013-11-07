@@ -16,7 +16,7 @@ public class GameLogic implements KeyListener {
   public static GraphicManager graphicManager;
   public static ASManager asManager;
   public static DiscoObjectManager doManager;
-  public static MusicManager musicManager;
+  private static MusicManager musicManager;
   public static final long UPDATE_TIME_INTERVALL = 5000000;
   public static final long ONE_SECOND = 1000000000; 
   public Player player;
@@ -87,7 +87,19 @@ public class GameLogic implements KeyListener {
 	  return true;
   }
   
-  public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
+  public static MusicManager getMusicManager() {
+	return musicManager;
+  }
+
+  public static void setMusicManager(MusicManager musicManager) {
+	GameLogic.musicManager = musicManager;
+  }
+  
+  public void updateMusic() {
+	  sbar.updateMusic(getMusicManager());
+  }
+
+public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
 	  if(!asManager.checkFreeCoordinate(id,coordinate)) 
 		  return false;
 	  if(!doManager.checkFreeCoordinate(coordinate)) 

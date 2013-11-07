@@ -260,6 +260,8 @@ public class Menu extends JLayeredPane {
 			switch (act) {
 			case 's':
 				GameLogic.getInstance().menu = false;
+				GameLogic.setMusicManager(musicManager);
+				GameLogic.getInstance().updateMusic();
 				setVisible(false);
 				disableButtonsEvents();
 				break;
