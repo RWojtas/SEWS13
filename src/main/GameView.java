@@ -367,7 +367,6 @@ public class GameView extends JFrame implements MouseListener {
 						  xPos--;
 					  } else {
 						  xPos++;
-						  System.out.println("Drin2");
 					  }
 					  if(human.getPosition().getY0() < c.getYCoordinate()) {
 						  yPos--;
@@ -424,7 +423,6 @@ public class GameView extends JFrame implements MouseListener {
 	  boolean roFree;
 	  boolean luFree;
 	  boolean ruFree;
-	  System.out.println("01");
 	  do {
 		  loopCounter++;
 		  
