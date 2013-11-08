@@ -18,53 +18,11 @@ public class BufferedImageLoader {
   private static double resolutionFactor = 1;
   
   public BufferedImageLoader(String adress, String name, int picsX, int picsY) {
-    imageTable = new BufferedImage[picsX][picsY];
-    BufferedImage scaledBufferedImage = null;
-    BufferedImage source = null;
-    
-    URL pic_url = getClass().getResource("../"+adress+""+name);
-
-    try {
-      source = ImageIO.read(pic_url);
-      System.out.println("Erfolgreich geladen: "+pic_url);
-    } catch (IOException e) {
-      System.out.println("Fehler beim laden von: "+pic_url);
-    }
-    
-    int x;
-    for(int y=0;y<picsY;y++) {
-      for(x=0;x<picsX;x++) {
-    	
-        Image scaledImage = source.getSubimage(x*source.getWidth()/picsX, y*source.getHeight()/picsY, source.getWidth()/picsX, source.getHeight()/picsY).getScaledInstance((int)(resolutionFactor*source.getWidth()/picsX), (int)(resolutionFactor*source.getHeight()/picsY),BufferedImage.SCALE_SMOOTH);
-        scaledBufferedImage = new BufferedImage((int)(resolutionFactor*source.getWidth()/picsX), (int)(resolutionFactor*source.getHeight()/picsY),BufferedImage.TYPE_INT_ARGB);
-        scaledBufferedImage.getGraphics().drawImage(scaledImage, 0, 0, null);  
-    	imageTable[x][y] = scaledBufferedImage;
-    	
-      }
-    }
-    imageWidth = scaledBufferedImage.getWidth();
-    imageHeight = scaledBufferedImage.getHeight();
+	  loadImageTable(adress, name, picsX, picsY);
   }
   
   public BufferedImageLoader(String adress, String name) {
-    BufferedImage scaledBufferedImage = null;
-    BufferedImage source = null;
-
-    URL pic_url = getClass().getResource("../"+adress+""+name);
-    
-    try {
-      source = ImageIO.read(pic_url);
-      Image scaledImage = source.getScaledInstance((int)(resolutionFactor*source.getWidth()), (int)(resolutionFactor*source.getHeight()),BufferedImage.SCALE_SMOOTH);
-      scaledBufferedImage = new BufferedImage((int)(resolutionFactor*source.getWidth()), (int)(resolutionFactor*source.getHeight()),BufferedImage.TYPE_INT_ARGB);
-      scaledBufferedImage.getGraphics().drawImage(scaledImage, 0, 0, null);
-      System.out.println("Erfolgreich geladen: "+pic_url);
-    } catch (IOException e) {
-      System.out.println("Fehler beim laden von: "+pic_url);
-    }
-
-    image = scaledBufferedImage;
-    imageWidth = scaledBufferedImage.getWidth();
-    imageHeight = scaledBufferedImage.getHeight();
+	  loadImage(adress, name);
   }
   
   public void loadImageTable(String adress, String name, int picsX, int picsY) {
@@ -84,7 +42,8 @@ public class BufferedImageLoader {
     int x;
     for(int y=0;y<picsY;y++) {
       for(x=0;x<picsX;x++) {
-        Image scaledImage = source.getSubimage(x*source.getWidth()/picsX, y*source.getHeight()/picsY, source.getWidth()/picsX, source.getHeight()/picsY).getScaledInstance((int)(resolutionFactor*source.getWidth()/picsX), (int)(resolutionFactor*source.getHeight()/picsY),BufferedImage.SCALE_SMOOTH);
+        Image scaledImage = source.getSubimage(x*source.getWidth()/picsX, y*source.getHeight()/picsY, source.getWidth()/picsX, source.getHeight()/picsY);
+        scaledImage.getScaledInstance((int)(resolutionFactor*source.getWidth()/picsX), (int)(resolutionFactor*source.getHeight()/picsY),BufferedImage.SCALE_SMOOTH);
         scaledBufferedImage = new BufferedImage((int)(resolutionFactor*source.getWidth()/picsX), (int)(resolutionFactor*source.getHeight()/picsY),BufferedImage.TYPE_INT_ARGB);
         scaledBufferedImage.getGraphics().drawImage(scaledImage, 0, 0, null);  
     	imageTable[x][y] = scaledBufferedImage;  	

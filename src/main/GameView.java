@@ -284,28 +284,26 @@ public class GameView extends JFrame implements MouseListener {
   }
   
   public void setTarget(Human human, int x, int y) {
-	  Coordinate target = new Coordinate(x,y);
-	  Coordinate lo = new Coordinate(x,y);
-	  Coordinate ro = new Coordinate(x+human.getWidth(),y);
-	  Coordinate lu = new Coordinate(x,y+human.getHeight());;
-	  Coordinate ru = new Coordinate(x+human.getWidth(),y+human.getHeight());;
-	  int xPos = x;
-	  int yPos = y;
-	  
+	  Coordinate target;
+	  int xPos = x-human.getWidth()/2;
+	  int yPos = y-human.getHeight()/2;
+	  Coordinate lo = new Coordinate(xPos,yPos);
+	  Coordinate ro = new Coordinate(xPos+human.getWidth(),yPos);
+	  Coordinate lu = new Coordinate(xPos,yPos+human.getHeight());;
+	  Coordinate ru = new Coordinate(xPos+human.getWidth(),yPos+human.getHeight());;
+
 	  if(!GameLogic.getInstance().checkFreePosition(human.hashCode(),lo,ro,lu,ru)) {
 		  if(GameLogic.getInstance().getComponentAt(x,y) == null) {
-			  xPos -= human.getWidth()/2;
-			  yPos -= human.getHeight()/2;
 			  target = determineFreeCoordinate01(human, new Coordinate(xPos,yPos));
 		  } else {
-			  xPos -= human.getWidth()/2;
-			  yPos -= human.getHeight()/2;
 			  target = determineFreeCoordinate02(human, new Coordinate(xPos,yPos));
 		  }
+	  } else {
+		  target = new Coordinate(xPos, yPos);
 	  }
 	  
-	  player.setActivity(1);
-	  player.setTarget(target.getXCoordinate(), target.getYCoordinate());  
+	  human.setActivity(1);
+	  human.setTarget(target.getXCoordinate(), target.getYCoordinate());  
   }
   
   public Coordinate determineFreeCoordinate02(Human human, Coordinate c) {
@@ -380,7 +378,7 @@ public class GameView extends JFrame implements MouseListener {
 			  }
 		  }
 		  
-		  //Debugging Comments:
+		  //Debugging Method invoke
 		  //printStep(c,xPos,yPos);
 		  //Scanner s = new Scanner(System.in);
 		  //s.nextLine();
@@ -414,8 +412,7 @@ public class GameView extends JFrame implements MouseListener {
 		  System.out.println();
 	  }
   }
-  
-  //Noch in Arbeit
+
   public Coordinate determineFreeCoordinate01(Human human, Coordinate c) {
 	  final int MAX_LOOPS = 100;
 	  int loopCounter = 0;
@@ -427,7 +424,7 @@ public class GameView extends JFrame implements MouseListener {
 	  boolean roFree;
 	  boolean luFree;
 	  boolean ruFree;
-	  
+	  System.out.println("01");
 	  do {
 		  loopCounter++;
 		  
