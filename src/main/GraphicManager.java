@@ -86,7 +86,7 @@ public class GraphicManager {
     popup1000x600 = new BufferedImageLoader("Data/Graphics/","popup1000x600_01.png");
     drinkButtons = new BufferedImageLoader("Data/Graphics/","drinkbuttons02.png", 2, 8);
     
-    statusBG = new BufferedImageLoader("Data/Graphics/","statusbg02.png");
+    statusBG = new BufferedImageLoader("Data/Graphics/","statusbg04.png");
     statusUhr = new BufferedImageLoader("Data/Graphics/","uhr01.png");
     statusBeenden = new BufferedImageLoader("Data/Graphics/", "exitButton01.png", 1, 2);
     
