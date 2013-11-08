@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
+import objects.Bar;
 import objects.DiscoObject;
 import player.Player;
 import main.BufferedImageLoader;
@@ -25,6 +26,7 @@ public class BarOverlay extends Overlay {
 	 */
 	static final int NUM_BUT = 8;
 	public Player player;
+	public Bar bar;
 	JLabel buttons[] = new JLabel[NUM_BUT];
 	Act actions[] = new Act[NUM_BUT];
 	
@@ -66,21 +68,41 @@ public class BarOverlay extends Overlay {
 		ImageIcon i;
 		ImageIcon h;
 		int action;
+		MouseEvent e;
 		public Act(int action, ImageIcon i, ImageIcon h) {
 			this.i = i;
 			this.h = h;
 			this.action = action;
 		}
 		@Override
-		public void mouseClicked(MouseEvent e) {
+		public void mouseClicked(final MouseEvent e) {
+			this.e = e;
 			player.setActivityTimer(600);
 			//if(player.getActivityTimer()==0){
-				DiscoObject.setStatusES(player, action);
-				((JLabel) e.getSource()).getParent().setVisible(false);
-				((JLabel) e.getSource()).getParent().setEnabled(false);
-				disableActions();
-				player.setActivity(0);
-				System.out.println(player.getActivityTimer());	
+			new Thread(new Runnable(){
+				@Override
+				public void run() {
+					System.out.println("Event"+player.getActivityTimer());	
+					while(player.getActivityTimer()>0) {
+						System.out.println("Event"+player.getActivityTimer());
+						try {
+							Thread.sleep(20);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					DiscoObject.setStatusES(player, action);
+					((JLabel) e.getSource()).getParent().setVisible(false);
+					((JLabel) e.getSource()).getParent().setEnabled(false);
+					disableActions();
+					player.setActivity(0);
+					System.out.println(player.getActivityTimer());
+					bar.openOverlay=false;
+					
+				}
+			}).start();;
+				
 			//}
 		}
 		@Override

@@ -34,7 +34,7 @@ public class GameLogic implements Runnable, KeyListener {
   }
   
   public void run() {
-	  
+	  System.out.print("dsfs");
 	  long fps = 0;
 	  long frames = 0;
 	  long updateTimer = 0;
@@ -43,6 +43,7 @@ public class GameLogic implements Runnable, KeyListener {
 	  long sleepTime = 0;
 	  
 	  while(true) {
+		  System.out.print("");
 		  if(menu) continue;
 		  if(!initialized) {  
 			  timestamp = System.nanoTime();
@@ -57,6 +58,9 @@ public class GameLogic implements Runnable, KeyListener {
 		  sbar.updateBars(player);
 		  frames++;
 		  updateTimer += UPDATE_TIME_INTERVALL;
+		  if(player.getActivityTimer()>0){
+			  player.decActivityTimer();
+		  }
 		  
 		  //FPS Berechnung 
 		  if(System.nanoTime()-framesPerSecondTimer >= FPS_DISPLAY_INTERVALL) {
