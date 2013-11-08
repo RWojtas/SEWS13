@@ -8,6 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import objects.Bar;
 import objects.DiscoObject;
 import player.*;
 
@@ -141,12 +142,18 @@ public class ASManager {
 	class ASMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
-
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
-		    
-		  	AS clickedObject = (AS)e.getSource();  
+	    	int xPos;
+		  	int yPos;
 		  	
+		  	AS clickedObject = (AS)e.getSource();  
+		   
+		    xPos = clickedObject.getPosition().getX0() + e.getX();
+		    yPos = clickedObject.getPosition().getX0() + e.getY();
+		    
+		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos,yPos);
+		    
 		    /* TODO Raffael & Sebastian (& Nicolas)
 		     * Aktion: NPC ansprechen/interagieren
 		     */
