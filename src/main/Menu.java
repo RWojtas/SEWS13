@@ -179,6 +179,12 @@ public class Menu extends JLayeredPane {
 		end.addMouseListener(end_l);
 		impr.addMouseListener(impr_l);
 	}
+	
+	public void setVisible(boolean on) {
+		super.setVisible(on);
+		if(on) enableButtonsEvents();
+		else disableButtonsEvents();
+	}
 
 	private JComponent makePopup(String title, JComponent content) {
 		JLayeredPane pan = (JLayeredPane) makePopup(title);

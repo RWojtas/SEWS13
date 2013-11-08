@@ -150,7 +150,10 @@ public class Statusbar {
 		public void mouseClicked(MouseEvent e) {
 			switch (act) {
 			case 'e':
-				System.exit(0);
+				//System.exit(0);
+				GameLogic.getInstance().menu = true;
+				GameLogic.getInstance().gameView.menu.setVisible(true);
+				GameLogic.getInstance().gameView.menu.setEnabled(true);
 				((JLabel) e.getSource()).setIcon(standard);
 				break;
 			case 'm':

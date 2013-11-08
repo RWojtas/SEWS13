@@ -36,6 +36,8 @@ public class GameView extends JFrame implements MouseListener {
 	
 	public MusicManager musicManager;
 	
+	public Menu menu;
+	
 	public BarOverlay bar;
 	public DJOverlay dj;
 	
@@ -92,7 +94,7 @@ public class GameView extends JFrame implements MouseListener {
 		layeredPane.add(musicManager.getPanel());
 		
 		//Men�
-		Menu menu = new Menu(graphicManager, musicManager);
+		menu = new Menu(graphicManager, musicManager);
 		layeredPane.add(menu, JLayeredPane.POPUP_LAYER);
 		
 		layer3.add(player);
