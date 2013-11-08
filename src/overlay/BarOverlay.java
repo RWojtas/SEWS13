@@ -74,14 +74,14 @@ public class BarOverlay extends Overlay {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			player.setActivityTimer(600);
-			if(player.getActivityTimer()==0){
+			//if(player.getActivityTimer()==0){
 				DiscoObject.setStatusES(player, action);
 				((JLabel) e.getSource()).getParent().setVisible(false);
 				((JLabel) e.getSource()).getParent().setEnabled(false);
 				disableActions();
 				player.setActivity(0);
 				System.out.println(player.getActivityTimer());	
-			}
+			//}
 		}
 		@Override
 		public void mouseEntered(MouseEvent e) {
