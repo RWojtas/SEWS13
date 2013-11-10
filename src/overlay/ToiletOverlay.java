@@ -131,9 +131,9 @@ public class ToiletOverlay extends Overlay{
 					((JLabel) e.getSource()).getParent().setVisible(false);
 					((JLabel) e.getSource()).getParent().setEnabled(false);
 					disableActions();
-					player.setActivity(action);
+					player.setActivity(0);
 					System.out.println(player.getActivityTimer());
-//					bar.openOverlay=false;
+
 					
 					// Reset
 					player.setVisible(true);
