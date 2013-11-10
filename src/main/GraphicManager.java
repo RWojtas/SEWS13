@@ -51,22 +51,23 @@ public class GraphicManager {
   public BufferedImageLoader progress4;
   
   public BufferedImageLoader border;
-  public BufferedImageLoader carpet;
   
   //Flirten
-  public BufferedImageLoader ButtonFlirten;
+  public BufferedImageLoader flirtButton;
   
   // Mouse
   public BufferedImageLoader mouse;
   
   //Sitzen
-  public BufferedImageLoader buttonSitzen;
+  public BufferedImageLoader benchButton;
   
   //Toilette
-  public BufferedImageLoader buttonWC;
+  public BufferedImageLoader toiletButton;
   
   //Tanzen
-  public BufferedImageLoader buttonTanzen;
+  public BufferedImageLoader dancefloorButton;
+  
+  public BufferedImageLoader carpet;
   
   public GraphicManager() {
     
@@ -123,15 +124,21 @@ public class GraphicManager {
     
     dj_overlay = new BufferedImageLoader("Data/Graphics/", "dj_overlay.png");
     
-    buttonSitzen = new BufferedImageLoader("Data/Graphics/", "SitztenButton02.png", 1, 2);
+
+//    buttonSitzen = new BufferedImageLoader("Data/Graphics/", "SitztenButton02.png", 1, 2);
+
+    benchButton = new BufferedImageLoader("Data/Graphics/", "ButtonSitzen.png", 2, 1);
+
     
-//    buttonWC = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
+//    toiletButton = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
     
-    buttonTanzen = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png");
+    dancefloorButton = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png");
     
     
     carpet = new BufferedImageLoader("Data/Graphics/", "carpet_01.png");
+
     
     benchOverlay = new BufferedImageLoader("Data/Graphics/", "benchoverlay_01.png");
+    flirtButton = new BufferedImageLoader("Data/Graphics/", "ButtonFlirten.png");
   }
 }
