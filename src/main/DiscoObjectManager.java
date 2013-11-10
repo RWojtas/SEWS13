@@ -66,7 +66,6 @@ public class DiscoObjectManager {
 	    discoObject[12] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(1038),BufferedImageLoader.scaleToScreenY(23));
 	    discoObject[12].addMouseListener(new BenchMouseListener());
 	    discoObject[13] = new Carpet(null, graphicManager.carpet.getImage(),BufferedImageLoader.scaleToScreenX(0),BufferedImageLoader.scaleToScreenY(250));
-
 	    
 	    for(DiscoObject obj : discoObject)
 			panel.add(obj);
