@@ -13,6 +13,9 @@ import javax.swing.*;
 import overlay.BarOverlay;
 import overlay.BenchOverlay;
 import overlay.DJOverlay;
+import overlay.DancefloorOverlay;
+import overlay.FlirtOverlay;
+import overlay.ToiletOverlay;
 import main.Menu.MouseAction;
 import music.MusicManager;
 import objects.*;
@@ -42,6 +45,9 @@ public class GameView extends JFrame implements MouseListener {
 	public BarOverlay bar;
 	public DJOverlay dj;
 	public BenchOverlay bench;
+	public DancefloorOverlay dancefloor;
+	public FlirtOverlay flirt;
+	public ToiletOverlay toilet;
 	
 	Statusbar sbar;
 	JLabel statusb_bg;
@@ -131,6 +137,19 @@ public class GameView extends JFrame implements MouseListener {
 		bench = new BenchOverlay(graphicManager, player, "Die Bank");
 		bench.setVisible(false);
 		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
+		
+		dancefloor = new DancefloorOverlay(graphicManager, player,"Die Tanzfläche");
+		dancefloor.setVisible(false);
+		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
+		
+		flirt = new FlirtOverlay(graphicManager, player, "Das Flirten");
+		flirt.setVisible(false);
+		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
+		
+		toilet = new ToiletOverlay(graphicManager, player, "Die Toilette");
+		toilet.setVisible(false);
+		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
+		
 		
 		// Start: Statusbar
 		statusb_bg = sbar.addLabel((int) deskResolution.getWidth()
