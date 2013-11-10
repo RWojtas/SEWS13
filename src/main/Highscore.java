@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Highscore {
 	private static final String HIGHSCORE_FILE = "data\\highscore.txt";
@@ -123,7 +124,9 @@ public class Highscore {
 			file_reader.close();
 		} catch (IOException e) {}
 		
-		Collections.sort(l);
+		Comparator<Integer> comparator = Collections.reverseOrder();
+		
+		Collections.sort(l, comparator);
 		
 		return l;
 	}

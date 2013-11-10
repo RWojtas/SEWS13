@@ -22,6 +22,10 @@ import javax.swing.JLayeredPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import music.MusicManager;
 
@@ -148,15 +152,21 @@ public class Menu extends JLayeredPane {
 
 		// TODO alle anzeigen!
 		ArrayList<Integer> hlist = Highscore.getInstance().readHighscoreFile();
-		String bester_stand = (hlist.size() > 0) ? hlist.get(hlist.size() - 1)
-				.toString() : " - keine Daten - ";
+		String bester_stand = "";
+		int i = 1;
+		for(Integer v : hlist) {
+			bester_stand += i+")   "+v.toString()+"\n";
+			i++;
+		}
+				
 		JTextArea best = new JTextArea();
 		best.setEditable(false);
 		best.setBackground(new Color(0,0,0,0));
 		best.setFocusable(false);
-		best.setText("Bester Punktestand: " + bester_stand);
-		best.setFont(new Font("Ahorani", 0, BufferedImageLoader.scaleToScreenY(30)));
+		best.setText(bester_stand);
+		best.setFont(new Font("Ahorani", 0, BufferedImageLoader.scaleToScreenY(45)));
 		best.setForeground(new Color(128, 0, 0));
+		best.setHighlighter(null);
 		score = makePopup("Bestenliste",best);
 		score.setVisible(false);
 		add(score, JLayeredPane.POPUP_LAYER);
