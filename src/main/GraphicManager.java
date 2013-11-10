@@ -65,6 +65,7 @@ public class GraphicManager {
   
   //Toilette
   public BufferedImageLoader toiletButton;
+  public BufferedImageLoader toiletOverlay;
   
   //Tanzen
   public BufferedImageLoader dancefloorButton;
@@ -132,7 +133,8 @@ public class GraphicManager {
     benchButton = new BufferedImageLoader("Data/Graphics/", "SitztenButton02.png", 1, 2);
 
     
-//    toiletButton = new BufferedImageLoader("Data/Graphics/", "buttonWC.png");
+    toiletButton = new BufferedImageLoader("Data/Graphics/", "WCButton02.png", 1, 2);
+    toiletOverlay = new BufferedImageLoader("Data/Graphics/", "wcoverlay_01.png");
     
     dancefloorButton = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png", 1, 2);
     

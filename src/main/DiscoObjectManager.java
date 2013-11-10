@@ -422,18 +422,38 @@ public class DiscoObjectManager {
 	class ToiletMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
-	    	if (!canClick) return;
+		    if (!canClick) return;
+	    	canClick = false;
 		    System.out.println("mouseClicked");
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
 		    Toilet clickedObject = (Toilet)e.getSource();
 		    
-		    gameLogic.gameView.setTarget(player,clickedObject.getX()+e.getX(),clickedObject.getY()+e.getY()); 
-		    
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
+		    final int x = clickedObject.getX()-10;
+		    final int y = clickedObject.getY()+100;
+		    
+		    
+		    gameLogic.gameView.setTarget(player,x,y);
+		    new Thread(new Runnable() {
+				@Override
+				public void run() {
+					int i = 0;
+					while(!player.doActivity()) {
+						try {
+							Thread.sleep(20);
+						} catch (InterruptedException e) {
+						}
+						i++;
+						if (i>200) break;
+					}
+					gameLogic.gameView.toilet.setVisible(true);
+					canClick = true;
+				}
+			}).start();
 		}
 
 		@Override
