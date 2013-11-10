@@ -70,6 +70,8 @@ public class GraphicManager {
   
   public BufferedImageLoader carpet;
   
+  public BufferedImageLoader gameOverImage;
+  
   public GraphicManager() {
     
 	//Mit diesem Befehl wird jede im Folgenden geladene Grafik
@@ -141,6 +143,8 @@ public class GraphicManager {
     
     benchOverlay = new BufferedImageLoader("Data/Graphics/", "benchoverlay_01.png");
     flirtButton = new BufferedImageLoader("Data/Graphics/", "ButtonFlirten.png");
+    
+    gameOverImage = new BufferedImageLoader("Data/Graphics/", "gameOverImage.png");
     
   }
 }
