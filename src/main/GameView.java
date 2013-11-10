@@ -140,18 +140,20 @@ public class GameView extends JFrame implements MouseListener {
 		bench.setVisible(false);
 		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
 		
-		dancefloor = new DancefloorOverlay(graphicManager, player,"Die Tanzfläche");
+		toilet = new ToiletOverlay(graphicManager, player, "Die Toilette");
+		toilet.setVisible(false);
+		layeredPane.add(toilet, JLayeredPane.POPUP_LAYER);
+		
+		dancefloor = new DancefloorOverlay(graphicManager, player, "Die Tanzflaeche");
 		dancefloor.setVisible(false);
-		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
+		layeredPane.add(dancefloor, JLayeredPane.POPUP_LAYER);		
 		/*
 		flirt = new FlirtOverlay(graphicManager, player, "Das Flirten");
 		flirt.setVisible(false);
-		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
-		
-		toilet = new ToiletOverlay(graphicManager, player, "Die Toilette");
-		toilet.setVisible(false);
-		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
+		layeredPane.add(flirt, JLayeredPane.POPUP_LAYER);
 		*/
+		
+		
 		
 		
 		// Start: Statusbar

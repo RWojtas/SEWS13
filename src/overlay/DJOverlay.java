@@ -82,7 +82,7 @@ public class DJOverlay extends Overlay {
 		
 		progressText = new JLabel();
 		progressText.setBounds(15, 550, 660, 150);
-		progressText.setText("\"Klar, spiel ich nach diesem Song für dich!\"");
+		progressText.setText("\"Klar, spiel ich nach diesem Song fuer dich!\"");
 		progressText.setForeground(new Color(128,0,0));
 		progressText.setFont(new Font("Aharoni", 0, 30));
 		progressText.setHorizontalTextPosition(JLabel.RIGHT);

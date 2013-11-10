@@ -146,7 +146,7 @@ public class DiscoObjectManager {
 				@Override
 				public void run() {
 					int i = 0;
-					while(Math.abs(player.getPosition().getX0() - x) > 8 && Math.abs(player.getPosition().getY0() - y) > 8) {
+					while(!player.doActivity()) {
 						try {
 							Thread.sleep(20);
 						} catch (InterruptedException e) {
@@ -208,7 +208,7 @@ public class DiscoObjectManager {
 				@Override
 				public void run() {
 					int i = 0;
-					while(Math.abs(player.getPosition().getX0() - x) > 8 && Math.abs(player.getPosition().getY0() - y) > 8) {
+					while(!player.doActivity()) {
 						try {
 							Thread.sleep(20);
 						} catch (InterruptedException e) {
@@ -256,11 +256,33 @@ public class DiscoObjectManager {
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
 		    Dancefloor clickedObject = (Dancefloor)e.getSource();
-		    gameLogic.gameView.setTarget(player,clickedObject.getX()+e.getX(),clickedObject.getY()+e.getY()); 
+		    //gameLogic.gameView.setTarget(player,clickedObject.getX()+e.getX(),clickedObject.getY()+e.getY()); 
 		    
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
+		    
+		    final int x = clickedObject.getX()+e.getX();
+		    final int y = clickedObject.getY()+e.getY();
+		    
+		    
+		    gameLogic.gameView.setTarget(player,x,y);
+		    new Thread(new Runnable() {
+				@Override
+				public void run() {
+					int i = 0;
+					while(!player.doActivity()) {
+						try {
+							Thread.sleep(20);
+						} catch (InterruptedException e) {
+						}
+						i++;
+						if (i>200) break;
+					}
+					gameLogic.gameView.dancefloor.setVisible(true);
+					canClick = true;
+				}
+			}).start();
 		}
 
 		@Override
@@ -311,7 +333,7 @@ public class DiscoObjectManager {
 				@Override
 				public void run() {
 					int i = 0;
-					while(Math.abs(player.getPosition().getX0() - x) > 8 && Math.abs(player.getPosition().getY0() - y) > 8) {
+					while(!player.doActivity()) {
 						try {
 							Thread.sleep(20);
 						} catch (InterruptedException e) {
@@ -323,12 +345,12 @@ public class DiscoObjectManager {
 					canClick = true;
 				}
 			}).start();
+		    canClick = true;
 		}
 
 	    @Override
 		public void mouseEntered(MouseEvent e) {
 		    //Wird ausgelöst, wenn die Maus den aktiven Bereich des MouseListeners betritt
-			  
 		}
 
 		@Override
@@ -400,18 +422,38 @@ public class DiscoObjectManager {
 	class ToiletMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
-	    	if (!canClick) return;
+		    if (!canClick) return;
+	    	canClick = false;
 		    System.out.println("mouseClicked");
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
 		    Toilet clickedObject = (Toilet)e.getSource();
 		    
-		    gameLogic.gameView.setTarget(player,clickedObject.getX()+e.getX(),clickedObject.getY()+e.getY()); 
-		    
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
+		    final int x = clickedObject.getX()-10;
+		    final int y = clickedObject.getY()+100;
+		    
+		    
+		    gameLogic.gameView.setTarget(player,x,y);
+		    new Thread(new Runnable() {
+				@Override
+				public void run() {
+					int i = 0;
+					while(!player.doActivity()) {
+						try {
+							Thread.sleep(20);
+						} catch (InterruptedException e) {
+						}
+						i++;
+						if (i>200) break;
+					}
+					gameLogic.gameView.toilet.setVisible(true);
+					canClick = true;
+				}
+			}).start();
 		}
 
 		@Override

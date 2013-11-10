@@ -92,6 +92,7 @@ public class BarOverlay extends Overlay {
 		}
 	}
 	
+	
 	class Act extends MouseAdapter {
 		ImageIcon i;
 		ImageIcon h;

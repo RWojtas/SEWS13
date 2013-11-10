@@ -36,6 +36,7 @@ public class GraphicManager {
   
   public BufferedImageLoader dj_overlay;
   public BufferedImageLoader benchOverlay;
+  public BufferedImageLoader dancefloorOverlay;
   
   public BufferedImageLoader statusBG;
   public BufferedImageLoader statusUhr;
@@ -64,6 +65,7 @@ public class GraphicManager {
   
   //Toilette
   public BufferedImageLoader toiletButton;
+  public BufferedImageLoader toiletOverlay;
   
   //Tanzen
   public BufferedImageLoader dancefloorButton;
@@ -133,9 +135,10 @@ public class GraphicManager {
     benchButton = new BufferedImageLoader("Data/Graphics/", "SitztenButton02.png", 1, 2);
 
     
-//    toiletButton = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
+    toiletButton = new BufferedImageLoader("Data/Graphics/", "WCButton02.png", 1, 2);
+    toiletOverlay = new BufferedImageLoader("Data/Graphics/", "wcoverlay_01.png");
     
-    dancefloorButton = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png", 1, 2);
+    dancefloorButton = new BufferedImageLoader("Data/Graphics/", "TanzenButton02.png", 1, 2);
     
     
     carpet = new BufferedImageLoader("Data/Graphics/", "carpet_01.png");
@@ -145,6 +148,8 @@ public class GraphicManager {
     flirtButton = new BufferedImageLoader("Data/Graphics/", "ButtonFlirten.png");
     
     gameOverImage = new BufferedImageLoader("Data/Graphics/", "gameOverImage.png");
+    
+    dancefloorOverlay = new BufferedImageLoader("Data/Graphics/", "daceoverlay_01.png");
     
   }
 }
