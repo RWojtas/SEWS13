@@ -34,7 +34,7 @@ public class BenchOverlay extends Overlay{
 		    buttons = new JLabel();
             buttons.setIcon(new ImageIcon(graphicManager.buttonSitzen.getImage(0,0)));
             buttons.setBounds(BufferedImageLoader.scaleToScreenX(700+0%3*95), BufferedImageLoader.scaleToScreenY(100+0/3*182), BufferedImageLoader.scaleToScreenX(90), BufferedImageLoader.scaleToScreenY(176));
-            actions = new Act(11+0, new ImageIcon(graphicManager.buttonSitzen.getImage(0,0)), new ImageIcon(graphicManager.buttonSitzen.getImage(1,0)));
+            actions = new Act(4, new ImageIcon(graphicManager.buttonSitzen.getImage(0,0)), new ImageIcon(graphicManager.buttonSitzen.getImage(1,0)));
             add(buttons,JLayeredPane.POPUP_LAYER);
 		
 		enableActions();

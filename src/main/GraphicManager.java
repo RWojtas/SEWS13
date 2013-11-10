@@ -123,8 +123,9 @@ public class GraphicManager {
     
     buttonSitzen = new BufferedImageLoader("Data/Graphics/", "ButtonSitzen.png");
     
-    buttonWC = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
+    buttonWC = new BufferedImageLoader("Data/Graphics/", "buttonWC.png");
     
     buttonTanzen = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png");
+    ButtonFlirten = new BufferedImageLoader("Data/Graphics/", "ButtonFlirten.png");
   }
 }

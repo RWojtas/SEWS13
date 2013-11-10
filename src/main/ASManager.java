@@ -11,13 +11,16 @@ import javax.swing.JPanel;
 import objects.Bar;
 import objects.DiscoObject;
 import player.*;
+import main.DiscoObjectManager;
 
 
 
 public class ASManager {
 	public AS[] human;
 	public GraphicManager graphicManager;
+	public Player player;
 	public DiscoObjectManager doManager;
+	public static GameLogic gameLogic;
 	final static int as_cntr = 10;
 	
 	public ASManager(GraphicManager graphicManager, DiscoObjectManager doManager) {
@@ -153,11 +156,35 @@ public class ASManager {
 		    yPos = clickedObject.getPosition().getX0() + e.getY();
 		    
 		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos,yPos);
+	    
 		    
 		    /* TODO Raffael & Sebastian (& Nicolas)
 		     * Aktion: NPC ansprechen/interagieren
 		     */
+		    		    
+		    final int x = clickedObject.getX()+clickedObject.getWidth()/2;
+		    final int y = clickedObject.getY()+clickedObject.getHeight()+10;
+		    
+		    GameLogic.gameView.setTarget(player,x,y);
+		    
+		    new Thread(new Runnable() {
+				@Override
+				public void run() {
+					int i = 0;
+					while(Math.abs(player.getPosition().getX0() - x) > 8 && Math.abs(player.getPosition().getY0() - y) > 8) {
+						try {
+							Thread.sleep(20);
+						} catch (InterruptedException e) {
+						}
+						i++;
+						if (i>200) break;
+					}
+					gameLogic.gameView.bar.setVisible(true);
+					doManager.canClick = true;
+				}
+			}).start();
 		}
+		
 
 	    @Override
 		public void mouseEntered(MouseEvent e) {
@@ -181,6 +208,8 @@ public class ASManager {
 		public void mouseReleased(MouseEvent e) {
 		     //Wird ausgelöst, nachdem man einen Klick mit der Maus wieder loslässt
 			  
-	    }
+	    	}
+		}
 	}
-}
+	
+
