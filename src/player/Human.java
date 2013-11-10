@@ -62,7 +62,6 @@ public abstract class Human extends JLabel{
 
 	// Constructor
 	public Human(String type, char gender, BufferedImage image, int x, int y, int direction) {
-		this.position = new Position(x, y, x+width, y, x, y+height, x+width, y+height);
 		this.target = new Position(0, 0, 0, 0, 0, 0, 0, 0);
 		this.flirt = 0.5;
 		this.fun = 0.5;
@@ -80,6 +79,8 @@ public abstract class Human extends JLabel{
 //		this.width =  image.getWidth();
 		this.height = BufferedImageLoader.scaleToScreenX(60);
 		this.width =  BufferedImageLoader.scaleToScreenY(60);
+		
+		this.position = new Position(x, y, x+width, y, x, y+height, x+width, y+height);
 		
 		for(int i=0;i<8;i++) {
 			images[i] = new ImageIcon(image.getSubimage(0,i*width,width,height));

@@ -68,6 +68,8 @@ public class GameView extends JFrame implements MouseListener {
 	JLabel gameExit;
 	JLabel moneyLabel;
 	private JLabel musicSwitch;
+	private JLabel gameOverLabel;
+	private int currentAnimationHeight;
 	
 	  
 	public GameView(ASManager asManager, DiscoObjectManager doManager, Player player, GraphicManager graphicManager) {
@@ -306,6 +308,33 @@ public class GameView extends JFrame implements MouseListener {
 		sbar.setLabels(status_mtitle, status_genre, status_uhrzeit, moneyLabel);
 		sbar.updateBars(player);
 		// End: Statusbar
+		
+		gameOverLabel = new JLabel();
+		gameOverLabel.setOpaque(false);
+		gameOverLabel.setVisible(false);
+		currentAnimationHeight = 0;
+		layer1.add(gameOverLabel,0);
+	}
+	
+	public void animateGameOverLabel(int x, int y, int endHeight) {
+		//if(currentAnimationHeight <= endHeight) {
+			int animationSpeed = 1;
+			BufferedImageLoader gameOverImage = graphicManager.gameOverImage;
+			graphicManager.gameOverImage.reScaleImageSize(gameOverImage.getImageWidth()+animationSpeed, gameOverImage.getImageHeight()+animationSpeed);
+			BufferedImage image = graphicManager.gameOverImage.getImage();		
+			
+			gameOverLabel.setVisible(true);
+			gameOverLabel.setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
+			gameOverLabel.setBounds(BufferedImageLoader.scaleToScreenX(300),
+									BufferedImageLoader.scaleToScreenX(300),
+									graphicManager.gameOverImage.getImageWidth(),
+									graphicManager.gameOverImage.getImageHeight());
+		//}	
+	}
+	
+	public void fateGameOverLabel() {
+		gameOverLabel.setVisible(false);
+		gameOverLabel.setLocation(- gameOverLabel.getWidth(),- gameOverLabel.getHeight());
 	}
  
 	public Statusbar getStatusbar() {
