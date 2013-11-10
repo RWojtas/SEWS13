@@ -11,6 +11,7 @@ import java.util.Scanner;
 import javax.swing.*;
 
 import overlay.BarOverlay;
+import overlay.BenchOverlay;
 import overlay.DJOverlay;
 import main.Menu.MouseAction;
 import music.MusicManager;
@@ -40,6 +41,7 @@ public class GameView extends JFrame implements MouseListener {
 	
 	public BarOverlay bar;
 	public DJOverlay dj;
+	public BenchOverlay bench;
 	
 	Statusbar sbar;
 	JLabel statusb_bg;
@@ -60,6 +62,7 @@ public class GameView extends JFrame implements MouseListener {
 	JLabel gameExit;
 	JLabel moneyLabel;
 	private JLabel musicSwitch;
+	
 	  
 	public GameView(ASManager asManager, DiscoObjectManager doManager, Player player, GraphicManager graphicManager) {
 		// Musik

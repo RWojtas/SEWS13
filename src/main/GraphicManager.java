@@ -57,6 +57,15 @@ public class GraphicManager {
   // Mouse
   public BufferedImageLoader mouse;
   
+  //Sitzen
+  public BufferedImageLoader buttonSitzen;
+  
+  //Toilette
+  public BufferedImageLoader buttonWC;
+  
+  //Tanzen
+  public BufferedImageLoader buttonTanzen;
+  
   public GraphicManager() {
     
 	//Mit diesem Befehl wird jede im Folgenden geladene Grafik
@@ -111,5 +120,11 @@ public class GraphicManager {
     progress4 = new BufferedImageLoader("Data/Graphics/", "progress4_01.png");
     
     dj_overlay = new BufferedImageLoader("Data/Graphics/", "dj_overlay.png");
+    
+    buttonSitzen = new BufferedImageLoader("Data/Graphics/", "ButtonSitzen.png");
+    
+    buttonWC = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
+    
+    buttonTanzen = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png");
   }
 }
