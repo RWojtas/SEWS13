@@ -138,7 +138,7 @@ public class GameView extends JFrame implements MouseListener {
 		bench.setVisible(false);
 		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
 		
-		dancefloor = new DancefloorOverlay(graphicManager, player,"Die Tanzfläche");
+		/*dancefloor = new DancefloorOverlay(graphicManager, player,"Die Tanzfläche");
 		dancefloor.setVisible(false);
 		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
 		
@@ -149,6 +149,7 @@ public class GameView extends JFrame implements MouseListener {
 		toilet = new ToiletOverlay(graphicManager, player, "Die Toilette");
 		toilet.setVisible(false);
 		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
+		*/
 		
 		
 		// Start: Statusbar
