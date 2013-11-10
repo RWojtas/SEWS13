@@ -21,7 +21,6 @@ import main.Highscore;
 public class FlirtOverlay extends Overlay {
 	
 	public Player player;
-	public Bench bench;
 	JLabel progress;
 	JLabel progressText;
 	JLabel buttons = new JLabel();
