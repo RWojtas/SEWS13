@@ -32,6 +32,13 @@ public class DancefloorOverlay extends Overlay{
 		button.setIcon(new ImageIcon(graphicManager.dancefloorButton.getImage(0,0)));
 		button.setBounds(BufferedImageLoader.scaleToScreenX(700), BufferedImageLoader.scaleToScreenY(100), BufferedImageLoader.scaleToScreenX(275), BufferedImageLoader.scaleToScreenY(55));
 		action = new Act(2, new ImageIcon(graphicManager.dancefloorButton.getImage(0,0)), new ImageIcon(graphicManager.dancefloorButton.getImage(0,1)));
+		add(button,JLayeredPane.POPUP_LAYER);
+		
+		// Dancefloor
+		JLabel dancefloor = new JLabel();
+		dancefloor.setIcon(new ImageIcon(graphicManager.dancefloorOverlay.getImage()));
+		dancefloor.setBounds(15, 100, 660, 540);
+		add(dancefloor,JLayeredPane.POPUP_LAYER);
 		
 		// Progress
 		progress = new JLabel();
@@ -88,7 +95,22 @@ public class DancefloorOverlay extends Overlay{
 					overlay.progress.setVisible(true);
 					overlay.progressText.setVisible(true);
 					overlay.close.setVisible(false);
-					while(player.getActivityTimer()>0) {						
+					while(player.getActivityTimer()>0) {
+						
+						switch(player.getActivityTimer()*5/1000) {
+						case 3:
+							overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress1.getImage()));
+							break;
+						case 2:
+							overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress2.getImage()));
+							break;
+						case 1:
+							overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress3.getImage()));
+							break;
+						case 0:
+							overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress4.getImage()));
+					}
+						
 						try {
 							Thread.sleep(20);
 						} catch (InterruptedException e1) {}
@@ -100,6 +122,10 @@ public class DancefloorOverlay extends Overlay{
 					player.setActivity(0);
 					
 					// Reset
+					overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress0.getImage()));
+					overlay.progress.setVisible(false);
+					overlay.progressText.setVisible(false);
+					overlay.close.setVisible(true);
 					((JLabel) e.getSource()).setIcon(i);
 				}
 			}).start();;
