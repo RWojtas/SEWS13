@@ -63,6 +63,9 @@ public class GraphicManager {
   //Toilette
   public BufferedImageLoader buttonWC;
   
+  //Tanzen
+  public BufferedImageLoader buttonTanzen;
+  
   public GraphicManager() {
     
 	//Mit diesem Befehl wird jede im Folgenden geladene Grafik
@@ -121,5 +124,7 @@ public class GraphicManager {
     buttonSitzen = new BufferedImageLoader("Data/Graphics/", "ButtonSitzen.png");
     
     buttonWC = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
+    
+    buttonTanzen = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png");
   }
 }
