@@ -190,7 +190,7 @@ public class DiscoObjectManager {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
 	    	if (!canClick) return;
-		    System.out.println("mouseClicked");
+		    System.out.println("mouseClickedBench");
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		  	
@@ -199,6 +199,27 @@ public class DiscoObjectManager {
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
+		    final int x = clickedObject.getX()+clickedObject.getWidth()+10;
+		    final int y = clickedObject.getY()+clickedObject.getHeight()/2;
+		    
+		    
+		    gameLogic.gameView.setTarget(player,x,y);
+		    new Thread(new Runnable() {
+				@Override
+				public void run() {
+					int i = 0;
+					while(Math.abs(player.getPosition().getX0() - x) > 8 && Math.abs(player.getPosition().getY0() - y) > 8) {
+						try {
+							Thread.sleep(20);
+						} catch (InterruptedException e) {
+						}
+						i++;
+						if (i>200) break;
+					}
+					gameLogic.gameView.bench.setVisible(true);
+					canClick = true;
+				}
+			}).start();
 		}
 
 	    @Override
