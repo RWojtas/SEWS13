@@ -139,7 +139,7 @@ public class GameView extends JFrame implements MouseListener {
 		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
 		
 		
-		dancefloor = new DancefloorOverlay(graphicManager, player, "Die Tanzfläche");
+		dancefloor = new DancefloorOverlay(graphicManager, player, "Die Tanzflaeche");
 		dancefloor.setVisible(false);
 		layeredPane.add(dancefloor, JLayeredPane.POPUP_LAYER);		
 		/*
