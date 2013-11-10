@@ -145,6 +145,7 @@ public class ASManager {
 	class ASMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
+	    	
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 	    	int xPos;
