@@ -37,6 +37,7 @@ public class GameView extends JFrame implements MouseListener {
 	public JPanel layer2;
 	public JPanel layer3;
 	public JPanel layer4;
+	public JPanel layer5;
 	public JLabel fps;
 	
 	public MusicManager musicManager;
@@ -78,8 +79,8 @@ public class GameView extends JFrame implements MouseListener {
 		// Musik
 		musicManager = new MusicManager();	
 		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
-		gameResolution = new Dimension(BufferedImageLoader.scaleToScreenX((int)(BufferedImageLoader.getStandardResolution().getWidth()),true)
-									  ,BufferedImageLoader.scaleToScreenY((int)(BufferedImageLoader.getStandardResolution().getHeight()),true));
+		gameResolution = new Dimension(BufferedImageLoader.scaleToScreenX((int)(BufferedImageLoader.getStandardResolution().getWidth()),false)
+									  ,BufferedImageLoader.scaleToScreenY((int)(BufferedImageLoader.getStandardResolution().getHeight()),false));
 		setSize((int) deskResolution.getWidth(),
 				(int) deskResolution.getHeight());
 		c = getContentPane();
@@ -94,11 +95,13 @@ public class GameView extends JFrame implements MouseListener {
 		layeredPane.addMouseListener(this);
 
 		c.add(layeredPane);
-
-		layer1 = createLayerPanel(); // Höchste Schicht
+		
+	
+		layer1 = createLayerPanel(); // Hoechste Schicht
 		layer2 = createLayerPanel(); // Mittlere Schicht
 		layer3 = createLayerPanel(); // Mittlere Schicht
 		layer4 = createLayerPanel(); // Tiefste Schicht
+		layer5 = createLayerPanel(); // Hintergrund Schicht
 
 		layeredPane.add(layer1, 0); // Layer für Statusbar
 		layeredPane.add(layer2, 1); // Layer für Overlay
@@ -127,8 +130,8 @@ public class GameView extends JFrame implements MouseListener {
 		// Hintergrund
 		JPanel bg = new JPanel();
 		bg.setBackground(new Color(10,10,10));
-		bg.setBounds(0, 0, (int)(gameResolution.getWidth()), (int)(gameResolution.getHeight()));
-		layeredPane.add(bg, -1);
+		bg.setBounds(0,0,(int)(gameResolution.getWidth()),(int)(gameResolution.getHeight()));
+		layer4.add(bg);
 		
 		//Overlays
 		bar = new BarOverlay(graphicManager, player, "Die Bar");
@@ -159,21 +162,21 @@ public class GameView extends JFrame implements MouseListener {
 		
 		// Start: Statusbar
 		statusb_bg = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(270,true), 0,
+				- BufferedImageLoader.scaleToScreenX(270,false), 0,
 				BufferedImageLoader.scaleToScreenX(270,false),
 				BufferedImageLoader.scaleToScreenY(768,false), 
 				graphicManager.statusBG.getImage());
 		layer1.add(statusb_bg,1);
 
 		statusb_uhr = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(233,true), BufferedImageLoader.scaleToScreenY(10,true),
+				- BufferedImageLoader.scaleToScreenX(233,false), BufferedImageLoader.scaleToScreenY(10,false),
 				BufferedImageLoader.scaleToScreenX(223,false),
 				BufferedImageLoader.scaleToScreenY(263,false),
 				graphicManager.statusUhr.getImage());
 		layer1.add(statusb_uhr,0);
 
 		status_mtitle = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215,true), BufferedImageLoader.scaleToScreenY(65,true),
+				- BufferedImageLoader.scaleToScreenX(215,false), BufferedImageLoader.scaleToScreenY(65,false),
 				BufferedImageLoader.scaleToScreenX(175,false),
 				BufferedImageLoader.scaleToScreenY(30,false),
 				"My Heart will go on", 
@@ -183,7 +186,7 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(status_mtitle, 0);
 		
 		status_genre = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215,true), BufferedImageLoader.scaleToScreenY(95,true),
+				- BufferedImageLoader.scaleToScreenX(215,false), BufferedImageLoader.scaleToScreenY(95,false),
 				BufferedImageLoader.scaleToScreenX(175,false),
 				BufferedImageLoader.scaleToScreenY(30,false), 
 				"Rock", 
@@ -193,7 +196,7 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(status_genre, 0);
 		
 		status_uhrzeit = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215,true), BufferedImageLoader.scaleToScreenY(140,true),
+				- BufferedImageLoader.scaleToScreenX(215,false), BufferedImageLoader.scaleToScreenY(140,false),
 				BufferedImageLoader.scaleToScreenX(175,false),
 				BufferedImageLoader.scaleToScreenY(60,false),
 				"23:00", 
@@ -203,7 +206,7 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(status_uhrzeit, 0);
 		
 		moneyLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215,true), BufferedImageLoader.scaleToScreenY(303,true),
+				- BufferedImageLoader.scaleToScreenX(215,false), BufferedImageLoader.scaleToScreenY(303,false),
 				BufferedImageLoader.scaleToScreenX(210,false),
 				BufferedImageLoader.scaleToScreenY(30,false),
 				"Geld: 0,00 Euro", 
@@ -214,13 +217,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(moneyLabel, 0);
 		
 		energyBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245,true), BufferedImageLoader.scaleToScreenY(360,true),
+				- BufferedImageLoader.scaleToScreenX(245,false), BufferedImageLoader.scaleToScreenY(360,false),
 				BufferedImageLoader.scaleToScreenX(235,false),
 				BufferedImageLoader.scaleToScreenY(25,false));
 		energyBar.setValue(0);
 		layer1.add(energyBar, 0);
 		energyLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215,true), BufferedImageLoader.scaleToScreenY(335,true),
+				- BufferedImageLoader.scaleToScreenX(215,false), BufferedImageLoader.scaleToScreenY(335,false),
 				BufferedImageLoader.scaleToScreenX(175,false),
 				BufferedImageLoader.scaleToScreenY(30,false),
 				"Energie", 
@@ -230,13 +233,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(energyLabel, 0);
 		
 		funBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245,true), BufferedImageLoader.scaleToScreenY(425,true),
+				- BufferedImageLoader.scaleToScreenX(245,false), BufferedImageLoader.scaleToScreenY(425,false),
 				BufferedImageLoader.scaleToScreenX(235,false),
 				BufferedImageLoader.scaleToScreenY(25,false));
 		funBar.setValue(0);
 		layer1.add(funBar, 0);
 		funLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215,true), BufferedImageLoader.scaleToScreenY(400,true),
+				- BufferedImageLoader.scaleToScreenX(215,false), BufferedImageLoader.scaleToScreenY(400,false),
 				BufferedImageLoader.scaleToScreenX(175,false),
 				BufferedImageLoader.scaleToScreenY(30,false),
 				"Spass", 
@@ -246,13 +249,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(funLabel, 0);
 		
 		urineBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245,true), BufferedImageLoader.scaleToScreenY(490,true),
+				- BufferedImageLoader.scaleToScreenX(245,false), BufferedImageLoader.scaleToScreenY(490,false),
 				BufferedImageLoader.scaleToScreenX(235,false),
 				BufferedImageLoader.scaleToScreenY(25,false));
 		urineBar.setValue(0);
 		layer1.add(urineBar, 0);
 		urineLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215,true), BufferedImageLoader.scaleToScreenY(465,true),
+				- BufferedImageLoader.scaleToScreenX(215,false), BufferedImageLoader.scaleToScreenY(465,false),
 				BufferedImageLoader.scaleToScreenX(175,false),
 				BufferedImageLoader.scaleToScreenY(30,false),
 				"Blase",
@@ -262,13 +265,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(urineLabel, 0);
 		
 		alcLevelBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245,true), BufferedImageLoader.scaleToScreenY(555,true),
+				- BufferedImageLoader.scaleToScreenX(245,false), BufferedImageLoader.scaleToScreenY(555,false),
 				BufferedImageLoader.scaleToScreenX(235,false),
 				BufferedImageLoader.scaleToScreenY(25,false));
 		alcLevelBar.setValue(0);
 		layer1.add(alcLevelBar, 0);
 		alcLevelLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215,true), BufferedImageLoader.scaleToScreenY(530,true),
+				- BufferedImageLoader.scaleToScreenX(215,false), BufferedImageLoader.scaleToScreenY(530,false),
 				BufferedImageLoader.scaleToScreenX(175,false),
 				BufferedImageLoader.scaleToScreenY(30,false),
 				"Alkoholpegel", 
@@ -278,13 +281,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(alcLevelLabel, 0);
 		
 		flirtBar = sbar.addProgressBar((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(245,true), BufferedImageLoader.scaleToScreenY(620,true),
+				- BufferedImageLoader.scaleToScreenX(245,false), BufferedImageLoader.scaleToScreenY(620,false),
 				BufferedImageLoader.scaleToScreenX(235,false),
 				BufferedImageLoader.scaleToScreenY(25,false));
 		flirtBar.setValue(0);
 		layer1.add(flirtBar, 0);
 		flirtLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215,true), BufferedImageLoader.scaleToScreenY(595,true),
+				- BufferedImageLoader.scaleToScreenX(215,false), BufferedImageLoader.scaleToScreenY(595,false),
 				BufferedImageLoader.scaleToScreenX(175,false),
 				BufferedImageLoader.scaleToScreenY(30,false),
 				"Liebaeugelei", 
@@ -294,13 +297,13 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(flirtLabel, 0);
 		
 		gameExit = sbar.addExitButton((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(60,true), BufferedImageLoader.scaleToScreenY(710,true),
+				- BufferedImageLoader.scaleToScreenX(60,false), BufferedImageLoader.scaleToScreenY(710,false),
 				BufferedImageLoader.scaleToScreenX(45,false),
 				BufferedImageLoader.scaleToScreenY(45,false));
 		layer1.add(gameExit, 0);
 		
 		musicSwitch = sbar.addMusicButton((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(60,true), BufferedImageLoader.scaleToScreenY(660,true),
+				- BufferedImageLoader.scaleToScreenX(60,false), BufferedImageLoader.scaleToScreenY(660,false),
 				BufferedImageLoader.scaleToScreenX(45,false),
 				BufferedImageLoader.scaleToScreenY(45,false));
 		layer1.add(musicSwitch, 0);
@@ -371,7 +374,10 @@ public class GameView extends JFrame implements MouseListener {
   public JPanel createLayerPanel() {
 	  JPanel layer = new JPanel();
 	  layer.setLayout(null);
-	  layer.setBounds(0,0,(int)deskResolution.getWidth(),(int)deskResolution.getHeight());
+	  layer.setBounds(BufferedImageLoader.scaleToScreenX(0, true),
+			  BufferedImageLoader.scaleToScreenY(0, true),
+			  (int)deskResolution.getWidth(),
+			  (int)deskResolution.getHeight());
 	  layer.setOpaque(false);
 	  return layer;
   }

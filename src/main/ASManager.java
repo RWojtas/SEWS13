@@ -89,11 +89,11 @@ public class ASManager {
 		for(int i = 0; i < as_cntr; i++) {
 			int y = 450;//f.myRandom(60, 700);
 			int x = 1098;//f.myRandom(1100, 1200);
-			human[i] = new AS(((i%2==0)?'m':'w'), ((i%2==0)?(((i%4==0))?graphicManager.man01.getImage():graphicManager.man02.getImage()):(((i%4)==1)?graphicManager.woman01.getImage():graphicManager.woman02.getImage())), BufferedImageLoader.scaleToScreenX(x,true), BufferedImageLoader.scaleToScreenY(y,true),1);
+			human[i] = new AS(((i%2==0)?'m':'w'), ((i%2==0)?(((i%4==0))?graphicManager.man01.getImage():graphicManager.man02.getImage()):(((i%4)==1)?graphicManager.woman01.getImage():graphicManager.woman02.getImage())), BufferedImageLoader.scaleToScreenX(x,false), BufferedImageLoader.scaleToScreenY(y,false),1);
 		    human[i].addMouseListener(new ASMouseListener());
 		    human[i].setActivityTimer(f.myRandom(400,3000));
 		    human[i].setActivity(-1);
-		    human[i].setTarget(BufferedImageLoader.scaleToScreenX(f.myRandom(150, 1000),true), BufferedImageLoader.scaleToScreenY(f.myRandom(200, 768),true));
+		    human[i].setTarget(BufferedImageLoader.scaleToScreenX(f.myRandom(150, 1000),false), BufferedImageLoader.scaleToScreenY(f.myRandom(200, 768),false));
 		}
 	    for(Human obj : human)
 			panel.add(obj);
