@@ -146,7 +146,7 @@ public class DiscoObjectManager {
 				@Override
 				public void run() {
 					int i = 0;
-					while(Math.abs(player.getPosition().getX0() - x) > 8 && Math.abs(player.getPosition().getY0() - y) > 8) {
+					while(!player.doActivity()) {
 						try {
 							Thread.sleep(20);
 						} catch (InterruptedException e) {
@@ -208,7 +208,7 @@ public class DiscoObjectManager {
 				@Override
 				public void run() {
 					int i = 0;
-					while(Math.abs(player.getPosition().getX0() - x) > 8 && Math.abs(player.getPosition().getY0() - y) > 8) {
+					while(!player.doActivity()) {
 						try {
 							Thread.sleep(20);
 						} catch (InterruptedException e) {
@@ -311,7 +311,7 @@ public class DiscoObjectManager {
 				@Override
 				public void run() {
 					int i = 0;
-					while(Math.abs(player.getPosition().getX0() - x) > 8 && Math.abs(player.getPosition().getY0() - y) > 8) {
+					while(!player.doActivity()) {
 						try {
 							Thread.sleep(20);
 						} catch (InterruptedException e) {

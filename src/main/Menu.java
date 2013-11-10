@@ -167,6 +167,7 @@ public class Menu extends JLayeredPane {
 		best.setFont(new Font("Ahorani", 0, BufferedImageLoader.scaleToScreenY(45)));
 		best.setForeground(new Color(128, 0, 0));
 		best.setHighlighter(null);
+		
 		score = makePopup("Bestenliste",best);
 		score.setVisible(false);
 		add(score, JLayeredPane.POPUP_LAYER);
