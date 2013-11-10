@@ -74,6 +74,10 @@ public class GraphicManager {
   
   public BufferedImageLoader gameOverImage;
   
+  
+  public BufferedImageLoader statMaennlich;
+  public BufferedImageLoader statWeiblich;
+  
   public GraphicManager() {
     
 	//Mit diesem Befehl wird jede im Folgenden geladene Grafik
@@ -151,5 +155,8 @@ public class GraphicManager {
     
     dancefloorOverlay = new BufferedImageLoader("Data/Graphics/", "daceoverlay_01.png");
     
+    
+    statMaennlich = new BufferedImageLoader("Data/Graphics/", "maennlich01.png", 1, 2);
+    statWeiblich = new BufferedImageLoader("Data/Graphics/", "weiblich01.png", 1, 2);
   }
 }
