@@ -142,9 +142,16 @@ public class ASManager {
 		return true;
 	}
 	
+	public void decreaseStatusForAll(){
+		for(int i=0; i<as_cntr; i++){
+			human[i].decreaseStatusOverTime();
+		}
+	}
+	
 	class ASMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
+	    	
 		    //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 	    	int xPos;

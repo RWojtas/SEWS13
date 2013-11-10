@@ -37,6 +37,7 @@ public class GraphicManager {
   public BufferedImageLoader dj_overlay;
   public BufferedImageLoader benchOverlay;
   public BufferedImageLoader dancefloorOverlay;
+  public BufferedImageLoader flirtOverlay;
   
   public BufferedImageLoader statusBG;
   public BufferedImageLoader statusUhr;
@@ -149,7 +150,8 @@ public class GraphicManager {
 
     
     benchOverlay = new BufferedImageLoader("Data/Graphics/", "benchoverlay_01.png");
-    flirtButton = new BufferedImageLoader("Data/Graphics/", "ButtonFlirten.png");
+    flirtButton = new BufferedImageLoader("Data/Graphics/", "ButtonFlirten.png",1,2);
+    //flirtOverlay = new BufferedImageLoader("Data/Graphic/", "flirtenoverlay_01.png");
     
     gameOverImage = new BufferedImageLoader("Data/Graphics/", "gameOverImage.png");
     

@@ -70,6 +70,7 @@ public class GameView extends JFrame implements MouseListener {
 	private JLabel musicSwitch;
 	private JLabel gameOverLabel;
 	private int currentAnimationHeight;
+	private int endAnimationHeight;
 	
 	  
 	public GameView(ASManager asManager, DiscoObjectManager doManager, Player player, GraphicManager graphicManager) {
@@ -151,9 +152,7 @@ public class GameView extends JFrame implements MouseListener {
 		flirt = new FlirtOverlay(graphicManager, player, "Das Flirten");
 		flirt.setVisible(false);
 		layeredPane.add(flirt, JLayeredPane.POPUP_LAYER);
-		*/
-		
-		
+			*/
 		
 		
 		// Start: Statusbar
@@ -313,23 +312,26 @@ public class GameView extends JFrame implements MouseListener {
 		gameOverLabel.setOpaque(false);
 		gameOverLabel.setVisible(false);
 		currentAnimationHeight = 0;
+		endAnimationHeight = 30;
 		layer1.add(gameOverLabel,0);
 	}
 	
-	public void animateGameOverLabel(int x, int y, int endHeight) {
-		//if(currentAnimationHeight <= endHeight) {
+	public void animateGameOverLabel() {
+		if(currentAnimationHeight <= endAnimationHeight) {
 			int animationSpeed = 1;
 			BufferedImageLoader gameOverImage = graphicManager.gameOverImage;
-			graphicManager.gameOverImage.reScaleImageSize(gameOverImage.getImageWidth()+animationSpeed, gameOverImage.getImageHeight()+animationSpeed);
+			graphicManager.gameOverImage.reScaleImageSize(gameOverImage.getImageWidth()+animationSpeed*2, gameOverImage.getImageHeight()+animationSpeed*2);
 			BufferedImage image = graphicManager.gameOverImage.getImage();		
 			
 			gameOverLabel.setVisible(true);
 			gameOverLabel.setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
-			gameOverLabel.setBounds(BufferedImageLoader.scaleToScreenX(300),
-									BufferedImageLoader.scaleToScreenX(300),
-									graphicManager.gameOverImage.getImageWidth(),
-									graphicManager.gameOverImage.getImageHeight());
-		//}	
+			gameOverLabel.setBounds(BufferedImageLoader.scaleToScreenX(300)-currentAnimationHeight,
+									BufferedImageLoader.scaleToScreenY(300)-currentAnimationHeight,
+									image.getWidth(),
+									image.getHeight());
+			
+			currentAnimationHeight+=animationSpeed;
+		}	
 	}
 	
 	public void fateGameOverLabel() {

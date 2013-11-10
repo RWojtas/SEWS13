@@ -21,6 +21,8 @@ public class GameLogic implements Runnable, KeyListener {
   public static final long UPDATE_TIME_INTERVALL = 6000000; //Nanosekunden
   public static final long ONE_SECOND = 1000000000; //Nanosekunden
   public static final long FPS_DISPLAY_INTERVALL = 100000000; //Nanosekunden
+  public static final int DISCO_OPEN_FROM = 23*60+57; //Minuten
+  public static final int DISCO_CLOSE_AT = 10; //Minuten 
   public Player player;
   public Statusbar statusbar;
   public boolean initialized = false;
@@ -34,7 +36,6 @@ public class GameLogic implements Runnable, KeyListener {
   }
   
   public void run() {
-	  System.out.print("dsfs");
 	  long fps = 0;
 	  long frames = 0;
 	  long updateTimer = 0;
@@ -49,7 +50,7 @@ public class GameLogic implements Runnable, KeyListener {
 			  timestamp = System.nanoTime();
 			  updateTimer = timestamp;
 			  framesPerSecondTimer = timestamp;
-			  statusbar.initializeClock(timestamp, 10, ONE_SECOND/60);
+			  statusbar.initializeClock(DISCO_OPEN_FROM, DISCO_CLOSE_AT, ONE_SECOND/60);
 			  initialized = true;
 		  }
 		  
@@ -60,12 +61,14 @@ public class GameLogic implements Runnable, KeyListener {
 			  statusbar.updateBars(player);
 			  statusbar.updateClock();
 			  frames++;
+			  player.decreaseStatusOverTime();
+			  asManager.decreaseStatusForAll();
 			  updateTimer += UPDATE_TIME_INTERVALL;
 			  if(player.getActivityTimer()>0){
 				  player.decActivityTimer();
 			  } 
 		  } else {
-			  gameView.animateGameOverLabel(1,1,1);
+			  gameView.animateGameOverLabel();
 		  }
 		  
 		  //FPS Berechnung 
