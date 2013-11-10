@@ -153,7 +153,7 @@ public class GraphicManager {
     flirtButton = new BufferedImageLoader("Data/Graphics/", "FlirtenButton01.png",1,2);
     flirtOverlay = new BufferedImageLoader("Data/Graphics/", "flirtenoverlay_01.png");
     
-    gameOverImage = new BufferedImageLoader("Data/Graphics/", "gameOverImage.png");
+    gameOverImage = new BufferedImageLoader("Data/Graphics/", "gameOver01.png");
     
     dancefloorOverlay = new BufferedImageLoader("Data/Graphics/", "daceoverlay_01.png");
     
