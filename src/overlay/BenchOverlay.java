@@ -31,14 +31,20 @@ public class BenchOverlay extends Overlay{
 		this.player = player;
 		
 		// Buttons
-		    buttons = new JLabel();
-            buttons.setIcon(new ImageIcon(graphicManager.buttonSitzen.getImage(0,0)));
-            buttons.setBounds(BufferedImageLoader.scaleToScreenX(700+0%3*95), BufferedImageLoader.scaleToScreenY(100+0/3*182), BufferedImageLoader.scaleToScreenX(90), BufferedImageLoader.scaleToScreenY(176));
-            actions = new Act(11+0, new ImageIcon(graphicManager.buttonSitzen.getImage(0,0)), new ImageIcon(graphicManager.buttonSitzen.getImage(1,0)));
-            add(buttons,JLayeredPane.POPUP_LAYER);
+	    buttons = new JLabel();
+        buttons.setIcon(new ImageIcon(graphicManager.buttonSitzen.getImage(0,0)));
+        buttons.setBounds(BufferedImageLoader.scaleToScreenX(700), BufferedImageLoader.scaleToScreenY(100), BufferedImageLoader.scaleToScreenX(275), BufferedImageLoader.scaleToScreenY(55));
+        actions = new Act(9, new ImageIcon(graphicManager.buttonSitzen.getImage(0,0)), new ImageIcon(graphicManager.buttonSitzen.getImage(0,1)));
+        add(buttons,JLayeredPane.POPUP_LAYER);
 		
 		enableActions();
 		
+		
+		// Bank
+		JLabel bench = new JLabel();
+		bench.setIcon(new ImageIcon(graphicManager.benchOverlay.getImage()));
+		bench.setBounds(15, 100, 660, 540);
+		add(bench,JLayeredPane.POPUP_LAYER);
 		
 		// Progress
 		progress = new JLabel();
@@ -50,7 +56,7 @@ public class BenchOverlay extends Overlay{
 		
 		progressText = new JLabel();
 		progressText.setBounds(15, 550, 660, 80);
-		progressText.setText("\"Na dann, Prost!\"");
+		progressText.setText("\"Ja, ja ein wenig Entspannung...\"");
 		progressText.setForeground(new Color(128,0,0));
 		progressText.setFont(new Font("Aharoni", 0, 30));
 		progressText.setHorizontalTextPosition(JLabel.RIGHT);
@@ -129,7 +135,7 @@ public class BenchOverlay extends Overlay{
 					((JLabel) e.getSource()).getParent().setVisible(false);
 					((JLabel) e.getSource()).getParent().setEnabled(false);
 					disableActions();
-					player.setActivity(0);
+					player.setActivity(action);	// Erholen
 					System.out.println(player.getActivityTimer());
 //					bar.openOverlay=false;
 					

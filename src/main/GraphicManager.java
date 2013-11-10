@@ -35,6 +35,7 @@ public class GraphicManager {
   public BufferedImageLoader barkeeper;
   
   public BufferedImageLoader dj_overlay;
+  public BufferedImageLoader benchOverlay;
   
   public BufferedImageLoader statusBG;
   public BufferedImageLoader statusUhr;
@@ -122,7 +123,7 @@ public class GraphicManager {
     
     dj_overlay = new BufferedImageLoader("Data/Graphics/", "dj_overlay.png");
     
-    buttonSitzen = new BufferedImageLoader("Data/Graphics/", "ButtonSitzen.png", 2, 1);
+    buttonSitzen = new BufferedImageLoader("Data/Graphics/", "SitztenButton02.png", 1, 2);
     
 //    buttonWC = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
     
@@ -130,5 +131,7 @@ public class GraphicManager {
     
     
     carpet = new BufferedImageLoader("Data/Graphics/", "carpet_01.png");
+    
+    benchOverlay = new BufferedImageLoader("Data/Graphics/", "benchoverlay_01.png");
   }
 }
