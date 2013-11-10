@@ -92,6 +92,10 @@ public class BarOverlay extends Overlay {
 		}
 	}
 	
+	public void setProgressText(String s){
+		this.progressText.setText(s);
+	}
+	
 	class Act extends MouseAdapter {
 		ImageIcon i;
 		ImageIcon h;
