@@ -122,7 +122,7 @@ public class GraphicManager {
     
     dj_overlay = new BufferedImageLoader("Data/Graphics/", "dj_overlay.png");
     
-    buttonSitzen = new BufferedImageLoader("Data/Graphics/", "ButtonSitzen.png");
+    buttonSitzen = new BufferedImageLoader("Data/Graphics/", "ButtonSitzen.png", 2, 1);
     
 //    buttonWC = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
     
