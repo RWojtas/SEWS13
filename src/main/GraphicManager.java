@@ -60,6 +60,9 @@ public class GraphicManager {
   //Sitzen
   public BufferedImageLoader buttonSitzen;
   
+  //Toilette
+  public BufferedImageLoader buttonWC;
+  
   public GraphicManager() {
     
 	//Mit diesem Befehl wird jede im Folgenden geladene Grafik
@@ -116,5 +119,7 @@ public class GraphicManager {
     dj_overlay = new BufferedImageLoader("Data/Graphics/", "dj_overlay.png");
     
     buttonSitzen = new BufferedImageLoader("Data/Graphics/", "ButtonSitzen.png");
+    
+    buttonWC = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
   }
 }
