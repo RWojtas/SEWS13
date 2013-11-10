@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 
 import player.Player;
 
@@ -70,7 +71,8 @@ public class Statusbar {
 				bars[i].setValue(bars[i].getValue()-1);
 			}
 		}
-		moneyLabel.setText("Geld: "+player.getMoney()+" Euro");
+		
+		moneyLabel.setText("Geld: "+DecimalFormat.getCurrencyInstance().format(player.getMoney()));
 	}
 	
 	public JLabel addLabel(int posX, int posY, int width, int height, BufferedImage image) {

@@ -171,14 +171,14 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(status_uhrzeit, 0);
 		
 		moneyLabel = sbar.addLabel((int) deskResolution.getWidth()
-				- BufferedImageLoader.scaleToScreenX(215), BufferedImageLoader.scaleToScreenY(303),
-				BufferedImageLoader.scaleToScreenX(205),
+				- BufferedImageLoader.scaleToScreenX(210), BufferedImageLoader.scaleToScreenY(303),
+				BufferedImageLoader.scaleToScreenX(245),
 				BufferedImageLoader.scaleToScreenY(30),
-				"Geld: 0 Euro", 
-				32,
-				JLabel.RIGHT,
-				BufferedImageLoader.scaleToScreenY(Font.BOLD));
-		moneyLabel.setForeground(Color.yellow);
+				"Geld: 0,00€", 
+				24,
+				JLabel.LEFT,
+				Font.ITALIC);
+		moneyLabel.setForeground(Color.white);
 		layer1.add(moneyLabel, 0);
 		
 		energyBar = sbar.addProgressBar((int) deskResolution.getWidth()
