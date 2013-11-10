@@ -63,7 +63,7 @@ public class BarOverlay extends Overlay {
 		moveToFront(progress);
 		
 		progressText = new JLabel();
-		progressText.setBounds(15, 550, 660, 80);
+		progressText.setBounds(15, 550, 660, 150);
 		progressText.setText("\"Na dann, Prost!\"");
 		progressText.setForeground(new Color(128,0,0));
 		progressText.setFont(new Font("Aharoni", 0, 30));

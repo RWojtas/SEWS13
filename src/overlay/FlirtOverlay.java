@@ -50,8 +50,8 @@ public class FlirtOverlay extends Overlay {
 		moveToFront(progress);
 		
 		progressText = new JLabel();
-		progressText.setBounds(15, 550, 660, 80);
-		progressText.setText("\"Na dann, Prost!\"");
+		progressText.setBounds(15, 550, 660, 150);
+		progressText.setText("\"Dann macht mal Liebe!\"");
 		progressText.setForeground(new Color(128,0,0));
 		progressText.setFont(new Font("Aharoni", 0, 30));
 		progressText.setHorizontalTextPosition(JLabel.RIGHT);
