@@ -163,22 +163,12 @@ public class ASManager {
 		    yPos = clickedObject.getPosition().getX0() + e.getY();
 		    
 		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos,yPos);
-	    
-		    
-		    /* TODO Raffael & Sebastian (& Nicolas)
-		     * Aktion: NPC ansprechen/interagieren
-		     */
-		    		    
-		    final int x = clickedObject.getX()+clickedObject.getWidth()/2;
-		    final int y = clickedObject.getY()+clickedObject.getHeight()+10;
-		    
-		    GameLogic.gameView.setTarget(player,x,y);
 		    
 		    new Thread(new Runnable() {
 				@Override
 				public void run() {
 					int i = 0;
-					while(Math.abs(player.getPosition().getX0() - x) > 8 && Math.abs(player.getPosition().getY0() - y) > 8) {
+					while(!GameLogic.getInstance().player.doActivity()) {
 						try {
 							Thread.sleep(20);
 						} catch (InterruptedException e) {
@@ -186,7 +176,7 @@ public class ASManager {
 						i++;
 						if (i>200) break;
 					}
-					gameLogic.gameView.flirt.setVisible(true);
+					GameLogic.getInstance().gameView.flirt.setVisible(true);
 					doManager.canClick = true;
 				}
 			}).start();
