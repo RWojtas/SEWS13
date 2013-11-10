@@ -94,7 +94,7 @@ public abstract class DiscoObject extends JLabel {
 								else p.setFun(1);
 								h.setBonus(1);
 							}
-							else barOverlay.setProgressText("\"Heute wohl kein Getraenk fuer dich!\"");
+
 
 							
 							
@@ -114,7 +114,6 @@ public abstract class DiscoObject extends JLabel {
 								else p.setFun(1);
 								h.setBonus(1);
 							}
-							else barOverlay.setProgressText("\"Heute wohl kein Getraenk fuer dich!\"");
 							break;
 				case 13:	if((p.getMoney()-2)>0){
 								p.removeMoney(2);
@@ -128,7 +127,6 @@ public abstract class DiscoObject extends JLabel {
 								else p.setFun(1);
 								h.setBonus(1);
 							}
-							else barOverlay.setProgressText("\"Heute wohl kein Getraenk fuer dich!\"");
 							break;
 				case 14:	if((p.getMoney()-2)>0){
 								p.removeMoney(2);
@@ -145,14 +143,12 @@ public abstract class DiscoObject extends JLabel {
 								else p.setFun(1);
 								h.setBonus(1);
 							}
-							else barOverlay.setProgressText("\"Heute wohl kein Getraenk fuer dich!\"");
 							break;
 				case 15: 	if((p.getMoney()-2.5)>0){
 								p.removeMoney(2.5);
 								if((p.getUrine()+0.4)<1)p.addUrine(0.40);
 								else p.setUrine(1);
 							}
-							else barOverlay.setProgressText("\"Heute wohl kein Getraenk fuer dich!\"");
 							break;
 				case 16:	if((p.getMoney()-2.5)>0){
 								p.removeMoney(2.5);
@@ -161,7 +157,6 @@ public abstract class DiscoObject extends JLabel {
 								if((p.getEnergy()+0.3)<1) p.addEnergy(0.3);
 								else p.setEnergy(1);
 							}
-							else barOverlay.setProgressText("\"Heute wohl kein Getraenk fuer dich!\"");
 							break;
 				case 17:	if((p.getMoney()-3.5)>0){
 								p.removeMoney(3.5);
@@ -170,7 +165,6 @@ public abstract class DiscoObject extends JLabel {
 								if((p.getAlcLevel()+0.3)<1) p.addAlcLevel(0.3);
 								else p.setAlcLevel(1);
 							}
-							else barOverlay.setProgressText("\"Heute wohl kein Getraenk fuer dich!\"");
 							break;
 				case 18:	if((p.getMoney()-2.5)>0){
 								p.removeMoney(2.5);
@@ -179,7 +173,6 @@ public abstract class DiscoObject extends JLabel {
 								if((p.getAlcLevel()+0.4)<1) p.addAlcLevel(0.4);
 								else p.setAlcLevel(1);
 							}
-							else barOverlay.setProgressText("\"Heute wohl kein Getraenk fuer dich!\"");
 							break;
 				case 4:		if((p.getEnergy()+0.4)<1) p.addEnergy(0.4);
 							else p.setEnergy(1);
