@@ -50,6 +50,7 @@ public class GraphicManager {
   public BufferedImageLoader progress4;
   
   public BufferedImageLoader border;
+  public BufferedImageLoader carpet;
   
   //Flirten
   public BufferedImageLoader ButtonFlirten;
@@ -123,8 +124,11 @@ public class GraphicManager {
     
     buttonSitzen = new BufferedImageLoader("Data/Graphics/", "ButtonSitzen.png");
     
-    buttonWC = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
+//    buttonWC = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
     
     buttonTanzen = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png");
+    
+    
+    carpet = new BufferedImageLoader("Data/Graphics/", "carpet_01.png");
   }
 }
