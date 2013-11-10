@@ -42,7 +42,7 @@ public class BarOverlay extends Overlay {
 		for(int i=0;i<NUM_BUT;i++) {
             buttons[i] = new JLabel();
             buttons[i].setIcon(new ImageIcon(graphicManager.drinkButtons.getImage(0,i)));
-            buttons[i].setBounds(BufferedImageLoader.scaleToScreenX(700+i%3*95), BufferedImageLoader.scaleToScreenY(100+i/3*182), BufferedImageLoader.scaleToScreenX(90), BufferedImageLoader.scaleToScreenY(176));
+            buttons[i].setBounds(BufferedImageLoader.scaleToScreenX(700+i%3*95,true), BufferedImageLoader.scaleToScreenY(100+i/3*182,true), BufferedImageLoader.scaleToScreenX(90,false), BufferedImageLoader.scaleToScreenY(176,false));
             actions[i] = new Act(11+i, new ImageIcon(graphicManager.drinkButtons.getImage(0,i)), new ImageIcon(graphicManager.drinkButtons.getImage(1,i)));
             add(buttons[i],JLayeredPane.POPUP_LAYER);
 		}

@@ -33,8 +33,8 @@ public class Overlay extends JLayeredPane {
 				.getWidth();
 		double screen_height = Toolkit.getDefaultToolkit().getScreenSize()
 				.getHeight();
-		int cont_width = BufferedImageLoader.scaleToScreenX(1000);
-		int cont_height = BufferedImageLoader.scaleToScreenY(650);
+		int cont_width = BufferedImageLoader.scaleToScreenX(1000,false);
+		int cont_height = BufferedImageLoader.scaleToScreenY(650,false);
 
 		bg = new JLabel(new ImageIcon(
 				graphicManager.popup1000x600.getImage()));
@@ -44,13 +44,13 @@ public class Overlay extends JLayeredPane {
 		title.setText(t);
 		title.setFont(new Font("Aharoni", 0, 48));
 		title.setForeground(new Color(128, 0, 0));
-		title.setBounds(BufferedImageLoader.scaleToScreenX(35), BufferedImageLoader.scaleToScreenY(20), BufferedImageLoader.scaleToScreenX(700), BufferedImageLoader.scaleToScreenY(48));
+		title.setBounds(BufferedImageLoader.scaleToScreenX(35,true), BufferedImageLoader.scaleToScreenY(20,true), BufferedImageLoader.scaleToScreenX(700,false), BufferedImageLoader.scaleToScreenY(48,false));
 
 		close = new JLabel();
 		Icon close_icon = new ImageIcon(graphicManager.closeButtons.getImage(0,
 				0));
 		close.setIcon(close_icon);
-		close.setBounds(cont_width - BufferedImageLoader.scaleToScreenX(60), BufferedImageLoader.scaleToScreenY(10), BufferedImageLoader.scaleToScreenX(45), BufferedImageLoader.scaleToScreenY(45));
+		close.setBounds(cont_width - BufferedImageLoader.scaleToScreenX(60,true), BufferedImageLoader.scaleToScreenY(10,true), BufferedImageLoader.scaleToScreenX(45,false), BufferedImageLoader.scaleToScreenY(45,false));
 		close.addMouseListener(new MouseAdapter() {
 			Icon icon_close = new ImageIcon(graphicManager.closeButtons
 					.getImage(0, 1));

@@ -116,18 +116,16 @@ public class BufferedImageLoader {
     }
   }
   
-  public static int scaleToScreenX(int xPos) {
-	 /* if(type) {	  
+  public static int scaleToScreenX(int value, boolean type) {
+	  if(type) {
 		  return (int)(resolutionFactor*(double)(value)); 
 	  } else {
 		  return (int)(resolutionFactor*(double)(value));
-	  }*/
-	  
-	  return (int)(resolutionFactor*(double)(xPos));
+	  }
   }
 
-  public static int scaleToScreenY(int yPos) {
-	  return (int)(resolutionFactor*(double)(yPos));  
+  public static int scaleToScreenY(int value, boolean type) {
+	  return (int)(resolutionFactor*(double)(value));  
   }
   
   /* Types:

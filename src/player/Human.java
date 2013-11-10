@@ -77,8 +77,8 @@ public abstract class Human extends JLabel{
 		graphicState = 0;
 //		this.height = image.getHeight();
 //		this.width =  image.getWidth();
-		this.height = BufferedImageLoader.scaleToScreenX(60);
-		this.width =  BufferedImageLoader.scaleToScreenY(60);
+		this.height = BufferedImageLoader.scaleToScreenX(60,false);
+		this.width =  BufferedImageLoader.scaleToScreenY(60,false);
 		
 		this.position = new Position(x, y, x+width, y, x, y+height, x+width, y+height);
 		
@@ -269,9 +269,18 @@ public abstract class Human extends JLabel{
 		this.setActivityTimer(20);
 	}
 	
+	public long t2;
 	public boolean checkFreePosition(int x, int y) {		// �berpr�ft ob eine gewisse Koordinate besetzt ist oder nicht. 
 		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in Form von "false" oder "true".
-		return gl.checkFreePosition(this.hashCode(), new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
+		if(type.equals("Player")) {
+			t2 = System.nanoTime();
+			boolean b = gl.checkFreePosition(this.hashCode(), new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
+			System.out.println("checkFreePosition Dauer:\nZeit in Nanosekunden: "+(System.nanoTime()-t2));
+			return b;
+		} else {
+			return gl.checkFreePosition(this.hashCode(), new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
+		}
+		
 	}
 	
 	public Coordinate ausDirzuCoo(int dir) { 			// Diese Methode erstellt aus der Richtung eines Menschen

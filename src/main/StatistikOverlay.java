@@ -34,8 +34,8 @@ public class StatistikOverlay extends JLayeredPane {
 				.getWidth();
 		double screen_height = Toolkit.getDefaultToolkit().getScreenSize()
 				.getHeight();
-		int cont_width = BufferedImageLoader.scaleToScreenX(700);
-		int cont_height = BufferedImageLoader.scaleToScreenY(400);
+		int cont_width = BufferedImageLoader.scaleToScreenX(700,false);
+		int cont_height = BufferedImageLoader.scaleToScreenY(400,false);
 
 		JLabel lab = new JLabel(new ImageIcon(
 				graphicManager.startPopup.getImage()));
@@ -43,18 +43,18 @@ public class StatistikOverlay extends JLayeredPane {
 
 		JLabel an = new JLabel("Bitte mach ein paar statistische Angaben:");
 		an.setFont(new Font("Aharoni", 0, BufferedImageLoader
-				.scaleToScreenY(22)));
+				.scaleToScreenY(22,false)));
 		an.setForeground(new Color(128, 0, 0));
 		an.setBounds(30, 60, cont_width - 60, 100);
 
 		JLabel text = new JLabel(title);
 		text.setFont(new Font("Aharoni", 0, BufferedImageLoader
-				.scaleToScreenY(48)));
+				.scaleToScreenY(48,false)));
 		text.setForeground(new Color(128, 0, 0));
-		text.setBounds(BufferedImageLoader.scaleToScreenX(35),
-				BufferedImageLoader.scaleToScreenY(20),
-				BufferedImageLoader.scaleToScreenX(300),
-				BufferedImageLoader.scaleToScreenY(48));
+		text.setBounds(BufferedImageLoader.scaleToScreenX(35,true),
+				BufferedImageLoader.scaleToScreenY(20,true),
+				BufferedImageLoader.scaleToScreenX(300,false),
+				BufferedImageLoader.scaleToScreenY(48,false));
 
 		setBounds((int) ((screen_width - cont_width) / 2),
 				(int) ((screen_height - cont_height) / 2), cont_width,
