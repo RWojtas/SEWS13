@@ -43,7 +43,7 @@ public class GameLogic implements Runnable, KeyListener {
 	  long timestamp = 0;
 	  long sleepTime = 0;
 	 
-	  long t1=0;
+	  //long t1=0;
 	  
 	  while(true) {
 		  System.out.print("");
@@ -58,11 +58,11 @@ public class GameLogic implements Runnable, KeyListener {
 		  //Updates
 		  if(!statusbar.isTimeOut()) {
 			  asManager.updateComponents();
-			  System.out.println("___________________________");
-			  System.out.println("Performance Check Player:");
-			  t1 = System.nanoTime();
+			  //System.out.println("___________________________");
+			  //System.out.println("Performance Check Player:");
+			  //t1 = System.nanoTime();
 			  player.stepNextPosition();
-			  System.out.println("Insgesamte Dauer:\nZeit in Nanosekunden: "+(System.nanoTime()-t1));
+			  //System.out.println("Insgesamte Dauer:\nZeit in Nanosekunden: "+(System.nanoTime()-t1));
 			  statusbar.updateBars(player);
 			  statusbar.updateClock();
 			  frames++;
