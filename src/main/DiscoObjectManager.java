@@ -256,11 +256,33 @@ public class DiscoObjectManager {
 		    //ohne mit gedrückter Maustaste die Position der Maus zu verändern
 		    
 		    Dancefloor clickedObject = (Dancefloor)e.getSource();
-		    gameLogic.gameView.setTarget(player,clickedObject.getX()+e.getX(),clickedObject.getY()+e.getY()); 
+		    //gameLogic.gameView.setTarget(player,clickedObject.getX()+e.getX(),clickedObject.getY()+e.getY()); 
 		    
 		    /* TODO
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
+		    
+		    final int x = clickedObject.getX()+clickedObject.getWidth()+10;
+		    final int y = clickedObject.getY()+clickedObject.getHeight()/2;
+		    
+		    
+		    gameLogic.gameView.setTarget(player,x,y);
+		    new Thread(new Runnable() {
+				@Override
+				public void run() {
+					int i = 0;
+					while(!player.doActivity()) {
+						try {
+							Thread.sleep(20);
+						} catch (InterruptedException e) {
+						}
+						i++;
+						if (i>200) break;
+					}
+					gameLogic.gameView.dancefloor.setVisible(true);
+					canClick = true;
+				}
+			}).start();
 		}
 
 		@Override
