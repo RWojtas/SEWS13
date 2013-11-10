@@ -141,8 +141,7 @@ public class BarOverlay extends Overlay {
 					((JLabel) e.getSource()).getParent().setEnabled(false);
 					disableActions();
 					player.setActivity(0);
-					System.out.println(player.getActivityTimer());
-//					bar.openOverlay=false;
+
 					
 					// Reset
 					overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress0.getImage()));
