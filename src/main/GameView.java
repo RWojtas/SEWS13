@@ -110,6 +110,12 @@ public class GameView extends JFrame implements MouseListener {
 
 		layer1.add(fps);
 		
+		// Hintergrund
+		JPanel bg = new JPanel();
+		bg.setBackground(new Color(10,10,10));
+		bg.setBounds(0, 0, (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+		layeredPane.add(bg, -1);
+		
 		//Overlays
 		bar = new BarOverlay(graphicManager, player, "Die Bar");
 		bar.setVisible(false);

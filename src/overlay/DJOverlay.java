@@ -121,6 +121,7 @@ public class DJOverlay extends Overlay {
 		public void mouseClicked(final MouseEvent e) {
 			this.e = e;
 			player.setActivityTimer(400);
+			
 			//if(player.getActivityTimer()==0){
 			new Thread(new Runnable(){
 				@Override

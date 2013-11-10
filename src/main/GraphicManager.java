@@ -49,6 +49,8 @@ public class GraphicManager {
   public BufferedImageLoader progress3;
   public BufferedImageLoader progress4;
   
+  public BufferedImageLoader border;
+  
   //Flirten
   public BufferedImageLoader ButtonFlirten;
   
@@ -68,9 +70,9 @@ public class GraphicManager {
     //objectGraphic = new BufferedImageLoader("Data/Graphics/","Bar.png");
     
     //background = new BufferedImageLoader("Data/Graphics/","bg.png");
-    bar = new BufferedImageLoader("Data/Graphics/","bar01.png");
-    dj = new BufferedImageLoader("Data/Graphics/","dj01.png");
-    dancefloor = new BufferedImageLoader("Data/Graphics/","tanzflaeche01.png");
+    bar = new BufferedImageLoader("Data/Graphics/","bar02.png");
+    dj = new BufferedImageLoader("Data/Graphics/","dj02.png");
+    dancefloor = new BufferedImageLoader("Data/Graphics/","tanzflaeche02.png");
     table = new BufferedImageLoader("Data/Graphics/","tisch02.png");
     wc = new BufferedImageLoader("Data/Graphics/","wc01.png");
     
@@ -109,5 +111,7 @@ public class GraphicManager {
     progress4 = new BufferedImageLoader("Data/Graphics/", "progress4_01.png");
     
     dj_overlay = new BufferedImageLoader("Data/Graphics/", "dj_overlay.png");
+    
+    border = new BufferedImageLoader("Data/Graphics/", "border.png");
   }
 }
