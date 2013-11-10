@@ -36,7 +36,6 @@ public class GameLogic implements Runnable, KeyListener {
   }
   
   public void run() {
-	  System.out.print("dsfs");
 	  long fps = 0;
 	  long frames = 0;
 	  long updateTimer = 0;
@@ -62,6 +61,8 @@ public class GameLogic implements Runnable, KeyListener {
 			  statusbar.updateBars(player);
 			  statusbar.updateClock();
 			  frames++;
+			  player.decreaseStatusOverTime();
+			  asManager.decreaseStatusForAll();
 			  updateTimer += UPDATE_TIME_INTERVALL;
 			  if(player.getActivityTimer()>0){
 				  player.decActivityTimer();

@@ -21,7 +21,6 @@ import main.Highscore;
 public class FlirtOverlay extends Overlay {
 	
 	public Player player;
-	public Bench bench;
 	JLabel progress;
 	JLabel progressText;
 	JLabel buttons = new JLabel();
@@ -101,7 +100,7 @@ public class FlirtOverlay extends Overlay {
 			new Thread(new Runnable(){
 				@Override
 				public void run() {
-					BenchOverlay overlay = (BenchOverlay)((JLabel) e.getSource()).getParent();
+					FlirtOverlay overlay = (FlirtOverlay)((JLabel) e.getSource()).getParent();
 					overlay.progress.setVisible(true);
 					overlay.progressText.setVisible(true);
 					overlay.close.setVisible(false);

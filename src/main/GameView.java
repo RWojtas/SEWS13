@@ -152,9 +152,7 @@ public class GameView extends JFrame implements MouseListener {
 		flirt = new FlirtOverlay(graphicManager, player, "Das Flirten");
 		flirt.setVisible(false);
 		layeredPane.add(flirt, JLayeredPane.POPUP_LAYER);
-		*/
-		
-		
+			*/
 		
 		
 		// Start: Statusbar
