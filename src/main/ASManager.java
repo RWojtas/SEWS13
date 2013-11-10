@@ -142,6 +142,12 @@ public class ASManager {
 		return true;
 	}
 	
+	public void decreaseStatusForAll(){
+		for(int i=0; i<as_cntr; i++){
+			human[i].decreaseStatusOverTime();
+		}
+	}
+	
 	class ASMouseListener implements MouseListener {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {

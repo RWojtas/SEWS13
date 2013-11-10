@@ -60,6 +60,7 @@ public class GameLogic implements Runnable, KeyListener {
 			  statusbar.updateClock();
 			  frames++;
 			  player.decreaseStatusOverTime();
+			  asManager.decreaseStatusForAll();
 			  updateTimer += UPDATE_TIME_INTERVALL;
 			  if(player.getActivityTimer()>0){
 				  player.decActivityTimer();
