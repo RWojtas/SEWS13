@@ -262,8 +262,8 @@ public class DiscoObjectManager {
 		  	 * Entsprechender Overlayaufruf bzw. Aktion
 		     */
 		    
-		    final int x = clickedObject.getX()+clickedObject.getWidth()+10;
-		    final int y = clickedObject.getY()+clickedObject.getHeight()/2;
+		    final int x = clickedObject.getX()+e.getX();
+		    final int y = clickedObject.getY()+e.getY();
 		    
 		    
 		    gameLogic.gameView.setTarget(player,x,y);
