@@ -113,6 +113,7 @@ public class BarOverlay extends Overlay {
 					BarOverlay overlay = (BarOverlay)((JLabel) e.getSource()).getParent();
 					overlay.progress.setVisible(true);
 					overlay.progressText.setVisible(true);
+					overlay.close.setVisible(false);
 					while(player.getActivityTimer()>0) {
 //						System.out.println("Event"+player.getActivityTimer());
 						
@@ -146,6 +147,7 @@ public class BarOverlay extends Overlay {
 					overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress0.getImage()));
 					overlay.progress.setVisible(false);
 					overlay.progressText.setVisible(false);
+					overlay.close.setVisible(true);
 					((JLabel) e.getSource()).setIcon(i);
 				}
 			}).start();;

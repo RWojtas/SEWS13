@@ -129,6 +129,7 @@ public class DJOverlay extends Overlay {
 					DJOverlay overlay = (DJOverlay)((JButton) e.getSource()).getParent().getParent().getParent().getParent();
 					overlay.progress.setVisible(true);
 					overlay.progressText.setVisible(true);
+					overlay.close.setVisible(false);
 					while(player.getActivityTimer()>0) {
 						
 						switch(player.getActivityTimer()*5/400) {
@@ -152,6 +153,7 @@ public class DJOverlay extends Overlay {
 					
 					overlay.setVisible(false);
 					overlay.setEnabled(false);
+					overlay.close.setVisible(true);
 					disableActions();
 					
 

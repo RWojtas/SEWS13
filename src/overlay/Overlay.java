@@ -23,7 +23,7 @@ import music.MusicManager;
 public class Overlay extends JLayeredPane {
 	protected GraphicManager graphicManager;
 	private JLabel title;
-	private JLabel close;
+	protected JLabel close;
 	private JLabel bg;
 	
 	public Overlay(final GraphicManager graphicManager, String t) {
