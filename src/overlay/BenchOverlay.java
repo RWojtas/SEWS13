@@ -24,7 +24,7 @@ public class BenchOverlay extends Overlay{
 	JLabel progress;
 	JLabel progressText;
 	JLabel buttons = new JLabel();
-	Act actions = new Act();
+	Act actions;
 	
 	public BenchOverlay(final GraphicManager graphicManager, Player player, String t) {
 		super(graphicManager, t);
@@ -94,9 +94,7 @@ public class BenchOverlay extends Overlay{
 			this.h = h;
 			this.action = action;
 		}
-		public Act() {
-			// TODO Auto-generated constructor stub
-		}
+
 		@Override
 		public void mouseClicked(final MouseEvent e) {
 			this.e = e;
@@ -135,7 +133,7 @@ public class BenchOverlay extends Overlay{
 					((JLabel) e.getSource()).getParent().setVisible(false);
 					((JLabel) e.getSource()).getParent().setEnabled(false);
 					disableActions();
-					player.setActivity(action);	// Erholen
+					player.setActivity(0);	// Erholen
 					System.out.println(player.getActivityTimer());
 //					bar.openOverlay=false;
 					
