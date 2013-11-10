@@ -128,6 +128,10 @@ public class GameView extends JFrame implements MouseListener {
 		dj.setVisible(false);
 		layeredPane.add(dj, JLayeredPane.POPUP_LAYER);
 		
+		bench = new BenchOverlay(graphicManager, player, "Die Bank");
+		bench.setVisible(false);
+		layeredPane.add(bench, JLayeredPane.POPUP_LAYER);
+		
 		// Start: Statusbar
 		statusb_bg = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(270), 0,
