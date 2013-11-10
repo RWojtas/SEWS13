@@ -29,6 +29,7 @@ public class GameView extends JFrame implements MouseListener {
 	public Player player;
 	public Container c;
 	public static Dimension deskResolution;
+	public static Dimension gameResolution;
 	public int currentLevel;
 	public JPanel background;
 	public static JLayeredPane layeredPane;
@@ -75,9 +76,10 @@ public class GameView extends JFrame implements MouseListener {
 	  
 	public GameView(ASManager asManager, DiscoObjectManager doManager, Player player, GraphicManager graphicManager) {
 		// Musik
-		musicManager = new MusicManager();
-		
+		musicManager = new MusicManager();	
 		deskResolution = Toolkit.getDefaultToolkit().getScreenSize();
+		gameResolution = new Dimension(BufferedImageLoader.scaleToScreenX((int)(BufferedImageLoader.getStandardResolution().getWidth()))
+									  ,BufferedImageLoader.scaleToScreenY((int)(BufferedImageLoader.getStandardResolution().getHeight())));
 		setSize((int) deskResolution.getWidth(),
 				(int) deskResolution.getHeight());
 		c = getContentPane();
@@ -125,7 +127,7 @@ public class GameView extends JFrame implements MouseListener {
 		// Hintergrund
 		JPanel bg = new JPanel();
 		bg.setBackground(new Color(10,10,10));
-		bg.setBounds(0, 0, BufferedImageLoader.scaleToScreenX(1366), BufferedImageLoader.scaleToScreenY(768));
+		bg.setBounds(0, 0, (int)(gameResolution.getWidth()), (int)(gameResolution.getHeight()));
 		layeredPane.add(bg, -1);
 		
 		//Overlays
@@ -338,7 +340,30 @@ public class GameView extends JFrame implements MouseListener {
 		gameOverLabel.setVisible(false);
 		gameOverLabel.setLocation(- gameOverLabel.getWidth(),- gameOverLabel.getHeight());
 	}
- 
+	
+	public boolean checkFreeCoordinate(Coordinate coordinate) {
+		if(coordinate.getXCoordinate() > gameResolution.getWidth() || coordinate.getXCoordinate() < 0) {
+			return false;
+		}
+		if(coordinate.getYCoordinate() > gameResolution.getHeight() || coordinate.getYCoordinate() < 0) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean checkFreePosition(Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
+		if(!checkFreeCoordinate(lo)) 
+			return false;
+		if(!checkFreeCoordinate(ro)) 
+			return false;
+		if(!checkFreeCoordinate(lu)) 
+			return false;
+		if(!checkFreeCoordinate(ru)) 
+			return false;
+		
+		return true;
+	}
+	
 	public Statusbar getStatusbar() {
 		return sbar;
 	}

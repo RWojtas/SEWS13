@@ -22,7 +22,7 @@ public class GameLogic implements Runnable, KeyListener {
   public static final long ONE_SECOND = 1000000000; //Nanosekunden
   public static final long FPS_DISPLAY_INTERVALL = 100000000; //Nanosekunden
   public static final int DISCO_OPEN_FROM = 23*60+57; //Minuten
-  public static final int DISCO_CLOSE_AT = 10; //Minuten 
+  public static final int DISCO_CLOSE_AT = 30; //Minuten 
   public Player player;
   public Statusbar statusbar;
   public boolean initialized = false;
@@ -116,6 +116,8 @@ public class GameLogic implements Runnable, KeyListener {
   }
   
   public boolean checkFreePosition(int id, Coordinate lo, Coordinate ro, Coordinate lu, Coordinate ru) {
+	  if(!gameView.checkFreePosition(lo,ro,lu,ru))
+		  return false;
 	  if(!asManager.checkFreePosition(id,lo,ro,lu,ru)) 
 		  return false;
 	  if(!doManager.checkFreePosition(lo,ro,lu,ru)) 
@@ -138,6 +140,8 @@ public class GameLogic implements Runnable, KeyListener {
   }
 
   public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
+	  if(!gameView.checkFreeCoordinate(coordinate))
+		  return false;
 	  if(!asManager.checkFreeCoordinate(id,coordinate)) 
 		  return false;
 	  if(!doManager.checkFreeCoordinate(coordinate)) 
