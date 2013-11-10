@@ -32,6 +32,9 @@ public class GraphicManager {
   public BufferedImageLoader popup1000x600;
   
   public BufferedImageLoader drinkButtons;
+  public BufferedImageLoader barkeeper;
+  
+  public BufferedImageLoader dj_overlay;
   
   public BufferedImageLoader statusBG;
   public BufferedImageLoader statusUhr;
@@ -39,6 +42,12 @@ public class GraphicManager {
   public BufferedImageLoader statusMusicMute;
   
   public BufferedImageLoader musicButtons;
+  
+  public BufferedImageLoader progress0;
+  public BufferedImageLoader progress1;
+  public BufferedImageLoader progress2;
+  public BufferedImageLoader progress3;
+  public BufferedImageLoader progress4;
   
   //Flirten
   public BufferedImageLoader ButtonFlirten;
@@ -91,5 +100,14 @@ public class GraphicManager {
     statusBeenden = new BufferedImageLoader("Data/Graphics/", "exitButton01.png", 1, 2);
     
     musicButtons = new BufferedImageLoader("Data/Graphics/", "musicButton01.png", 1, 2);
+    barkeeper = new BufferedImageLoader("Data/Graphics/", "barkeeper01.png");
+    
+    progress0 = new BufferedImageLoader("Data/Graphics/", "progress0_01.png");
+    progress1 = new BufferedImageLoader("Data/Graphics/", "progress1_01.png");
+    progress2 = new BufferedImageLoader("Data/Graphics/", "progress2_01.png");
+    progress3 = new BufferedImageLoader("Data/Graphics/", "progress3_01.png");
+    progress4 = new BufferedImageLoader("Data/Graphics/", "progress4_01.png");
+    
+    dj_overlay = new BufferedImageLoader("Data/Graphics/", "dj_overlay.png");
   }
 }

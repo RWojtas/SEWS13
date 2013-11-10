@@ -1,5 +1,7 @@
 package overlay;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -27,6 +29,8 @@ public class BarOverlay extends Overlay {
 	static final int NUM_BUT = 8;
 	public Player player;
 	public Bar bar;
+	JLabel progress;
+	JLabel progressText;
 	JLabel buttons[] = new JLabel[NUM_BUT];
 	Act actions[] = new Act[NUM_BUT];
 	
@@ -38,11 +42,35 @@ public class BarOverlay extends Overlay {
 		for(int i=0;i<NUM_BUT;i++) {
             buttons[i] = new JLabel();
             buttons[i].setIcon(new ImageIcon(graphicManager.drinkButtons.getImage(0,i)));
-            buttons[i].setBounds(BufferedImageLoader.scaleToScreenX(700+i%3*95), BufferedImageLoader.scaleToScreenY(100+i/3*180), BufferedImageLoader.scaleToScreenX(90), BufferedImageLoader.scaleToScreenY(176));
+            buttons[i].setBounds(BufferedImageLoader.scaleToScreenX(700+i%3*95), BufferedImageLoader.scaleToScreenY(100+i/3*182), BufferedImageLoader.scaleToScreenX(90), BufferedImageLoader.scaleToScreenY(176));
             actions[i] = new Act(11+i, new ImageIcon(graphicManager.drinkButtons.getImage(0,i)), new ImageIcon(graphicManager.drinkButtons.getImage(1,i)));
             add(buttons[i],JLayeredPane.POPUP_LAYER);
 		}
 		enableActions();
+		
+		// Barkeeper
+		JLabel barkeeper = new JLabel();
+		barkeeper.setIcon(new ImageIcon(graphicManager.barkeeper.getImage()));
+		barkeeper.setBounds(15, 100, 660, 540);
+		add(barkeeper,JLayeredPane.POPUP_LAYER);
+		
+		// Progress
+		progress = new JLabel();
+		progress.setBounds(15, 100, 660, 540);
+		progress.setIcon(new ImageIcon(graphicManager.progress0.getImage()));
+		progress.setVisible(false);
+		add(progress,JLayeredPane.POPUP_LAYER);
+		moveToFront(progress);
+		
+		progressText = new JLabel();
+		progressText.setBounds(15, 550, 660, 80);
+		progressText.setText("\"Na dann, Prost!\"");
+		progressText.setForeground(new Color(128,0,0));
+		progressText.setFont(new Font("Aharoni", 0, 30));
+		progressText.setHorizontalTextPosition(JLabel.RIGHT);
+		progressText.setVisible(false);
+		add(progressText,JLayeredPane.POPUP_LAYER);
+		moveToFront(progressText);
 	}
 	
 	public void setVisible(boolean on) {
@@ -77,20 +105,34 @@ public class BarOverlay extends Overlay {
 		@Override
 		public void mouseClicked(final MouseEvent e) {
 			this.e = e;
-			player.setActivityTimer(600);
+			player.setActivityTimer(1000);
 			//if(player.getActivityTimer()==0){
 			new Thread(new Runnable(){
 				@Override
 				public void run() {
-					System.out.println("Event"+player.getActivityTimer());	
+					BarOverlay overlay = (BarOverlay)((JLabel) e.getSource()).getParent();
+					overlay.progress.setVisible(true);
+					overlay.progressText.setVisible(true);
 					while(player.getActivityTimer()>0) {
-						System.out.println("Event"+player.getActivityTimer());
-						try {
-							Thread.sleep(20);
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+//						System.out.println("Event"+player.getActivityTimer());
+						
+						switch(player.getActivityTimer()*5/1000) {
+							case 3:
+								overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress1.getImage()));
+								break;
+							case 2:
+								overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress2.getImage()));
+								break;
+							case 1:
+								overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress3.getImage()));
+								break;
+							case 0:
+								overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress4.getImage()));
 						}
+						
+						try {
+							Thread.sleep(40);
+						} catch (InterruptedException e1) {}
 					}
 					DiscoObject.setStatusES(player, action);
 					((JLabel) e.getSource()).getParent().setVisible(false);
@@ -98,8 +140,13 @@ public class BarOverlay extends Overlay {
 					disableActions();
 					player.setActivity(0);
 					System.out.println(player.getActivityTimer());
-					bar.openOverlay=false;
+//					bar.openOverlay=false;
 					
+					// Reset
+					overlay.progress.setIcon(new ImageIcon(overlay.graphicManager.progress0.getImage()));
+					overlay.progress.setVisible(false);
+					overlay.progressText.setVisible(false);
+					((JLabel) e.getSource()).setIcon(i);
 				}
 			}).start();;
 				

@@ -115,7 +115,7 @@ public class GameView extends JFrame implements MouseListener {
 		bar.setVisible(false);
 		layeredPane.add(bar, JLayeredPane.POPUP_LAYER);
 		
-		dj = new DJOverlay(graphicManager, "Der DJ", musicManager);
+		dj = new DJOverlay(graphicManager, "Der DJ", musicManager, player);
 		dj.setVisible(false);
 		layeredPane.add(dj, JLayeredPane.POPUP_LAYER);
 		
