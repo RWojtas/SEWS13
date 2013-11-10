@@ -29,9 +29,9 @@ public class DancefloorOverlay extends Overlay{
 		this.player=player;
 		
 		button = new JLabel();
-		//button.setIcon(new ImageIcon(graphicManager.dancefloorButton.getImage(0,0)));
-		//button.setBounds(BufferedImageLoader.scaleToScreenX(), BufferedImageLoader.scaleToScreenY(), BufferedImageLoader.scaleToScreenX(), BufferedImageLoader.scaleToScreenY());
-		//action = new Act(2, new ImageIcon(graphicManager.dancefloorButton.getImage(0,0)), new ImageIcon(graphicManager.dancefloorButton.getImage(0, 60)));
+		button.setIcon(new ImageIcon(graphicManager.dancefloorButton.getImage(0,0)));
+		button.setBounds(BufferedImageLoader.scaleToScreenX(700), BufferedImageLoader.scaleToScreenY(100), BufferedImageLoader.scaleToScreenX(275), BufferedImageLoader.scaleToScreenY(55));
+		action = new Act(2, new ImageIcon(graphicManager.dancefloorButton.getImage(0,0)), new ImageIcon(graphicManager.dancefloorButton.getImage(0,1)));
 		
 		// Progress
 		progress = new JLabel();
