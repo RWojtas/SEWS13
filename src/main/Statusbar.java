@@ -31,7 +31,12 @@ public class Statusbar {
 	JLabel status_mtitle;
 	JLabel status_genre;
 	JLabel status_uhrzeit;
-	JLabel moneyLabel;
+	JLabel moneyLabel;	
+	static long gameStartTime;
+	static long gameEndTime;
+	static final long ONE_SECOND = 1000000000;
+	static long gameSecond;
+	static double secondFactor;
 	
 	public Statusbar(GraphicManager graphicManager, MusicManager musicManager) {
 		this.graphicManager = graphicManager;
@@ -75,6 +80,34 @@ public class Statusbar {
 		}
 		
 		moneyLabel.setText("Geld: "+new DecimalFormat("#000.00", DecimalFormatSymbols.getInstance(Locale.GERMAN)).format(player.getMoney())+" Euro");
+	}
+	
+	
+	//gameDuration - Spieldauer in Sekunden
+	public void initializeClock(long gameStartTime, long gameDuration, long gameSecondSize) {
+		this.gameStartTime = gameStartTime;
+		this.gameEndTime = gameStartTime + gameDuration*ONE_SECOND;
+		this.gameSecond = gameSecondSize;
+		this.secondFactor = (double)(this.ONE_SECOND)/(double)(this.gameSecond);
+	}
+	
+	public void updateClock() {		
+		long currentTime = 0;
+
+		currentTime = (long)(secondFactor*(double)(System.nanoTime()-gameStartTime));
+	
+		int min = (int)((currentTime/ONE_SECOND)/60)%24;
+		int hour = (int)((currentTime/ONE_SECOND)/60)/24;	
+		
+		setUhrzeit(String.format("%02d:%02d",hour,min));
+	}
+	
+	public boolean isTimeOut() {
+		if(System.nanoTime() >= gameEndTime) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public JLabel addLabel(int posX, int posY, int width, int height, BufferedImage image) {

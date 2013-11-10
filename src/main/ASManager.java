@@ -179,7 +179,7 @@ public class ASManager {
 						i++;
 						if (i>200) break;
 					}
-					gameLogic.gameView.bar.setVisible(true);
+					gameLogic.gameView.flirt.setVisible(true);
 					doManager.canClick = true;
 				}
 			}).start();

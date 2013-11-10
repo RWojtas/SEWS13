@@ -92,7 +92,7 @@ public class Menu extends JLayeredPane {
 					musicManager.mute(!musicManager.isMute());
 //					((JLabel) e.getSource()).setIcon((((JLabel) e.getSource()).getIcon().equals(off)) ? on : off);
 					speaker.setIcon(musicManager.isMute() ? off: on);
-					GameLogic.getInstance().sbar.mswitch.setIcon(musicManager.isMute() ? off: on);
+					GameLogic.getInstance().statusbar.mswitch.setIcon(musicManager.isMute() ? off: on);
 			}
 		});
 		speaker.setVisible(true);

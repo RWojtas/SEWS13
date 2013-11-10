@@ -22,10 +22,10 @@ public class GameLogic implements Runnable, KeyListener {
   public static final long ONE_SECOND = 1000000000; //Nanosekunden
   public static final long FPS_DISPLAY_INTERVALL = 100000000; //Nanosekunden
   public Player player;
-  public boolean menu = true;
-  public Statusbar sbar;
+  public Statusbar statusbar;
   public boolean initialized = false;
-
+  public boolean menu = true;
+  
   public static GameLogic getInstance() {
 	  if(gameLogic == null) {
 		  gameLogic = new GameLogic();
@@ -49,17 +49,23 @@ public class GameLogic implements Runnable, KeyListener {
 			  timestamp = System.nanoTime();
 			  updateTimer = timestamp;
 			  framesPerSecondTimer = timestamp;
+			  statusbar.initializeClock(timestamp, 10, ONE_SECOND/60);
 			  initialized = true;
 		  }
 		  
 		  //Updates
-		  asManager.updateComponents();
-		  player.stepNextPosition();
-		  sbar.updateBars(player);
-		  frames++;
-		  updateTimer += UPDATE_TIME_INTERVALL;
-		  if(player.getActivityTimer()>0){
-			  player.decActivityTimer();
+		  if(!statusbar.isTimeOut()) {
+			  asManager.updateComponents();
+			  player.stepNextPosition();
+			  statusbar.updateBars(player);
+			  statusbar.updateClock();
+			  frames++;
+			  updateTimer += UPDATE_TIME_INTERVALL;
+			  if(player.getActivityTimer()>0){
+				  player.decActivityTimer();
+			  } 
+		  } else {
+			  gameView.animateGameOverLabel(1,1,1);
 		  }
 		  
 		  //FPS Berechnung 
@@ -100,7 +106,7 @@ public class GameLogic implements Runnable, KeyListener {
     gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(graphicManager.mouse.getImage(), new Point(gameView.getX(), gameView.getY()), "mouse02"));
     gameView.addKeyListener(this);
     gameView.setVisible(true);
-    sbar = gameView.getStatusbar();
+    statusbar = gameView.getStatusbar();
     
     Thread th = new Thread(this);
     th.start();
@@ -124,8 +130,8 @@ public class GameLogic implements Runnable, KeyListener {
   }
   
   public void updateMusic() {
-	  if(sbar != null)
-		  sbar.updateMusic(getMusicManager());
+	  if(statusbar != null)
+		  statusbar.updateMusic(getMusicManager());
   }
 
   public boolean checkFreeCoordinate(int id, Coordinate coordinate) {

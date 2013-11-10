@@ -16,6 +16,8 @@ public class BufferedImageLoader {
   private static Dimension deskResolution;
   private static Dimension standardResolution = new Dimension(1366,768); //Beispiel Wert: (1920,1080)
   private static double resolutionFactor = 1;
+  private static double widthCorrection;
+  private static double heightCorrection;
   
   public BufferedImageLoader(String adress, String name, int picsX, int picsY) {
 	  loadImageTable(adress, name, picsX, picsY);
@@ -104,8 +106,10 @@ public class BufferedImageLoader {
 
 	  if(deskResolution.getWidth()/standardResolution.getWidth() < deskResolution.getHeight()/standardResolution.getHeight()) {
 	    resolutionFactor = deskResolution.getWidth()/standardResolution.getWidth();
+	    heightCorrection = (deskResolution.getHeight()-standardResolution.getHeight())/2;
 	  } else {
 	    resolutionFactor = deskResolution.getHeight()/standardResolution.getHeight();
+	    widthCorrection = (deskResolution.getWidth()-standardResolution.getWidth())/2;
 	  }
     } else {
       resolutionFactor = 1;	
@@ -113,11 +117,38 @@ public class BufferedImageLoader {
   }
   
   public static int scaleToScreenX(int xPos) {
+	 /* if(type) {	  
+		  return (int)(resolutionFactor*(double)(value)); 
+	  } else {
+		  return (int)(resolutionFactor*(double)(value));
+	  }*/
+	  
 	  return (int)(resolutionFactor*(double)(xPos));
   }
 
   public static int scaleToScreenY(int yPos) {
 	  return (int)(resolutionFactor*(double)(yPos));  
+  }
+  
+  /* Types:
+   * true  - Koordinaten werden angepasst
+   * false - Groeße wird angepasst
+   */ 
+  public static int scaleToScreen(int value, boolean type) {
+	  return 1;
+  }
+  
+  public void reScaleImageSize(int w, int h) {
+	  BufferedImage scaledBufferedImage = null;
+	  BufferedImage source = null;
+	    
+	  Image scaledImage = image.getScaledInstance(w, h,BufferedImage.SCALE_SMOOTH);
+	  scaledBufferedImage = new BufferedImage(w, h,BufferedImage.TYPE_INT_ARGB);
+	  scaledBufferedImage.getGraphics().drawImage(scaledImage, 0, 0, null);
+
+	  image = scaledBufferedImage;
+	  imageWidth = scaledBufferedImage.getWidth();
+	  imageHeight = scaledBufferedImage.getHeight();
   }
   
   public static Dimension getStandardResolution() {
