@@ -162,7 +162,7 @@ public class Statusbar {
 				break;
 			case 'm':
 				musicManager.mute(!musicManager.isMute());
-				((JLabel) e.getSource()).setIcon((((JLabel) e.getSource()).getIcon().equals(standard)) ? hover : standard);
+				((JLabel) e.getSource()).setIcon((musicManager.isMute()) ? hover : standard);
 				break;
 			}
 		}

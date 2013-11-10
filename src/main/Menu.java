@@ -72,7 +72,7 @@ public class Menu extends JLayeredPane {
 			}
 		});
 		
-		JLabel speaker = new JLabel();
+		speaker = new JLabel();
 		Icon speaker_icon = new ImageIcon(graphicManager.speaker.getImage(0,
 				0));
 		speaker.setIcon(speaker_icon);
@@ -86,7 +86,9 @@ public class Menu extends JLayeredPane {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 					musicManager.mute(!musicManager.isMute());
-					((JLabel) e.getSource()).setIcon((((JLabel) e.getSource()).getIcon().equals(off)) ? on : off);
+//					((JLabel) e.getSource()).setIcon((((JLabel) e.getSource()).getIcon().equals(off)) ? on : off);
+					speaker.setIcon(musicManager.isMute() ? off: on);
+					GameLogic.getInstance().sbar.mswitch.setIcon(musicManager.isMute() ? off: on);
 			}
 		});
 		speaker.setVisible(true);
@@ -184,6 +186,10 @@ public class Menu extends JLayeredPane {
 		super.setVisible(on);
 		if(on) enableButtonsEvents();
 		else disableButtonsEvents();
+		
+		speaker.setIcon((musicManager.isMute()) ? new ImageIcon(graphicManager.speaker
+				.getImage(0, 1)) : new ImageIcon(graphicManager.speaker
+				.getImage(0, 0)));
 	}
 
 	private JComponent makePopup(String title, JComponent content) {
