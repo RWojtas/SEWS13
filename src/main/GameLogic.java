@@ -124,7 +124,8 @@ public class GameLogic implements Runnable, KeyListener {
   }
   
   public void updateMusic() {
-	  sbar.updateMusic(getMusicManager());
+	  if(sbar != null)
+		  sbar.updateMusic(getMusicManager());
   }
 
   public boolean checkFreeCoordinate(int id, Coordinate coordinate) {

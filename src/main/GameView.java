@@ -122,7 +122,7 @@ public class GameView extends JFrame implements MouseListener {
 		// Hintergrund
 		JPanel bg = new JPanel();
 		bg.setBackground(new Color(10,10,10));
-		bg.setBounds(0, 0, (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+		bg.setBounds(0, 0, BufferedImageLoader.scaleToScreenX(1366), BufferedImageLoader.scaleToScreenY(768));
 		layeredPane.add(bg, -1);
 		
 		//Overlays
