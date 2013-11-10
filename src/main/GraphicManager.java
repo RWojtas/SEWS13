@@ -133,7 +133,7 @@ public class GraphicManager {
     
 //    toiletButton = new BufferedImageLoader("Data/Graphics", "buttonWC.png");
     
-    dancefloorButton = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png", 1, 2);
+    dancefloorButton = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png");
     
     
     carpet = new BufferedImageLoader("Data/Graphics/", "carpet_01.png");
