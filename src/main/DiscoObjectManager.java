@@ -345,12 +345,12 @@ public class DiscoObjectManager {
 					canClick = true;
 				}
 			}).start();
+		    canClick = true;
 		}
 
 	    @Override
 		public void mouseEntered(MouseEvent e) {
 		    //Wird ausgelöst, wenn die Maus den aktiven Bereich des MouseListeners betritt
-			  
 		}
 
 		@Override

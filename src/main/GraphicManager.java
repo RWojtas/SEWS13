@@ -136,7 +136,7 @@ public class GraphicManager {
     toiletButton = new BufferedImageLoader("Data/Graphics/", "WCButton02.png", 1, 2);
     toiletOverlay = new BufferedImageLoader("Data/Graphics/", "wcoverlay_01.png");
     
-    dancefloorButton = new BufferedImageLoader("Data/Graphics/", "buttonTanzen.png", 1, 2);
+    dancefloorButton = new BufferedImageLoader("Data/Graphics/", "TanzenButton02.png", 1, 2);
     
     
     carpet = new BufferedImageLoader("Data/Graphics/", "carpet_01.png");
