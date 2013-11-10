@@ -33,7 +33,8 @@ public class Statusbar {
 	JLabel status_uhrzeit;
 	JLabel moneyLabel;	
 	static long gameStartTime;
-	static long gameEndTime;
+	static long realStartTime;
+	static long realEndTime;
 	static final long ONE_SECOND = 1000000000;
 	static long gameSecond;
 	static double secondFactor;
@@ -83,10 +84,20 @@ public class Statusbar {
 	}
 	
 	
-	//gameDuration - Spieldauer in Sekunden
-	public void initializeClock(long gameStartTime, long gameDuration, long gameSecondSize) {
-		this.gameStartTime = gameStartTime;
-		this.gameEndTime = gameStartTime + gameDuration*ONE_SECOND;
+	//open           - Spielanfang in Minuten
+	//close          - Spielende in Minuten
+	//gameSecondSize - Dauer einer Sekunde im Spiel
+	public void initializeClock(int open, int close, long gameSecondSize) {
+		int gameDuration;
+		if(close <= open) {
+			gameDuration = 24*60-open+close;
+		} else {
+			gameDuration = close-open;
+		}
+		
+		this.gameStartTime = open*60*ONE_SECOND;
+		this.realStartTime = System.nanoTime();
+		this.realEndTime = realStartTime + gameDuration*ONE_SECOND;
 		this.gameSecond = gameSecondSize;
 		this.secondFactor = (double)(this.ONE_SECOND)/(double)(this.gameSecond);
 	}
@@ -94,16 +105,16 @@ public class Statusbar {
 	public void updateClock() {		
 		long currentTime = 0;
 
-		currentTime = (long)(secondFactor*(double)(System.nanoTime()-gameStartTime));
+		currentTime = (long)(secondFactor*(double)(System.nanoTime()-realStartTime));
 	
-		int min = (int)((currentTime/ONE_SECOND)/60)%24;
-		int hour = (int)((currentTime/ONE_SECOND)/60)/24;	
+		int min = (int)(((gameStartTime+currentTime)/ONE_SECOND)/60)%60;
+		int hour = (int)((((gameStartTime+currentTime)/ONE_SECOND)/60)/60)%24;	
 		
 		setUhrzeit(String.format("%02d:%02d",hour,min));
 	}
 	
 	public boolean isTimeOut() {
-		if(System.nanoTime() >= gameEndTime) {
+		if(System.nanoTime() >= realEndTime) {
 			return true;
 		} else {
 			return false;
