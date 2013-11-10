@@ -430,5 +430,14 @@ public abstract class Human extends JLabel{
 		return false;
 	}
 	
+	public void decreaseStatusOverTime(){
+		if(activity==0)
+		{
+			this.alcLevel--;
+			this.flirt--;
+			this.fun--;
+		}
+	}
+	
 	
 }
