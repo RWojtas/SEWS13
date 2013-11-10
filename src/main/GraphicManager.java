@@ -111,7 +111,5 @@ public class GraphicManager {
     progress4 = new BufferedImageLoader("Data/Graphics/", "progress4_01.png");
     
     dj_overlay = new BufferedImageLoader("Data/Graphics/", "dj_overlay.png");
-    
-    border = new BufferedImageLoader("Data/Graphics/", "border.png");
   }
 }
