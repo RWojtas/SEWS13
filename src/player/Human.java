@@ -33,7 +33,7 @@ public abstract class Human extends JLabel{
 	protected int old_direction;
 	protected int wegfinde_cnt;
 	protected boolean has_moved = true;
-	protected boolean wegfindetrouble = false;
+	protected int wegfindetrouble = 0;
 	protected int troublecnt;
 
 	/*
@@ -397,6 +397,7 @@ public abstract class Human extends JLabel{
 		return true;
 	}
 	
+	/*
 	// START: getNextPos() - inkl. Wegfindealgorithmus
 		public void stepNextPosition() { //Diese Methode setzt die nï¿½chste Position des Menschen
 			// System.out.println("stepNextPosition()");
@@ -463,8 +464,9 @@ public abstract class Human extends JLabel{
 			}
 		}
 		// END: getNextPos()
+		*/
 
-	/* Neuer Wegfindealgo - auskommentiert aufgrund von Performanceproblemen	
+	/* Neuer Wegfindealgo - auskommentiert aufgrund von Performanceproblemen	*/
 	// START: getNextPos() - inkl. Wegfindealgorithmus
 	public void stepNextPosition() { //Diese Methode setzt die n�chste Position des Menschen
 		System.out.println("##########");
@@ -574,7 +576,10 @@ public abstract class Human extends JLabel{
 						if(tmp>7) tmp = tmp-8;
 						if(tmp == this.old_direction) {
 							this.new_direction = this.old_direction;
-							this.wegfindetrouble = 1;
+							if(this.old_direction == 2 || this.old_direction == 6)
+								this.wegfindetrouble = 2;
+							else
+								this.wegfindetrouble = 1;
 							this.troublecnt = 0;
 						}
 						if(this.new_direction>7) this.new_direction = this.new_direction-8;
@@ -613,21 +618,23 @@ public abstract class Human extends JLabel{
 					}
 					if(this.wegfindetrouble == 1) {
 						System.out.println("# TROUBLE: 1");
-						**** if(ziel_direction == 4 || ziel_direction == 0) {
+						/* if(ziel_direction == 4 || ziel_direction == 0) {
 							this.wegfindetrouble = 2;
-						} ****
+						} */
 						if(ziel_direction < 4 ) {
-							ziel_direction = 2;
+							ziel_direction = 0;
 							Coordinate coo = ausDirzuCoo(ziel_direction);
 							trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
 						} else {
-							ziel_direction = 6;
+							ziel_direction = 4;
 							Coordinate coo = ausDirzuCoo(ziel_direction);
 							trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
 						}
-					***	this.troublecnt++;
+					}
+					/*	this.troublecnt++;
 						System.out.println("# TROUBLECNT: "+this.troublecnt);
-					 } else if(this.wegfindetrouble == 2) {
+					 } else */
+					if(this.wegfindetrouble == 2) {
 						System.out.println("# TROUBLE: 2");
 						if(ziel_direction < 4) {
 							ziel_direction = 6;
@@ -638,11 +645,12 @@ public abstract class Human extends JLabel{
 							Coordinate coo = ausDirzuCoo(ziel_direction);
 							trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
 						}
-						this.troublecnt++;
+					}
+						/* this.troublecnt++;
 						if(this.troublecnt > 1000) {
 							this.wegfindetrouble = 0;
-						} ***
-					}
+						} */
+					// }
 					if(trouble_out) {
 						this.wegfindetrouble = 0;
 						this.new_direction = ziel_direction;
