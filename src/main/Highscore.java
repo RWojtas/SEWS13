@@ -26,7 +26,6 @@ public class Highscore {
 	private Highscore() {
 		score = 0;
 		list = readHighscoreFile();
-		saveHighscoreFile();
 	}
 
 	/**
@@ -55,6 +54,14 @@ public class Highscore {
 	 */
 	public void setScore(int score) {
 		this.score = score;
+	}
+	
+	/**
+	 * Punktestand speichern
+	 */	
+	public void saveScore() {
+		this.list.add(score);
+		saveHighscoreFile();
 	}
 
 	/**

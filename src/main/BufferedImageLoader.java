@@ -117,6 +117,10 @@ public class BufferedImageLoader {
     }
   }
   
+  /* Types:
+   * true  - Zentrierungs-Korrektur erfolgt
+   * false - Zentrierungs-Korrektur erfolgt nicht
+   */ 
   public static int scaleToScreenX(int value, boolean type) {
 	  if(type) {
 		  return (int)(resolutionFactor*(double)(value)+widthCorrection); 
@@ -124,21 +128,17 @@ public class BufferedImageLoader {
 		  return (int)(resolutionFactor*(double)(value));
 	  }
   }
-
+  
+  /* Types:
+   * true  - Zentrierungs-Korrektur erfolgt
+   * false - Zentrierungs-Korrektur erfolgt nicht
+   */ 
   public static int scaleToScreenY(int value, boolean type) {
 	  if(type) {
 		  return (int)(resolutionFactor*(double)(value)+heightCorrection); 
 	  } else {
 		  return (int)(resolutionFactor*(double)(value));
 	  } 
-  }
-  
-  /* Types:
-   * true  - Koordinaten werden angepasst
-   * false - Groeﬂe wird angepasst
-   */ 
-  public static int scaleToScreen(int value, boolean type) {
-	  return 1;
   }
   
   public void reScaleImageSize(int w, int h) {

@@ -29,7 +29,10 @@ public abstract class Human extends JLabel{
 	protected int height;					// H�he des Spielers (Sicht von oben)
 	protected int width;					// Breite des Spielers (Sicht von oben)
 	protected int direction;				// Richtung in die der Spieler gerade schaut -> wichtig f�r weitere Bewegung
+	protected int new_direction;
 	protected int old_direction;
+	protected int wegfinde_cnt;
+	protected boolean has_moved = true;
 	boolean wegfindetrouble = false;
 
 	/*
@@ -395,75 +398,209 @@ public abstract class Human extends JLabel{
 
 	// START: getNextPos() - inkl. Wegfindealgorithmus
 	public void stepNextPosition() { //Diese Methode setzt die n�chste Position des Menschen
-		// System.out.println("stepNextPosition()");
+		System.out.println("##########");
+		System.out.println("# Start: stepNextPosition()");
+		System.out.println("# Spieler: "+this.getType());
 		int x = this.getXPosition();												//mit Hilfe der weiter oben erkl�rten Methoden.
 		int y = this.getYPosition();												//Der Fall, dass sich der Mensch nicht bewegt, ist abgefangen.
-		boolean rcheck = false;
 		Coordinate newPos = new Coordinate(x, y);
 		
-		if (this.getActivity() != 0 && this.getActivity() != -1 ) {												
-			if (this.position != this.target) {
-				if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
-						rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht f�r die Richtung unten rechts. 
-				}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
-				else if(x > this.target.getX0() && y < this.target.getY0()){
-					rcheck = this.check(1,0);
-				}
-				else if( x < this.target.getX0() && y > this.target.getY0()) {
-						rcheck = this.check(5,0);
-				}
-				else if(x > this.target.getX0() && y > this.target.getY0()) {
-						rcheck = this.check(3,0);	
-				}
-				else if(x > this.target.getX0()) {
-						rcheck = this.check(2,0);
-				}
-				else if(x < this.target.getX0()) {
-						rcheck = this.check(6,0);
-				}
-				else if(y < this.target.getY0()) {
-						rcheck = this.check(0,0);
-				}
-				else if(y > this.target.getY0()) {
-						rcheck = this.check(4,0);
-				}
-				if((this.old_direction==4) && (this.direction==0)) {
-					wegfindetrouble = true;
-				}
-				if(wegfindetrouble == true) {
-					rcheck=false;
-					Coordinate Coo = ausDirzuCoo(2);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
-					if(!(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate()))) {		// ob diese frei ist. Falls ja, wird die Richtung des Menschen entsprechend gesetzt.
-						Coo = ausDirzuCoo(4);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
-						if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())) {
-							setDirection(4);											// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und pr�ft die n�chste Richtung
-							newPos = ausDirzuCoo(this.direction);
+		if (this.getActivity() != 0 && this.getActivity() != -1 ) {
+			System.out.println("# Aktivität != 0 && != -1 -> Laufbereit");
+			System.out.println("# Aktuelle Position: "+this.position.getX0()+","+this.position.getY0()+","+this.position.getX1()+","+this.position.getY1()+","+this.position.getX2()+","+this.position.getY2()+","+this.position.getX3()+","+this.position.getY3());
+			System.out.println("#              Ziel: "+this.target.getX0()+","+this.target.getY0()+","+this.target.getX1()+","+this.target.getY1()+","+this.target.getX2()+","+this.target.getY2()+","+this.target.getX3()+","+this.target.getY3());
+			if (this.position.getX0() != this.target.getX0() || this.position.getY0() != this.target.getY0()) {
+				System.out.println("# aktuelle Position != Target -> LAUFEN!");
+				System.out.println("# wegfinde_cnt: "+this.wegfinde_cnt);
+				if(!this.wegfindetrouble) {
+					if(this.has_moved) {
+						this.has_moved = false;
+						this.wegfinde_cnt = 0;
+						if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
+							System.out.println("# Direction: 7");
+							this.direction = 7;//wird die Methode check(7,0) aufgerufen. Die 7 steht f�r die Richtung unten rechts.
+						}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
+						else if(x > this.target.getX0() && y < this.target.getY0()){
+							System.out.println("# Direction: 1");
+							this.direction = 1;	
 						}
+						else if( x < this.target.getX0() && y > this.target.getY0()) {
+							System.out.println("# Direction: 5");
+							this.direction = 5;	
+						}
+						else if(x > this.target.getX0() && y > this.target.getY0()) {
+							System.out.println("# Direction: 3");
+							this.direction = 3;		
+						}
+						else if(x > this.target.getX0()) {
+							System.out.println("# Direction: 2");
+							this.direction = 2;	
+						}
+						else if(x < this.target.getX0()) {
+							System.out.println("# Direction: 6");
+							this.direction = 6;	
+						}
+						else if(y < this.target.getY0()) {
+							System.out.println("# Direction: 0");
+							this.direction = 0;	
+						}
+						else if(y > this.target.getY0()) {
+							System.out.println("# Direction: 4");
+							this.direction = 4;	
+						}
+						this.new_direction = this.direction;
+						System.out.println("# has_moved -> new_direction: "+this.direction);
 					} else {
-						setDirection(2);
-						newPos = ausDirzuCoo(this.direction);
-						Coo = ausDirzuCoo(1);										// Diese Methode �berpr�ft anhand der Richtung, die �bergeben wird, die n�chste Koordinate und schaut,  
-						if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())) {
-							wegfindetrouble=false;
+						
+						boolean richtung = false;
+						if(this.direction != 3 && this.direction != 4 && this.direction != 7)
+							richtung = true;
+						switch(wegfinde_cnt) {
+							case 1:
+								if(richtung)
+									this.new_direction = this.direction+1;
+								else
+									this.new_direction = this.direction-1;
+								break;
+							case 2:
+								if(richtung)
+									this.new_direction = this.direction+2;
+								else
+									this.new_direction = this.direction-2;
+								break;
+							case 3:
+								if(richtung)
+									this.new_direction = this.direction-1;
+								else
+									this.new_direction = this.direction+1;
+								break;
+							case 4:
+								if(richtung)
+									this.new_direction = this.direction-2;
+								else
+									this.new_direction = this.direction+2;
+								break;
+							case 5:
+								if(richtung)
+									this.new_direction = this.direction+3;
+								else
+									this.new_direction = this.direction-3;
+								break;
+							case 6:
+								if(richtung)
+									this.new_direction = this.direction+4;
+								else
+									this.new_direction = this.direction-4;
+								break;
+							case 7:
+								if(richtung)
+									this.new_direction = this.direction-3;
+								else
+									this.new_direction = this.direction+3;
+								break;
+							default:
+								this.wegfinde_cnt = 0;
+						}
+						int tmp = this.new_direction+4;
+						if(tmp>7) tmp = tmp-8;
+						if(tmp == this.old_direction) {
+							this.new_direction = this.old_direction;
+							this.wegfindetrouble = true;
+						}
+						if(this.new_direction>7) this.new_direction = this.new_direction-8;
+						if(this.new_direction<0) this.new_direction = this.new_direction+8;
+					}
+				} else {
+					boolean trouble_out = false;
+					int ziel_direction;
+					if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
+						ziel_direction = 7;
+					}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
+					else if(x > this.target.getX0() && y < this.target.getY0()){
+						ziel_direction = 1;	
+					}
+					else if( x < this.target.getX0() && y > this.target.getY0()) {
+						ziel_direction = 5;	
+					}
+					else if(x > this.target.getX0() && y > this.target.getY0()) {
+						ziel_direction = 3;		
+					}
+					else if(x > this.target.getX0()) {
+						ziel_direction = 2;	
+					}
+					else if(x < this.target.getX0()) {
+						ziel_direction = 6;	
+					}
+					else if(y < this.target.getY0()) {
+						ziel_direction = 0;	
+					}
+					else if(y > this.target.getY0()) {
+						ziel_direction = 4;	
+					} else {
+						ziel_direction = 4;
+						this.wegfindetrouble = false;
+						System.out.println("############################################################################ SOLLTE NICHT EINTRETEN!!!");
+					}
+					if(ziel_direction < 4 ) {
+						ziel_direction = 2;
+						Coordinate coo = ausDirzuCoo(ziel_direction);
+						trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
+					} else {
+						ziel_direction = 6;
+						Coordinate coo = ausDirzuCoo(ziel_direction);
+						trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
+					}
+					if(trouble_out) {
+						this.wegfindetrouble = false;
+						this.new_direction = ziel_direction;
+					} else {
+						this.direction = this.old_direction;
+						Coordinate coo = ausDirzuCoo(this.direction);
+						if(!checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate())) {
+							this.wegfindetrouble = false;
+							System.out.println("Eingekesselt? Schnell raus hier!");
 						}
 					}
 				}
 				
-				if(rcheck) {
-					newPos = ausDirzuCoo(this.direction);
+				Coordinate coo = ausDirzuCoo(this.new_direction);
+				if(checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate())) {
+					has_moved = true;
+					System.out.println("# Position frei!");
+				} else {
+					wegfinde_cnt++;
+					has_moved = false;
+					System.out.println("# Position belegt!");
 				}
-				this.old_direction = this.direction;
-				moveObject(newPos.getXCoordinate(), newPos.getYCoordinate()); // Die neue Position wird explizit gesetzt.
+				
+				if(has_moved) {
+					System.out.println("# Setze neue Position!");
+					System.out.println("# Alte Position: "+this.position.getX0()+","+this.position.getY0());
+					setDirection(this.new_direction);
+					newPos = ausDirzuCoo(this.direction);
+					this.old_direction = new_direction;
+					moveObject(newPos.getXCoordinate(), newPos.getYCoordinate()); // Die neue Position wird explizit gesetzt.
+				}
+				
 				//System.out.println("Aktuell: x:"+x+" y:"+y+" Neu: x:"+newPos.getXCoordinate()+" y:"+newPos.getYCoordinate()+" Target: x:"+this.target.getX0()+" y:"+this.target.getY0()+ " " +this.direction);
 			}
+			System.out.println("# Aktuelle Direction: "+this.direction);
+			System.out.println("# Aktuelle Position: "+this.position.getX0()+","+this.position.getY0());
+			System.out.println("#              Ziel: "+this.target.getX0()+","+this.target.getY0());
+			try {
+				  Thread.sleep(0);
+			  } catch (InterruptedException e) {
+				  e.printStackTrace();
+			  }
 		}
+		System.out.println("# Ende: stepNextPosition()");
 	}
 	// END: getNextPos()
 
 	// END: AKTIVIT�TSMETHODEN
 
 	public boolean doActivity() {
-		if((this.position.getX0() == target.getX0())  && (position.getY0() == target.getY0())) {
+		if((position.getX0() == target.getX0())  && (position.getY0() == target.getY0())) {
 			return true;
 		}
 		return false;
