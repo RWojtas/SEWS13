@@ -106,26 +106,33 @@ public class BufferedImageLoader {
 
 	  if(deskResolution.getWidth()/standardResolution.getWidth() < deskResolution.getHeight()/standardResolution.getHeight()) {
 	    resolutionFactor = deskResolution.getWidth()/standardResolution.getWidth();
-	    heightCorrection = (deskResolution.getHeight()-standardResolution.getHeight())/2;
+	    heightCorrection = (deskResolution.getHeight()-resolutionFactor*(standardResolution.getHeight()))/2;
+	    
 	  } else {
 	    resolutionFactor = deskResolution.getHeight()/standardResolution.getHeight();
-	    widthCorrection = (deskResolution.getWidth()-standardResolution.getWidth())/2;
+	    widthCorrection = (deskResolution.getWidth()-resolutionFactor*(standardResolution.getWidth()))/2;
 	  }
     } else {
       resolutionFactor = 1;	
     }
+    
+    System.out.println("w: "+widthCorrection+" h: "+heightCorrection);
   }
   
   public static int scaleToScreenX(int value, boolean type) {
 	  if(type) {
-		  return (int)(resolutionFactor*(double)(value)); 
+		  return (int)(resolutionFactor*(double)(value)+widthCorrection); 
 	  } else {
 		  return (int)(resolutionFactor*(double)(value));
 	  }
   }
 
   public static int scaleToScreenY(int value, boolean type) {
-	  return (int)(resolutionFactor*(double)(value));  
+	  if(type) {
+		  return (int)(resolutionFactor*(double)(value)+heightCorrection); 
+	  } else {
+		  return (int)(resolutionFactor*(double)(value));
+	  } 
   }
   
   /* Types:

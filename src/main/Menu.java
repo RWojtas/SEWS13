@@ -174,7 +174,10 @@ public class Menu extends JLayeredPane {
 
 		
 		enableButtonsEvents();
-		setBounds(0, 0, BufferedImageLoader.scaleToScreenX(1366,false), BufferedImageLoader.scaleToScreenY(768,false));
+		setBounds(BufferedImageLoader.scaleToScreenX(0,true),
+				BufferedImageLoader.scaleToScreenY(0,true),
+				BufferedImageLoader.scaleToScreenX(1366,false),
+				BufferedImageLoader.scaleToScreenY(768,false));
 		setOpaque(false);
 		setVisible(true);
 	}
