@@ -88,7 +88,7 @@ public class GameLogic implements Runnable, KeyListener {
 		  //FPS Berechnung 
 		  if(System.nanoTime()-framesPerSecondTimer >= FPS_DISPLAY_INTERVALL) {
 			  fps = frames*(ONE_SECOND/(System.nanoTime()-framesPerSecondTimer));
-	    	  gameView.fps.setText("FPS "+fps);   
+	    	  // gameView.fps.setText("FPS "+fps);   
 	    	  frames = 0;
 	    	  framesPerSecondTimer += FPS_DISPLAY_INTERVALL;
 		  }
