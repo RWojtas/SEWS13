@@ -269,7 +269,7 @@ public abstract class Human extends JLabel{
 		this.setActivityTimer(20);
 	}
 	
-	//public long t2;
+	public long t2;
 	public boolean checkFreePosition(int x, int y) {		// �berpr�ft ob eine gewisse Koordinate besetzt ist oder nicht. 
 		GameLogic gl = GameLogic.getInstance();				// Gibt eine entsprechende Antwort in Form von "false" oder "true".
 		//if(type.equals("Player")) {

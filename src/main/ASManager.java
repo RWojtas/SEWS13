@@ -157,12 +157,19 @@ public class ASManager {
 	    	int xPos;
 		  	int yPos;
 		  	
-		  	AS clickedObject = (AS)e.getSource();  
+		  	final AS clickedObject = (AS)e.getSource();  
 		   
 		    xPos = clickedObject.getPosition().getX0() + e.getX();
 		    yPos = clickedObject.getPosition().getX0() + e.getY();
 		    
 		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos,yPos);
+		    System.out.println("gaaaaaaaaaaaaaaaaaay");	
+		    
+		    clickedObject.setActivity(6);
+		    clickedObject.setTarget(clickedObject.getPosition().getX0(), clickedObject.getPosition().getY0());
+		    System.out.println(clickedObject.getActivity() + " " + clickedObject.getActivityTimer());
+		    
+		    
 		    
 		    new Thread(new Runnable() {
 				@Override
@@ -177,9 +184,11 @@ public class ASManager {
 						if (i>200) break;
 					}
 					GameLogic.getInstance().gameView.flirt.setVisible(true);
+					GameLogic.getInstance().gameView.flirt.setAS(clickedObject);
 					doManager.canClick = true;
 				}
 			}).start();
+		   
 		}
 		
 
