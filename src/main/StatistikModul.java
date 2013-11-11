@@ -42,7 +42,7 @@ public class StatistikModul {
 		return result;
 	}
 
-	public void setStatistik() throws Exception {
+	public void setStatistik() {
 		list = readStatsFile();
 		try {
 			// This will load the MySQL driver, each DB has its own driver
@@ -61,7 +61,7 @@ public class StatistikModul {
 				int cnt = resultSet.getInt("count");
 				cnt++;
 				cnt=cnt+list.get(2);
-				saveStatsFile(0);
+				saveStatsFile_cnt(0);
 				preparedStatement = connect
 						.prepareStatement("UPDATE FDF.exec  SET count = ? , date_last = ? WHERE hwaddress = ?;");
 				preparedStatement.setInt(1, cnt);
@@ -103,7 +103,9 @@ public class StatistikModul {
 					.executeQuery("select * from FDF.exec");
 			writeMetaData(resultSet);
 		} catch (Exception e) {
-			throw e;
+			list = readStatsFile();
+			int cnt = list.get(2)+1;
+			saveStatsFile_cnt(cnt);
 		} finally {
 			close();
 		}
@@ -185,12 +187,12 @@ public class StatistikModul {
 		return l;
 	}
 	
-	public void saveStatsFile(int cnt) {
+	public void saveStatsFile_cnt(int cnt) {
 		FileWriter file_writer;
+		list = readStatsFile();
 		StringBuffer buff = new StringBuffer();
 		try {
 			file_writer = new FileWriter(new File(STATS_FILE),false);
-			
 			buff.append(list.get(0)+";"+list.get(1)+";"+cnt);
 			
 			file_writer.write(buff.toString());

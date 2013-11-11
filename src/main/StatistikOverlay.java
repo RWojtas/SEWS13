@@ -115,6 +115,7 @@ public class StatistikOverlay extends JLayeredPane {
 				((JComponent) e.getSource()).getParent().setVisible(false);
 				gender = 1;
 				stats.saveStatsFile_first(gender, age_years);
+				stats.setStatistik();
 			}
 		});
 		ok_m.setBounds(10, 280, 320, 128);
@@ -139,6 +140,7 @@ public class StatistikOverlay extends JLayeredPane {
 				((JComponent) e.getSource()).getParent().setVisible(false);
 				gender = 0;
 				stats.saveStatsFile_first(gender, age_years);
+				stats.setStatistik();
 			}
 		});
 		ok_w.setBounds(370, 280, 320, 128);

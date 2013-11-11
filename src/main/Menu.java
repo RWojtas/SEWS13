@@ -179,6 +179,8 @@ public class Menu extends JLayeredPane {
 		if(Stats.readStatsFile().get(0) == 0 && Stats.readStatsFile().get(1) == 0) {
 			Stats_show = new StatistikOverlay(graphicManager,Stats);
 			add(Stats_show, JLayeredPane.POPUP_LAYER);
+		} else {
+			Stats.setStatistik();
 		}
 	}
 	
