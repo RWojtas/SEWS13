@@ -33,7 +33,7 @@ public abstract class Human extends JLabel{
 	protected int old_direction;
 	protected int wegfinde_cnt;
 	protected boolean has_moved = true;
-	protected int wegfindetrouble = 0;
+	protected boolean wegfindetrouble = false;
 	protected int troublecnt;
 
 	/*
@@ -396,7 +396,75 @@ public abstract class Human extends JLabel{
 		}
 		return true;
 	}
+	
+	// START: getNextPos() - inkl. Wegfindealgorithmus
+		public void stepNextPosition() { //Diese Methode setzt die nï¿½chste Position des Menschen
+			// System.out.println("stepNextPosition()");
+			int x = this.getXPosition();												//mit Hilfe der weiter oben erklï¿½rten Methoden.
+			int y = this.getYPosition();												//Der Fall, dass sich der Mensch nicht bewegt, ist abgefangen.
+			boolean rcheck = false;
+			Coordinate newPos = new Coordinate(x, y);
+			
+			if (this.getActivity() != 0 && this.getActivity() != -1 ) {												
+				if (this.position != this.target) {
+					if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
+							rcheck = this.check(7,0);									//wird die Methode check(7,0) aufgerufen. Die 7 steht fï¿½r die Richtung unten rechts. 
+					}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
+					else if(x > this.target.getX0() && y < this.target.getY0()){
+						rcheck = this.check(1,0);
+					}
+					else if( x < this.target.getX0() && y > this.target.getY0()) {
+							rcheck = this.check(5,0);
+					}
+					else if(x > this.target.getX0() && y > this.target.getY0()) {
+							rcheck = this.check(3,0);	
+					}
+					else if(x > this.target.getX0()) {
+							rcheck = this.check(2,0);
+					}
+					else if(x < this.target.getX0()) {
+							rcheck = this.check(6,0);
+					}
+					else if(y < this.target.getY0()) {
+							rcheck = this.check(0,0);
+					}
+					else if(y > this.target.getY0()) {
+							rcheck = this.check(4,0);
+					}
+					if((this.old_direction==4) && (this.direction==0)) {
+						wegfindetrouble = true;
+					}
+					if(wegfindetrouble == true) {
+						rcheck=false;
+						Coordinate Coo = ausDirzuCoo(2);										// Diese Methode ï¿½berprï¿½ft anhand der Richtung, die ï¿½bergeben wird, die nï¿½chste Koordinate und schaut,  
+						if(!(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate()))) {		// ob diese frei ist. Falls ja, wird die Richtung des Menschen entsprechend gesetzt.
+							Coo = ausDirzuCoo(4);										// Diese Methode ï¿½berprï¿½ft anhand der Richtung, die ï¿½bergeben wird, die nï¿½chste Koordinate und schaut,  
+							if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())) {
+								setDirection(4);											// Falls diese Koordinate nicht frei ist, ruft sich die Methode selber erneut auf und prï¿½ft die nï¿½chste Richtung
+								newPos = ausDirzuCoo(this.direction);
+							}
+						} else {
+							setDirection(2);
+							newPos = ausDirzuCoo(this.direction);
+							Coo = ausDirzuCoo(1);										// Diese Methode ï¿½berprï¿½ft anhand der Richtung, die ï¿½bergeben wird, die nï¿½chste Koordinate und schaut,  
+							if(checkFreePosition(Coo.getXCoordinate(),Coo.getYCoordinate())) {
+								wegfindetrouble=false;
+							}
+						}
+					}
+					
+					if(rcheck) {
+						newPos = ausDirzuCoo(this.direction);
+					}
+					this.old_direction = this.direction;
+					moveObject(newPos.getXCoordinate(), newPos.getYCoordinate()); // Die neue Position wird explizit gesetzt.
+					//System.out.println("Aktuell: x:"+x+" y:"+y+" Neu: x:"+newPos.getXCoordinate()+" y:"+newPos.getYCoordinate()+" Target: x:"+this.target.getX0()+" y:"+this.target.getY0()+ " " +this.direction);
+				}
+			}
+		}
+		// END: getNextPos()
 
+	/* Neuer Wegfindealgo - auskommentiert aufgrund von Performanceproblemen	
 	// START: getNextPos() - inkl. Wegfindealgorithmus
 	public void stepNextPosition() { //Diese Methode setzt die n�chste Position des Menschen
 		System.out.println("##########");
@@ -545,9 +613,9 @@ public abstract class Human extends JLabel{
 					}
 					if(this.wegfindetrouble == 1) {
 						System.out.println("# TROUBLE: 1");
-						/* if(ziel_direction == 4 || ziel_direction == 0) {
+						**** if(ziel_direction == 4 || ziel_direction == 0) {
 							this.wegfindetrouble = 2;
-						} */
+						} ****
 						if(ziel_direction < 4 ) {
 							ziel_direction = 2;
 							Coordinate coo = ausDirzuCoo(ziel_direction);
@@ -557,7 +625,7 @@ public abstract class Human extends JLabel{
 							Coordinate coo = ausDirzuCoo(ziel_direction);
 							trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
 						}
-					/*	this.troublecnt++;
+					***	this.troublecnt++;
 						System.out.println("# TROUBLECNT: "+this.troublecnt);
 					 } else if(this.wegfindetrouble == 2) {
 						System.out.println("# TROUBLE: 2");
@@ -573,7 +641,7 @@ public abstract class Human extends JLabel{
 						this.troublecnt++;
 						if(this.troublecnt > 1000) {
 							this.wegfindetrouble = 0;
-						} */
+						} ***
 					}
 					if(trouble_out) {
 						this.wegfindetrouble = 0;
@@ -621,7 +689,7 @@ public abstract class Human extends JLabel{
 		}
 		System.out.println("# Ende: stepNextPosition()");
 	}
-	// END: getNextPos()
+	// END: getNextPos() */
 
 	// END: AKTIVIT�TSMETHODEN
 
