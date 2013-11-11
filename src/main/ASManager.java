@@ -123,15 +123,13 @@ public class ASManager {
 	  	  
 	  	clickedLayeredPane = GameView.layeredPane;
 	  	
-	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
-	  		if(clickedObject == null) {
-		  		clickedPanel = (JComponent)clickedLayeredPane.getComponent(i);
-		        try {
-		  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
-		  	  	} catch(Exception e) {
-		  	  	    clickedObject = null;
-		  	  	}	
-		  	}
+	  	if(clickedObject == null) {
+	  		clickedPanel = (JComponent)clickedLayeredPane.getComponent(9);
+	        try {
+	  	  	    clickedObject = (Human)clickedPanel.getComponentAt(x, y);  
+	  	  	} catch(Exception e) {
+	  	  	    clickedObject = null;
+	  	  	}	
 	  	}
 
 	  	return clickedObject;
@@ -139,7 +137,7 @@ public class ASManager {
     
     public boolean checkFreeCoordinate(int id, Coordinate coordinate) {
     	Human component = getComponentAt(coordinate.getXCoordinate(),coordinate.getYCoordinate());
-    	if (component != null && 	component.hashCode() != id) 
+    	if (component != null && component.hashCode() != id) 
 			return false;
     	else
     		return true;

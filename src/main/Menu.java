@@ -179,7 +179,7 @@ public class Menu extends JLayeredPane {
 		if(Stats.readStatsFile().get(0) == 0 && Stats.readStatsFile().get(1) == 0) {
 			Stats_show = new StatistikOverlay(graphicManager);
 			System.out.println(Stats_show.getAge()+" "+Stats_show.getGender());
-			add(Stats_show, JLayeredPane.POPUP_LAYER);
+			//add(Stats_show, JLayeredPane.POPUP_LAYER);
 		}
 	}
 	
@@ -249,7 +249,7 @@ public class Menu extends JLayeredPane {
 		text.setFont(new Font("Aharoni", 0, BufferedImageLoader.scaleToScreenY(48,false)));
 		text.setForeground(new Color(128, 0, 0));
 		text.setBounds(BufferedImageLoader.scaleToScreenX(35,false), BufferedImageLoader.scaleToScreenY(20,false), BufferedImageLoader.scaleToScreenX(300,false), BufferedImageLoader.scaleToScreenY(48,false));
-
+        
 		JLabel close = new JLabel();
 		Icon close_icon = new ImageIcon(graphicManager.closeButtons.getImage(0,
 				0));
@@ -305,6 +305,7 @@ public class Menu extends JLayeredPane {
 		public void mouseClicked(MouseEvent e) {
 			switch (act) {
 			case 's':
+				//System.out.println("Agress Listener: "+e.getX()+" "+e.getY());
 				GameLogic.getInstance().initialized = false;
 				setVisible(false);
 				disableButtonsEvents();	

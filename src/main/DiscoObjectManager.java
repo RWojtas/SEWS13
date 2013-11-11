@@ -108,15 +108,13 @@ public class DiscoObjectManager {
 	  	  
 	  	clickedLayeredPane = GameView.layeredPane;
 	  	
-	  	for(int i=0;i<clickedLayeredPane.getComponentCount();i++) {
-	  		if(clickedObject == null) {
-		  		clickedPanel = (JComponent)clickedLayeredPane.getComponent(i);
-		        try {
-		  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
-		  	  	} catch(Exception e) {
-		  	  	    clickedObject = null;
-		  	  	}	
-		  	}
+	  	if(clickedObject == null) {
+	  		clickedPanel = (JComponent)clickedLayeredPane.getComponent(10);
+	        try {
+	  	  	    clickedObject = (DiscoObject)clickedPanel.getComponentAt(x, y);  
+	  	  	} catch(Exception e) {
+	  	  	    clickedObject = null;
+	  	  	}	
 	  	}
 
 	  	return clickedObject;

@@ -154,6 +154,14 @@ public class BufferedImageLoader {
 	  imageHeight = scaledBufferedImage.getHeight();
   }
   
+  public static double getWidthCorrection() {
+	  return widthCorrection; 
+  }
+  
+  public static double getHeightCorrection() {
+	  return heightCorrection; 
+  }
+  
   public static Dimension getStandardResolution() {
     return standardResolution;
   }

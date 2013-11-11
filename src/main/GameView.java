@@ -460,8 +460,8 @@ public class GameView extends JFrame implements MouseListener {
   
   public void setTarget(Human human, int x, int y) {
 	  Coordinate target;
-	  int xPos = x-human.getWidth()/2;
-	  int yPos = y-human.getHeight()/2;
+	  int xPos = x-human.getWidth()/2-(int)BufferedImageLoader.getWidthCorrection();
+	  int yPos = y-human.getHeight()/2-(int)BufferedImageLoader.getHeightCorrection();
 	  Coordinate lo = new Coordinate(xPos,yPos);
 	  Coordinate ro = new Coordinate(xPos+human.getWidth(),yPos);
 	  Coordinate lu = new Coordinate(xPos,yPos+human.getHeight());;
