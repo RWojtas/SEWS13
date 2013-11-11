@@ -275,7 +275,7 @@ public abstract class Human extends JLabel{
 		if(type.equals("Player")) {
 			t2 = System.nanoTime();
 			boolean b = gl.checkFreePosition(this.hashCode(), new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));
-			System.out.println("checkFreePosition Dauer:\nZeit in Nanosekunden: "+(System.nanoTime()-t2));
+			//System.out.println("checkFreePosition Dauer:\nZeit in Nanosekunden: "+(System.nanoTime()-t2));
 			return b;
 		} else {
 			return gl.checkFreePosition(this.hashCode(), new Coordinate(x,y), new Coordinate(x+width, y), new Coordinate(x,y+height), new Coordinate(x+width, y+height));

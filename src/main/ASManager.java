@@ -163,6 +163,12 @@ public class ASManager {
 		    yPos = clickedObject.getPosition().getX0() + e.getY();
 		    
 		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos,yPos);
+		    System.out.println("gaaaaaaaaaaaaaaaaaay");	
+		    
+		    clickedObject.setActivity(6);
+		    clickedObject.setTarget(clickedObject.getPosition().getX0(), clickedObject.getPosition().getY0());
+		    System.out.println(clickedObject.getActivity() + " " + clickedObject.getActivityTimer());
+		    
 		    
 		    new Thread(new Runnable() {
 				@Override
@@ -180,6 +186,7 @@ public class ASManager {
 					doManager.canClick = true;
 				}
 			}).start();
+		   
 		}
 		
 
