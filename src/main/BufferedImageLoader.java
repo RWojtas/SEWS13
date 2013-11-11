@@ -32,7 +32,8 @@ public class BufferedImageLoader {
     BufferedImage scaledBufferedImage = null;
     BufferedImage source = null;
     
-    URL pic_url = getClass().getResource("../"+adress+""+name);
+    //URL pic_url = getClass().getResource("../"+adress+""+name);
+    File pic_url = new File("pic\\"+name);
 
     try {
       source = ImageIO.read(pic_url);
@@ -59,7 +60,8 @@ public class BufferedImageLoader {
     BufferedImage scaledBufferedImage = null;
     BufferedImage source = null;
     
-    URL pic_url = getClass().getResource("../"+adress+""+name);
+    //URL pic_url = getClass().getResource("../"+adress+""+name);
+    File pic_url = new File("pic\\"+name);
     
     try {
       source = ImageIO.read(pic_url);
