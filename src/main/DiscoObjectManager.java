@@ -37,7 +37,6 @@ public class DiscoObjectManager {
 	}
 	
 	public void addComponents(JPanel panel) {
-		
 	    discoObject = new DiscoObject[14];
 	    discoObject[0] = new Bar(graphicManager.bar.getImage(),BufferedImageLoader.scaleToScreenX(0,false),BufferedImageLoader.scaleToScreenY(0,false));
 	    discoObject[0].addMouseListener(new BarMouseListener());
@@ -69,6 +68,37 @@ public class DiscoObjectManager {
 	    
 	    for(DiscoObject obj : discoObject)
 			panel.add(obj);
+	}
+	
+	public void resetComponents() {
+		discoObject = new DiscoObject[14];
+	    discoObject[0] = new Bar(graphicManager.bar.getImage(),BufferedImageLoader.scaleToScreenX(0,false),BufferedImageLoader.scaleToScreenY(0,false));
+	    discoObject[0].addMouseListener(new BarMouseListener());
+	    discoObject[1] = new Toilet(graphicManager.wc.getImage(),BufferedImageLoader.scaleToScreenX(920-20,false),BufferedImageLoader.scaleToScreenY(475-30,false));
+	    discoObject[1].addMouseListener(new ToiletMouseListener());
+	    discoObject[2] = new DJ(graphicManager.dj.getImage(),BufferedImageLoader.scaleToScreenX(0,false),BufferedImageLoader.scaleToScreenY(410,false));
+	    discoObject[2].addMouseListener(new DJMouseListener());
+	    discoObject[3] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(518,false),BufferedImageLoader.scaleToScreenY(23,false));
+	    discoObject[3].addMouseListener(new TableMouseListener());
+	    discoObject[4] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(730,false),BufferedImageLoader.scaleToScreenY(23,false));
+	    discoObject[4].addMouseListener(new TableMouseListener());
+	    discoObject[5] = new Table(graphicManager.table.getImage(),BufferedImageLoader.scaleToScreenX(940,false),BufferedImageLoader.scaleToScreenY(23,false));
+	    discoObject[5].addMouseListener(new TableMouseListener());
+	    discoObject[6] = new Dancefloor(graphicManager.dancefloor.getImage(),BufferedImageLoader.scaleToScreenX(200,false),BufferedImageLoader.scaleToScreenY(400,false));
+	    discoObject[6].addMouseListener(new DancefloorMouseListener());
+	    discoObject[7] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(480,false),BufferedImageLoader.scaleToScreenY(23,false));
+	    discoObject[7].addMouseListener(new BenchMouseListener());
+	    discoObject[8] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(616,false),BufferedImageLoader.scaleToScreenY(23,false));
+	    discoObject[8].addMouseListener(new BenchMouseListener());
+	    discoObject[9] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(692,false),BufferedImageLoader.scaleToScreenY(23,false));
+	    discoObject[9].addMouseListener(new BenchMouseListener());
+	    discoObject[10] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(828,false),BufferedImageLoader.scaleToScreenY(23,false));
+	    discoObject[10].addMouseListener(new BenchMouseListener());
+	    discoObject[11] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(902,false),BufferedImageLoader.scaleToScreenY(23,false));
+	    discoObject[11].addMouseListener(new BenchMouseListener());
+	    discoObject[12] = new Bench(graphicManager.bench.getImage(),BufferedImageLoader.scaleToScreenX(1038,false),BufferedImageLoader.scaleToScreenY(23,false));
+	    discoObject[12].addMouseListener(new BenchMouseListener());
+	    discoObject[13] = new Carpet(null, graphicManager.carpet.getImage(),BufferedImageLoader.scaleToScreenX(0,false),BufferedImageLoader.scaleToScreenY(250,false));
 	}
 	
 	public DiscoObject getComponentAt(int x, int y) {

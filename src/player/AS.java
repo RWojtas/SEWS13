@@ -2,6 +2,9 @@ package player;
 
 
 import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
+
 import main.*;
 
 public class AS extends Human {
@@ -11,6 +14,37 @@ public class AS extends Human {
 	public AS(char gender, BufferedImage image, int x, int y, int direction) {
 		super("AS",gender,image,x,y,direction);
 		this.type = type;
+	}
+	
+	public void resetAS(char gender, BufferedImage image, int x, int y, int direction) {
+		super.resetHuman("AS",gender,image,x,y,direction);
+		this.target = new Position(0, 0, 0, 0, 0, 0, 0, 0);
+		this.flirt = 0.5;
+		this.fun = 0.5;
+		this.alcLevel = 0;
+		this.urine = 0.5;
+		this.energy = 1;
+		this.gender = gender;
+		this.type = type;
+		this.activity = 0;
+		this.direction = direction;
+		
+		graphicState = 0;
+//		this.height = image.getHeight();
+//		this.width =  image.getWidth();
+		this.height = BufferedImageLoader.scaleToScreenX(60,false);
+		this.width =  BufferedImageLoader.scaleToScreenY(60,false);
+		
+		this.position = new Position(x, y, x+width, y, x, y+height, x+width, y+height);
+		
+		for(int i=0;i<8;i++) {
+			images[i] = new ImageIcon(image.getSubimage(0,i*width,width,height));
+			//System.out.println(i*width+"");
+		};
+		
+		setIcon(images[0]);
+		setBounds(x,y,width,height);
+		setOpaque(false);
 	}
 	
 	public void setActivityWithPos(int activity, DiscoObjectManager doManager){

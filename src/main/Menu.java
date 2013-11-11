@@ -287,8 +287,9 @@ public class Menu extends JLayeredPane {
 		public void mouseClicked(MouseEvent e) {
 			switch (act) {
 			case 's':
+				GameLogic.getInstance().initialized = false;
 				setVisible(false);
-				disableButtonsEvents();
+				disableButtonsEvents();	
 				GameLogic.getInstance().menu = false;
 				GameLogic.setMusicManager(musicManager);
 				GameLogic.getInstance().updateMusic();

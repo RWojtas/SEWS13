@@ -96,6 +96,36 @@ public abstract class Human extends JLabel{
 		setOpaque(false);
 	}
 	
+	public void resetHuman(String type, char gender, BufferedImage image, int x, int y, int direction) {
+		this.target = new Position(0, 0, 0, 0, 0, 0, 0, 0);
+		this.flirt = 0.5;
+		this.fun = 0.5;
+		this.alcLevel = 0;
+		this.urine = 0.5;
+		this.energy = 1;
+		this.gender = gender;
+		this.type = type;
+		this.activity = 0;
+		this.direction = direction;
+		
+		
+		graphicState = 0;
+//		this.height = image.getHeight();
+//		this.width =  image.getWidth();
+		this.height = BufferedImageLoader.scaleToScreenX(60,false);
+		this.width =  BufferedImageLoader.scaleToScreenY(60,false);
+		
+		this.position = new Position(x, y, x+width, y, x, y+height, x+width, y+height);
+		
+		for(int i=0;i<8;i++) {
+			images[i] = new ImageIcon(image.getSubimage(0,i*width,width,height));
+			//System.out.println(i*width+"");
+		};
+		
+		setIcon(images[0]);
+		setBounds(x,y,width,height);
+		setOpaque(false);
+	}
 	
 	public void moveObject(int x, int y) {
 		position.setPosition(x, y, x+this.width, y, x, y+this.height, x+this.width, y+this.height);
@@ -605,9 +635,10 @@ public abstract class Human extends JLabel{
 	public void decreaseStatusOverTime(){
 		if(activity==0||activity==1)
 		{
-			this.alcLevel=this.alcLevel-0.00007;
-			this.flirt=this.flirt-0.00007;
-			this.fun=this.fun-0.00007;
+			this.alcLevel=this.alcLevel-0.00001;
+			this.flirt=this.flirt-0.00001;
+			this.fun=this.fun-0.000009;
+			this.energy = this.energy - 0.00002;
 		}
 	}
 	

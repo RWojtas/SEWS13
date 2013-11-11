@@ -13,6 +13,12 @@ public class Player extends Human{
 		this.type = type;
 		this.money = money;
 	}
+	
+	public void resetPlayer(double money, char gender, BufferedImage image, int x, int y, int direction) {
+		super.resetHuman("Player",gender,image,x,y,direction);
+		this.type = type;
+		this.money = money;
+	}
 
 	public double getMoney() {
 		return money;
