@@ -30,6 +30,7 @@ public class GameLogic implements Runnable, KeyListener {
   public boolean initialized = false;
   public boolean firstGame = true;
   public boolean menu = true;
+  private int  player_money = 25;
   
   public static GameLogic getInstance() {
 	  if(gameLogic == null) {
@@ -106,14 +107,14 @@ public class GameLogic implements Runnable, KeyListener {
   }
   
   public void resetGame() {
-	  player = new Player(100,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800,true), BufferedImageLoader.scaleToScreenY(500,true),1);
+	  player = new Player(player_money,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800,true), BufferedImageLoader.scaleToScreenY(500,true),1);
 	  gameView.resetGameView(asManager, doManager, player);
   }
   
   private GameLogic() {
     graphicManager = new GraphicManager();
     
-    player = new Player(100,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800,true), BufferedImageLoader.scaleToScreenY(500,true),1);
+    player = new Player(player_money,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800,true), BufferedImageLoader.scaleToScreenY(500,true),1);
     doManager = new DiscoObjectManager(graphicManager, this, player);
     asManager = new ASManager(graphicManager,doManager);
     
