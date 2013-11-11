@@ -34,6 +34,8 @@ import music.MusicManager;
  */
 public class Menu extends JLayeredPane {
 	GraphicManager graphicManager;
+	StatistikModul Stats = new StatistikModul();
+	StatistikOverlay Stats_show;
 
 	JComponent score;
 	JComponent impressum;
@@ -50,6 +52,8 @@ public class Menu extends JLayeredPane {
 	MouseAction impr_l;
 	MouseAction end_l;
 	MouseAction speaker_l;
+
+	JTextArea highscorelist;
 	
 	MusicManager musicManager;
 
@@ -149,26 +153,17 @@ public class Menu extends JLayeredPane {
 		impressum = makePopup("Impressum", imp_pic);
 		impressum.setVisible(false);
 		add(impressum, JLayeredPane.POPUP_LAYER);
-
-		// TODO alle anzeigen!
-		ArrayList<Integer> hlist = Highscore.getInstance().readHighscoreFile();
-		String bester_stand = "";
-		int i = 1;
-		for(Integer v : hlist) {
-			bester_stand += i+")   "+v.toString()+"\n";
-			i++;
-		}
-				
-		JTextArea best = new JTextArea();
-		best.setEditable(false);
-		best.setBackground(new Color(0,0,0,0));
-		best.setFocusable(false);
-		best.setText(bester_stand);
-		best.setFont(new Font("Ahorani", 0, BufferedImageLoader.scaleToScreenY(45,false)));
-		best.setForeground(new Color(128, 0, 0));
-		best.setHighlighter(null);
+			
+		highscorelist = new JTextArea();
+		highscorelist.setEditable(false);
+		highscorelist.setBackground(new Color(0,0,0,0));
+		highscorelist.setFocusable(false);
+		highscorelist.setText(getHighscoreList());
+		highscorelist.setFont(new Font("Ahorani", 0, BufferedImageLoader.scaleToScreenY(20,false)));
+		highscorelist.setForeground(new Color(128, 0, 0));
+		highscorelist.setHighlighter(null);
 		
-		score = makePopup("Bestenliste",best);
+		score = makePopup("Bestenliste",highscorelist);
 		score.setVisible(false);
 		add(score, JLayeredPane.POPUP_LAYER);
 
@@ -180,6 +175,26 @@ public class Menu extends JLayeredPane {
 				BufferedImageLoader.scaleToScreenY(768,false));
 		setOpaque(false);
 		setVisible(true);
+		
+		if(Stats.readStatsFile().get(0) == 0 && Stats.readStatsFile().get(1) == 0) {
+			Stats_show = new StatistikOverlay(graphicManager);
+			System.out.println(Stats_show.getAge()+" "+Stats_show.getGender());
+			add(Stats_show, JLayeredPane.POPUP_LAYER);
+		}
+	}
+	
+	public String getHighscoreList() {
+		ArrayList<Integer> hlist = Highscore.getInstance().readHighscoreFile();
+		String list = "";
+		int i = 1;
+		for(Integer v : hlist) {
+			list += String.format("%-5s",i+")")+v.toString()+"\n";
+			i++;
+			if(i>10) {
+				break;
+			}
+		}
+		return list;
 	}
 
 	private void disableButtonsEvents() {
@@ -208,7 +223,10 @@ public class Menu extends JLayeredPane {
 
 	private JComponent makePopup(String title, JComponent content) {
 		JLayeredPane pan = (JLayeredPane) makePopup(title);
-		content.setBounds(10, 80, 680, 300);
+		content.setBounds(BufferedImageLoader.scaleToScreenX(30,false), 
+				BufferedImageLoader.scaleToScreenY(100,false),
+				BufferedImageLoader.scaleToScreenX(680,false),
+				BufferedImageLoader.scaleToScreenY(300,false));
 		pan.add(content, JLayeredPane.DEFAULT_LAYER);
 		pan.moveToFront(content);
 		return pan;
@@ -230,13 +248,13 @@ public class Menu extends JLayeredPane {
 		text.setText(title);
 		text.setFont(new Font("Aharoni", 0, BufferedImageLoader.scaleToScreenY(48,false)));
 		text.setForeground(new Color(128, 0, 0));
-		text.setBounds(BufferedImageLoader.scaleToScreenX(35,true), BufferedImageLoader.scaleToScreenY(20,true), BufferedImageLoader.scaleToScreenX(300,false), BufferedImageLoader.scaleToScreenY(48,false));
+		text.setBounds(BufferedImageLoader.scaleToScreenX(35,false), BufferedImageLoader.scaleToScreenY(20,false), BufferedImageLoader.scaleToScreenX(300,false), BufferedImageLoader.scaleToScreenY(48,false));
 
 		JLabel close = new JLabel();
 		Icon close_icon = new ImageIcon(graphicManager.closeButtons.getImage(0,
 				0));
 		close.setIcon(close_icon);
-		close.setBounds(BufferedImageLoader.scaleToScreenX(640,true), BufferedImageLoader.scaleToScreenY(10,true), BufferedImageLoader.scaleToScreenX(45,false), BufferedImageLoader.scaleToScreenY(45,false));
+		close.setBounds(BufferedImageLoader.scaleToScreenX(640,false), BufferedImageLoader.scaleToScreenY(10,false), BufferedImageLoader.scaleToScreenX(45,false), BufferedImageLoader.scaleToScreenY(45,false));
 		close.addMouseListener(new MouseAdapter() {
 			Icon icon_close = new ImageIcon(graphicManager.closeButtons
 					.getImage(0, 1));
@@ -302,6 +320,7 @@ public class Menu extends JLayeredPane {
 				disableButtonsEvents();
 				break;
 			case 'h':
+				highscorelist.setText(getHighscoreList());
 				score.setVisible(true);
 				disableButtonsEvents();
 				break;

@@ -107,7 +107,7 @@ public class GameLogic implements Runnable, KeyListener {
   }
   
   public void resetGame() {
-	  player = new Player(player_money,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800,true), BufferedImageLoader.scaleToScreenY(500,true),1);
+	  player.resetPlayer(player_money,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800,true), BufferedImageLoader.scaleToScreenY(500,true),1);
 	  gameView.resetGameView(asManager, doManager, player);
   }
   
