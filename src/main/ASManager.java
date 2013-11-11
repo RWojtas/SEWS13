@@ -21,7 +21,7 @@ public class ASManager {
 	public Player player;
 	public DiscoObjectManager doManager;
 	public static GameLogic gameLogic;
-	final static int as_cntr = 10;
+	final static int as_cntr = 20;
 	
 	public ASManager(GraphicManager graphicManager, DiscoObjectManager doManager) {
 		this.graphicManager = graphicManager;
@@ -71,7 +71,10 @@ public class ASManager {
 						}
 					}
 				}
-			} else {
+			} else if(human[i].getActivity() == 6) {
+				human[i].setDirection((GameLogic.getInstance().player.getDirection()+4)%8);
+			}
+			else {
 				if(human[i].doActivity() || human[i].getActivity() == -1 ) {
 					human[i].decActivityTimer();
 					//  TO-DO  Aktion muss ausgef�hrt werden
@@ -87,8 +90,10 @@ public class ASManager {
 		Functions f = new Functions();
 		human = new AS[as_cntr];
 		for(int i = 0; i < as_cntr; i++) {
-			int y = 450;//f.myRandom(60, 700);
-			int x = 1098;//f.myRandom(1100, 1200);
+			// int y = 450;//f.myRandom(60, 700);
+			// int x = 1098;//f.myRandom(1100, 1200);
+			int y = 450;
+			int x = 500;
 			human[i] = new AS(((i%2==0)?'m':'w'), ((i%2==0)?(((i%4==0))?graphicManager.man01.getImage():graphicManager.man02.getImage()):(((i%4)==1)?graphicManager.woman01.getImage():graphicManager.woman02.getImage())), BufferedImageLoader.scaleToScreenX(x,false), BufferedImageLoader.scaleToScreenY(y,false),1);
 		    human[i].addMouseListener(new ASMouseListener());
 		    human[i].setActivityTimer(f.myRandom(400,3000));
@@ -171,12 +176,13 @@ public class ASManager {
 		  	final AS clickedObject = (AS)e.getSource();  
 		   
 		    xPos = clickedObject.getPosition().getX0() + e.getX();
-		    yPos = clickedObject.getPosition().getX0() + e.getY();
+		    yPos = clickedObject.getPosition().getY0() + e.getY();
 		    
 		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos,yPos);
 		    System.out.println("gaaaaaaaaaaaaaaaaaay");	
 		    
 		    clickedObject.setActivity(6);
+		    clickedObject.setActivityTimer(2900);
 		    clickedObject.setTarget(clickedObject.getPosition().getX0(), clickedObject.getPosition().getY0());
 		    System.out.println(clickedObject.getActivity() + " " + clickedObject.getActivityTimer());
 		    
