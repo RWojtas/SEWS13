@@ -406,6 +406,7 @@ public class GameView extends JFrame implements MouseListener {
 			//Initialization
 			if(currentAnimationProgress == 0) {
 				highscoreLabel.setText(String.format("Punktestand: %d",Highscore.getInstance().getScore()));
+				Highscore.getInstance().saveScore();
 				gameOverLabel.setVisible(true);
 				highscoreLabel.setVisible(true);
 			}
