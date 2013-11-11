@@ -191,9 +191,21 @@ public class StatistikModul {
 		try {
 			file_writer = new FileWriter(new File(STATS_FILE),false);
 			
-			Collections.sort(list);
-			
 			buff.append(list.get(0)+";"+list.get(1)+";"+cnt);
+			
+			file_writer.write(buff.toString());
+			file_writer.close();
+		} catch (IOException e) {}
+		
+	}
+	
+	public void saveStatsFile_first(int gender, int age) {
+		FileWriter file_writer;
+		StringBuffer buff = new StringBuffer();
+		try {
+			file_writer = new FileWriter(new File(STATS_FILE),false);
+			
+			buff.append(gender+";"+age+";"+0);
 			
 			file_writer.write(buff.toString());
 			file_writer.close();

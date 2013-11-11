@@ -84,8 +84,16 @@ public class AS extends Human {
 				this.setActivityTimer(2000);
 				break;
 		}
-		int x = f.myRandom(doManager.discoObject[dos].getX(), doManager.discoObject[dos].getX()+doManager.discoObject[dos].WIDTH);
-		int y = f.myRandom(doManager.discoObject[dos].getY(), doManager.discoObject[dos].getY()+doManager.discoObject[dos].HEIGHT);
+		int x;
+		int y;
+		if(dos == 6) {
+			x = f.myRandom(doManager.discoObject[dos].getX(), doManager.discoObject[dos].getX()+BufferedImageLoader.scaleToScreenX(668,false));
+			y = f.myRandom(doManager.discoObject[dos].getY(), doManager.discoObject[dos].getY()+BufferedImageLoader.scaleToScreenY(355,false));
+		}
+		else {
+			x = f.myRandom(doManager.discoObject[dos].getX(), doManager.discoObject[dos].getX()+doManager.discoObject[dos].WIDTH);
+			y = f.myRandom(doManager.discoObject[dos].getY(), doManager.discoObject[dos].getY()+doManager.discoObject[dos].HEIGHT);
+		}
 		this.setTarget(x,y);
 	}
 	

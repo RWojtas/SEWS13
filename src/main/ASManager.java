@@ -39,7 +39,7 @@ public class ASManager {
 				else if(human[i].getActivity() == 1 && human[i].doActivity()) {
 					human[i].setActivity(0);
 				}
-				if(human[i].getActivity() == 0 || human[i].getActivity() == 2 || human[i].getActivity() == 4) {
+				if(human[i].getActivity() == 0 ||  human[i].getActivity() == 4) {
 					if(human[i].getUrine() > 0.9) {
 						human[i].setActivityWithPos(5, doManager);
 					}
@@ -51,7 +51,7 @@ public class ASManager {
 							human[i].setActivityWithPos(9, doManager);
 						}
 					}
-					else if(human[i].getEnergy() > 0.5 && human[i].getFun() < 0.4) {
+					else if(human[i].getEnergy() >= 0.3 && human[i].getFun() < 0.6) {
 						human[i].setActivityWithPos(2, doManager);
 					}
 					else {
@@ -177,7 +177,7 @@ public class ASManager {
 		    yPos = clickedObject.getPosition().getY0() + e.getY();
 		    
 		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos,yPos);
-		    System.out.println("gaaaaaaaaaaaaaaaaaay");	
+
 		    
 		    clickedObject.setActivity(6);
 		    clickedObject.setActivityTimer(2900);
