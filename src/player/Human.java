@@ -33,7 +33,8 @@ public abstract class Human extends JLabel{
 	protected int old_direction;
 	protected int wegfinde_cnt;
 	protected boolean has_moved = true;
-	boolean wegfindetrouble = false;
+	protected int wegfindetrouble = 0;
+	protected int troublecnt;
 
 	/*
 	 * Aktivit�tentabelle: 
@@ -382,7 +383,7 @@ public abstract class Human extends JLabel{
 			if (this.position.getX0() != this.target.getX0() || this.position.getY0() != this.target.getY0()) {
 				System.out.println("# aktuelle Position != Target -> LAUFEN!");
 				System.out.println("# wegfinde_cnt: "+this.wegfinde_cnt);
-				if(!this.wegfindetrouble) {
+				if(this.wegfindetrouble == 0) {
 					if(this.has_moved) {
 						this.has_moved = false;
 						this.wegfinde_cnt = 0;
@@ -475,7 +476,8 @@ public abstract class Human extends JLabel{
 						if(tmp>7) tmp = tmp-8;
 						if(tmp == this.old_direction) {
 							this.new_direction = this.old_direction;
-							this.wegfindetrouble = true;
+							this.wegfindetrouble = 1;
+							this.troublecnt = 0;
 						}
 						if(this.new_direction>7) this.new_direction = this.new_direction-8;
 						if(this.new_direction<0) this.new_direction = this.new_direction+8;
@@ -508,26 +510,49 @@ public abstract class Human extends JLabel{
 						ziel_direction = 4;	
 					} else {
 						ziel_direction = 4;
-						this.wegfindetrouble = false;
+						this.wegfindetrouble = 0;
 						System.out.println("############################################################################ SOLLTE NICHT EINTRETEN!!!");
 					}
-					if(ziel_direction < 4 ) {
-						ziel_direction = 2;
-						Coordinate coo = ausDirzuCoo(ziel_direction);
-						trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
-					} else {
-						ziel_direction = 6;
-						Coordinate coo = ausDirzuCoo(ziel_direction);
-						trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
+					if(this.wegfindetrouble == 1) {
+						System.out.println("# TROUBLE: 1");
+						/* if(ziel_direction == 4 || ziel_direction == 0) {
+							this.wegfindetrouble = 2;
+						} */
+						if(ziel_direction < 4 ) {
+							ziel_direction = 2;
+							Coordinate coo = ausDirzuCoo(ziel_direction);
+							trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
+						} else {
+							ziel_direction = 6;
+							Coordinate coo = ausDirzuCoo(ziel_direction);
+							trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
+						}
+					/*	this.troublecnt++;
+						System.out.println("# TROUBLECNT: "+this.troublecnt);
+					 } else if(this.wegfindetrouble == 2) {
+						System.out.println("# TROUBLE: 2");
+						if(ziel_direction < 4) {
+							ziel_direction = 6;
+							Coordinate coo = ausDirzuCoo(ziel_direction);
+							trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
+						} else {
+							ziel_direction = 2;
+							Coordinate coo = ausDirzuCoo(ziel_direction);
+							trouble_out = checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate());
+						}
+						this.troublecnt++;
+						if(this.troublecnt > 1000) {
+							this.wegfindetrouble = 0;
+						} */
 					}
 					if(trouble_out) {
-						this.wegfindetrouble = false;
+						this.wegfindetrouble = 0;
 						this.new_direction = ziel_direction;
 					} else {
 						this.direction = this.old_direction;
 						Coordinate coo = ausDirzuCoo(this.direction);
 						if(!checkFreePosition(coo.getXCoordinate(),coo.getYCoordinate())) {
-							this.wegfindetrouble = false;
+							this.wegfindetrouble = 0;
 							System.out.println("Eingekesselt? Schnell raus hier!");
 						}
 					}
@@ -554,6 +579,7 @@ public abstract class Human extends JLabel{
 				
 				//System.out.println("Aktuell: x:"+x+" y:"+y+" Neu: x:"+newPos.getXCoordinate()+" y:"+newPos.getYCoordinate()+" Target: x:"+this.target.getX0()+" y:"+this.target.getY0()+ " " +this.direction);
 			}
+			System.out.println("#      Old Direction: "+this.old_direction);
 			System.out.println("# Aktuelle Direction: "+this.direction);
 			System.out.println("# Aktuelle Position: "+this.position.getX0()+","+this.position.getY0());
 			System.out.println("#              Ziel: "+this.target.getX0()+","+this.target.getY0());

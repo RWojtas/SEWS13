@@ -21,7 +21,7 @@ public class ASManager {
 	public Player player;
 	public DiscoObjectManager doManager;
 	public static GameLogic gameLogic;
-	final static int as_cntr = 10;
+	final static int as_cntr = 20;
 	
 	public ASManager(GraphicManager graphicManager, DiscoObjectManager doManager) {
 		this.graphicManager = graphicManager;
@@ -87,8 +87,10 @@ public class ASManager {
 		Functions f = new Functions();
 		human = new AS[as_cntr];
 		for(int i = 0; i < as_cntr; i++) {
-			int y = 450;//f.myRandom(60, 700);
-			int x = 1098;//f.myRandom(1100, 1200);
+			// int y = 450;//f.myRandom(60, 700);
+			// int x = 1098;//f.myRandom(1100, 1200);
+			int y = 450;
+			int x = 500;
 			human[i] = new AS(((i%2==0)?'m':'w'), ((i%2==0)?(((i%4==0))?graphicManager.man01.getImage():graphicManager.man02.getImage()):(((i%4)==1)?graphicManager.woman01.getImage():graphicManager.woman02.getImage())), BufferedImageLoader.scaleToScreenX(x,false), BufferedImageLoader.scaleToScreenY(y,false),1);
 		    human[i].addMouseListener(new ASMouseListener());
 		    human[i].setActivityTimer(f.myRandom(400,3000));

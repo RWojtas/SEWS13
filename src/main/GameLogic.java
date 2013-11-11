@@ -24,7 +24,7 @@ public class GameLogic implements Runnable, KeyListener {
   //public static final int DISCO_OPEN_FROM = 23*60; //Minuten
   //public static final int DISCO_CLOSE_AT = 4*60; //Minuten
   public static final int DISCO_OPEN_FROM = 23*60; //Minuten
-  public static final int DISCO_CLOSE_AT = 23*60+3; //Minuten
+  public static final int DISCO_CLOSE_AT = 5*60+3; //Minuten
   public Player player;
   public Statusbar statusbar;
   public boolean initialized = false;
