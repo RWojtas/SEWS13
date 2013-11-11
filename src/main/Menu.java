@@ -34,6 +34,8 @@ import music.MusicManager;
  */
 public class Menu extends JLayeredPane {
 	GraphicManager graphicManager;
+	StatistikModul Stats = new StatistikModul();
+	StatistikOverlay Stats_show;
 
 	JComponent score;
 	JComponent impressum;
