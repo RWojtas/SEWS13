@@ -57,8 +57,8 @@ public class Menu extends JLayeredPane {
 		this.graphicManager = graphicManager;
 		this.musicManager = musicManager;
 
-		int left = BufferedImageLoader.scaleToScreenX(630 * 1366 / 1600,true);
-		int top = BufferedImageLoader.scaleToScreenY(270 * 768 / 900,true);
+		int left = BufferedImageLoader.scaleToScreenX(630 * 1366 / 1600,false);
+		int top = BufferedImageLoader.scaleToScreenY(270 * 768 / 900,false);
 		int width = BufferedImageLoader.scaleToScreenX(300,false);
 		int height = BufferedImageLoader.scaleToScreenY(60,false);
 		int height_gab = BufferedImageLoader.scaleToScreenY(height + 20,false);

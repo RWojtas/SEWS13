@@ -69,10 +69,11 @@ public class GameView extends JFrame implements MouseListener {
 	JLabel funLabel;
 	JLabel gameExit;
 	JLabel moneyLabel;
+	JLabel highscoreLabel;
 	private JLabel musicSwitch;
 	private JLabel gameOverLabel;
-	private int currentAnimationHeight;
-	private int endAnimationHeight;
+	private int currentAnimationProgress;
+	private int endAnimationDuration;
 	
 	  
 	public GameView(ASManager asManager, DiscoObjectManager doManager, Player player, GraphicManager graphicManager) {
@@ -316,26 +317,47 @@ public class GameView extends JFrame implements MouseListener {
 		gameOverLabel = new JLabel();
 		gameOverLabel.setOpaque(false);
 		gameOverLabel.setVisible(false);
-		currentAnimationHeight = 0;
-		endAnimationHeight = 30;
+		currentAnimationProgress = 0;
+		endAnimationDuration = 30;
 		layer1.add(gameOverLabel,0);
+		
+		highscoreLabel = new JLabel();
+		highscoreLabel.setOpaque(false);
+		highscoreLabel.setVisible(false);
+		highscoreLabel.setHorizontalAlignment(JLabel.CENTER);
+		highscoreLabel.setVerticalAlignment(JLabel.CENTER);
+		highscoreLabel.setFont(new Font("Arial",Font.BOLD,BufferedImageLoader.scaleToScreenX(100,false)));
+		highscoreLabel.setForeground(Color.white);
+		layer1.add(highscoreLabel,0);
 	}
 	
-	public void animateGameOverLabel() {
-		if(currentAnimationHeight <= endAnimationHeight) {
+	public void animateGameOverScreen() {
+		if(currentAnimationProgress <= endAnimationDuration) {
 			int animationSpeed = 1;
+			
 			BufferedImageLoader gameOverImage = graphicManager.gameOverImage;
 			graphicManager.gameOverImage.reScaleImageSize(gameOverImage.getImageWidth()+animationSpeed*2, gameOverImage.getImageHeight()+animationSpeed*2);
 			BufferedImage image = graphicManager.gameOverImage.getImage();		
 			
-			gameOverLabel.setVisible(true);
 			gameOverLabel.setIcon(new ImageIcon(image.getSubimage(0,0,image.getWidth(),image.getHeight())));
-			gameOverLabel.setBounds(BufferedImageLoader.scaleToScreenX(300,false)-currentAnimationHeight,
-									BufferedImageLoader.scaleToScreenY(300,false)-currentAnimationHeight,
+			gameOverLabel.setBounds(BufferedImageLoader.scaleToScreenX(300,false)-currentAnimationProgress,
+									BufferedImageLoader.scaleToScreenY(300,false)-currentAnimationProgress,
 									image.getWidth(),
 									image.getHeight());
 			
-			currentAnimationHeight+=animationSpeed;
+			highscoreLabel.setBounds(BufferedImageLoader.scaleToScreenX(100,false)-currentAnimationProgress,
+									BufferedImageLoader.scaleToScreenY(500,false),
+									BufferedImageLoader.scaleToScreenX(1000,false),
+									BufferedImageLoader.scaleToScreenY(300,false));
+
+			//Initialization
+			if(currentAnimationProgress == 0) {
+				highscoreLabel.setText(String.format("Punktestand: %d",Highscore.getInstance().getScore()));
+				gameOverLabel.setVisible(true);
+				highscoreLabel.setVisible(true);
+			}
+			
+			currentAnimationProgress+=animationSpeed;
 		}	
 	}
 	
