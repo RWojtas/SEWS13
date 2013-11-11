@@ -19,12 +19,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 
 public class StatistikOverlay extends JLayeredPane {
-	private char gender;
+	private int gender;
 	private int age_years;
 
 	GraphicManager graphicManager;
 
-	public StatistikOverlay(GraphicManager gm) {
+	public StatistikOverlay(GraphicManager gm, final StatistikModul stats) {
 		super();
 		this.graphicManager = gm;
 
@@ -113,7 +113,8 @@ public class StatistikOverlay extends JLayeredPane {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				((JComponent) e.getSource()).getParent().setVisible(false);
-				gender = 'm';
+				gender = 1;
+				stats.saveStatsFile_first(gender, age_years);
 			}
 		});
 		ok_m.setBounds(10, 280, 320, 128);
@@ -136,7 +137,8 @@ public class StatistikOverlay extends JLayeredPane {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				((JComponent) e.getSource()).getParent().setVisible(false);
-				gender = 'w';
+				gender = 0;
+				stats.saveStatsFile_first(gender, age_years);
 			}
 		});
 		ok_w.setBounds(370, 280, 320, 128);

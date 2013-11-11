@@ -177,8 +177,7 @@ public class Menu extends JLayeredPane {
 		setVisible(true);
 		
 		if(Stats.readStatsFile().get(0) == 0 && Stats.readStatsFile().get(1) == 0) {
-			Stats_show = new StatistikOverlay(graphicManager);
-			System.out.println(Stats_show.getAge()+" "+Stats_show.getGender());
+			Stats_show = new StatistikOverlay(graphicManager,Stats);
 			add(Stats_show, JLayeredPane.POPUP_LAYER);
 		}
 	}
