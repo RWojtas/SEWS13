@@ -56,7 +56,7 @@ public class ToiletOverlay extends Overlay{
 		
 		progressText = new JLabel();
 		progressText.setBounds(15, 550, 660, 150);
-		progressText.setText("- Kein Kommentar -");
+		progressText.setText("Guten Rutsch!");
 		progressText.setForeground(new Color(128,0,0));
 		progressText.setFont(new Font("Aharoni", 0, 30));
 		progressText.setHorizontalTextPosition(JLabel.RIGHT);
