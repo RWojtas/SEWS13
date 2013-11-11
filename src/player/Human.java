@@ -706,7 +706,7 @@ public abstract class Human extends JLabel{
 			this.alcLevel=this.alcLevel-0.00001;
 			this.flirt=this.flirt-0.00001;
 			this.fun=this.fun-0.000009;
-			this.energy = this.energy - 0.00002;
+			this.energy = this.energy - 0.00001;
 		}
 	}
 	

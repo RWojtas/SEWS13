@@ -137,7 +137,7 @@ public class FlirtOverlay extends Overlay {
 						} catch (InterruptedException e1) {}
 					}
 					
-					as.setActivity(0);
+					
 					System.out.println(as.getActivity() + "   " + as.getActivityTimer());
 					DiscoObject.setStatusES(player, action);
 					((JLabel) e.getSource()).getParent().setVisible(false);
@@ -145,6 +145,7 @@ public class FlirtOverlay extends Overlay {
 					disableActions();
 					player.setActivity(0);
 					as.setActivity(0);
+					as.setActivityTimer(0);
 					System.out.println(player.getActivityTimer());
 //					bar.openOverlay=false;
 					

@@ -71,7 +71,10 @@ public class ASManager {
 						}
 					}
 				}
-			} else {
+			} else if(human[i].getActivity() == 6) {
+				human[i].setDirection((GameLogic.getInstance().player.getDirection()+4)%8);
+			}
+			else {
 				if(human[i].doActivity() || human[i].getActivity() == -1 ) {
 					human[i].decActivityTimer();
 					//  TO-DO  Aktion muss ausgef�hrt werden
@@ -173,12 +176,13 @@ public class ASManager {
 		  	final AS clickedObject = (AS)e.getSource();  
 		   
 		    xPos = clickedObject.getPosition().getX0() + e.getX();
-		    yPos = clickedObject.getPosition().getX0() + e.getY();
+		    yPos = clickedObject.getPosition().getY0() + e.getY();
 		    
 		    GameLogic.getInstance().gameView.setTarget(GameLogic.getInstance().player,xPos,yPos);
 		    System.out.println("gaaaaaaaaaaaaaaaaaay");	
 		    
 		    clickedObject.setActivity(6);
+		    clickedObject.setActivityTimer(2900);
 		    clickedObject.setTarget(clickedObject.getPosition().getX0(), clickedObject.getPosition().getY0());
 		    System.out.println(clickedObject.getActivity() + " " + clickedObject.getActivityTimer());
 		    
