@@ -1,5 +1,9 @@
 package main;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.NetworkInterface;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class StatistikModul {
@@ -15,6 +21,8 @@ public class StatistikModul {
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
+	private static final String STATS_FILE = "data\\stats.txt";
+	private ArrayList<Integer> list;
 	
 	public static String getMacAddress() throws Exception {
 		String result = "";
@@ -35,6 +43,7 @@ public class StatistikModul {
 	}
 
 	public void setStatistik() throws Exception {
+		list = readStatsFile();
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -51,6 +60,8 @@ public class StatistikModul {
 			if(resultSet.next()) {
 				int cnt = resultSet.getInt("count");
 				cnt++;
+				cnt=cnt+list.get(2);
+				saveStatsFile(0);
 				preparedStatement = connect
 						.prepareStatement("UPDATE FDF.exec  SET count = ? , date_last = ? WHERE hwaddress = ?;");
 				preparedStatement.setInt(1, cnt);
@@ -143,5 +154,50 @@ public class StatistikModul {
 			}
 		} catch (Exception e) {
 		}
+	}
+	
+	public ArrayList<Integer> readStatsFile() {
+		FileReader file_reader;
+		int c;
+		StringBuffer buff = new StringBuffer();
+		ArrayList<Integer> l = new ArrayList<Integer>();
+
+		try {
+			file_reader = new FileReader(new File(STATS_FILE));
+
+			do {
+				c = file_reader.read();
+				if (c == ';' || c == -1 && buff.length() > 0) {
+					l.add(Integer.parseInt(buff.toString()));
+					buff = new StringBuffer();
+					
+				} else
+					buff.append((char) c);
+			} while (c != -1);
+
+			file_reader.close();
+		} catch (IOException e) {}
+		
+		Comparator<Integer> comparator = Collections.reverseOrder();
+		
+		Collections.sort(l, comparator);
+		
+		return l;
+	}
+	
+	public void saveStatsFile(int cnt) {
+		FileWriter file_writer;
+		StringBuffer buff = new StringBuffer();
+		try {
+			file_writer = new FileWriter(new File(STATS_FILE),false);
+			
+			Collections.sort(list);
+			
+			buff.append(list.get(0)+";"+list.get(1)+";"+cnt);
+			
+			file_writer.write(buff.toString());
+			file_writer.close();
+		} catch (IOException e) {}
+		
 	}
 }

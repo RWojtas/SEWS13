@@ -34,6 +34,8 @@ import music.MusicManager;
  */
 public class Menu extends JLayeredPane {
 	GraphicManager graphicManager;
+	StatistikModul Stats = new StatistikModul();
+	StatistikOverlay Stats_show;
 
 	JComponent score;
 	JComponent impressum;
@@ -180,6 +182,13 @@ public class Menu extends JLayeredPane {
 				BufferedImageLoader.scaleToScreenY(768,false));
 		setOpaque(false);
 		setVisible(true);
+		
+		if(Stats.readStatsFile().get(0) == 0 && Stats.readStatsFile().get(1) == 0) {
+			Stats_show = new StatistikOverlay(graphicManager);
+			int age = Stats_show.getAge();
+			int gender = Stats_show.getGender();
+			System.out.println(age+" "+gender);
+		}
 	}
 
 	private void disableButtonsEvents() {
