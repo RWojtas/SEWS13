@@ -746,8 +746,9 @@ public class GameView extends JFrame implements MouseListener {
   	  System.out.println("mouseClicked!");
   	  //Wird ausgelöst, wenn man einen Klick mit der Maus ausführt 
   	  //ohne mit gedrückter Maustaste die Position der Maus zu verändern
-  	  
-  	  setTarget(player,e.getX(),e.getY()); 
+  	  if(player.getActivityTimer() == 0) {
+  	  setTarget(player,e.getX(),e.getY());
+  	  }
   }
 
 	@Override
