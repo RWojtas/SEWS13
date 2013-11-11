@@ -92,8 +92,8 @@ public class ASManager {
 		for(int i = 0; i < as_cntr; i++) {
 			// int y = 450;//f.myRandom(60, 700);
 			// int x = 1098;//f.myRandom(1100, 1200);
-			int y = 450;
-			int x = 500;
+			int y = 290;
+			int x = 50;
 			human[i] = new AS(((i%2==0)?'m':'w'), ((i%2==0)?(((i%4==0))?graphicManager.man01.getImage():graphicManager.man02.getImage()):(((i%4)==1)?graphicManager.woman01.getImage():graphicManager.woman02.getImage())), BufferedImageLoader.scaleToScreenX(x,false), BufferedImageLoader.scaleToScreenY(y,false),1);
 		    human[i].addMouseListener(new ASMouseListener());
 		    human[i].setActivityTimer(f.myRandom(400,3000));
@@ -107,8 +107,8 @@ public class ASManager {
 	public void resetComponents() {
 		Functions f = new Functions();
 		for(int i = 0; i < as_cntr; i++) {
-			int y = 450;
-			int x = 500;
+			int y = 290;
+			int x = 50;
 			human[i].resetAS(((i%2==0)?'m':'w'), ((i%2==0)?(((i%4==0))?graphicManager.man01.getImage():graphicManager.man02.getImage()):(((i%4)==1)?graphicManager.woman01.getImage():graphicManager.woman02.getImage())), BufferedImageLoader.scaleToScreenX(x,false), BufferedImageLoader.scaleToScreenY(y,false),1);
 		    human[i].setActivityTimer(f.myRandom(400,3000));
 		    human[i].setActivity(-1);
