@@ -115,8 +115,6 @@ public class BufferedImageLoader {
     } else {
       resolutionFactor = 1;	
     }
-    
-    System.out.println("w: "+widthCorrection+" h: "+heightCorrection);
   }
   
   public static int scaleToScreenX(int value, boolean type) {

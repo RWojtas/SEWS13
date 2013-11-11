@@ -331,6 +331,59 @@ public class GameView extends JFrame implements MouseListener {
 		layer1.add(highscoreLabel,0);
 	}
 	
+	public void resetGameView(ASManager asManager, DiscoObjectManager doManager, Player player) {
+		this.asManager = asManager;
+		this.doManager = doManager;
+		this.player = player;
+		
+		asManager.resetComponents();
+		doManager.resetComponents();
+
+		fps.setOpaque(false);
+		fps.setHorizontalAlignment(JLabel.RIGHT);
+		fps.setFont(new Font("Dialog", Font.BOLD, 30));
+		fps.setBounds((int) deskResolution.getWidth() - 300 - 3,
+				(int) deskResolution.getHeight() - 30, 300, 30);
+		
+		//Overlays
+		bar.setVisible(false);
+
+		dj.setVisible(false);
+		
+		bench.setVisible(false);
+
+		toilet.setVisible(false);
+		
+		dancefloor.setVisible(false);		
+		
+		flirt.setVisible(false);
+		
+		funBar.setValue(0);
+		
+		urineBar.setValue(0);
+		
+		alcLevelBar.setValue(0);
+		
+		flirtBar.setValue(0);
+		
+		sbar.setBars(energyBar, urineBar, flirtBar, alcLevelBar, funBar);
+		sbar.setLabels(status_mtitle, status_genre, status_uhrzeit, moneyLabel);
+		sbar.updateBars(player);
+		// End: Statusbar
+		
+		gameOverLabel.setOpaque(false);
+		gameOverLabel.setVisible(false);
+		currentAnimationProgress = 0;
+		endAnimationDuration = 30;
+		
+		highscoreLabel.setOpaque(false);
+		highscoreLabel.setVisible(false);
+		highscoreLabel.setHorizontalAlignment(JLabel.CENTER);
+		highscoreLabel.setVerticalAlignment(JLabel.CENTER);
+		highscoreLabel.setFont(new Font("Arial",Font.BOLD,BufferedImageLoader.scaleToScreenX(100,false)));
+		highscoreLabel.setForeground(Color.white);
+	}
+	
 	public void animateGameOverScreen() {
 		if(currentAnimationProgress <= endAnimationDuration) {
 			int animationSpeed = 1;

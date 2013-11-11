@@ -21,13 +21,14 @@ public class GameLogic implements Runnable, KeyListener {
   public static final long UPDATE_TIME_INTERVALL = 6000000; //Nanosekunden
   public static final long ONE_SECOND = 1000000000; //Nanosekunden
   public static final long FPS_DISPLAY_INTERVALL = 100000000; //Nanosekunden
-  //public static final int DISCO_OPEN_FROM = 23*60; //Minuten
-  //public static final int DISCO_CLOSE_AT = 4*60; //Minuten
   public static final int DISCO_OPEN_FROM = 23*60; //Minuten
-  public static final int DISCO_CLOSE_AT = 23*60+3; //Minuten
+  public static final int DISCO_CLOSE_AT = 4*60; //Minuten
+  //public static final int DISCO_OPEN_FROM = 23*60; //Minuten
+  //public static final int DISCO_CLOSE_AT = 23*60+3; //Minuten
   public Player player;
   public Statusbar statusbar;
   public boolean initialized = false;
+  public boolean firstGame = true;
   public boolean menu = true;
   
   public static GameLogic getInstance() {
@@ -44,27 +45,32 @@ public class GameLogic implements Runnable, KeyListener {
 	  long framesPerSecondTimer = 0;
 	  long timestamp = 0;
 	  long sleepTime = 0;
-	 
-	  long t1=0;
+	  firstGame = true;
+	  //long t1=0;
 	  
 	  while(true) {
 		  System.out.print("");
 		  if(menu) continue;
-		  if(!initialized) {  
+		  if(!initialized) {
+			  if(!firstGame) {
+				  resetGame();
+			  }
+			  System.out.println(firstGame);
 			  timestamp = System.nanoTime();
 			  updateTimer = timestamp;
 			  framesPerSecondTimer = timestamp; 
 			  statusbar.initializeClock(DISCO_OPEN_FROM, DISCO_CLOSE_AT, ONE_SECOND/60);
 			  initialized = true;
+			  firstGame = false;
 		  }
 		  //Updates
 		  if(!statusbar.isTimeOut()) {
 			  asManager.updateComponents();
-			//  System.out.println("___________________________");
-			//  System.out.println("Performance Check Player:");
-			  t1 = System.nanoTime();
+			  //System.out.println("___________________________");
+			  //System.out.println("Performance Check Player:");
+			  //t1 = System.nanoTime();
 			  player.stepNextPosition();
-		//	  System.out.println("Insgesamte Dauer:\nZeit in Nanosekunden: "+(System.nanoTime()-t1));
+			  //System.out.println("Insgesamte Dauer:\nZeit in Nanosekunden: "+(System.nanoTime()-t1));
 			  statusbar.updateBars(player);
 			  statusbar.updateClock();
 			  frames++;
@@ -97,6 +103,11 @@ public class GameLogic implements Runnable, KeyListener {
 			  }  
 		  } 
 	  }
+  }
+  
+  public void resetGame() {
+	  player = new Player(100,'m', graphicManager.man01.getImage(), BufferedImageLoader.scaleToScreenX(800,true), BufferedImageLoader.scaleToScreenY(500,true),1);
+	  gameView.resetGameView(asManager, doManager, player);
   }
   
   private GameLogic() {
