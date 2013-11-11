@@ -12,6 +12,7 @@ import javax.swing.JLayeredPane;
 import overlay.BenchOverlay.Act;
 import objects.Bench;
 import objects.DiscoObject;
+import player.AS;
 import player.Human;
 import player.Player;
 import main.BufferedImageLoader;
@@ -21,6 +22,7 @@ import main.Highscore;
 public class FlirtOverlay extends Overlay {
 	
 	public Player player;
+	public AS as;
 	JLabel progress;
 	JLabel progressText;
 	JLabel buttons = new JLabel();
@@ -83,6 +85,10 @@ public class FlirtOverlay extends Overlay {
 	
 	}
 	
+	public void setAS(AS as){
+		this.as=as;
+	}
+	
 	class Act extends MouseAdapter {
 		ImageIcon i;
 		ImageIcon h;
@@ -130,11 +136,15 @@ public class FlirtOverlay extends Overlay {
 							Thread.sleep(40);
 						} catch (InterruptedException e1) {}
 					}
+					
+					as.setActivity(0);
+					System.out.println(as.getActivity() + "   " + as.getActivityTimer());
 					DiscoObject.setStatusES(player, action);
 					((JLabel) e.getSource()).getParent().setVisible(false);
 					((JLabel) e.getSource()).getParent().setEnabled(false);
 					disableActions();
 					player.setActivity(0);
+					as.setActivity(0);
 					System.out.println(player.getActivityTimer());
 //					bar.openOverlay=false;
 					
