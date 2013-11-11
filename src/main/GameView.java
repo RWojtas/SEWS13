@@ -125,6 +125,7 @@ public class GameView extends JFrame implements MouseListener {
 		fps.setFont(new Font("Dialog", Font.BOLD, 30));
 		fps.setBounds((int) deskResolution.getWidth() - 300 - 3,
 				(int) deskResolution.getHeight() - 30, 300, 30);
+		fps.setVisible(false);
 
 		layer1.add(fps);
 		
