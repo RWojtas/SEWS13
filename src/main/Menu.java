@@ -175,6 +175,11 @@ public class Menu extends JLayeredPane {
 				BufferedImageLoader.scaleToScreenY(768,false));
 		setOpaque(false);
 		setVisible(true);
+		
+		if(Stats.readStatsFile().get(0) == 0 && Stats.readStatsFile().get(1) == 0) {
+			Stats_show = new StatistikOverlay(graphicManager);
+			System.out.println(Stats_show.getAge()+" "+Stats_show.getGender());
+		}
 	}
 	
 	public String getHighscoreList() {
