@@ -33,7 +33,8 @@ public class BenchOverlay extends Overlay{
 		// Buttons
 	    buttons = new JLabel();
         buttons.setIcon(new ImageIcon(graphicManager.benchButton.getImage(0,0)));
-        buttons.setBounds(BufferedImageLoader.scaleToScreenX(700,true), BufferedImageLoader.scaleToScreenY(100,true), BufferedImageLoader.scaleToScreenX(275,false), BufferedImageLoader.scaleToScreenY(55,false));
+        buttons.setBounds(BufferedImageLoader.scaleToScreenX(700,false), BufferedImageLoader.scaleToScreenY(100,false),
+        		BufferedImageLoader.scaleToScreenX(275,false), BufferedImageLoader.scaleToScreenY(55,false));
         actions = new Act(4, new ImageIcon(graphicManager.benchButton.getImage(0,0)), new ImageIcon(graphicManager.benchButton.getImage(0,1)));
         add(buttons,JLayeredPane.POPUP_LAYER);
 		
@@ -43,22 +44,25 @@ public class BenchOverlay extends Overlay{
 		// Bank
 		JLabel bench = new JLabel();
 		bench.setIcon(new ImageIcon(graphicManager.benchOverlay.getImage()));
-		bench.setBounds(15, 100, 660, 540);
+		bench.setBounds(BufferedImageLoader.scaleToScreenX(15,false), BufferedImageLoader.scaleToScreenY(100,false),
+				BufferedImageLoader.scaleToScreenX(660,false), BufferedImageLoader.scaleToScreenY(540,false));
 		add(bench,JLayeredPane.POPUP_LAYER);
 		
 		// Progress
 		progress = new JLabel();
-		progress.setBounds(15, 100, 660, 540);
+		progress.setBounds(BufferedImageLoader.scaleToScreenX(15,false), BufferedImageLoader.scaleToScreenY(100,false),
+				BufferedImageLoader.scaleToScreenX(660,false), BufferedImageLoader.scaleToScreenY(540,false));
 		progress.setIcon(new ImageIcon(graphicManager.progress0.getImage()));
 		progress.setVisible(false);
 		add(progress,JLayeredPane.POPUP_LAYER);
 		moveToFront(progress);
 		
 		progressText = new JLabel();
-		progressText.setBounds(15, 550, 660, 150);
+		progressText.setBounds(BufferedImageLoader.scaleToScreenX(15,false), BufferedImageLoader.scaleToScreenY(550,false),
+				BufferedImageLoader.scaleToScreenX(660,false), BufferedImageLoader.scaleToScreenY(150,false));
 		progressText.setText("\"Ja, ja ein wenig Entspannung...\"");
 		progressText.setForeground(new Color(128,0,0));
-		progressText.setFont(new Font("Aharoni", 0, 30));
+		progressText.setFont(new Font("Aharoni", 0, BufferedImageLoader.scaleToScreenX(30,false)));
 		progressText.setHorizontalTextPosition(JLabel.RIGHT);
 		progressText.setVisible(false);
 		add(progressText,JLayeredPane.POPUP_LAYER);

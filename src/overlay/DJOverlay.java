@@ -22,6 +22,7 @@ import javax.swing.ListModel;
 import overlay.BarOverlay.Act;
 import objects.DiscoObject;
 import player.Player;
+import main.BufferedImageLoader;
 import main.GraphicManager;
 import music.MusicManager;
 
@@ -47,7 +48,8 @@ public class DJOverlay extends Overlay {
 		for(String cat : m.getSongCategories()) {
 			JButton j = new JButton(cat);
 			Act a = new Act(cat);
-			j.setBounds(0, 0+i*130, 275, 120);
+			j.setBounds(0, BufferedImageLoader.scaleToScreenY(0+i*130,false), 
+					BufferedImageLoader.scaleToScreenX(275,false), BufferedImageLoader.scaleToScreenY(120,false));
 			j.setBorder(null);
 			pan.add(j);
 			
@@ -55,12 +57,13 @@ public class DJOverlay extends Overlay {
 			actions.add(a);
 			i++;
 		}
-		pan.setPreferredSize(new Dimension(100, i*100));
+		pan.setPreferredSize(new Dimension(BufferedImageLoader.scaleToScreenX(100,false), BufferedImageLoader.scaleToScreenY(i*100,false)));
 		
 		JScrollPane listScrollPane = new JScrollPane(pan);
 		listScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		listScrollPane.setWheelScrollingEnabled(true);
-		listScrollPane.setBounds(700,100,275,540);
+		listScrollPane.setBounds(BufferedImageLoader.scaleToScreenX(700,false),BufferedImageLoader.scaleToScreenY(100,false),
+				BufferedImageLoader.scaleToScreenX(275,false),BufferedImageLoader.scaleToScreenY(540,false));
 		listScrollPane.setBorder(null);
 		
 		add(listScrollPane, JLayeredPane.POPUP_LAYER);
@@ -69,22 +72,25 @@ public class DJOverlay extends Overlay {
 		// DJ
 		JLabel dj = new JLabel();
 		dj.setIcon(new ImageIcon(graphicManager.dj_overlay.getImage()));
-		dj.setBounds(15, 100, 660, 540);
+		dj.setBounds(BufferedImageLoader.scaleToScreenX(15,false), BufferedImageLoader.scaleToScreenY(100,false), 
+				BufferedImageLoader.scaleToScreenX(660,false), BufferedImageLoader.scaleToScreenY(540,false));
 		add(dj,JLayeredPane.POPUP_LAYER);
 		
 		// Progress
 		progress = new JLabel();
-		progress.setBounds(15, 100, 660, 540);
+		progress.setBounds(BufferedImageLoader.scaleToScreenX(15,false), BufferedImageLoader.scaleToScreenY(100,false), 
+				BufferedImageLoader.scaleToScreenX(660,false), BufferedImageLoader.scaleToScreenY(540,false));
 		progress.setIcon(new ImageIcon(graphicManager.progress0.getImage()));
 		progress.setVisible(false);
 		add(progress,JLayeredPane.POPUP_LAYER);
 		moveToFront(progress);
 		
 		progressText = new JLabel();
-		progressText.setBounds(15, 550, 660, 150);
+		progressText.setBounds(BufferedImageLoader.scaleToScreenX(15,false), BufferedImageLoader.scaleToScreenY(550,false), 
+				BufferedImageLoader.scaleToScreenX(660,false), BufferedImageLoader.scaleToScreenY(150,false));
 		progressText.setText("\"Klar, spiel ich nach diesem Song fuer dich!\"");
 		progressText.setForeground(new Color(128,0,0));
-		progressText.setFont(new Font("Aharoni", 0, 30));
+		progressText.setFont(new Font("Aharoni", 0, BufferedImageLoader.scaleToScreenX(30,false)));
 		progressText.setHorizontalTextPosition(JLabel.RIGHT);
 		progressText.setVisible(false);
 		add(progressText,JLayeredPane.POPUP_LAYER);

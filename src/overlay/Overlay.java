@@ -42,15 +42,17 @@ public class Overlay extends JLayeredPane {
 		
 		title = new JLabel();
 		title.setText(t);
-		title.setFont(new Font("Aharoni", 0, 48));
+		title.setFont(new Font("Aharoni", 0, BufferedImageLoader.scaleToScreenY(48,false)));
 		title.setForeground(new Color(128, 0, 0));
-		title.setBounds(BufferedImageLoader.scaleToScreenX(35,true), BufferedImageLoader.scaleToScreenY(20,true), BufferedImageLoader.scaleToScreenX(700,false), BufferedImageLoader.scaleToScreenY(48,false));
+		title.setBounds(BufferedImageLoader.scaleToScreenX(35,false), BufferedImageLoader.scaleToScreenY(20,false), 
+				BufferedImageLoader.scaleToScreenX(700,false), BufferedImageLoader.scaleToScreenY(48,false));
 
 		close = new JLabel();
 		Icon close_icon = new ImageIcon(graphicManager.closeButtons.getImage(0,
 				0));
 		close.setIcon(close_icon);
-		close.setBounds(cont_width - BufferedImageLoader.scaleToScreenX(60,true), BufferedImageLoader.scaleToScreenY(10,true), BufferedImageLoader.scaleToScreenX(45,false), BufferedImageLoader.scaleToScreenY(45,false));
+		close.setBounds(cont_width - BufferedImageLoader.scaleToScreenX(60,false), BufferedImageLoader.scaleToScreenY(10,false), 
+				BufferedImageLoader.scaleToScreenX(45,false), BufferedImageLoader.scaleToScreenY(45,false));
 		close.addMouseListener(new MouseAdapter() {
 			Icon icon_close = new ImageIcon(graphicManager.closeButtons
 					.getImage(0, 1));

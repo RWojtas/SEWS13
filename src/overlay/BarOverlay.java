@@ -19,7 +19,7 @@ import main.Highscore;
 public class BarOverlay extends Overlay {
 	/*  11 - BlauHohn
 	 *  12 - RotOchsen
-	 *  13 - GelbVögln
+	 *  13 - GelbVï¿½gln
 	 *  14 - SchwarzKatzerl
 	 *  15 - ZitronenLimonade
 	 *  16 - Eistee
@@ -42,7 +42,9 @@ public class BarOverlay extends Overlay {
 		for(int i=0;i<NUM_BUT;i++) {
             buttons[i] = new JLabel();
             buttons[i].setIcon(new ImageIcon(graphicManager.drinkButtons.getImage(0,i)));
-            buttons[i].setBounds(BufferedImageLoader.scaleToScreenX(700+i%3*95,true), BufferedImageLoader.scaleToScreenY(100+i/3*182,true), BufferedImageLoader.scaleToScreenX(90,false), BufferedImageLoader.scaleToScreenY(176,false));
+            buttons[i].setBounds(BufferedImageLoader.scaleToScreenX(700+i%3*95,false), BufferedImageLoader.scaleToScreenY(100+i/3*182,false), 
+            		graphicManager.drinkButtons.getImageWidth(),graphicManager.drinkButtons.getImageHeight());
+            
             actions[i] = new Act(11+i, new ImageIcon(graphicManager.drinkButtons.getImage(0,i)), new ImageIcon(graphicManager.drinkButtons.getImage(1,i)));
             add(buttons[i],JLayeredPane.POPUP_LAYER);
 		}
@@ -51,22 +53,25 @@ public class BarOverlay extends Overlay {
 		// Barkeeper
 		JLabel barkeeper = new JLabel();
 		barkeeper.setIcon(new ImageIcon(graphicManager.barkeeper.getImage()));
-		barkeeper.setBounds(15, 100, 660, 540);
+		barkeeper.setBounds(BufferedImageLoader.scaleToScreenX(15,false), BufferedImageLoader.scaleToScreenY(100,false), 
+				BufferedImageLoader.scaleToScreenX(660,false), BufferedImageLoader.scaleToScreenY(540,false));
 		add(barkeeper,JLayeredPane.POPUP_LAYER);
 		
 		// Progress
 		progress = new JLabel();
-		progress.setBounds(15, 100, 660, 540);
+		progress.setBounds(BufferedImageLoader.scaleToScreenX(15,false), BufferedImageLoader.scaleToScreenY(100,false), 
+				BufferedImageLoader.scaleToScreenX(660,false), BufferedImageLoader.scaleToScreenY(540,false));
 		progress.setIcon(new ImageIcon(graphicManager.progress0.getImage()));
 		progress.setVisible(false);
 		add(progress,JLayeredPane.POPUP_LAYER);
 		moveToFront(progress);
 		
 		progressText = new JLabel();
-		progressText.setBounds(15, 550, 660, 150);
+		progressText.setBounds(BufferedImageLoader.scaleToScreenX(15,false), BufferedImageLoader.scaleToScreenY(550,false), 
+				BufferedImageLoader.scaleToScreenX(660,false), BufferedImageLoader.scaleToScreenY(150,false));
 		progressText.setText("\"Na dann, Prost!\"");
 		progressText.setForeground(new Color(128,0,0));
-		progressText.setFont(new Font("Aharoni", 0, 30));
+		progressText.setFont(new Font("Aharoni", 0, BufferedImageLoader.scaleToScreenX(30,false)));
 		progressText.setHorizontalTextPosition(JLabel.RIGHT);
 		progressText.setVisible(false);
 		add(progressText,JLayeredPane.POPUP_LAYER);
