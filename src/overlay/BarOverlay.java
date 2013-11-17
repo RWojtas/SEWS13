@@ -44,7 +44,6 @@ public class BarOverlay extends Overlay {
             buttons[i].setIcon(new ImageIcon(graphicManager.drinkButtons.getImage(0,i)));
             buttons[i].setBounds(BufferedImageLoader.scaleToScreenX(700+i%3*95,false), BufferedImageLoader.scaleToScreenY(100+i/3*182,false), 
             		graphicManager.drinkButtons.getImageWidth(),graphicManager.drinkButtons.getImageHeight());
-            
             actions[i] = new Act(11+i, new ImageIcon(graphicManager.drinkButtons.getImage(0,i)), new ImageIcon(graphicManager.drinkButtons.getImage(1,i)));
             add(buttons[i],JLayeredPane.POPUP_LAYER);
 		}

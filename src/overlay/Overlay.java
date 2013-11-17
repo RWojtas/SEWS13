@@ -46,7 +46,7 @@ public class Overlay extends JLayeredPane {
 		title.setForeground(new Color(128, 0, 0));
 		title.setBounds(BufferedImageLoader.scaleToScreenX(35,false), BufferedImageLoader.scaleToScreenY(20,false), 
 				BufferedImageLoader.scaleToScreenX(700,false), BufferedImageLoader.scaleToScreenY(48,false));
-
+		
 		close = new JLabel();
 		Icon close_icon = new ImageIcon(graphicManager.closeButtons.getImage(0,
 				0));
