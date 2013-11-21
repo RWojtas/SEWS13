@@ -7,6 +7,11 @@ import javax.swing.ImageIcon;
 
 import main.*;
 
+/**
+ * @author Raffael & Sebastian
+ * 
+ */
+
 public class AS extends Human {
 
 	Functions f = new Functions();
@@ -30,8 +35,6 @@ public class AS extends Human {
 		this.direction = direction;
 		
 		graphicState = 0;
-//		this.height = image.getHeight();
-//		this.width =  image.getWidth();
 		this.height = BufferedImageLoader.scaleToScreenX(60,false);
 		this.width =  BufferedImageLoader.scaleToScreenY(60,false);
 		
@@ -39,7 +42,6 @@ public class AS extends Human {
 		
 		for(int i=0;i<8;i++) {
 			images[i] = new ImageIcon(image.getSubimage(0,i*width,width,height));
-			//System.out.println(i*width+"");
 		};
 		
 		setIcon(images[0]);

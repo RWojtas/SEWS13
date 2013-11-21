@@ -4,6 +4,12 @@ import java.awt.image.BufferedImage;
 
 import main.Highscore;
 
+/**
+ * 
+ * @author Raffael & Sebastian
+ *
+ */
+
 public class Player extends Human{
 	private double money;
 	

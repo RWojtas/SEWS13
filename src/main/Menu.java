@@ -176,10 +176,10 @@ public class Menu extends JLayeredPane {
 		setOpaque(false);
 		setVisible(true);
 		
-		if(Stats.readStatsFile().get(0) == 0 && Stats.readStatsFile().get(1) == 0) {
+		if(Stats.readStatsFile().get(0) == 0 && Stats.readStatsFile().get(1) == 0) { // wenn Alter und Geschlecht 0, zeige PopUp für die Abfrage
 			Stats_show = new StatistikOverlay(graphicManager,Stats);
 			add(Stats_show, JLayeredPane.POPUP_LAYER);
-		} else {
+		} else { // ansonsten werden einfach die Stats geupdated
 			Stats.setStatistik();
 		}
 	}
@@ -349,6 +349,7 @@ public class Menu extends JLayeredPane {
 		}
 	}
 
+// alte main - für Debugzwecke, jetzt in GameLogic integriert
 //	public static void main(String[] args) {
 //		GraphicManager graphicManager = new GraphicManager();
 //

@@ -18,6 +18,11 @@ import java.util.Locale;
 
 import player.Player;
 
+/**
+ * @author Raffael & Sebastian
+ * @design Nicolas
+ */
+
 public class Statusbar {
 	GraphicManager graphicManager;
 	MusicManager musicManager;

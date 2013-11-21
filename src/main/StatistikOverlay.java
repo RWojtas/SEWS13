@@ -18,6 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 
+/**
+ * @author Nicolas
+ */
 public class StatistikOverlay extends JLayeredPane {
 	private int gender;
 	private int age_years;

@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -8,8 +7,6 @@ import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import objects.Bar;
-import objects.DiscoObject;
 import player.*;
 import main.DiscoObjectManager;
 
@@ -28,7 +25,11 @@ public class ASManager {
 		this.doManager = doManager;
 	}
 	
-	
+	/**
+	 * @author Raffael & Sebastian
+	 * 
+	 * Funktion, damit die Automatischen Spieler interagieren
+	 */
 	public void updateComponents() {
 		Functions f = new Functions();
 		for(int i=0;i<human.length;i++) {
@@ -86,6 +87,11 @@ public class ASManager {
 		
 	}
 	
+	/**
+	 * @author Raffael
+	 * 
+	 * Funktion, die die AS hinzufügt und vom roten Teppich loslaufen lässt
+	 */
 	public void addComponents(JPanel panel) {
 		Functions f = new Functions();
 		human = new AS[as_cntr];
@@ -171,7 +177,7 @@ public class ASManager {
 	    	int xPos;
 		  	int yPos;
 		  	
-		  	final AS clickedObject = (AS)e.getSource();  
+		  	final AS clickedObject = (AS)e.getSource();  // welcher AS wurde gedrückt?
 		   
 		    xPos = clickedObject.getPosition().getX0() + e.getX();
 		    yPos = clickedObject.getPosition().getY0() + e.getY();
@@ -181,7 +187,7 @@ public class ASManager {
 		    
 		    clickedObject.setActivity(6);
 		    clickedObject.setActivityTimer(2900);
-		    clickedObject.setTarget(clickedObject.getPosition().getX0(), clickedObject.getPosition().getY0());
+		    clickedObject.setTarget(clickedObject.getPosition().getX0(), clickedObject.getPosition().getY0()); // zum AS laufen
 		    System.out.println(clickedObject.getActivity() + " " + clickedObject.getActivityTimer());
 		    
 		    

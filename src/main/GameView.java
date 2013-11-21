@@ -163,6 +163,9 @@ public class GameView extends JFrame implements MouseListener {
 		
 		
 		// Start: Statusbar
+		/*
+		 * @author Sebastian
+		 */
 		statusb_bg = sbar.addLabel((int) deskResolution.getWidth()
 				- BufferedImageLoader.scaleToScreenX(270,false), 0,
 				BufferedImageLoader.scaleToScreenX(270,false),

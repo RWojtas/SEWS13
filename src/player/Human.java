@@ -1,6 +1,5 @@
 package player;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
@@ -8,8 +7,13 @@ import javax.swing.ImageIcon;
 
 import main.BufferedImageLoader;
 import main.GameLogic;
-import objects.DiscoObject;
 
+/**
+ * @author Raffael & Sebastian
+ * @grafischeUmsetzung Philip & Nicolas
+ * 
+ * alle Mensch...
+ */
 
 public abstract class Human extends JLabel{
 	// Attribute
@@ -79,8 +83,6 @@ public abstract class Human extends JLabel{
 		
 		
 		graphicState = 0;
-//		this.height = image.getHeight();
-//		this.width =  image.getWidth();
 		this.height = BufferedImageLoader.scaleToScreenX(60,false);
 		this.width =  BufferedImageLoader.scaleToScreenY(60,false);
 		
@@ -88,7 +90,6 @@ public abstract class Human extends JLabel{
 		
 		for(int i=0;i<8;i++) {
 			images[i] = new ImageIcon(image.getSubimage(0,i*width,width,height));
-			//System.out.println(i*width+"");
 		};
 		
 		setIcon(images[0]);
@@ -110,8 +111,6 @@ public abstract class Human extends JLabel{
 		
 		
 		graphicState = 0;
-//		this.height = image.getHeight();
-//		this.width =  image.getWidth();
 		this.height = BufferedImageLoader.scaleToScreenX(60,false);
 		this.width =  BufferedImageLoader.scaleToScreenY(60,false);
 		
@@ -119,7 +118,6 @@ public abstract class Human extends JLabel{
 		
 		for(int i=0;i<8;i++) {
 			images[i] = new ImageIcon(image.getSubimage(0,i*width,width,height));
-			//System.out.println(i*width+"");
 		};
 		
 		setIcon(images[0]);
@@ -319,7 +317,7 @@ public abstract class Human extends JLabel{
 	
 	public Coordinate ausDirzuCoo(int dir) { 			// Diese Methode erstellt aus der Richtung eines Menschen
 		int x = this.getPosition().getX0();				// die n�chste Position, in die er hingehen w�rde. 
-		int y = this.getPosition().getY0();				// Diese Koordinate wird dann zur�ckgegeben.
+		int y = this.getPosition().getY0();				// Diese wird dann als Koordinate zur�ckgegeben.
 		switch(dir) {
 		case 0: 
 			++y;									
@@ -398,7 +396,7 @@ public abstract class Human extends JLabel{
 	}
 	
 	/*
-	// START: getNextPos() - inkl. Wegfindealgorithmus
+	// START: stepNextPos() - inkl. Wegfindealgorithmus
 		public void stepNextPosition() { //Diese Methode setzt die nï¿½chste Position des Menschen
 			// System.out.println("stepNextPosition()");
 			int x = this.getXPosition();												//mit Hilfe der weiter oben erklï¿½rten Methoden.
@@ -466,29 +464,38 @@ public abstract class Human extends JLabel{
 		// END: getNextPos()
 		*/
 
-	/* Neuer Wegfindealgo - auskommentiert aufgrund von Performanceproblemen	*/
-	// START: getNextPos() - inkl. Wegfindealgorithmus
+	/* Neuer Wegfindealgo - verbessert die Perfomance, da nur maximal 2 Richtungen pro Durchgang überprüft werden 
+	 * 					  - allerdings werden die Personen dadurch logischerweise langsamer, wenn ein alternativer Weg genommen wird
+	 * 					  - ist ein Kompromiss*/
+	// START: stepNextPos() - inkl. Wegfindealgorithmus
 	public void stepNextPosition() { //Diese Methode setzt die n�chste Position des Menschen
-		System.out.println("##########");
-		System.out.println("# Start: stepNextPosition()");
-		System.out.println("# Spieler: "+this.getType());
+		/* Debugausgaben
+		 * System.out.println("##########");
+		 * System.out.println("# Start: stepNextPosition()");
+		 * System.out.println("# Spieler: "+this.getType());
+		 */
 		int x = this.getXPosition();												//mit Hilfe der weiter oben erkl�rten Methoden.
 		int y = this.getYPosition();												//Der Fall, dass sich der Mensch nicht bewegt, ist abgefangen.
 		Coordinate newPos = new Coordinate(x, y);
 		
 		if (this.getActivity() != 0 && this.getActivity() != -1 ) {
-			System.out.println("# Aktivität != 0 && != -1 -> Laufbereit");
-			System.out.println("# Aktuelle Position: "+this.position.getX0()+","+this.position.getY0()+","+this.position.getX1()+","+this.position.getY1()+","+this.position.getX2()+","+this.position.getY2()+","+this.position.getX3()+","+this.position.getY3());
-			System.out.println("#              Ziel: "+this.target.getX0()+","+this.target.getY0()+","+this.target.getX1()+","+this.target.getY1()+","+this.target.getX2()+","+this.target.getY2()+","+this.target.getX3()+","+this.target.getY3());
+			/* Debugausgabe
+				System.out.println("# Aktivität != 0 && != -1 -> Laufbereit");
+				System.out.println("# Aktuelle Position: "+this.position.getX0()+","+this.position.getY0()+","+this.position.getX1()+","+this.position.getY1()+","+this.position.getX2()+","+this.position.getY2()+","+this.position.getX3()+","+this.position.getY3());
+				System.out.println("#              Ziel: "+this.target.getX0()+","+this.target.getY0()+","+this.target.getX1()+","+this.target.getY1()+","+this.target.getX2()+","+this.target.getY2()+","+this.target.getX3()+","+this.target.getY3());
+			*/
 			if (this.position.getX0() != this.target.getX0() || this.position.getY0() != this.target.getY0()) {
-				System.out.println("# aktuelle Position != Target -> LAUFEN!");
-				System.out.println("# wegfinde_cnt: "+this.wegfinde_cnt);
-				if(this.wegfindetrouble == 0) {
+				/* Debugausgabe
+					System.out.println("# aktuelle Position != Target -> LAUFEN!");
+					System.out.println("# wegfinde_cnt: "+this.wegfinde_cnt);
+				*/
+				if(this.wegfindetrouble == 0) { // in manchen Fällen tritt ein "Trouble" ein, dass die Positionen hin und her wechseln (dann zittert der Mensch schön), ist dieser Fall eingetreten, wird der Teil übersprungen
 					if(this.has_moved) {
 						this.has_moved = false;
 						this.wegfinde_cnt = 0;
 						if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
-							System.out.println("# Direction: 7");
+							// Debugausgabe
+							// System.out.println("# Direction: 7");
 							this.direction = 7;//wird die Methode check(7,0) aufgerufen. Die 7 steht f�r die Richtung unten rechts.
 						}																	//Alle Richtungen mit entsprechenden Werten (0-7) sind am Anfang des Dokuments aufgelistet.
 						else if(x > this.target.getX0() && y < this.target.getY0()){
@@ -520,7 +527,8 @@ public abstract class Human extends JLabel{
 							this.direction = 4;	
 						}
 						this.new_direction = this.direction;
-						System.out.println("# has_moved -> new_direction: "+this.direction);
+						// Debugausgabe
+						// System.out.println("# has_moved -> new_direction: "+this.direction);
 					} else {
 						
 						boolean richtung = false;
@@ -573,7 +581,7 @@ public abstract class Human extends JLabel{
 								this.wegfinde_cnt = 0;
 						}
 						int tmp = this.new_direction+4;
-						if(tmp>7) tmp = tmp-8;
+						if(tmp>7) tmp = tmp-8; // dir=8 geht schließlich nicht
 						if(tmp == this.old_direction) {
 							this.new_direction = this.old_direction;
 							if(this.old_direction == 2 || this.old_direction == 6)
@@ -585,7 +593,10 @@ public abstract class Human extends JLabel{
 						if(this.new_direction>7) this.new_direction = this.new_direction-8;
 						if(this.new_direction<0) this.new_direction = this.new_direction+8;
 					}
-				} else {
+				} else { // so bei Trouble wird das ganze etwas anders gehändelt
+					// es wird dafür gesorgt, dass der Spieler nicht wieder die entgegengesetzte Richtung einschlägt
+					// sondern solang eine Richtung weiter, bis eine andere Richtung zum Ziel, außer die Entgegengesetzte frei ist
+					// der Mensch läuft dadurch außen herum
 					boolean trouble_out = false;
 					int ziel_direction;
 					if(x < this.target.getX0() && y < this.target.getY0()) {			//Wenn die aktuelle x Position und y Position kleiner als die des Ziel sind
@@ -614,10 +625,12 @@ public abstract class Human extends JLabel{
 					} else {
 						ziel_direction = 4;
 						this.wegfindetrouble = 0;
-						System.out.println("############################################################################ SOLLTE NICHT EINTRETEN!!!");
+						// Debugausgabe
+						// System.out.println("############################################################################ SOLLTE NICHT EINTRETEN!!!");
 					}
-					if(this.wegfindetrouble == 1) {
-						System.out.println("# TROUBLE: 1");
+					if(this.wegfindetrouble == 1) { // zwei verschiedene TroubleFälle (Links/Rechts und Oben/Unten)
+						// Debugausgabe:
+						// System.out.println("# TROUBLE: 1");
 						/* if(ziel_direction == 4 || ziel_direction == 0) {
 							this.wegfindetrouble = 2;
 						} */
@@ -651,7 +664,7 @@ public abstract class Human extends JLabel{
 							this.wegfindetrouble = 0;
 						} */
 					// }
-					if(trouble_out) {
+					if(trouble_out) { // Juhu, Trouble zu Ende, sobald außen herum ;-)
 						this.wegfindetrouble = 0;
 						this.new_direction = ziel_direction;
 					} else {
@@ -675,8 +688,10 @@ public abstract class Human extends JLabel{
 				}
 				
 				if(has_moved) {
-					System.out.println("# Setze neue Position!");
-					System.out.println("# Alte Position: "+this.position.getX0()+","+this.position.getY0());
+					/* Debugausgaben
+					 * System.out.println("# Setze neue Position!");
+					 * System.out.println("# Alte Position: "+this.position.getX0()+","+this.position.getY0());
+					 */
 					setDirection(this.new_direction);
 					newPos = ausDirzuCoo(this.direction);
 					this.old_direction = new_direction;
@@ -685,30 +700,26 @@ public abstract class Human extends JLabel{
 				
 				//System.out.println("Aktuell: x:"+x+" y:"+y+" Neu: x:"+newPos.getXCoordinate()+" y:"+newPos.getYCoordinate()+" Target: x:"+this.target.getX0()+" y:"+this.target.getY0()+ " " +this.direction);
 			}
-			System.out.println("#      Old Direction: "+this.old_direction);
-			System.out.println("# Aktuelle Direction: "+this.direction);
-			System.out.println("# Aktuelle Position: "+this.position.getX0()+","+this.position.getY0());
-			System.out.println("#              Ziel: "+this.target.getX0()+","+this.target.getY0());
-			try {
-				  Thread.sleep(0);
-			  } catch (InterruptedException e) {
-				  e.printStackTrace();
-			  }
+			/* Debugausgaben
+				System.out.println("#      Old Direction: "+this.old_direction);
+				System.out.println("# Aktuelle Direction: "+this.direction);
+				System.out.println("# Aktuelle Position: "+this.position.getX0()+","+this.position.getY0());
+				System.out.println("#              Ziel: "+this.target.getX0()+","+this.target.getY0());
+			*/
 		}
-		System.out.println("# Ende: stepNextPosition()");
+		// Debugausgabe
+		// System.out.println("# Ende: stepNextPosition()");
 	}
-	// END: getNextPos() */
+	// END: stepNextPos() */
 
-	// END: AKTIVIT�TSMETHODEN
-
-	public boolean doActivity() {
+	public boolean doActivity() { // Soll die ausgewählte Aktivität ausgeführt werden? JA, wenn Zielposition gleich der aktuellen ist
 		if((position.getX0() == target.getX0())  && (position.getY0() == target.getY0())) {
 			return true;
 		}
 		return false;
 	}
 	
-	public void decreaseStatusOverTime(){
+	public void decreaseStatusOverTime(){ // Stati, die sich über die Zeit ändern, wenn keine Aktivität ausgeführt wird
 		if(activity==0||activity==1)
 		{
 			this.alcLevel=this.alcLevel-0.00001;
@@ -718,5 +729,6 @@ public abstract class Human extends JLabel{
 		}
 	}
 	
+	// END: AKTIVIT�TSMETHODEN
 	
 }

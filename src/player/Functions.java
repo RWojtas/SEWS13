@@ -2,6 +2,11 @@ package player;
 
 import java.util.Random;
 
+/**
+ * @author Raffael & Sebastian
+ * 
+ */
+
 public class Functions {
 	//Random zufall = new Random();
 	

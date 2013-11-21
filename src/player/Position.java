@@ -1,5 +1,11 @@
 package player;
 
+/**
+ * 
+ * @author Raffael & Sebastian
+ *
+ */
+
 public class Position {
 	private Coordinate lo; //Position links oben
 	private Coordinate ro; //Position rechts oben

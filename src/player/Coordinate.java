@@ -1,6 +1,10 @@
 package player;
 import java.lang.Math;
 
+/**
+ * @author Raffael & Sebastian
+ */
+
 public class Coordinate {
 	private int x;
 	private int y;
