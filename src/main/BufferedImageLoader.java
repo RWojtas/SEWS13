@@ -46,7 +46,7 @@ public class BufferedImageLoader {
     for(int y=0;y<picsY;y++) {
       for(x=0;x<picsX;x++) {
         Image scaledImage = source.getSubimage(x*source.getWidth()/picsX, y*source.getHeight()/picsY, source.getWidth()/picsX, source.getHeight()/picsY);
-        scaledImage.getScaledInstance((int)(resolutionFactor*source.getWidth()/picsX), (int)(resolutionFactor*source.getHeight()/picsY),BufferedImage.SCALE_SMOOTH);
+        scaledImage = scaledImage.getScaledInstance((int)(resolutionFactor*source.getWidth()/picsX), (int)(resolutionFactor*source.getHeight()/picsY),BufferedImage.SCALE_SMOOTH);
         scaledBufferedImage = new BufferedImage((int)(resolutionFactor*source.getWidth()/picsX), (int)(resolutionFactor*source.getHeight()/picsY),BufferedImage.TYPE_INT_ARGB);
         scaledBufferedImage.getGraphics().drawImage(scaledImage, 0, 0, null);  
     	imageTable[x][y] = scaledBufferedImage;  	

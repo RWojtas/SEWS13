@@ -72,7 +72,7 @@ public class Menu extends JLayeredPane {
 		musicManager.play();
 		
 		final JLabel song = new JLabel(musicManager.getSongTitle() + " (" + musicManager.getSongCategory() + ")");
-		song.setBounds(BufferedImageLoader.scaleToScreenX(200,true),BufferedImageLoader.scaleToScreenY(20,true),BufferedImageLoader.scaleToScreenX(200,false),BufferedImageLoader.scaleToScreenY(45,false));
+		song.setBounds(BufferedImageLoader.scaleToScreenX(200,false),BufferedImageLoader.scaleToScreenY(20,false),BufferedImageLoader.scaleToScreenX(200,false),BufferedImageLoader.scaleToScreenY(45,false));
 		song.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 					musicManager.next();
@@ -84,7 +84,7 @@ public class Menu extends JLayeredPane {
 		Icon speaker_icon = new ImageIcon(graphicManager.speaker.getImage(0,
 				0));
 		speaker.setIcon(speaker_icon);
-		speaker.setBounds(BufferedImageLoader.scaleToScreenX(140,true), BufferedImageLoader.scaleToScreenY(20,true), BufferedImageLoader.scaleToScreenX(45,false), BufferedImageLoader.scaleToScreenY(45,false));
+		speaker.setBounds(BufferedImageLoader.scaleToScreenX(140,false), BufferedImageLoader.scaleToScreenY(20,false), BufferedImageLoader.scaleToScreenX(45,false), BufferedImageLoader.scaleToScreenY(45,false));
 		speaker.addMouseListener(new MouseAdapter() {
 			Icon off = new ImageIcon(graphicManager.speaker
 					.getImage(0, 1));
