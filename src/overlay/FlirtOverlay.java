@@ -35,7 +35,7 @@ public class FlirtOverlay extends Overlay {
 		// Buttons
 	    buttons = new JLabel();
         buttons.setIcon(new ImageIcon(graphicManager.flirtButton.getImage(0,0)));
-        buttons.setBounds(BufferedImageLoader.scaleToScreenX(700,true), BufferedImageLoader.scaleToScreenY(100,true), BufferedImageLoader.scaleToScreenX(275,false), BufferedImageLoader.scaleToScreenY(55,false));
+        buttons.setBounds(BufferedImageLoader.scaleToScreenX(700,false), BufferedImageLoader.scaleToScreenY(100,false), BufferedImageLoader.scaleToScreenX(275,false), BufferedImageLoader.scaleToScreenY(55,false));
         actions = new Act(7, new ImageIcon(graphicManager.flirtButton.getImage(0,0)), new ImageIcon(graphicManager.flirtButton.getImage(0,1)));
         add(buttons,JLayeredPane.POPUP_LAYER);
 		
