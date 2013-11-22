@@ -1,14 +1,10 @@
 package music;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.MediaPlayer;
-
 import javax.swing.JComponent;
-
 import main.GameLogic;
 
 /**
@@ -114,20 +110,6 @@ public class MusicManager {
 		}
 		if(before) mediaPlayer.play();	// avoid async-effects...
 		
-		System.out.println("nächser Song:"+mfList.get((mediaIndex + 1)%size).category+": "+mfList.get((mediaIndex + 1)%size).title);
-		
-		/*
-		mediaPlayer.stop();
-		int size = mfList.size();
-		int index;
-		for(int i = 1;i < size;i++) {
-			index = (mediaIndex+i)%size;
-			if(category.equals(mfList.get(index).category)) {
-				mediaIndex = index;
-				defineActions();
-			}
-		}
-		mediaPlayer.play();
-		*/
+		//System.out.println("nächser Song:"+mfList.get((mediaIndex + 1)%size).category+": "+mfList.get((mediaIndex + 1)%size).title);
 	}
 }

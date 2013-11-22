@@ -20,6 +20,10 @@ import main.BufferedImageLoader;
 import main.GraphicManager;
 import music.MusicManager;
 
+
+/**
+ * @author Nicolas
+ */
 public class Overlay extends JLayeredPane {
 	protected GraphicManager graphicManager;
 	private JLabel title;
@@ -104,43 +108,4 @@ public class Overlay extends JLayeredPane {
 			((JLabel) e.getSource()).setIcon(i);
 		}
 	}
-	
-	
-//	public static void main(String[] args) {
-//		GraphicManager graphicManager = new GraphicManager();
-//		MusicManager m = new MusicManager();
-//		JFrame gameView = new JFrame();
-//
-//		gameView.setTitle("Felse deine Feier");
-//		gameView.setSize(
-//				(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()),
-//				(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
-//		gameView.setUndecorated(true);
-//		gameView.setAlwaysOnTop(true);
-//		gameView.setResizable(false);
-//		gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		gameView.setVisible(true);
-//		gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-//				graphicManager.mouse.getImage(),
-//				new Point(gameView.getX(), gameView.getY()), "mouse02"));
-//
-//		JComponent c = new DJOverlay(graphicManager, "DJ", m);
-//
-//		GroupLayout layout = new GroupLayout(gameView.getContentPane());
-//		gameView.getContentPane().setLayout(layout);
-//		layout.setHorizontalGroup(layout.createParallelGroup(
-//				javax.swing.GroupLayout.Alignment.LEADING).addComponent(c,
-//				javax.swing.GroupLayout.DEFAULT_SIZE,
-//				(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()),
-//				Short.MAX_VALUE));
-//		layout.setVerticalGroup(layout.createParallelGroup(
-//				javax.swing.GroupLayout.Alignment.LEADING)
-//				.addComponent(
-//						c,
-//						javax.swing.GroupLayout.DEFAULT_SIZE,
-//						(int) (Toolkit.getDefaultToolkit().getScreenSize()
-//								.getHeight()), Short.MAX_VALUE));
-//		gameView.pack();
-//		gameView.setVisible(true);
-//	}
 }

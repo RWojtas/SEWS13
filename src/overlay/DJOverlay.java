@@ -26,6 +26,10 @@ import main.BufferedImageLoader;
 import main.GraphicManager;
 import music.MusicManager;
 
+
+/**
+ * @author Nicolas
+ */
 public class DJOverlay extends Overlay {
 	MusicManager musicManager;
 	

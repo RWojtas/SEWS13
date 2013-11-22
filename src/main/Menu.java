@@ -2,31 +2,17 @@ package main;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.GroupLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
 import music.MusicManager;
 
 /**
@@ -348,43 +334,4 @@ public class Menu extends JLayeredPane {
 		public void mouseReleased(MouseEvent e) {
 		}
 	}
-
-// alte main - für Debugzwecke, jetzt in GameLogic integriert
-//	public static void main(String[] args) {
-//		GraphicManager graphicManager = new GraphicManager();
-//
-//		JFrame gameView = new JFrame();
-//
-//		gameView.setTitle("Felse deine Feier");
-//		gameView.setSize(
-//				(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()),
-//				(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
-//		gameView.setUndecorated(true);
-//		gameView.setAlwaysOnTop(true);
-//		gameView.setResizable(false);
-//		gameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		gameView.setVisible(true);
-//		gameView.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-//				graphicManager.mouse.getImage(),
-//				new Point(gameView.getX(), gameView.getY()), "mouse02"));
-//
-//		JComponent c = new Menu(graphicManager);
-//
-//		GroupLayout layout = new GroupLayout(gameView.getContentPane());
-//		gameView.getContentPane().setLayout(layout);
-//		layout.setHorizontalGroup(layout.createParallelGroup(
-//				javax.swing.GroupLayout.Alignment.LEADING).addComponent(c,
-//				javax.swing.GroupLayout.DEFAULT_SIZE,
-//				(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()),
-//				Short.MAX_VALUE));
-//		layout.setVerticalGroup(layout.createParallelGroup(
-//				javax.swing.GroupLayout.Alignment.LEADING)
-//				.addComponent(
-//						c,
-//						javax.swing.GroupLayout.DEFAULT_SIZE,
-//						(int) (Toolkit.getDefaultToolkit().getScreenSize()
-//								.getHeight()), Short.MAX_VALUE));
-//		gameView.pack();
-//		gameView.setVisible(true);
-//	}
 }

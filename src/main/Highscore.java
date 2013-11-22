@@ -1,19 +1,16 @@
-/**
- * @author Nicolas
- */
-
 package main;
 
-import java.awt.List;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * @author Nicolas
+ */
 public class Highscore {
 	private static final String HIGHSCORE_FILE = "data\\highscore.txt";
 	private static Highscore instance;
@@ -55,10 +52,10 @@ public class Highscore {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
+
 	/**
 	 * Punktestand speichern
-	 */	
+	 */
 	public void saveScore() {
 		this.list.add(score);
 		saveHighscoreFile();
@@ -83,7 +80,7 @@ public class Highscore {
 	public void setManus(int manus) {
 		this.score -= manus;
 	}
-	
+
 	/**
 	 * Save highscores
 	 */
@@ -91,20 +88,21 @@ public class Highscore {
 		FileWriter file_writer;
 		StringBuffer buff = new StringBuffer();
 		try {
-			file_writer = new FileWriter(new File(HIGHSCORE_FILE),false);
-			
+			file_writer = new FileWriter(new File(HIGHSCORE_FILE), false);
+
 			Collections.sort(list);
-			
+
 			for (Integer a : list) {
-				buff.append(a.toString()+";");
+				buff.append(a.toString() + ";");
 			}
-			
+
 			file_writer.write(buff.toString());
 			file_writer.close();
-		} catch (IOException e) {}
-		
+		} catch (IOException e) {
+		}
+
 	}
-	
+
 	/**
 	 * 
 	 * @return Highscorelist
@@ -123,18 +121,19 @@ public class Highscore {
 				if (c == ';' || c == -1 && buff.length() > 0) {
 					l.add(Integer.parseInt(buff.toString()));
 					buff = new StringBuffer();
-					
+
 				} else
 					buff.append((char) c);
 			} while (c != -1);
 
 			file_reader.close();
-		} catch (IOException e) {}
-		
+		} catch (IOException e) {
+		}
+
 		Comparator<Integer> comparator = Collections.reverseOrder();
-		
+
 		Collections.sort(l, comparator);
-		
+
 		return l;
 	}
 }

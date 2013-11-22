@@ -6,7 +6,9 @@ import javax.imageio.*;
 import java.io.*;
 import java.net.*;
 
-
+/**
+ * @author Philip
+ */
 public class BufferedImageLoader {
 
   private BufferedImage[][] imageTable;

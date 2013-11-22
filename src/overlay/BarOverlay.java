@@ -16,6 +16,10 @@ import main.BufferedImageLoader;
 import main.GraphicManager;
 import main.Highscore;
 
+
+/**
+ * @author Nicolas
+ */
 public class BarOverlay extends Overlay {
 	/*  11 - BlauHohn
 	 *  12 - RotOchsen

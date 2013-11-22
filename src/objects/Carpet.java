@@ -2,6 +2,9 @@ package objects;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * @author Nicolas
+ */
 public class Carpet extends DiscoObject {
 
 	public Carpet(String type, BufferedImage image, int x, int y) {

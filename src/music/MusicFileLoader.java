@@ -1,16 +1,13 @@
 package music;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
 
 /**
- * 
  * @author Nicolas
- * 
  */
 public class MusicFileLoader {
 	final static String START_DIR = "media\\";

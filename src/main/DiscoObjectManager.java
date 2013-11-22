@@ -10,11 +10,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import objects.*;
-import objects.Position;
 import player.*;
-
-
-
 
 public class DiscoObjectManager {
 	public DiscoObject[] discoObject;

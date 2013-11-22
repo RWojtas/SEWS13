@@ -4,7 +4,6 @@
 
 package main;
 
-import java.awt.image.BufferedImage;
 
 public class GraphicManager {
 	public int levels;
